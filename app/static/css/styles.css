@@ -1,0 +1,14 @@
+body {
+    margin-top: 6rem;
+}
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+#flash {
+    font-size: 1.5em;
+    text-align: center;
+}
