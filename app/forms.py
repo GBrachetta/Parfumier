@@ -25,3 +25,11 @@ class RegistrationForm(FlaskForm):
         user = mongo.db.users.find_one({'email': email.data})
         if user:
             raise ValidationError('The email already exists.')
+
+
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[
+                             DataRequired(), Length(min=6)])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
