@@ -1,4 +1,87 @@
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
 {% block content %}
-<h1>Register</h1>
-{% endblock content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form method=POST action="{{ url_for('register') }}" novalidate>
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Please Register</legend>
+                    <div class="form-group">
+                        {{ form.csrf_token }}
+                        {{ form.username.label(class="form-control-label") }}
+                        {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-md is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.username(class="form-control form-control-md")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.csrf_token }}
+                        {{ form.first_name.label(class="form-control-label") }}
+                        {% if form.first_name.errors %}
+                        {{ form.first_name(class="form-control form-control-md is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.first_name.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.first_name(class="form-control form-control-md")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.csrf_token }}
+                        {{ form.email.label(class="form-control-label") }}
+                        {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-md is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.email(class="form-control form-control-md")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label(class="form-control-label")}}
+                        {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-md is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.password(class="form-control form-control-md")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.confirm_password.label(class="form-control-label")}}
+                        {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control form-control-md is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.confirm_password(class="form-control form-control-md")}}
+                        {% endif %}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-secondary")}}
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
+</div>
+{% endblock content%}
