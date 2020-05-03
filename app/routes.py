@@ -25,12 +25,12 @@ def login():
     if form.validate_on_submit():
         user = mongo.db.users.find_one({'email': form.email.data})
         if user and User.check_password(user['password'], form.password.data):
-            user_obj = User(user['username'], user['first_name'], user['email'],
+            user_obj = User(user['username'], user['first_name'], user['last_name'], user['email'],
                             user['_id'], user['is_admin'])
             login_user(user_obj, remember=form.remember.data)
             next_page = request.args.get('next')
             flash('You have logged in!', 'info')
-            return redirect(next_page) if next_page else redirect('index')
+            return redirect(next_page) if next_page else redirect(url_for('index'))
         else:
             flash('Please check your credentials', 'warning')
     return render_template('login.html', title='Login', form=form)
@@ -44,7 +44,7 @@ def register():
     users = mongo.db.users
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data)
-        users.insert({'username': form.username.data, 'first_name': form.first_name.data,
+        users.insert({'username': form.username.data, 'first_name': form.first_name.data, 'last_name': form.last_name.data,
                       'email': form.email.data, 'password': hashed_password, 'is_admin': False})
         flash(f'Account created for {form.username.data}', 'info')
         return redirect(url_for('login'))
