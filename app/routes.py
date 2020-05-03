@@ -61,5 +61,5 @@ def account():
 @login_required
 def logout():
     logout_user()
-    flash('So sad to see you go!', 'primary')
+    flash('So sad to see you go!', 'warning')
     return redirect(url_for('index'))
