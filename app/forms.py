@@ -52,7 +52,7 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError('The username already exists.')
 
     def validate_email(self, email):
-        if username.data != current_user.username:
+        if email.data != current_user.email:
             user = mongo.db.users.find_one({'email': email.data})
             if user:
                 raise ValidationError('The email already exists.')
