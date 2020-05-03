@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, mongo
 from app.users import User
-from app.forms import RegistrationForm, LoginForm
+from app.forms import RegistrationForm, LoginForm, UpdateAccountForm
 
 
 @app.route('/')
@@ -51,10 +51,12 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
-@app.route('/account')
+@app.route('/account', methods=['POST', 'GET'])
 @login_required
 def account():
-    return render_template('account.html', title="About")
+    form = UpdateAccountForm()
+    
+    return render_template('account.html', title="About", form=form)
 
 
 @app.route('/logout')
