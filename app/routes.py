@@ -53,7 +53,7 @@ def register():
         user_obj = User(user['username'], user['first_name'], user['last_name'], user['email'],
                         user['_id'], user['is_admin'], user['avatar'])
         login_user(user_obj)
-        flash(f'Account created for {form.username.data}', 'info')
+        flash(f'Account created for {form.username.data}. You are now logged in.', 'info')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
