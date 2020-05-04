@@ -1,6 +1,9 @@
+import os
+import secrets
 from flask import render_template, redirect, flash, url_for, request
 from werkzeug.security import generate_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
+from PIL import Image
 from app import app, mongo
 from app.users import User
 from app.forms import RegistrationForm, LoginForm, UpdateAccountForm
@@ -26,7 +29,7 @@ def login():
         user = mongo.db.users.find_one({'email': form.email.data})
         if user and User.check_password(user['password'], form.password.data):
             user_obj = User(user['username'], user['first_name'], user['last_name'], user['email'],
-                            user['_id'], user['is_admin'])
+                            user['_id'], user['is_admin'], user['avatar'])
             login_user(user_obj, remember=form.remember.data)
             next_page = request.args.get('next')
             flash('You have logged in!', 'info')
@@ -45,10 +48,41 @@ def register():
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data)
         users.insert({'username': form.username.data, 'first_name': form.first_name.data, 'last_name': form.last_name.data,
-                      'email': form.email.data, 'password': hashed_password, 'is_admin': False})
+                      'email': form.email.data, 'password': hashed_password, 'is_admin': False, 'avatar': 'default.png'})
         flash(f'Account created for {form.username.data}', 'info')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+# ORIGINAL
+# @app.route('/account', methods=['POST', 'GET'])
+# @login_required
+# def account():
+#     form = UpdateAccountForm()
+#     updated_user = {"username": form.username.data, "first_name": form.first_name.data,
+#                     "last_name": form.last_name.data, "email": form.email.data}
+#     if form.validate_on_submit():
+#         mongo.db.users.update_one({"_id": current_user._id}, {
+#                                   "$set": updated_user})
+#         flash('You have updated your information', 'info')
+#         return redirect(url_for('account'))
+#     elif request.method == 'GET':
+#         form.username.data = current_user.username
+#         form.first_name.data = current_user.first_name
+#         form.last_name.data = current_user.last_name
+#         form.email.data = current_user.email
+#     return render_template('account.html', title="Account", form=form)
+
+
+def save_avatar(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/images', picture_fn)
+    output_size = (150, 150)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+    return picture_fn
 
 
 @app.route('/account', methods=['POST', 'GET'])
@@ -58,6 +92,13 @@ def account():
     updated_user = {"username": form.username.data, "first_name": form.first_name.data,
                     "last_name": form.last_name.data, "email": form.email.data}
     if form.validate_on_submit():
+        if form.avatar.data:
+            avatar = save_avatar(form.avatar.data)
+            old_avatar = mongo.db.users.find_one(
+                {'username': current_user.username})
+            avatar = {'$set': {'avatar': avatar}}
+            mongo.db.users.update_one(old_avatar, avatar)
+
         mongo.db.users.update_one({"_id": current_user._id}, {
                                   "$set": updated_user})
         flash('You have updated your information', 'info')
@@ -67,7 +108,8 @@ def account():
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
-    return render_template('account.html', title="Account", form=form)
+    avatar = url_for('static', filename=f"images/{current_user.avatar}")
+    return render_template('account.html', title="Account", form=form, avatar=avatar)
 
 
 @app.route('/logout')
