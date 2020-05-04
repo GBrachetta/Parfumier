@@ -53,32 +53,13 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
-# ORIGINAL
-# @app.route('/account', methods=['POST', 'GET'])
-# @login_required
-# def account():
-#     form = UpdateAccountForm()
-#     updated_user = {"username": form.username.data, "first_name": form.first_name.data,
-#                     "last_name": form.last_name.data, "email": form.email.data}
-#     if form.validate_on_submit():
-#         mongo.db.users.update_one({"_id": current_user._id}, {
-#                                   "$set": updated_user})
-#         flash('You have updated your information', 'info')
-#         return redirect(url_for('account'))
-#     elif request.method == 'GET':
-#         form.username.data = current_user.username
-#         form.first_name.data = current_user.first_name
-#         form.last_name.data = current_user.last_name
-#         form.email.data = current_user.email
-#     return render_template('account.html', title="Account", form=form)
-
 
 def save_avatar(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
     picture_path = os.path.join(app.root_path, 'static/images', picture_fn)
-    output_size = (150, 150)
+    output_size = (125, 125)
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
@@ -99,7 +80,8 @@ def account():
             avatar = {'$set': {'avatar': avatar}}
             mongo.db.users.update_one(old_value, avatar)
             if current_user.avatar != 'default.png':
-                os.remove(os.path.join(app.root_path, 'static/images', current_user.avatar))
+                os.remove(os.path.join(app.root_path,
+                                       'static/images', current_user.avatar))
         mongo.db.users.update_one({"_id": current_user._id}, {
                                   "$set": updated_user})
         flash('You have updated your information', 'info')

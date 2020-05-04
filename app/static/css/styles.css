@@ -20,4 +20,12 @@ h6 {
 #flash {
     font-size: 1.5em;
     text-align: center;
+    width: 40%;
+    margin: 0 auto;
+    margin-bottom: 2em;
+}
+
+.account-img {
+    width: 125px;
+    height: 125px;
 }
