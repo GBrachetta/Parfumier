@@ -49,6 +49,10 @@ def register():
         hashed_password = generate_password_hash(form.password.data)
         users.insert({'username': form.username.data, 'first_name': form.first_name.data, 'last_name': form.last_name.data,
                       'email': form.email.data, 'password': hashed_password, 'is_admin': False, 'avatar': 'default.png'})
+        user = mongo.db.users.find_one({'email': form.email.data})
+        user_obj = User(user['username'], user['first_name'], user['last_name'], user['email'],
+                        user['_id'], user['is_admin'], user['avatar'])
+        login_user(user_obj)
         flash(f'Account created for {form.username.data}', 'info')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
@@ -84,6 +88,10 @@ def account():
                                        'static/images', current_user.avatar))
         mongo.db.users.update_one({"_id": current_user._id}, {
                                   "$set": updated_user})
+        user = mongo.db.users.find_one({'email': form.email.data})
+        user_obj = User(user['username'], user['first_name'], user['last_name'], user['email'],
+                        user['_id'], user['is_admin'], user['avatar'])
+        login_user(user_obj)
         flash('You have updated your information', 'info')
         return redirect(url_for('account'))
     elif request.method == 'GET':
