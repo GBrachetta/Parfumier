@@ -1,6 +1,7 @@
 from app import mongo
 from wtforms.validators import DataRequired, EqualTo, ValidationError, Email, Length
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import(StringField, PasswordField, SubmitField, TextAreaField,
                     SelectMultipleField, FieldList, widgets, BooleanField)
 from flask_login import current_user
@@ -43,6 +44,8 @@ class UpdateAccountForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     first_name = StringField('First Name')
     last_name = StringField('Last Name')
+    avatar = FileField('Upload your avatar', validators=[FileAllowed(['jpg', 'png'])])
+
     submit = SubmitField('Update')
 
     def validate_username(self, username):

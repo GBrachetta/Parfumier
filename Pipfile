@@ -16,6 +16,7 @@ flask-pymongo = "*"
 dnspython = "*"
 flask-wtf = "*"
 python-dotenv = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"
