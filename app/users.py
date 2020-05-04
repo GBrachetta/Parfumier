@@ -3,13 +3,14 @@ from app import login_manager, mongo
 
 
 class User():
-    def __init__(self, username, first_name, last_name, email, _id, is_admin):
+    def __init__(self, username, first_name, last_name, email, _id, is_admin, avatar):
         self.username = username
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self._id = _id
         self.is_admin = is_admin
+        self.avatar = avatar
 
     def is_authenticated(self):
         return True
@@ -33,4 +34,4 @@ def load_user(email):
     user = mongo.db.users.find_one({'email': email})
     if not user:
         return None
-    return User(user['username'], user['first_name'], user['last_name'], user['email'], user['_id'], user['is_admin'])
+    return User(user['username'], user['first_name'], user['last_name'], user['email'], user['_id'], user['is_admin'], user['avatar'])
