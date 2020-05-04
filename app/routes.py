@@ -94,11 +94,12 @@ def account():
     if form.validate_on_submit():
         if form.avatar.data:
             avatar = save_avatar(form.avatar.data)
-            old_avatar = mongo.db.users.find_one(
+            old_value = mongo.db.users.find_one(
                 {'username': current_user.username})
             avatar = {'$set': {'avatar': avatar}}
-            mongo.db.users.update_one(old_avatar, avatar)
-
+            mongo.db.users.update_one(old_value, avatar)
+            if current_user.avatar != 'default.png':
+                os.remove(os.path.join(app.root_path, 'static/images', current_user.avatar))
         mongo.db.users.update_one({"_id": current_user._id}, {
                                   "$set": updated_user})
         flash('You have updated your information', 'info')
