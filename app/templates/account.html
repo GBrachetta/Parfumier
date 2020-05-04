@@ -6,8 +6,9 @@
         <div class="col-6">
             <div class="media">
                 <img class="rounded-circle account-img" src="{{ avatar }}">
-                <div class="media-body">
+                <div class="pl-3 media-body">
                     <h2 class="account-heading">{{ current_user.username }}</h2>
+                    <p class="text-primary lead">{{ current_user.first_name}} {{ current_user.last_name}}</p>
                     <p class="text-secondary">{{ current_user.email}}</p>
                 </div>
             </div>
