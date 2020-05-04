@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, mongo
 from app.users import User
-from app.forms import RegistrationForm, LoginForm
+from app.forms import RegistrationForm, LoginForm, UpdateAccountForm
 
 
 @app.route('/')
@@ -51,10 +51,23 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
-@app.route('/account')
+@app.route('/account', methods=['POST', 'GET'])
 @login_required
 def account():
-    return render_template('account.html', title="About")
+    form = UpdateAccountForm()
+    updated_user = {"username": form.username.data, "first_name": form.first_name.data,
+                    "last_name": form.last_name.data, "email": form.email.data}
+    if form.validate_on_submit():
+        mongo.db.users.update_one({"_id": current_user._id}, {
+                                  "$set": updated_user})
+        flash('You have updated your information', 'info')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name
+        form.email.data = current_user.email
+    return render_template('account.html', title="Account", form=form)
 
 
 @app.route('/logout')
