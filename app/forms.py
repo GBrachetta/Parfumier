@@ -50,7 +50,8 @@ class UpdateAccountForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     first_name = StringField('First Name')
     last_name = StringField('Last Name')
-    avatar = FileField('Upload your avatar', validators=[FileAllowed(['jpg', 'png'])])
+    avatar = FileField('Upload your avatar', validators=[
+                       FileAllowed(['jpg', 'png'])])
 
     submit = SubmitField('Update')
 
@@ -68,11 +69,12 @@ class UpdateAccountForm(FlaskForm):
 
 # START ATTEMPT TO SEND RESET PASSWORD EMAIL #
 
+
 class RequestResetForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Login')
+
     def validate_email(self, email):
-        user = mongo.db.users.find_one({'email':email.data})
         user = mongo.db.users.find_one({'email': email.data})
         if user is None:
             raise ValidationError('There is no accout with that email.')
