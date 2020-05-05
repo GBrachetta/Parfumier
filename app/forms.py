@@ -73,7 +73,6 @@ class RequestResetForm(FlaskForm):
     submit = SubmitField('Login')
     def validate_email(self, email):
         user = mongo.db.users.find_one({'email':email.data})
-        logging.debug(User) # LOGGING
         user = mongo.db.users.find_one({'email': email.data})
         if user is None:
             raise ValidationError('There is no accout with that email.')
