@@ -118,8 +118,6 @@ def logout():
     return redirect(url_for('index'))
 
 
-# START ATTEMPT TO SEND EMAIL PASSWORD RESET
-
 def send_reset_email(user):
     reset_user = User(
         user['username'], user['first_name'], user['last_name'], user['email'], user['_id'], user['is_admin'], user['avatar']
@@ -127,9 +125,17 @@ def send_reset_email(user):
     token = reset_user.get_reset_token()
     msg = Message('Password Reset Request',
                   sender='code@idilettanti.com', recipients=[reset_user.email])
-    msg.body = f"""To reset your password, visit the following link:
+    msg.body = f"""You have requested to reset your password for your account on Parfumier.
+    
+To reset your password, please visit the following link:
+
 {url_for('reset_token', token=token, _external=True)}
+
 If you did not make this request then simply ignore this email and no changes will be made.
+
+Best regards,
+
+Parfumier
 """
     mail.send(msg)
 
@@ -142,7 +148,7 @@ def reset_request():
     if form.validate_on_submit():
         user = mongo.db.users.find_one({'email': form.email.data})
         send_reset_email(user)
-        flash('An email has been sent to reset your email', 'success')
+        flash('An email has been sent to reset your password', 'success')
         return redirect(url_for('login'))
     return render_template('reset_request.html', title="Reset Password", form=form)
 
@@ -161,6 +167,10 @@ def reset_token(token):
         hashed_password = generate_password_hash(form.password.data)
         mongo.db.users.update_one({"email": user["email"]}, {
                                   "$set": {"password": hashed_password}})
-        flash('Your password has been updated, please log in.', 'info')
+        user = mongo.db.users.find_one({'password': hashed_password})
+        user_obj = User(user['username'], user['first_name'], user['last_name'], user['email'],
+                        user['_id'], user['is_admin'], user['avatar'])
+        login_user(user_obj)
+        flash('Your password has been updated. You are now logged in.', 'info')
         return redirect(url_for('login'))
     return render_template('reset_token.html', title="Reset Password", form=form)
