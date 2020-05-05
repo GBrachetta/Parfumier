@@ -67,27 +67,15 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError('The email already exists.')
 
-# START ATTEMPT TO SEND RESET PASSWORD EMAIL #
-
 
 class RequestResetForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Login')
+    submit = SubmitField('Request Password Reset')
 
     def validate_email(self, email):
         user = mongo.db.users.find_one({'email': email.data})
         if user is None:
             raise ValidationError('There is no accout with that email.')
-
-# COREY
-# class RequestResetForm(FlaskForm):
-#     email = StringField('Email', validators=[DataRequired(), Email()])
-#     submit = SubmitField('Request Password Reset')
-#     def validate_email(self, email):
-#         user = User.query.filter_by(email=email.data).first()
-#         if user is None:
-#             raise ValidationError(
-#                 'There is no account with that email. You must register first.')
 
 
 class ResetPasswordForm(FlaskForm):
@@ -96,10 +84,3 @@ class ResetPasswordForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password', validators=[
                                      DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset Password')
-
-
-# class ResetPasswordForm(FlaskForm):
-#     password = PasswordField('Password', validators=[DataRequired()])
-#     confirm_password = PasswordField('Confirm Password',
-#                                      validators=[DataRequired(), EqualTo('password')])
-#     submit = SubmitField('Reset Password')

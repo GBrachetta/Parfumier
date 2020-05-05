@@ -35,11 +35,8 @@ class User():
     def check_password(password_hash, password):
         return check_password_hash(password_hash, password)
 
-
-# START ATTEMPT TO SEND RESET PASSWORD EMAIL #
-
     def get_reset_token(self, expires_sec=1800):
-        s = Serializer(app.config['SECRET_KEY'], expires_sec) 
+        s = Serializer(app.config['SECRET_KEY'], expires_sec)
         return s.dumps({'email': self.email}).decode('utf-8')
 
     @staticmethod
@@ -50,9 +47,6 @@ class User():
         except Exception:
             return None
         return mongo.db.users.find_one({'email': email})
-
-
-# END ATTEMPT TO SEND RESET PASSWORD EMAIL #
 
 
 @login_manager.user_loader
