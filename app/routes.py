@@ -118,8 +118,6 @@ def logout():
     return redirect(url_for('index'))
 
 
-
-
 # START ATTEMPT TO SEND EMAIL PASSWORD RESET
 
 def send_reset_email(user):
@@ -127,8 +125,8 @@ def send_reset_email(user):
         user['username'], user['first_name'], user['last_name'], user['email'], user['_id'], user['is_admin'], user['avatar']
     )
     token = reset_user.get_reset_token()
-    msg = Message("Password Reset Request",
-                  sender="johandeleeuw@gmail.com", recipients=[reset_user.email])
+    msg = Message('Password Reset Request',
+                  sender='code@idilettanti.com', recipients=[reset_user.email])
     msg.body = f"""To reset your password, visit the following link:
 {url_for('reset_token', token=token, _external=True)}
 If you did not make this request then simply ignore this email and no changes will be made.
@@ -159,9 +157,10 @@ def reset_token(token):
         return redirect(url_for('reset_request'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
+        update_user = mongo.db.users.find_one({'email': user["email"]})
         hashed_password = generate_password_hash(form.password.data)
-        user.update_one({'password': hashed_password})
+        mongo.db.users.update_one({"email": user["email"]}, {
+                                  "$set": {"password": hashed_password}})
         flash('Your password has been updated, please log in.', 'info')
         return redirect(url_for('login'))
     return render_template('reset_token.html', title="Reset Password", form=form)
-
