@@ -4,9 +4,15 @@ from flask import render_template, redirect, flash, url_for, request
 from werkzeug.security import generate_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
 from PIL import Image
-from app import app, mongo
+from app import app, mongo, mail
 from app.users import User
-from app.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from app.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
+from flask_mail import Message
+import logging
+
+# LOGGING
+logging.basicConfig(level=logging.DEBUG, filename='app.log', filemode='w',
+                    format='%(asctime)s %(name)s - %(filename)s :: %(lineno)d - %(levelname)s - %(message)s\n', datefmt='%Y-%m-%d %H:%M:%S')
 
 
 @app.route('/')
@@ -53,7 +59,8 @@ def register():
         user_obj = User(user['username'], user['first_name'], user['last_name'], user['email'],
                         user['_id'], user['is_admin'], user['avatar'])
         login_user(user_obj)
-        flash(f'Account created for {form.username.data}. You are now logged in.', 'info')
+        flash(
+            f'Account created for {form.username.data}. You are now logged in.', 'info')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
@@ -109,3 +116,51 @@ def logout():
     logout_user()
     flash('So sad to see you go!', 'warning')
     return redirect(url_for('index'))
+
+
+# START ATTEMPT TO SEND EMAIL PASSWORD RESET
+
+def send_reset_email(user):
+    reset_user = User(
+        user['username'], user['first_name'], user['last_name'], user['email'], user['_id'], user['is_admin'], user['avatar']
+    )
+    token = reset_user.get_reset_token()
+    msg = Message('Password Reset Request',
+                  sender='code@idilettanti.com', recipients=[reset_user.email])
+    msg.body = f"""To reset your password, visit the following link:
+{url_for('reset_token', token=token, _external=True)}
+If you did not make this request then simply ignore this email and no changes will be made.
+"""
+    mail.send(msg)
+
+
+@app.route('/reset_password', methods=['GET', 'POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = mongo.db.users.find_one({'email': form.email.data})
+        send_reset_email(user)
+        flash('An email has been sent to reset your email', 'success')
+        return redirect(url_for('login'))
+    return render_template('reset_request.html', title="Reset Password", form=form)
+
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash('That is an invalid or expired token', 'warning')
+        return redirect(url_for('reset_request'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        update_user = mongo.db.users.find_one({'email': user["email"]})
+        hashed_password = generate_password_hash(form.password.data)
+        mongo.db.users.update_one({"email": user["email"]}, {
+                                  "$set": {"password": hashed_password}})
+        flash('Your password has been updated, please log in.', 'info')
+        return redirect(url_for('login'))
+    return render_template('reset_token.html', title="Reset Password", form=form)

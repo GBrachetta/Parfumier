@@ -17,6 +17,7 @@ dnspython = "*"
 flask-wtf = "*"
 python-dotenv = "*"
 pillow = "*"
+flask-mail = "*"
 
 [requires]
 python_version = "3.7"
