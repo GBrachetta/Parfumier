@@ -59,7 +59,8 @@ def register():
         user_obj = User(user['username'], user['first_name'], user['last_name'], user['email'],
                         user['_id'], user['is_admin'], user['avatar'])
         login_user(user_obj)
-        flash(f'Account created for {form.username.data}. You are now logged in.', 'info')
+        flash(
+            f'Account created for {form.username.data}. You are now logged in.', 'info')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
@@ -116,31 +117,23 @@ def logout():
     flash('So sad to see you go!', 'warning')
     return redirect(url_for('index'))
 
+
+
+
 # START ATTEMPT TO SEND EMAIL PASSWORD RESET
+
 def send_reset_email(user):
-    logging.debug(user)  # LOGGING
-    token = user.get_reset_token()
-    msg = Message('Password Reset Request',
-                  sender='code@idilettanti.com', recipients=[user.email])
-    msg.body = f'''To reset your password, visit the following link:
+    reset_user = User(
+        user['username'], user['first_name'], user['last_name'], user['email'], user['_id'], user['is_admin'], user['avatar']
+    )
+    token = reset_user.get_reset_token()
+    msg = Message("Password Reset Request",
+                  sender="johandeleeuw@gmail.com", recipients=[reset_user.email])
+    msg.body = f"""To reset your password, visit the following link:
 {url_for('reset_token', token=token, _external=True)}
-    
-If you did not make this request then ignore this email and no changes will be made.
-'''
+If you did not make this request then simply ignore this email and no changes will be made.
+"""
     mail.send(msg)
-
-
-# COREY
-# def send_reset_email(user):
-#     token = user.get_reset_token()
-#     msg = Message('Password Reset Request',
-#                   sender='code@idilettanti.com', recipients=[user.email])
-#     msg.body = f'''To reset your password, visit the following link:
-# {url_for('users.reset_token', token=token, _external=True)}
-
-# If you did not make this request then ignore this email and no changes will be made.
-# '''
-#     mail.send(msg)
 
 
 @app.route('/reset_password', methods=['GET', 'POST'])
@@ -154,20 +147,6 @@ def reset_request():
         flash('An email has been sent to reset your email', 'success')
         return redirect(url_for('login'))
     return render_template('reset_request.html', title="Reset Password", form=form)
-
-
-# COREY
-# @users.route('/reset_password', methods=['GET', 'POST'])
-# def reset_request():
-#     if current_user.is_authenticated:
-#         return redirect(url_for('main.home'))
-#     form = RequestResetForm()
-#     if form.validate_on_submit():
-#         user = User.query.filter_by(email=form.email.data).first()
-#         send_reset_email(user)
-#         flash('An email has been sent with instructions to reset your password', 'info')
-#         return redirect(url_for('users.login'))
-#     return render_template('reset_request.html', title='Reset Password', form=form)
 
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
@@ -186,21 +165,3 @@ def reset_token(token):
         return redirect(url_for('login'))
     return render_template('reset_token.html', title="Reset Password", form=form)
 
-# COREY
-# @users.route('/reset_password/<token>', methods=['GET', 'POST'])
-# def reset_token(token):
-#     if current_user.is_authenticated:
-#         return redirect(url_for('main.home'))
-#     user = User.verify_reset_token(token)
-#     if user is None:
-#         flash('That is an invalid or expired token', 'warning')
-#         return redirect(url_for('users.reset_request'))
-#     form = ResetPasswordForm()
-#     if form.validate_on_submit():
-#         hashed_password = bcrypt.generate_password_hash(
-#             form.password.data).decode('utf-8')
-#         user.password = hashed_password
-#         db.session.commit()
-#         flash('Your password has been updated. You can now log in', 'success')
-#         return redirect(url_for('users.login'))
-#     return render_template('reset_token.html', title='Reset Password', form=form)
