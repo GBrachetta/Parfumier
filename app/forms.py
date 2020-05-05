@@ -5,6 +5,12 @@ from flask_wtf.file import FileField, FileAllowed
 from wtforms import(StringField, PasswordField, SubmitField, TextAreaField,
                     SelectMultipleField, FieldList, widgets, BooleanField)
 from flask_login import current_user
+from app.users import User
+import logging
+
+# LOGGING
+logging.basicConfig(level=logging.DEBUG, filename='app.log', filemode='w',
+                    format='%(asctime)s %(name)s - %(filename)s :: %(lineno)d - %(levelname)s - %(message)s\n', datefmt='%Y-%m-%d %H:%M:%S')
 
 
 class RegistrationForm(FlaskForm):
@@ -59,3 +65,40 @@ class UpdateAccountForm(FlaskForm):
             user = mongo.db.users.find_one({'email': email.data})
             if user:
                 raise ValidationError('The email already exists.')
+
+# START ATTEMPT TO SEND RESET PASSWORD EMAIL #
+
+class RequestResetForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Login')
+    def validate_email(self, email):
+        user = mongo.db.users.find_one({'email':email.data})
+        logging.debug(User) # LOGGING
+        user = mongo.db.users.find_one({'email': email.data})
+        if user is None:
+            raise ValidationError('There is no accout with that email.')
+
+# COREY
+# class RequestResetForm(FlaskForm):
+#     email = StringField('Email', validators=[DataRequired(), Email()])
+#     submit = SubmitField('Request Password Reset')
+#     def validate_email(self, email):
+#         user = User.query.filter_by(email=email.data).first()
+#         if user is None:
+#             raise ValidationError(
+#                 'There is no account with that email. You must register first.')
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[
+                             DataRequired(), Length(min=6)])
+    confirm_password = PasswordField('Confirm Password', validators=[
+                                     DataRequired(), EqualTo('password')])
+    submit = SubmitField('Reset Password')
+
+
+# class ResetPasswordForm(FlaskForm):
+#     password = PasswordField('Password', validators=[DataRequired()])
+#     confirm_password = PasswordField('Confirm Password',
+#                                      validators=[DataRequired(), EqualTo('password')])
+#     submit = SubmitField('Reset Password')
