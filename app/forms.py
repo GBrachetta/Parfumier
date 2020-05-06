@@ -1,12 +1,10 @@
-from app import mongo
+import logging
 from wtforms.validators import DataRequired, EqualTo, ValidationError, Email, Length
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import(StringField, PasswordField, SubmitField, TextAreaField,
-                    SelectMultipleField, FieldList, widgets, BooleanField)
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from flask_login import current_user
-from app.users import User
-import logging
+from app import mongo
 
 # LOGGING
 logging.basicConfig(level=logging.DEBUG, filename='app.log', filemode='w',
@@ -14,54 +12,70 @@ logging.basicConfig(level=logging.DEBUG, filename='app.log', filemode='w',
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[
-                           DataRequired(), Length(min=2, max=20)])
+    '''
+    DESCRIPTION
+    '''
+    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     first_name = StringField('First Name')
     last_name = StringField('Last Name')
-    password = PasswordField('Password', validators=[
-                             DataRequired(), Length(min=6)])
-    confirm_password = PasswordField('Confirm Password', validators=[
-                                     DataRequired(), EqualTo('password')])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(),
+                                                                     EqualTo('password')])
     submit = SubmitField('Register')
 
     def validate_username(self, username):
+        '''
+        DESCRIPTION
+        '''
         user = mongo.db.users.find_one({'username': username.data})
         if user:
             raise ValidationError('The username already exists.')
 
     def validate_email(self, email):
+        '''
+        DESCRIPTION
+        '''
         user = mongo.db.users.find_one({'email': email.data})
         if user:
             raise ValidationError('The email already exists.')
 
 
 class LoginForm(FlaskForm):
+    '''
+    DESCRIPTION
+    '''
     email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[
-                             DataRequired(), Length(min=6)])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
 
 class UpdateAccountForm(FlaskForm):
-    username = StringField('Username', validators=[
-                           DataRequired(), Length(min=2, max=20)])
+    '''
+    DESCRIPTION
+    '''
+    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     first_name = StringField('First Name')
     last_name = StringField('Last Name')
-    avatar = FileField('Upload your avatar', validators=[
-                       FileAllowed(['jpg', 'png'])])
+    avatar = FileField('Upload your avatar', validators=[FileAllowed(['jpg', 'png'])])
 
     submit = SubmitField('Update')
 
     def validate_username(self, username):
+        '''
+        DESCRIPTION
+        '''
         if username.data != current_user.username:
             user = mongo.db.users.find_one({'username': username.data})
             if user:
                 raise ValidationError('The username already exists.')
 
     def validate_email(self, email):
+        '''
+        DESCRIPTION
+        '''
         if email.data != current_user.email:
             user = mongo.db.users.find_one({'email': email.data})
             if user:
@@ -69,18 +83,26 @@ class UpdateAccountForm(FlaskForm):
 
 
 class RequestResetForm(FlaskForm):
+    '''
+    DESCRIPTION
+    '''
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Request Password Reset')
 
     def validate_email(self, email):
+        '''
+        DESCRIPTION
+        '''
         user = mongo.db.users.find_one({'email': email.data})
         if user is None:
             raise ValidationError('There is no accout with that email.')
 
 
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Password', validators=[
-                             DataRequired(), Length(min=6)])
-    confirm_password = PasswordField('Confirm Password', validators=[
-                                     DataRequired(), EqualTo('password')])
+    '''
+    DESCRIPTION
+    '''
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(),
+                                                                     EqualTo('password')])
     submit = SubmitField('Reset Password')
