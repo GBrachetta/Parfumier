@@ -2,6 +2,6 @@
 {% block content %}
 <h1>This is the Home Page</h1>
 {% if current_user.is_authenticated %}
-<h2>Welcome, {{ current_user.username}}!</h2>
+<h2>Welcome, {{ current_user.username.title() }}!</h2>
 {% endif %}
 {% endblock content %}
