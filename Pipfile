@@ -6,6 +6,9 @@ verify_ssl = true
 [dev-packages]
 autopep8 = "*"
 pytest = "*"
+pep8 = "*"
+pylint = "*"
+pylint-flask = "*"
 
 [packages]
 flask = "*"
