@@ -74,7 +74,7 @@
                             {% endif %}
                         </div>
                         <div class="form-group">
-                            {{ form.avatar.label() }}
+                            {{ form.avatar.label(class="btn btn-outline-primary") }}
                             {{ form.avatar(class="form-control-file") }}
                             {% if form.avatar.errors %}
                             {% for error in form.avatar.errors %}
