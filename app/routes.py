@@ -175,7 +175,7 @@ Parfumier
     html = f"""
     <html>
     <body>
-    <h3>Dear <strong>{receiver['username']}</strong>,</h3>,<br>
+    <h3>Dear <strong>{receiver['username']}</strong>,</h3><br>
        <p>You have requested to reset your password for your account on Parfumier.<br>
        <p>To reset your password, please visit the following link:<br><br>
        <a href="{url_for('reset_token', token=token, _external=True)}">Reset Password</a><br><br>
