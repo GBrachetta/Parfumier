@@ -29,3 +29,7 @@ h6 {
     width: 125px;
     height: 125px;
 }
+
+#avatar {
+    display: none;
+}
