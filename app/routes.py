@@ -1,14 +1,15 @@
 import os
 import secrets
+import logging
 from flask import render_template, redirect, flash, url_for, request
 from werkzeug.security import generate_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
 from PIL import Image
+from flask_mail import Message
 from app import app, mongo, mail
 from app.users import User
-from app.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
-from flask_mail import Message
-import logging
+from app.forms import (RegistrationForm, LoginForm,
+                       UpdateAccountForm, RequestResetForm, ResetPasswordForm)
 
 # LOGGING
 logging.basicConfig(level=logging.DEBUG, filename='app.log', filemode='w',
@@ -18,16 +19,25 @@ logging.basicConfig(level=logging.DEBUG, filename='app.log', filemode='w',
 @app.route('/')
 @app.route('/index')
 def index():
+    '''
+    DESCRIPTION
+    '''
     return render_template('index.html')
 
 
 @app.route('/about')
 def about():
+    '''
+    DESCRIPTION
+    '''
     return render_template('about.html', title="About")
 
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
+    '''
+    DESCRIPTION
+    '''
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
@@ -47,14 +57,18 @@ def login():
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
+    '''
+    DESCRIPTION
+    '''
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RegistrationForm()
     users = mongo.db.users
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data)
-        users.insert({'username': form.username.data, 'first_name': form.first_name.data, 'last_name': form.last_name.data,
-                      'email': form.email.data, 'password': hashed_password, 'is_admin': False, 'avatar': 'default.png'})
+        users.insert({'username': form.username.data, 'first_name': form.first_name.data,
+                      'last_name': form.last_name.data, 'email': form.email.data,
+                      'password': hashed_password, 'is_admin': False, 'avatar': 'default.png'})
         user = mongo.db.users.find_one({'email': form.email.data})
         user_obj = User(user['username'], user['first_name'], user['last_name'], user['email'],
                         user['_id'], user['is_admin'], user['avatar'])
@@ -66,6 +80,9 @@ def register():
 
 
 def save_avatar(form_picture):
+    '''
+    DESCRIPTION
+    '''
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
@@ -80,6 +97,9 @@ def save_avatar(form_picture):
 @app.route('/account', methods=['POST', 'GET'])
 @login_required
 def account():
+    '''
+    DESCRIPTION
+    '''
     form = UpdateAccountForm()
     updated_user = {"username": form.username.data, "first_name": form.first_name.data,
                     "last_name": form.last_name.data, "email": form.email.data}
@@ -93,8 +113,7 @@ def account():
             if current_user.avatar != 'default.png':
                 os.remove(os.path.join(app.root_path,
                                        'static/images', current_user.avatar))
-        mongo.db.users.update_one({"_id": current_user._id}, {
-                                  "$set": updated_user})
+        mongo.db.users.update_one({"username": current_user.username}, {"$set": updated_user})
         user = mongo.db.users.find_one({'email': form.email.data})
         user_obj = User(user['username'], user['first_name'], user['last_name'], user['email'],
                         user['_id'], user['is_admin'], user['avatar'])
@@ -106,6 +125,7 @@ def account():
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
+        form.avatar.data = current_user.avatar
     avatar = url_for('static', filename=f"images/{current_user.avatar}")
     return render_template('account.html', title="Account", form=form, avatar=avatar)
 
@@ -113,14 +133,21 @@ def account():
 @app.route('/logout')
 @login_required
 def logout():
+    '''
+    DESCRIPTION
+    '''
     logout_user()
     flash('So sad to see you go!', 'warning')
     return redirect(url_for('index'))
 
 
 def send_reset_email(user):
+    '''
+    DESCRIPTION
+    '''
     reset_user = User(
-        user['username'], user['first_name'], user['last_name'], user['email'], user['_id'], user['is_admin'], user['avatar']
+        user['username'], user['first_name'], user['last_name'],
+        user['email'], user['_id'], user['is_admin'], user['avatar']
     )
     token = reset_user.get_reset_token()
     msg = Message('Password Reset Request',
@@ -142,6 +169,9 @@ Parfumier
 
 @app.route('/reset_password', methods=['GET', 'POST'])
 def reset_request():
+    '''
+    DESCRIPTION
+    '''
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RequestResetForm()
@@ -155,6 +185,9 @@ def reset_request():
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_token(token):
+    '''
+    DESCRIPTION
+    '''
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     user = User.verify_reset_token(token)
@@ -163,10 +196,8 @@ def reset_token(token):
         return redirect(url_for('reset_request'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
-        update_user = mongo.db.users.find_one({'email': user["email"]})
         hashed_password = generate_password_hash(form.password.data)
-        mongo.db.users.update_one({"email": user["email"]}, {
-                                  "$set": {"password": hashed_password}})
+        mongo.db.users.update_one({"email": user["email"]}, {"$set": {"password": hashed_password}})
         user = mongo.db.users.find_one({'password': hashed_password})
         user_obj = User(user['username'], user['first_name'], user['last_name'], user['email'],
                         user['_id'], user['is_admin'], user['avatar'])
@@ -174,3 +205,15 @@ def reset_token(token):
         flash('Your password has been updated. You are now logged in.', 'info')
         return redirect(url_for('login'))
     return render_template('reset_token.html', title="Reset Password", form=form)
+
+
+@app.route('/delete_user', methods=['GET', 'POST'])
+@login_required
+def delete_user():
+    '''
+    DESCRIPTION
+    '''
+    mongo.db.users.remove({"username": current_user.username})
+    logout_user()
+    flash('You have deleted your account', 'success')
+    return redirect(url_for('index'))
