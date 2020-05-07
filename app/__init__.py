@@ -21,4 +21,4 @@ app.config['MAIL_USERNAME'] = os.environ.get("MAIL_USER")
 app.config['MAIL_PASSWORD'] = os.environ.get("MAIL_PASS")
 mail = Mail(app)
 
-from app import routes, users
+from app import routes, models

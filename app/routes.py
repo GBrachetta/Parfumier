@@ -10,7 +10,7 @@ from werkzeug.security import generate_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
 from PIL import Image
 from app import app, mongo
-from app.users import User
+from app.models import User
 from app.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                        RequestResetForm, ResetPasswordForm)
 
