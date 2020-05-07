@@ -3,3 +3,4 @@ __pycache__
 *.log
 .vscode
 static/images/**
+!*/static/images/default.png
