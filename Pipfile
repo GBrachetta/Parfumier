@@ -9,6 +9,8 @@ pytest = "*"
 pep8 = "*"
 pylint = "*"
 pylint-flask = "*"
+flake8 = "*"
+black = "*"
 
 [packages]
 flask = "*"
@@ -21,6 +23,11 @@ flask-wtf = "*"
 python-dotenv = "*"
 pillow = "*"
 flask-mail = "*"
+pep8 = "*"
+autopep8 = "*"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
