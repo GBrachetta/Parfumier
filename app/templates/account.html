@@ -104,7 +104,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                By clicking on the Delete button you will delete your account.
+                <p>By clicking on the Delete button you will delete your account.</p>
+                <p><strong>This action cannot be undone.</strong></p>
             </div>
             <div class="modal-footer">
                 <form action="{{ url_for('delete_user' )}}" method="POST">
