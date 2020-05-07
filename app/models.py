@@ -12,6 +12,7 @@ class User():
     '''
     DESCRIPTION
     '''
+
     def __init__(self, username, first_name, last_name, email, _id, is_admin, avatar):
         self.username = username
         self.first_name = first_name
@@ -30,7 +31,7 @@ class User():
     def is_active(self):
         '''
         DESCRIPTION
-        '''       
+        '''
         return True
 
     def is_anonymous(self):
