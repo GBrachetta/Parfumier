@@ -20,7 +20,6 @@ logging.basicConfig(level=logging.DEBUG, filename='app.log', filemode='w',
 
 
 @app.route('/')
-@app.route('/index')
 def index():
     '''
     DESCRIPTION
