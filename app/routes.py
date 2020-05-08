@@ -19,7 +19,6 @@ from app.forms import (
     ResetPasswordForm,
 )
 
-# LOGGING
 logging.basicConfig(
     level=logging.DEBUG,
     filename="app.log",
