@@ -116,6 +116,7 @@ def register():
     return render_template("register.html", title="Register", form=form)
 
 
+# TODO Remove from routes and place in external utils.py
 def save_avatar(form_picture):
     """
     DESCRIPTION

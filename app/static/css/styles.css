@@ -31,5 +31,23 @@ h6 {
 }
 
 #avatar {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+#thumb-avatar {
+    padding: 15px;
+
+    padding-left: 32px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-origin: border-box;
+    margin-block: auto;
+    margin-block-start: auto;
+    margin-block-end: auto;
+    margin-left: 25px;
+    border-radius: 50%;
+    padding-bottom: 11px;
 }
