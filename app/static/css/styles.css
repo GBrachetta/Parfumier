@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap');
+
+
 body {
     margin-top: 6rem;
+    font-family: "Quicksand", sans-serif !important;
 }
 
 h1,
@@ -13,14 +17,14 @@ h6 {
 
 .content-section {
     background: #ffffff;
-    padding: 10px 20px;
+    padding: 10px;
     margin-bottom: 20px;
 }
 
 #flash {
-    font-size: 1.5em;
+    font-size: 1em;
     text-align: center;
-    width: 40%;
+    width: 80%;
     margin: 0 auto;
     margin-bottom: 2em;
 }
@@ -39,7 +43,6 @@ h6 {
 
 #thumb-avatar {
     padding: 15px;
-
     padding-left: 32px;
     background-size: cover;
     background-repeat: no-repeat;
@@ -50,4 +53,14 @@ h6 {
     margin-left: 25px;
     border-radius: 50%;
     padding-bottom: 11px;
+}
+
+@media only screen and (min-width: 768px) {
+    #flash {
+        font-size: 1.5em;
+        text-align: center;
+        width: 40%;
+        margin: 0 auto;
+        margin-bottom: 2em;
+    }
 }
