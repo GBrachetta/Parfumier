@@ -194,7 +194,7 @@ def logout():
     DESCRIPTION
     """
     logout_user()
-    flash("So sad to see you go!", "warning")
+    flash("We hope to see you back soon again!", "warning")
     return redirect(url_for("index"))
 
 
