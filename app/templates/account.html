@@ -76,6 +76,10 @@
                         <div class="form-group">
                             {{ form.avatar.label(class="btn btn-outline-primary") }}
                             {{ form.avatar(class="form-control-file") }}
+                            <span id="thumb-avatar"></span>
+                            <div class="pt-2">
+                                <span class="lead text-danger" id="fileName"></span>
+                            </div>
                             {% if form.avatar.errors %}
                             {% for error in form.avatar.errors %}
                             <span class="text-danger">{{ error }}</span></br>
