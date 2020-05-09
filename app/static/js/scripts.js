@@ -1,3 +1,4 @@
+// With invaluable input from Roko Buljian
 const EL_avatar = document.querySelector("#avatar");
 const EL_fileName = document.querySelector("#fileName");
 const EL_previewAvatar = document.querySelector("#thumb-avatar");
