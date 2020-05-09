@@ -19,7 +19,7 @@
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.password(class="form-control form-control-md")}}
+                        {{ form.password(class="form-control form-control-md", placeholder="Enter your new password")}}
                         {% endif %}
                     </div>
                     <div class="form-group">
@@ -38,7 +38,7 @@
                     </div>
                 </fieldset>
                 <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-primary")}}
+                    {{ form.submit(class="btn btn-outline-primary", placeholder="Confirm your new password")}}
                 </div>
             </form>
         </div>
