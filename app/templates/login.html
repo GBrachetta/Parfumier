@@ -3,7 +3,7 @@
 
 <div class="container content-section">
     <div class="row justify-content-center">
-        <div class="col-6">
+        <div class=" col-md-6">
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
                 <fieldset class="form-group">
@@ -19,7 +19,7 @@
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.email(class="form-control form-control-md")}}
+                        {{ form.email(class="form-control form-control-md", placeholder="Enter your email")}}
                         {% endif %}
                     </div>
                     <div class="form-group">
@@ -32,7 +32,7 @@
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.password(class="form-control form-control-md")}}
+                        {{ form.password(class="form-control form-control-md", placeholder="Enter your password")}}
                         {% endif %}
                     </div>
                     <div class="form-check">
