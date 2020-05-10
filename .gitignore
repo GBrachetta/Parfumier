@@ -2,6 +2,6 @@
 __pycache__
 *.log
 .vscode
-*/static/images/**
-!static/images/default.png
-!*static/images/default.png
+# */static/images/avatars/**
+# !static/images/avatars/default.png
+# !*static/images/avatars/default.png

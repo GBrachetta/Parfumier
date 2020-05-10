@@ -135,7 +135,7 @@ def account():
             if current_user.avatar != "default.png":
                 os.remove(
                     os.path.join(
-                        app.root_path, "static/images", current_user.avatar
+                        app.root_path, "static/images/avatars", current_user.avatar
                     )
                 )
         mongo.db.users.update_one(
@@ -160,7 +160,7 @@ def account():
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
         form.avatar.data = current_user.avatar
-    avatar = url_for("static", filename=f"images/{current_user.avatar}")
+    avatar = url_for("static", filename=f"images/avatars/{current_user.avatar}")
     return render_template(
         "account.html", title="Account", form=form, avatar=avatar
     )
