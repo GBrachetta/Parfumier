@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap");
 
 body {
     margin-top: 6rem;
@@ -34,14 +33,16 @@ h6 {
     height: 125px;
 }
 
-#avatar {
+#avatar,
+#picture {
     position: absolute;
     width: 1px;
     height: 1px;
     opacity: 0;
 }
 
-#thumb-avatar {
+#thumb-avatar,
+#thumb-picture {
     padding: 15px;
     padding-left: 32px;
     background-size: cover;
