@@ -8,7 +8,13 @@ from wtforms.validators import (
 )
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import (
+    StringField,
+    PasswordField,
+    SubmitField,
+    BooleanField,
+    TextAreaField,
+)
 from flask_login import current_user
 from app import mongo
 
@@ -136,3 +142,12 @@ class ResetPasswordForm(FlaskForm):
         "Confirm Password", validators=[DataRequired(), EqualTo("password")]
     )
     submit = SubmitField("Reset Password")
+
+
+class CreatePerfumeForm(FlaskForm):
+    brand = StringField("Brand", validators=[DataRequired()])
+    name = StringField("Name", validators=[DataRequired()])
+    description = TextAreaField("Description")
+    public = BooleanField("Public")
+    submit = SubmitField("Publish")
+    picture = FileField("Picture", validators=[FileAllowed(["jpg", "png"])])
