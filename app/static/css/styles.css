@@ -33,27 +33,35 @@ h6 {
     height: 125px;
 }
 
-#avatar,
-#picture {
+.form-control-file {
     position: absolute;
     width: 1px;
     height: 1px;
     opacity: 0;
 }
 
-#thumb-avatar,
-#thumb-picture {
-    padding: 15px;
-    padding-left: 32px;
+#form-perfume .form-control-thumbnail {
+    display: inline-block;
+    width: 164px;
+    height: 164px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-origin: border-box;
-    margin-block: auto;
-    margin-block-start: auto;
-    margin-block-end: auto;
-    margin-left: 25px;
+    /* background-origin: border-box; */
+    margin-left: 77px;
+    position: absolute;
+    border-radius: 5px;
+}
+
+#form-profile .form-control-thumbnail {
+    position: absolute;
     border-radius: 50%;
-    padding-bottom: 11px;
+    display: inline-block;
+    width: 46px;
+    height: 46px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-origin: border-box; */
+    margin-left: 25px;
 }
 
 @media only screen and (min-width: 768px) {
