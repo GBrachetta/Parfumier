@@ -17,7 +17,7 @@
     <div class="container content-section">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form method=POST action="" enctype="multipart/form-data" novalidate>
+                <form method=POST action="" enctype="multipart/form-data" id="form-profile" novalidate>
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
                         <legend class="border-bottom mb-4">Update your Account</legend>
@@ -74,11 +74,11 @@
                             {% endif %}
                         </div>
                         <div class="form-group">
-                            {{ form.avatar.label(class="btn btn-outline-primary") }}
+                            {{ form.avatar.label(class="btn btn-outline-primary form-control-label") }}
                             {{ form.avatar(class="form-control-file") }}
-                            <span id="thumb-avatar"></span>
+                            <span class="form-control-thumbnail"></span>
                             <div class="pt-2">
-                                <span class="lead text-danger" id="fileName"></span>
+                                <span class="form-control-filename lead text-danger" data-text="New avatar selected, please click update" id="fileName"></span>
                             </div>
                             {% if form.avatar.errors %}
                             {% for error in form.avatar.errors %}
