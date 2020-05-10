@@ -4,7 +4,7 @@ from flask import render_template, redirect, flash, url_for, request
 from werkzeug.security import generate_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, mongo
-from app.models import User, Perfume
+from app.models import User
 from app.forms import (
     RegistrationForm,
     LoginForm,
@@ -13,7 +13,7 @@ from app.forms import (
     ResetPasswordForm,
     CreatePerfumeForm,
 )
-from app.utils import save_avatar, send_reset_email
+from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
 
 logging.basicConfig(
@@ -251,16 +251,33 @@ def delete_user():
 def new_perfume():
     form = CreatePerfumeForm()
     if form.validate_on_submit():
-        perfume = Perfume(
-            author=current_user.username,
-            brand=form.brand.data,
-            name=form.name.data,
-            description=form.description.data,
-            date_updated=datetime.utcnow(),
-            public=form.public.data,
-            picture=form.picture.data,
-        )
-        mongo.db.perfumes.insert_one(perfume.__dict__)
+        print(f"Marca {form.brand.data}")
+        if form.picture.data:
+            picture = save_picture(form.picture.data)
+            mongo.db.perfumes.insert(
+                {
+                    "author": current_user.username,
+                    "brand": form.brand.data,
+                    "name": form.name.data,
+                    "description": form.description.data,
+                    "date_updated": datetime.utcnow(),
+                    "public": form.public.data,
+                    "picture": picture,
+                }
+            )
+        else:
+            mongo.db.perfumes.insert(
+                {
+                    "author": current_user.username,
+                    "brand": form.brand.data,
+                    "name": form.name.data,
+                    "description": form.description.data,
+                    "date_updated": datetime.utcnow(),
+                    "public": form.public.data,
+                    "picture": "generic.png",
+                }
+            )
+
         flash("You added a new perfume!", "info")
         return redirect(url_for("index"))
     return render_template("new_perfume.html", title="New Perfume", form=form)
