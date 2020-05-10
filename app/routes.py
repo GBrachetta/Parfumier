@@ -1,5 +1,4 @@
 import os
-import secrets
 import logging
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -8,7 +7,6 @@ import smtplib
 from flask import render_template, redirect, flash, url_for, request
 from werkzeug.security import generate_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
-from PIL import Image
 from app import app, mongo
 from app.models import User
 from app.forms import (
@@ -18,6 +16,7 @@ from app.forms import (
     RequestResetForm,
     ResetPasswordForm,
 )
+from app.utils import save_avatar
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -114,22 +113,6 @@ def register():
         )
         return redirect(url_for("login"))
     return render_template("register.html", title="Register", form=form)
-
-
-# TODO Remove from routes and place in external utils.py
-def save_avatar(form_picture):
-    """
-    DESCRIPTION
-    """
-    random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.filename)
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join(app.root_path, "static/images", picture_fn)
-    output_size = (125, 125)
-    i = Image.open(form_picture)
-    i.thumbnail(output_size)
-    i.save(picture_path)
-    return picture_fn
 
 
 @app.route("/account", methods=["POST", "GET"])
