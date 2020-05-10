@@ -11,9 +11,14 @@ from flask import url_for
 
 
 def save_avatar(form_picture):
+    """Saves avatar to file system
+
+    Keyword arguments:
+    argument -- description
+    Return: returns a file to the file system with dimensions reduced
+            as defined in the output size.
     """
-    DESCRIPTION
-    """
+
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
@@ -26,9 +31,13 @@ def save_avatar(form_picture):
 
 
 def send_reset_email(user):
+    """Sends a multipart email using python email
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
     """
-    DESCRIPTION
-    """
+
     reset_user = User(
         username=user["username"],
         first_name=user["first_name"],
