@@ -89,7 +89,7 @@ class UpdateAccountForm(FlaskForm):
     first_name = StringField("First Name")
     last_name = StringField("Last Name")
     avatar = FileField(
-        "Upload your avatar", validators=[FileAllowed(["jpg", "png"])]
+        "Choose your avatar", validators=[FileAllowed(["jpg", "png"])]
     )
 
     submit = SubmitField("Update")
