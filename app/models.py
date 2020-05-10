@@ -80,6 +80,19 @@ class User:
         return mongo.db.users.find_one({"email": email})
 
 
+class Perfume:
+    def __init__(
+        self, author, brand, name, description, date_updated, public, picture
+    ):
+        self.author = author
+        self.brand = brand
+        self.name = name
+        self.descritpion = description
+        self.date_updated = date_updated
+        self.public = public
+        self.picture = picture
+
+
 @login_manager.user_loader
 def load_user(email):
     """
