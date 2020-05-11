@@ -277,11 +277,41 @@ def new_perfume():
 
 @app.route("/perfumes")
 def perfumes():
+    """sumary_line
+    With a solution found on my question on Stack Overflow:
+    https://stackoverflow.com/questions/61732985/inner-join-like-with-mongodb-in-flask-jinja
+    Keyword arguments:
+    argument -- description
+    Return: return_description
     """
-    DESCRIPTION
-    """
-    # perfumes = mongo.db.posts.find(
-    #     {"$query": {"public": True}, "$orderby": {"date_posted": -1}}
-    # ).limit(3)
-    perfumes = mongo.db.perfumes.find()
-    return render_template("perfumes.html", title="Perfumes", perfumes=perfumes)
+
+    cur = mongo.db.perfumes.aggregate(
+        [
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "author",
+                    "foreignField": "username",
+                    "as": "creator",
+                }
+            },
+            {"$unwind": "$creator"},
+            {
+                "$project": {
+                    "_id": "$_id",
+                    "perfumeName": "$name",
+                    "perfumeBrand": "$brand",
+                    "perfumeDescription": "$description",
+                    "date_updated": "$date_updated",
+                    "perfumePicture": "$picture",
+                    "isPublic": "$public",
+                    "username": "$creator.username",
+                    "firstName": "$creator.first_name",
+                    "lastName": "$creator.last_name",
+                    "profilePicture": "$creator.avatar",
+                }
+            },
+        ]
+    )
+
+    return render_template("perfumes.html", title="Perfumes", perfumes=cur)
