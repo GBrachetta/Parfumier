@@ -11,8 +11,10 @@ from app.forms import (
     UpdateAccountForm,
     RequestResetForm,
     ResetPasswordForm,
+    CreatePerfumeForm,
 )
-from app.utils import save_avatar, send_reset_email
+from app.utils import save_avatar, send_reset_email, save_picture
+from datetime import datetime
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -29,14 +31,6 @@ def index():
     DESCRIPTION
     """
     return render_template("index.html")
-
-
-@app.route("/about")
-def about():
-    """
-    DESCRIPTION
-    """
-    return render_template("about.html", title="About")
 
 
 @app.route("/login", methods=["POST", "GET"])
@@ -135,7 +129,9 @@ def account():
             if current_user.avatar != "default.png":
                 os.remove(
                     os.path.join(
-                        app.root_path, "static/images", current_user.avatar
+                        app.root_path,
+                        "static/images/avatars",
+                        current_user.avatar,
                     )
                 )
         mongo.db.users.update_one(
@@ -160,7 +156,7 @@ def account():
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
         form.avatar.data = current_user.avatar
-    avatar = url_for("static", filename=f"images/{current_user.avatar}")
+    avatar = url_for("static", filename=f"images/avatars/{current_user.avatar}")
     return render_template(
         "account.html", title="Account", form=form, avatar=avatar
     )
@@ -240,3 +236,86 @@ def delete_user():
     logout_user()
     flash("You have deleted your account", "success")
     return redirect(url_for("index"))
+
+
+@app.route("/perfume/new", methods=["GET", "POST"])
+@login_required
+def new_perfume():
+    if current_user.is_admin:
+        form = CreatePerfumeForm()
+        if form.validate_on_submit():
+            print(f"Marca {form.brand.data}")
+            if form.picture.data:
+                picture = save_picture(form.picture.data)
+                mongo.db.perfumes.insert(
+                    {
+                        "author": current_user.username,
+                        "brand": form.brand.data,
+                        "name": form.name.data,
+                        "description": form.description.data,
+                        "date_updated": datetime.utcnow(),
+                        "public": form.public.data,
+                        "picture": picture,
+                    }
+                )
+            else:
+                mongo.db.perfumes.insert(
+                    {
+                        "author": current_user.username,
+                        "brand": form.brand.data,
+                        "name": form.name.data,
+                        "description": form.description.data,
+                        "date_updated": datetime.utcnow(),
+                        "public": form.public.data,
+                        "picture": "generic.png",
+                    }
+                )
+
+            flash("You added a new perfume!", "info")
+            return redirect(url_for("index"))
+    else:
+        flash("You need to be an administrator to enter data.", "danger")
+        return redirect(url_for("perfumes"))
+    return render_template("new_perfume.html", title="New Perfume", form=form)
+
+
+@app.route("/perfumes")
+def perfumes():
+    """sumary_line
+    With a solution found on my question on Stack Overflow:
+    https://stackoverflow.com/questions/61732985/inner-join-like-with-mongodb-in-flask-jinja
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
+    cur = mongo.db.perfumes.aggregate(
+        [
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "author",
+                    "foreignField": "username",
+                    "as": "creator",
+                }
+            },
+            {"$unwind": "$creator"},
+            {
+                "$project": {
+                    "_id": "$_id",
+                    "perfumeName": "$name",
+                    "perfumeBrand": "$brand",
+                    "perfumeDescription": "$description",
+                    "date_updated": "$date_updated",
+                    "perfumePicture": "$picture",
+                    "isPublic": "$public",
+                    "username": "$creator.username",
+                    "firstName": "$creator.first_name",
+                    "lastName": "$creator.last_name",
+                    "profilePicture": "$creator.avatar",
+                }
+            },
+        ]
+    )
+
+    return render_template("perfumes.html", title="Perfumes", perfumes=cur)

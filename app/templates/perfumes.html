@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+
+<div class="container mb-4 pt-4">
+    <h1>Perfumes</h1>
+</div>
+{% for perfume in perfumes %}
+<div class="card">
+    <h5 class="card-header text-white bg-primary">
+        <a class="collapsed d-block" data-toggle="collapse" href="#id{{perfume['_id']}}" aria-expanded="true" aria-controls="id{{perfume['_id']}}" id="heading-collapsed">
+            <i class="fa fa-chevron-down float-right"></i>
+            {{ perfume['perfumeName'] }}
+        </a>
+    </h5>
+    <div id="id{{perfume['_id']}}" class="collapse" aria-labelledby="heading-collapsed">
+        <div class="card-body">
+            <h5>A perfume by <span class="lead text-primary font-weight-bold">{{ perfume['perfumeBrand'] }}</span></h5>
+        </div>
+        <div class="container pb-5">
+            <div class="row justify-content-center">
+                <div class="col-7">
+                    <div class="card-body">
+                        {{ perfume['perfumeDescription'] | safe}}
+                    </div>
+                </div>
+                <div class="col-4">
+                    <img class="float-right picture-perfume" src="{{ url_for('static', filename='images/perfume_pics/' + perfume['perfumePicture']) }}" alt="Avatar">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container pt-2 pb-4">
+            <div class="row">
+                <div class="col-7">
+                    Posted by <span class="text-success">{{ perfume['username']}}</span> 
+                    <span class="text-muted">({{ perfume['firstName']}} {{ perfume['lastName']}})</span>
+                     on {{ perfume.date_updated.strftime('%d-%m-%Y') }}
+                </div>
+                <div class="col-4">
+                    <img class="float-right avatar-perfume" src="{{ url_for('static', filename='images/avatars/' + perfume['profilePicture']) }}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock content %}

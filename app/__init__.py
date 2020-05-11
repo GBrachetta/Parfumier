@@ -13,5 +13,8 @@ login_manager.login_message_category = "info"
 app.config["MONGO_URI"] = Config.MONGO_URI
 mongo = PyMongo(app)
 
-
+"""
+Imports bellow need to happen after initialisation of the app
+to prevent circular imports.
+"""
 from app import routes, models
