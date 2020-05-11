@@ -241,37 +241,41 @@ def delete_user():
 @app.route("/perfume/new", methods=["GET", "POST"])
 @login_required
 def new_perfume():
-    form = CreatePerfumeForm()
-    if form.validate_on_submit():
-        print(f"Marca {form.brand.data}")
-        if form.picture.data:
-            picture = save_picture(form.picture.data)
-            mongo.db.perfumes.insert(
-                {
-                    "author": current_user.username,
-                    "brand": form.brand.data,
-                    "name": form.name.data,
-                    "description": form.description.data,
-                    "date_updated": datetime.utcnow(),
-                    "public": form.public.data,
-                    "picture": picture,
-                }
-            )
-        else:
-            mongo.db.perfumes.insert(
-                {
-                    "author": current_user.username,
-                    "brand": form.brand.data,
-                    "name": form.name.data,
-                    "description": form.description.data,
-                    "date_updated": datetime.utcnow(),
-                    "public": form.public.data,
-                    "picture": "generic.png",
-                }
-            )
+    if current_user.is_admin:
+        form = CreatePerfumeForm()
+        if form.validate_on_submit():
+            print(f"Marca {form.brand.data}")
+            if form.picture.data:
+                picture = save_picture(form.picture.data)
+                mongo.db.perfumes.insert(
+                    {
+                        "author": current_user.username,
+                        "brand": form.brand.data,
+                        "name": form.name.data,
+                        "description": form.description.data,
+                        "date_updated": datetime.utcnow(),
+                        "public": form.public.data,
+                        "picture": picture,
+                    }
+                )
+            else:
+                mongo.db.perfumes.insert(
+                    {
+                        "author": current_user.username,
+                        "brand": form.brand.data,
+                        "name": form.name.data,
+                        "description": form.description.data,
+                        "date_updated": datetime.utcnow(),
+                        "public": form.public.data,
+                        "picture": "generic.png",
+                    }
+                )
 
-        flash("You added a new perfume!", "info")
-        return redirect(url_for("index"))
+            flash("You added a new perfume!", "info")
+            return redirect(url_for("index"))
+    else:
+        flash("You need to be an administrator to enter data.", "danger")
+        return redirect(url_for("perfumes"))
     return render_template("new_perfume.html", title="New Perfume", form=form)
 
 
