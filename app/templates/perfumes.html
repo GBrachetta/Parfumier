@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% for perfume in perfumes %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 alert alert-primary">
+            <h4 class="card-title">{{ perfume.brand }}</h4><br>
+            <h3 class="card-title">{{ perfume.name }}</h3>
+            <p>{{ perfume.description | safe}}</p>
+            <img class="float-left post-img" src="{{ url_for('static', filename='images/perfume_pics/' + perfume.picture) }}" alt="Avatar">
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock content %}
