@@ -33,14 +33,6 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/about")
-def about():
-    """
-    DESCRIPTION
-    """
-    return render_template("about.html", title="About")
-
-
 @app.route("/login", methods=["POST", "GET"])
 def login():
     """
@@ -281,3 +273,15 @@ def new_perfume():
         flash("You added a new perfume!", "info")
         return redirect(url_for("index"))
     return render_template("new_perfume.html", title="New Perfume", form=form)
+
+
+@app.route("/perfumes")
+def perfumes():
+    """
+    DESCRIPTION
+    """
+    # perfumes = mongo.db.posts.find(
+    #     {"$query": {"public": True}, "$orderby": {"date_posted": -1}}
+    # ).limit(3)
+    perfumes = mongo.db.perfumes.find()
+    return render_template("perfumes.html", title="Perfumes", perfumes=perfumes)
