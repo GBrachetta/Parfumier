@@ -12,6 +12,7 @@ from app.forms import (
     RequestResetForm,
     ResetPasswordForm,
     CreatePerfumeForm,
+    CreateTypeForm,
 )
 from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
@@ -256,6 +257,7 @@ def new_perfume():
                         "date_updated": datetime.utcnow(),
                         "public": form.public.data,
                         "picture": picture,
+                        "type": form.type.data,
                     }
                 )
             else:
@@ -268,6 +270,7 @@ def new_perfume():
                         "date_updated": datetime.utcnow(),
                         "public": form.public.data,
                         "picture": "generic.png",
+                        "type": form.type.data,
                     }
                 )
 
@@ -275,7 +278,7 @@ def new_perfume():
             return redirect(url_for("index"))
     else:
         flash("You need to be an administrator to enter data.", "danger")
-        return redirect(url_for("perfumes"))
+        return redirect(url_for("index"))
     return render_template("new_perfume.html", title="New Perfume", form=form)
 
 
@@ -309,6 +312,7 @@ def perfumes():
                     "date_updated": "$date_updated",
                     "perfumePicture": "$picture",
                     "isPublic": "$public",
+                    "perfumeType": "$type",
                     "username": "$creator.username",
                     "firstName": "$creator.first_name",
                     "lastName": "$creator.last_name",
@@ -317,5 +321,21 @@ def perfumes():
             },
         ]
     )
-
     return render_template("perfumes.html", title="Perfumes", perfumes=cur)
+
+
+@app.route("/type/new", methods=['GET', 'POST'])
+@login_required
+def new_type():
+    if current_user.is_admin:
+        form = CreateTypeForm()
+        if form.validate_on_submit():
+            mongo.db.types.insert(
+                {"type": form.type.data, "description": form.description.data}
+            )
+            flash("You added a new type!", "info")
+            return redirect(url_for("index"))
+    else:
+        flash("You need to be an administrator.", "danger")
+        return redirect(url_for("index"))
+    return render_template("new_type.html", title="New Type", form=form)
