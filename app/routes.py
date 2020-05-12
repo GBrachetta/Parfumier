@@ -285,7 +285,7 @@ def new_perfume():
         "new_perfume.html",
         title="New Perfume",
         form=form,
-        types=mongo.db.types.find(),
+        types=mongo.db.types.find().sort("type_name"),
     )
 
 
@@ -376,7 +376,9 @@ def perfume(id):
             {"$match": {"_id": ObjectId(id)}},
         ]
     )
-    return render_template("perfume.html", title="Perfumes", cursor=cur, perfume=perfume)
+    return render_template(
+        "perfume.html", title="Perfumes", cursor=cur, perfume=perfume
+    )
 
 
 # ! Types
