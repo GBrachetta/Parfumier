@@ -15,6 +15,7 @@
     </h5>
     <div id="id{{perfume['_id']}}" class="collapse" aria-labelledby="heading-collapsed">
         <div class="card-body">
+            <h4>Name: <a href="{{ url_for('perfume', id=perfume._id) }}"> {{ perfume['perfumeName'] }}</a></h4>
             <h5>A perfume by <span class="lead text-primary font-weight-bold">{{ perfume['perfumeBrand'] }}</span></h5>
             <p>Type: {{ perfume['perfumeType'] }}</p>
         </div>
@@ -36,7 +37,7 @@
                 <div class="col-7">
                     Posted by <span class="text-success">{{ perfume['username']}}</span>
                     <span class="text-muted">({{ perfume['firstName']}} {{ perfume['lastName']}})</span>
-                    on {{ perfume.date_updated.strftime('%d-%m-%Y') }}
+                    on {{ perfume.date_updated.strftime('%d-%m-%Y') }}<br>
                 </div>
                 <div class="col-4">
                     <img class="float-right avatar-perfume" src="{{ url_for('static', filename='images/avatars/' + perfume['profilePicture']) }}" alt="">
@@ -45,6 +46,7 @@
         </div>
     </div>
 </div>
+
 {% endfor %}
 {% if current_user.is_authenticated and current_user.is_admin == True %}
 <div class="mt-5">

@@ -16,6 +16,7 @@ from app.forms import (
 )
 from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
+from bson.objectid import ObjectId
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -239,6 +240,7 @@ def delete_user():
     return redirect(url_for("index"))
 
 
+# ! PERFUMES
 @app.route("/perfume/new", methods=["GET", "POST"])
 @login_required
 def new_perfume():
@@ -330,6 +332,54 @@ def perfumes():
     return render_template("perfumes.html", title="Perfumes", perfumes=cur)
 
 
+@app.route("/perfumes/<id>", methods=["POST"])
+@login_required
+def delete_perfume(id):
+    if current_user.is_admin:
+        mongo.db.perfumes.delete_one({"_id": ObjectId(id)})
+        flash("You deleted this perfume", "success")
+        return redirect(url_for("perfumes"))
+    flash("Not allowed", "warning")
+    return redirect(url_for("perfumes"))
+
+
+@app.route("/perfume/<id>")
+def perfume(id):
+    perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
+    cur = mongo.db.perfumes.aggregate(
+        [
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "author",
+                    "foreignField": "username",
+                    "as": "creator",
+                }
+            },
+            {"$unwind": "$creator"},
+            {
+                "$project": {
+                    "_id": "$_id",
+                    "perfumeName": "$name",
+                    "perfumeBrand": "$brand",
+                    "perfumeDescription": "$description",
+                    "date_updated": "$date_updated",
+                    "perfumePicture": "$picture",
+                    "isPublic": "$public",
+                    "perfumeType": "$perfume_type",
+                    "username": "$creator.username",
+                    "firstName": "$creator.first_name",
+                    "lastName": "$creator.last_name",
+                    "profilePicture": "$creator.avatar",
+                }
+            },
+            {"$match": {"_id": ObjectId(id)}},
+        ]
+    )
+    return render_template("perfume.html", title="Perfumes", cursor=cur, perfume=perfume)
+
+
+# ! Types
 @app.route("/type/new", methods=["GET", "POST"])
 @login_required
 def new_type():
@@ -340,6 +390,7 @@ def new_type():
                 {
                     "type_name": form.type_name.data,
                     "description": form.description.data,
+                    "author": current_user.username,
                 }
             )
             flash("You added a new type!", "info")
@@ -354,3 +405,20 @@ def new_type():
 def types():
     types = mongo.db.types.find().sort("type_name")
     return render_template("types.html", types=types)
+
+
+@app.route("/type/<id>")
+def type(id):
+    type = mongo.db.types.find_one({"_id": ObjectId(id)})
+    return render_template("type.html", type=type)
+
+
+@app.route("/type/<id>", methods=["POST"])
+@login_required
+def delete_type(id):
+    if current_user.is_admin:
+        mongo.db.types.delete_one({"_id": ObjectId(id)})
+        flash("You deleted this type", "success")
+        return redirect(url_for("types"))
+    flash("Not allowed", "warning")
+    return redirect(url_for("types"))
