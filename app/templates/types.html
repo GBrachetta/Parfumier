@@ -2,28 +2,52 @@
 {% block content %}
 
 <div class="container mb-4 pt-4">
-    <h1>Types</h1>
+    <h1>Types of Perfumes</h1>
 </div>
-{% for type in types %}
-<div class="card">
-    <h5 class="card-header text-white bg-primary">
-        <a class="collapsed d-block" data-toggle="collapse" href="#id{{ type._id }}" aria-expanded="true" aria-controls="id{{ type._id }}" id="heading-collapsed">
-            <i class="fa fa-chevron-down float-right"></i>
-            {{ type.type_name }}
-        </a>
-    </h5>
-    <div id="id{{type._id}}" class="collapse" aria-labelledby="heading-collapsed">
-        <div class="card-body">
-            <h5>Type name <span class="lead text-primary font-weight-bold">{{ type.type_name }}</span></h5>
-            <p>Description: {{ type.description | safe}}</p>
+<div class="container">
+    <div class="row">
+        {% for type in types %}
+        <div class="card col-12 mb-1">
+            <div class="card-body">
+                <h5 class="card-title"><span class="lead text-primary font-weight-bold">{{ type.type_name }}</h5>
+                <hr>
+                <p class="card-text">{{ type.description | safe}}</p>
+                {% if current_user.is_authenticated and current_user.is_admin == True %}
+                <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteTypeModal">Delete</button>
+
+                {% endif %}
+            </div>
         </div>
+        <div class="modal fade" id="deleteTypeModal" tabindex="-1" role="dialog" aria-labelledby="deleteTypeModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteUserModal">Please Confirm Deletion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please confirm you want to delete this type.</p>
+                        <p><strong>This action cannot be undone.</strong></p>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="{{ url_for('delete_type', id=type._id) }}" method="POST">
+                            <input type="submit" , class="btn btn-danger" value="Delete">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
-{% endfor %}
 {% if current_user.is_authenticated and current_user.is_admin == True %}
 <div class="mt-5">
     <a href="{{ url_for('new_type') }}" class="btn btn-primary" type="button">Add new type</a>
 </div>
 {% endif %}
+<!-- Modal -->
 
 {% endblock content %}
