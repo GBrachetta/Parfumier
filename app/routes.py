@@ -312,7 +312,7 @@ def perfumes():
                     "date_updated": "$date_updated",
                     "perfumePicture": "$picture",
                     "isPublic": "$public",
-                    "perfumeType": "$type",
+                    "perfumeType": "$perfume_type",
                     "username": "$creator.username",
                     "firstName": "$creator.first_name",
                     "lastName": "$creator.last_name",
