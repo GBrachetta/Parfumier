@@ -357,7 +357,7 @@ def types():
     return render_template("types.html", types=types)
 
 
-@app.route("/types/<id>/delete")
+@app.route("/types/<id>/delete", methods=["POST"])
 @login_required
 def delete_type(id):
     if current_user.is_admin:
