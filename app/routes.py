@@ -253,11 +253,11 @@ def new_perfume():
                         "author": current_user.username,
                         "brand": form.brand.data,
                         "name": form.name.data,
+                        "perfume_type": form.perfume_type.data,
                         "description": form.description.data,
                         "date_updated": datetime.utcnow(),
                         "public": form.public.data,
                         "picture": picture,
-                        "perfume_type": form.perfume_type.data,
                     }
                 )
             else:
@@ -266,16 +266,16 @@ def new_perfume():
                         "author": current_user.username,
                         "brand": form.brand.data,
                         "name": form.name.data,
+                        "perfume_type": form.perfume_type.data,
                         "description": form.description.data,
                         "date_updated": datetime.utcnow(),
                         "public": form.public.data,
                         "picture": "generic.png",
-                        "perfume_type": form.perfume_type.data,
                     }
                 )
 
             flash("You added a new perfume!", "info")
-            return redirect(url_for("index"))
+            return redirect(url_for("perfumes"))
     else:
         flash("You need to be an administrator to enter data.", "danger")
         return redirect(url_for("index"))
