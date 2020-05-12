@@ -13,7 +13,7 @@ from app.forms import (
     ResetPasswordForm,
     CreatePerfumeForm,
     CreateTypeForm,
-    UpdateTypeForm,
+    EditTypeForm,
 )
 from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
@@ -430,7 +430,7 @@ def delete_type(id):
 @app.route("/type/edit/<id>", methods=["POST", "GET"])
 @login_required
 def edit_type(id):
-    form = UpdateTypeForm()
+    form = EditTypeForm()
     type = mongo.db.types.find_one({"_id": ObjectId(id)})
     if current_user.is_admin:
         if form.validate_on_submit():

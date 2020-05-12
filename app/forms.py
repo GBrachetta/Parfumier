@@ -168,7 +168,7 @@ class CreateTypeForm(FlaskForm):
             raise ValidationError("The type already exists.")
 
 
-class UpdateTypeForm(FlaskForm):
+class EditTypeForm(FlaskForm):
     type_name = StringField("Type", validators=[DataRequired()])
     description = TextAreaField("Description")
     submit = SubmitField("Update")
