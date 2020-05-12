@@ -103,9 +103,10 @@ class Perfume:
 
 
 class Types:
-    def __init__(self, type_name, description):
+    def __init__(self, type_name, description, author):
         self.type_name = type_name
         self.description = description
+        self.author = author
 
 
 @login_manager.user_loader
