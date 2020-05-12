@@ -9,16 +9,16 @@
                     <legend class="border-bottom mb-4">Add New Type</legend>
                     <div class="form-group">
                         {{ form.csrf_token }}
-                        {{ form.type.label(class="form-control-label") }}
-                        {% if form.type.errors %}
-                        {{ form.type(class="form-control form-control-md is-invalid")}}
+                        {{ form.type_name.label(class="form-control-label") }}
+                        {% if form.type_name.errors %}
+                        {{ form.type_name(class="form-control form-control-md is-invalid")}}
                         <div class="invalid-feedback">
-                            {% for error in form.type.errors %}
+                            {% for error in form.type_name.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.type(class="form-control form-control-md", placeholder="Enter brand")}}
+                        {{ form.type_name(class="form-control form-control-md", placeholder="Enter brand")}}
                         {% endif %}
                     </div>
                     <div class="form-group">
