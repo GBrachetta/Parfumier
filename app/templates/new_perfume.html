@@ -36,17 +36,23 @@
                         {% endif %}
                     </div>
                     <div class="form-group">
-                        {{ form.csrf_token }}
-                        {{ form.type.label(class="form-control-label") }}
-                        {% if form.type.errors %}
-                        {{ form.type(class="form-control form-control-md is-invalid")}}
+                        {{ form.perfume_type.label(class="form-control-label") }}
+                        {% if form.perfume_type.errors %}
+                        {{ form.perfume_type(class="form-control form-control-md is-invalid")}}
                         <div class="invalid-feedback">
-                            {% for error in form.type.errors %}
+                            {% for error in form.perfume_type.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.type(class="form-control form-control-md", placeholder="Enter type")}}
+                        <div class="input-group mb-3">
+                            <select class="custom-select" id="perfume_type" name="perfume_type">
+                                <option selected>Choose type</option>
+                                {% for type in types %}
+                                <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                         {% endif %}
                     </div>
                     <div class="form-group">
