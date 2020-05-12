@@ -13,6 +13,7 @@ from app.forms import (
     ResetPasswordForm,
     CreatePerfumeForm,
     CreateTypeForm,
+    UpdateTypeForm,
 )
 from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
@@ -424,3 +425,25 @@ def delete_type(id):
         return redirect(url_for("types"))
     flash("Not allowed", "warning")
     return redirect(url_for("types"))
+
+
+@app.route("/type/edit/<id>", methods=["POST", "GET"])
+@login_required
+def edit_type(id):
+    form = UpdateTypeForm()
+    type = mongo.db.types.find_one({"_id": ObjectId(id)})
+    if current_user.is_admin:
+        if form.validate_on_submit():
+            new_value = {
+                "$set": {
+                    "type_name": form.type_name.data,
+                    "description": form.description.data,
+                }
+            }
+            mongo.db.types.update_one(type, new_value)
+            flash("Type has been updated", "info")
+            return redirect(url_for("type", id=type["_id"]))
+        elif request.method == "GET":
+            form.type_name.data = type["type_name"]
+            form.description.data = type["description"]
+    return render_template("edit_type.html", title="Edit Type", form=form)
