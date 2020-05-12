@@ -16,6 +16,7 @@ from app.forms import (
 )
 from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
+from bson.objectid import ObjectId
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -354,3 +355,14 @@ def new_type():
 def types():
     types = mongo.db.types.find().sort("type_name")
     return render_template("types.html", types=types)
+
+
+@app.route("/types/<id>/delete")
+@login_required
+def delete_type(id):
+    if current_user.is_admin:
+        mongo.db.types.delete_one({"_id": ObjectId(id)})
+        flash("You deleted this type", "success")
+        return redirect(url_for("types"))
+    flash("Not allowed", "warning")
+    return redirect(url_for("types"))
