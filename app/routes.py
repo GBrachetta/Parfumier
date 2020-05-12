@@ -341,6 +341,7 @@ def new_type():
                 {
                     "type_name": form.type_name.data,
                     "description": form.description.data,
+                    "author": current_user.username,
                 }
             )
             flash("You added a new type!", "info")
@@ -357,7 +358,7 @@ def types():
     return render_template("types.html", types=types)
 
 
-@app.route("/types/<id>/delete", methods=["POST"])
+@app.route("/types/<id>", methods=["POST"])
 @login_required
 def delete_type(id):
     if current_user.is_admin:
@@ -366,3 +367,21 @@ def delete_type(id):
         return redirect(url_for("types"))
     flash("Not allowed", "warning")
     return redirect(url_for("types"))
+
+
+@app.route("/perfumes/<id>", methods=["POST"])
+@login_required
+def delete_perfume(id):
+    if current_user.is_admin:
+        mongo.db.perfumes.delete_one({"_id": ObjectId(id)})
+        flash("You deleted this perfume", "success")
+        return redirect(url_for("perfumes"))
+    flash("Not allowed", "warning")
+    return redirect(url_for("perfumes"))
+
+
+# @app.route("/types/<id>")
+# @login_required
+# def edit_type(id):
+#     if current_user.is_admin:
+#         mongo.db.types.find_one({"_id": ObjectId(id)})
