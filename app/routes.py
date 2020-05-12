@@ -240,6 +240,7 @@ def delete_user():
     return redirect(url_for("index"))
 
 
+# ! PERFUMES
 @app.route("/perfume/new", methods=["GET", "POST"])
 @login_required
 def new_perfume():
@@ -331,6 +332,23 @@ def perfumes():
     return render_template("perfumes.html", title="Perfumes", perfumes=cur)
 
 
+@app.route("/perfumes/<id>", methods=["POST"])
+@login_required
+def delete_perfume(id):
+    if current_user.is_admin:
+        mongo.db.perfumes.delete_one({"_id": ObjectId(id)})
+        flash("You deleted this perfume", "success")
+        return redirect(url_for("perfumes"))
+    flash("Not allowed", "warning")
+    return redirect(url_for("perfumes"))
+
+
+@app.route("/perfume/<id>")
+def perfume(id):
+    return render_template("perfume.html")
+
+
+# ! Types
 @app.route("/type/new", methods=["GET", "POST"])
 @login_required
 def new_type():
@@ -358,7 +376,13 @@ def types():
     return render_template("types.html", types=types)
 
 
-@app.route("/types/<id>", methods=["POST"])
+@app.route("/type/<id>")
+def type(id):
+    type = mongo.db.types.find_one({"_id": ObjectId(id)})
+    return render_template("type.html", type=type)
+
+
+@app.route("/type/<id>", methods=["POST"])
 @login_required
 def delete_type(id):
     if current_user.is_admin:
@@ -367,21 +391,3 @@ def delete_type(id):
         return redirect(url_for("types"))
     flash("Not allowed", "warning")
     return redirect(url_for("types"))
-
-
-@app.route("/perfumes/<id>", methods=["POST"])
-@login_required
-def delete_perfume(id):
-    if current_user.is_admin:
-        mongo.db.perfumes.delete_one({"_id": ObjectId(id)})
-        flash("You deleted this perfume", "success")
-        return redirect(url_for("perfumes"))
-    flash("Not allowed", "warning")
-    return redirect(url_for("perfumes"))
-
-
-# @app.route("/types/<id>")
-# @login_required
-# def edit_type(id):
-#     if current_user.is_admin:
-#         mongo.db.types.find_one({"_id": ObjectId(id)})
