@@ -345,7 +345,38 @@ def delete_perfume(id):
 
 @app.route("/perfume/<id>")
 def perfume(id):
-    return render_template("perfume.html")
+    perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
+    cur = mongo.db.perfumes.aggregate(
+        [
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "author",
+                    "foreignField": "username",
+                    "as": "creator",
+                }
+            },
+            {"$unwind": "$creator"},
+            {
+                "$project": {
+                    "_id": "$_id",
+                    "perfumeName": "$name",
+                    "perfumeBrand": "$brand",
+                    "perfumeDescription": "$description",
+                    "date_updated": "$date_updated",
+                    "perfumePicture": "$picture",
+                    "isPublic": "$public",
+                    "perfumeType": "$perfume_type",
+                    "username": "$creator.username",
+                    "firstName": "$creator.first_name",
+                    "lastName": "$creator.last_name",
+                    "profilePicture": "$creator.avatar",
+                }
+            },
+            {"$match": {"_id": ObjectId(id)}},
+        ]
+    )
+    return render_template("perfume.html", title="Perfumes", cursor=cur, perfume=perfume)
 
 
 # ! Types
