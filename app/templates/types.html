@@ -12,13 +12,17 @@
                 <h5 class="card-title"><span class="lead text-primary font-weight-bold">{{ type.type_name }}</h5>
                 <hr>
                 <p class="card-text">{{ type.description | safe}}</p>
-                {% if current_user.is_authenticated and current_user.is_admin == True %}
-                <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteTypeModal">Delete</button>
-
+                {% if current_user.is_authenticated and current_user.is_admin == True and current_user.username == type.author %}
+                    <a href="#" class="btn btn-primary btn-sm" disabled>Edit</a>
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteTypeModal">Delete</button>
+                {% elif current_user.is_authenticated and current_user.is_admin == True %}
+                    <a href="#" class="btn btn-primary btn-sm" disabled>Edit</a>
+                    <button disabled type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteTypeModal">Delete</button>
+                    <span class="small ml-2">Only the author can delete this type.</span>
                 {% endif %}
             </div>
         </div>
+        <!-- Modal -->
         <div class="modal fade" id="deleteTypeModal" tabindex="-1" role="dialog" aria-labelledby="deleteTypeModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -48,6 +52,5 @@
     <a href="{{ url_for('new_type') }}" class="btn btn-primary" type="button">Add new type</a>
 </div>
 {% endif %}
-<!-- Modal -->
 
 {% endblock content %}
