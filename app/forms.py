@@ -151,10 +151,10 @@ class CreatePerfumeForm(FlaskForm):
     public = BooleanField("Public")
     submit = SubmitField("Publish")
     picture = FileField("Picture", validators=[FileAllowed(["jpg", "png"])])
-    type = StringField("Type", validators=[DataRequired()])
+    perfume_type = StringField("Type", validators=[DataRequired()])
 
 
 class CreateTypeForm(FlaskForm):
-    type = StringField("Type", validators=[DataRequired()])
+    type_name = StringField("Type", validators=[DataRequired()])
     description = TextAreaField("Description")
     submit = SubmitField("Create")
