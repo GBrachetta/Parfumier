@@ -257,7 +257,7 @@ def new_perfume():
                         "date_updated": datetime.utcnow(),
                         "public": form.public.data,
                         "picture": picture,
-                        "type": form.type.data,
+                        "perfume_type": form.perfume_type.data,
                     }
                 )
             else:
@@ -270,7 +270,7 @@ def new_perfume():
                         "date_updated": datetime.utcnow(),
                         "public": form.public.data,
                         "picture": "generic.png",
-                        "type": form.type.data,
+                        "perfume_type": form.perfume_type.data,
                     }
                 )
 
@@ -279,7 +279,7 @@ def new_perfume():
     else:
         flash("You need to be an administrator to enter data.", "danger")
         return redirect(url_for("index"))
-    return render_template("new_perfume.html", title="New Perfume", form=form)
+    return render_template("new_perfume.html", title="New Perfume", form=form, types=mongo.db.types.find())
 
 
 @app.route("/perfumes")
@@ -331,7 +331,7 @@ def new_type():
         form = CreateTypeForm()
         if form.validate_on_submit():
             mongo.db.types.insert(
-                {"type": form.type.data, "description": form.description.data}
+                {"type_name": form.type_name.data, "description": form.description.data}
             )
             flash("You added a new type!", "info")
             return redirect(url_for("index"))
