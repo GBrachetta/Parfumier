@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<div class="container mb-4 pt-4">
+    <h1>Types</h1>
+</div>
+{% for type in types %}
+<div class="card">
+    <h5 class="card-header text-white bg-primary">
+        <a class="collapsed d-block" data-toggle="collapse" href="#id{{ type._id }}" aria-expanded="true" aria-controls="id{{ type._id }}" id="heading-collapsed">
+            <i class="fa fa-chevron-down float-right"></i>
+            {{ type.type_name }}
+        </a>
+    </h5>
+    <div id="id{{type._id}}" class="collapse" aria-labelledby="heading-collapsed">
+        <div class="card-body">
+            <h5>Type name <span class="lead text-primary font-weight-bold">{{ type.type_name }}</span></h5>
+            <p>Description: {{ type.description | safe}}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% if current_user.is_authenticated and current_user.is_admin == True %}
+<div class="mt-5">
+    <a href="{{ url_for('new_type') }}" class="btn btn-primary" type="button">Add new type</a>
+</div>
+{% endif %}
+
+{% endblock content %}
