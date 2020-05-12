@@ -149,7 +149,7 @@ class CreatePerfumeForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     description = TextAreaField("Description")
     public = BooleanField("Public")
-    submit = SubmitField("Publish")
+    submit = SubmitField("Create")
     picture = FileField("Picture", validators=[FileAllowed(["jpg", "png"])])
     perfume_type = StringField("Type", validators=[DataRequired()])
 
@@ -158,3 +158,11 @@ class CreateTypeForm(FlaskForm):
     type_name = StringField("Type", validators=[DataRequired()])
     description = TextAreaField("Description")
     submit = SubmitField("Create")
+
+    def validate_type_name(self, type_name):
+        """
+        DESCRIPTION
+        """
+        type = mongo.db.types.find_one({"type_name": type_name.data})
+        if type:
+            raise ValidationError("The type already exists.")
