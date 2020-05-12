@@ -28,9 +28,7 @@
                     <div class="navbar-nav mr-auto">
                         <a class="nav-item nav-link" href="{{ url_for('index') }}">Home</a>
                         <a class="nav-item nav-link" href="{{ url_for('perfumes') }}">Perfumes</a>
-                        {% if current_user.is_authenticated and current_user.is_admin == True %}
-                        <a class="nav-item nav-link" href="{{ url_for('new_perfume') }}">Add Perfume</a>
-                        {% endif %}
+                        <a class="nav-item nav-link" href="{{ url_for('types') }}">Types</a>
                     </div>
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">

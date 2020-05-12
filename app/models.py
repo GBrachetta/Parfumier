@@ -82,7 +82,15 @@ class User:
 
 class Perfume:
     def __init__(
-        self, author, brand, name, description, date_updated, public, picture
+        self,
+        author,
+        brand,
+        name,
+        description,
+        date_updated,
+        public,
+        picture,
+        perfume_type,
     ):
         self.author = author
         self.brand = brand
@@ -91,6 +99,13 @@ class Perfume:
         self.date_updated = date_updated
         self.public = public
         self.picture = picture
+        self.perfume_type = perfume_type
+
+
+class Types:
+    def __init__(self, type_name, description):
+        self.type_name = type_name
+        self.description = description
 
 
 @login_manager.user_loader
