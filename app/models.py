@@ -90,7 +90,7 @@ class Perfume:
         date_updated,
         public,
         picture,
-        type,
+        perfume_type,
     ):
         self.author = author
         self.brand = brand
@@ -99,12 +99,12 @@ class Perfume:
         self.date_updated = date_updated
         self.public = public
         self.picture = picture
-        self.type = type
+        self.perfume_type = perfume_type
 
 
 class Types:
-    def __init__(self, type, description):
-        self.type = type
+    def __init__(self, type_name, description):
+        self.type_name = type_name
         self.description = description
 
 
