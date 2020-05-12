@@ -13,6 +13,7 @@ from app.forms import (
     ResetPasswordForm,
     CreatePerfumeForm,
     CreateTypeForm,
+    EditTypeForm,
 )
 from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
@@ -285,7 +286,7 @@ def new_perfume():
         "new_perfume.html",
         title="New Perfume",
         form=form,
-        types=mongo.db.types.find(),
+        types=mongo.db.types.find().sort("type_name"),
     )
 
 
@@ -376,7 +377,9 @@ def perfume(id):
             {"$match": {"_id": ObjectId(id)}},
         ]
     )
-    return render_template("perfume.html", title="Perfumes", cursor=cur, perfume=perfume)
+    return render_template(
+        "perfume.html", title="Perfumes", cursor=cur, perfume=perfume
+    )
 
 
 # ! Types
@@ -422,3 +425,25 @@ def delete_type(id):
         return redirect(url_for("types"))
     flash("Not allowed", "warning")
     return redirect(url_for("types"))
+
+
+@app.route("/type/edit/<id>", methods=["POST", "GET"])
+@login_required
+def edit_type(id):
+    form = EditTypeForm()
+    type = mongo.db.types.find_one({"_id": ObjectId(id)})
+    if current_user.is_admin:
+        if form.validate_on_submit():
+            new_value = {
+                "$set": {
+                    "type_name": form.type_name.data,
+                    "description": form.description.data,
+                }
+            }
+            mongo.db.types.update_one(type, new_value)
+            flash("Type has been updated", "info")
+            return redirect(url_for("type", id=type["_id"]))
+        elif request.method == "GET":
+            form.type_name.data = type["type_name"]
+            form.description.data = type["description"]
+    return render_template("edit_type.html", title="Edit Type", form=form)
