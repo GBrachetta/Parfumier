@@ -279,7 +279,12 @@ def new_perfume():
     else:
         flash("You need to be an administrator to enter data.", "danger")
         return redirect(url_for("index"))
-    return render_template("new_perfume.html", title="New Perfume", form=form, types=mongo.db.types.find())
+    return render_template(
+        "new_perfume.html",
+        title="New Perfume",
+        form=form,
+        types=mongo.db.types.find(),
+    )
 
 
 @app.route("/perfumes")
@@ -324,18 +329,27 @@ def perfumes():
     return render_template("perfumes.html", title="Perfumes", perfumes=cur)
 
 
-@app.route("/type/new", methods=['GET', 'POST'])
+@app.route("/type/new", methods=["GET", "POST"])
 @login_required
 def new_type():
     if current_user.is_admin:
         form = CreateTypeForm()
         if form.validate_on_submit():
             mongo.db.types.insert(
-                {"type_name": form.type_name.data, "description": form.description.data}
+                {
+                    "type_name": form.type_name.data,
+                    "description": form.description.data,
+                }
             )
             flash("You added a new type!", "info")
-            return redirect(url_for("index"))
+            return redirect(url_for("types"))
     else:
         flash("You need to be an administrator.", "danger")
         return redirect(url_for("index"))
     return render_template("new_type.html", title="New Type", form=form)
+
+
+@app.route("/types")
+def types():
+    types = mongo.db.types.find()
+    return render_template("types.html", types=types)
