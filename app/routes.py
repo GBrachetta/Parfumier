@@ -324,6 +324,7 @@ def perfumes():
                     "profilePicture": "$creator.avatar",
                 }
             },
+            {"$sort": {"perfumeName": 1}},
         ]
     )
     return render_template("perfumes.html", title="Perfumes", perfumes=cur)
@@ -351,5 +352,5 @@ def new_type():
 
 @app.route("/types")
 def types():
-    types = mongo.db.types.find()
+    types = mongo.db.types.find().sort("type_name")
     return render_template("types.html", types=types)
