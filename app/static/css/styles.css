@@ -99,3 +99,13 @@ h6 {
 .picture-perfume{
     max-width: 250px;
 }
+
+/* .card-img-top{
+    max-height: 100px;
+} */
+
+.view-more:hover{
+    text-decoration: none;
+    color: #444444;
+    font-weight: 500;
+}
