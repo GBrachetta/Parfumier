@@ -14,6 +14,7 @@ from app.forms import (
     CreatePerfumeForm,
     CreateTypeForm,
     EditTypeForm,
+    EditPerfumeForm,
 )
 from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
@@ -248,7 +249,6 @@ def new_perfume():
     if current_user.is_admin:
         form = CreatePerfumeForm()
         if form.validate_on_submit():
-            print(f"Marca {form.brand.data}")
             if form.picture.data:
                 picture = save_picture(form.picture.data)
                 mongo.db.perfumes.insert(
@@ -333,17 +333,6 @@ def perfumes():
     return render_template("perfumes.html", title="Perfumes", perfumes=cur)
 
 
-@app.route("/perfumes/<id>", methods=["POST"])
-@login_required
-def delete_perfume(id):
-    if current_user.is_admin:
-        mongo.db.perfumes.delete_one({"_id": ObjectId(id)})
-        flash("You deleted this perfume", "success")
-        return redirect(url_for("perfumes"))
-    flash("Not allowed", "warning")
-    return redirect(url_for("perfumes"))
-
-
 @app.route("/perfume/<id>")
 def perfume(id):
     perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
@@ -379,6 +368,69 @@ def perfume(id):
     )
     return render_template(
         "perfume.html", title="Perfumes", cursor=cur, perfume=perfume
+    )
+
+
+@app.route("/perfumes/<id>", methods=["POST"])
+@login_required
+def delete_perfume(id):
+    if current_user.is_admin:
+        mongo.db.perfumes.delete_one({"_id": ObjectId(id)})
+        flash("You deleted this perfume", "success")
+        return redirect(url_for("perfumes"))
+    flash("Not allowed", "warning")
+    return redirect(url_for("perfumes"))
+
+
+@app.route("/perfume/edit/<id>", methods=["POST", "GET"])
+@login_required
+def edit_perfume(id):
+    form = EditPerfumeForm()
+    perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
+    if current_user.is_admin:
+        if form.validate_on_submit():
+            if form.picture.data:
+                picture = save_picture(form.picture.data)
+
+                new_value = {
+                    "$set": {
+                        "author": current_user.username,
+                        "brand": form.brand.data,
+                        "name": form.name.data,
+                        "perfume_type": form.perfume_type.data,
+                        "description": form.description.data,
+                        "date_updated": datetime.utcnow(),
+                        "public": form.public.data,
+                        "picture": picture,
+                    }
+                }
+                mongo.db.perfumes.update_one(perfume, new_value)
+            else:
+                new_value = {
+                    "$set": {
+                        "author": current_user.username,
+                        "brand": form.brand.data,
+                        "name": form.name.data,
+                        "perfume_type": form.perfume_type.data,
+                        "description": form.description.data,
+                        "date_updated": datetime.utcnow(),
+                        "public": form.public.data,
+                    }
+                }
+                mongo.db.perfumes.update_one(perfume, new_value)
+                flash("You updated the perfume", "info")
+                return redirect(url_for("perfume", id=perfume["_id"]))
+        elif request.method == "GET":
+            form.brand.data = perfume["brand"]
+            form.name.data = perfume["name"]
+            form.perfume_type.data = perfume["perfume_type"]
+            form.description.data = perfume["description"]
+            form.public.data = perfume["public"]
+    return render_template(
+        "edit_perfume.html",
+        title="Edit Perfume",
+        form=form,
+        types=mongo.db.types.find().sort("type_name"),
     )
 
 
