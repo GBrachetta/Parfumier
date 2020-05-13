@@ -2,7 +2,16 @@
 {% block content %}
 
 <div class="container mb-4 pt-4">
-    <h1>Types of Perfumes</h1>
+    <div class="row">
+        <div class="col-9">
+            <h1>Types of Perfumes</h1>
+        </div>
+        <div class="col-3">
+            {% if current_user.is_authenticated and current_user.is_admin == True %}
+            <a href="{{ url_for('new_type') }}" class="btn btn-primary float-right" type="button">Add new type</a>
+            {% endif %}
+        </div>
+    </div>
 </div>
 <div class="container">
     <div class="row">
@@ -19,10 +28,5 @@
         {% endfor %}
     </div>
 </div>
-{% if current_user.is_authenticated and current_user.is_admin == True %}
-<div class="mt-5">
-    <a href="{{ url_for('new_type') }}" class="btn btn-primary" type="button">Add new type</a>
-</div>
-{% endif %}
 
 {% endblock content %}

@@ -1,8 +1,16 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+
 <div class="container mb-4 pt-4">
-    <h1>Types of Perfumes: {{ type.type_name }}</h1>
+    <div class="row">
+        <div class="col-9">
+            <h1>Types of Perfumes: {{ type.type_name }}</h1>
+        </div>
+        <div class="col-3">
+            <a href="{{ url_for('types') }}" class="btn btn-primary float-right" type="button">Back to all types</a>
+        </div>
+    </div>
 </div>
 <div class="container">
     <div class="row">
@@ -23,9 +31,6 @@
             </div>
         </div>
     </div>
-</div>
-<div class="mt-5">
-    <a href="{{ url_for('types') }}" class="btn btn-primary" type="button">Back to all types</a>
 </div>
 <!-- MODAL -->
 <div class="modal fade" id="deleteTypeModal" tabindex="-1" role="dialog" aria-labelledby="deleteTypeModalLabel" aria-hidden="true">
