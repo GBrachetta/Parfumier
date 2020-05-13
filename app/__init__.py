@@ -18,4 +18,3 @@ Imports bellow need to happen after initialisation of the app
 to prevent circular imports.
 """
 from app import routes, models
-

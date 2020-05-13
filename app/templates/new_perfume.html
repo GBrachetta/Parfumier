@@ -38,7 +38,12 @@
                     <div class="form-group">
                         {{ form.perfume_type.label(class="form-control-label") }}
                         {% if form.perfume_type.errors %}
-                        {{ form.perfume_type(class="form-control form-control-md is-invalid")}}
+                        <select class="custom-select is-invalid" id="perfume_type" name="perfume_type">
+                            <option disabled selected>Choose type</option>
+                            {% for type in types %}
+                            <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                            {% endfor %}
+                        </select>
                         <div class="invalid-feedback">
                             {% for error in form.perfume_type.errors %}
                             <span>{{ error }}</span>
