@@ -47,6 +47,9 @@
 
 
 
+
+
+
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     {% for category, message in messages %}
@@ -60,6 +63,14 @@
         {% block content %}
         {% endblock content %}
     </div>
+
+
+  <footer class="mt-5 py-4 bg-primary flex-shrink-0">
+      <div class="container text-center">
+          <a href="https://bootstrapious.com/snippets" class="text-muted">Footer Content</a>
+      </div>
+  </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
