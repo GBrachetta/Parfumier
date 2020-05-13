@@ -47,9 +47,13 @@
                         {% else %}
                         <div class="input-group mb-3">
                             <select class="custom-select" id="perfume_type" name="perfume_type">
-                                <option disabled selected>Choose type</option>
+                                <option value="None given" disabled>Choose type</option>
                                 {% for type in types %}
+                                {% if type.type_name == form.perfume_type.data %}
+                                <option value="{{ form.perfume_type.data }}" selected>{{ form.perfume_type.data }}</option>
+                                {% else %}
                                 <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                {% endif %}
                                 {% endfor %}
                             </select>
                         </div>
