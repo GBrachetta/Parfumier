@@ -5,53 +5,72 @@
 <div class="container mb-4 pt-4">
     <h1>Perfumes</h1>
 </div>
-{% for perfume in perfumes %}
-<div class="card">
-    <h5 class="card-header text-white bg-primary">
-        <a class="collapsed d-block" data-toggle="collapse" href="#id{{perfume['_id']}}" aria-expanded="true" aria-controls="id{{perfume['_id']}}" id="heading-collapsed">
-            <i class="fa fa-chevron-down float-right"></i>
-            {{ perfume['perfumeName'] }}
-        </a>
-    </h5>
-    <div id="id{{perfume['_id']}}" class="collapse" aria-labelledby="heading-collapsed">
-        <div class="card-body">
-            <h4>Name: <a href="{{ url_for('perfume', id=perfume._id) }}"> {{ perfume['perfumeName'] }}</a></h4>
-            <h5>A perfume by <span class="lead text-primary font-weight-bold">{{ perfume['perfumeBrand'] }}</span></h5>
-            <p>Type: {{ perfume['perfumeType'] }}</p>
-        </div>
-        <div class="container pb-5">
-            <div class="row justify-content-center">
-                <div class="col-7">
-                    <div class="card-body">
-                        {{ perfume['perfumeDescription'] | safe}}
+<div class="container navpad">
+    <div class="row justify-content-center">
+        {% for perfume in perfumes %}
+        <section class="col-lg-3 col-md-4 col-sm-6 col-12 filter-div px-2 pb-1 pb-lg-3 text-center">
+
+
+
+            <article class="card my-1 d-none d-sm-block hvr-grow" id="card-perfumes">
+                <div class="image-square">
+                    <img class="" src="{{ url_for('static', filename='images/perfume_pics/' + perfume['perfumePicture']) }}" onerror="if (this.src != '../static/images/perfume_pics/generic.png') this.src = '../static/images/perfume_pics/generic.png';" alt="">
+                </div>
+                <div class="card-body text-center py-2">
+                    <small class="d-none d-sm-block text-muted">{{ perfume['perfumeBrand'] }}</small>
+                    <h2 class="card-title">{{ perfume['perfumeName'] }}</h2>
+                    <a href="{{ url_for('perfume', id=perfume._id) }}">
+                        <p class="mb-0 view-more">VIEW MORE</p>
+                    </a>
+                </div>
+                <!--card footer-->
+                <footer class="card-footer p-1">
+                    <div class="d-flex flex-row justify-content-around card-xs">
+                        <div class="d-flex flex-column text-center">
+                            <small class="primary-color-text"><i class="material-icons">{{ perfume['perfumeType'] }}</i></small>
+                            <small class="text-muted">{{tag}}</small>
+                        </div>
                     </div>
-                </div>
-                <div class="col-4">
-                    <img class="float-right picture-perfume" src="{{ url_for('static', filename='images/perfume_pics/' + perfume['perfumePicture']) }}" alt="Avatar">
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="container pt-2 pb-4">
-            <div class="row">
-                <div class="col-7">
-                    Posted by <span class="text-success">{{ perfume['username']}}</span>
-                    <span class="text-muted">({{ perfume['firstName']}} {{ perfume['lastName']}})</span>
-                    on {{ perfume.date_updated.strftime('%d-%m-%Y') }}<br>
-                </div>
-                <div class="col-4">
-                    <img class="float-right avatar-perfume" src="{{ url_for('static', filename='images/avatars/' + perfume['profilePicture']) }}" alt="">
-                </div>
-            </div>
-        </div>
+                </footer>
+            </article>
+
+
+        </section>
+        {% endfor %}
     </div>
 </div>
 
-{% endfor %}
+
 {% if current_user.is_authenticated and current_user.is_admin == True %}
 <div class="mt-5">
     <a href="{{ url_for('new_perfume') }}" class="btn btn-primary" type="button">Add new perfume</a>
 </div>
 {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% endblock content %}
