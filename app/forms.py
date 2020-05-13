@@ -154,6 +154,16 @@ class CreatePerfumeForm(FlaskForm):
     perfume_type = StringField("Type", validators=[DataRequired()])
 
 
+class EditPerfumeForm(FlaskForm):
+    brand = StringField("Brand", validators=[DataRequired()])
+    name = StringField("Name", validators=[DataRequired()])
+    description = TextAreaField("Description")
+    public = BooleanField("Public")
+    submit = SubmitField("Update")
+    picture = FileField("Picture", validators=[FileAllowed(["jpg", "png"])])
+    perfume_type = StringField("Type", validators=[DataRequired()])
+
+
 class CreateTypeForm(FlaskForm):
     type_name = StringField("Type", validators=[DataRequired()])
     description = TextAreaField("Description")
