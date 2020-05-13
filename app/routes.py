@@ -153,7 +153,7 @@ def account():
         )
         login_user(user_obj)
         flash("You have updated your information", "info")
-        return redirect(url_for("account"))
+        return redirect(url_for("index"))
     elif request.method == "GET":
         form.username.data = current_user.username
         form.first_name.data = current_user.first_name
@@ -391,7 +391,6 @@ def edit_perfume(id):
         if form.validate_on_submit():
             if form.picture.data:
                 picture = save_picture(form.picture.data)
-
                 new_value = {
                     "$set": {
                         "brand": form.brand.data,
@@ -404,6 +403,8 @@ def edit_perfume(id):
                     }
                 }
                 mongo.db.perfumes.update_one(perfume, new_value)
+                flash("You updated the perfume", "info")
+                return redirect(url_for("perfume", id=perfume["_id"]))
             else:
                 new_value = {
                     "$set": {

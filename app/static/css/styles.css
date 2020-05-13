@@ -44,6 +44,7 @@ h6 {
     display: inline-block;
     width: 164px;
     height: 164px;
+    /* background-size: 100% auto; */
     background-size: cover;
     background-repeat: no-repeat;
     /* background-origin: border-box; */
@@ -108,4 +109,19 @@ h6 {
     text-decoration: none;
     color: #444444;
     font-weight: 500;
+}
+
+.card-title{
+    font-size: 1.5em;
+}
+
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
 }

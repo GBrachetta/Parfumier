@@ -2,7 +2,16 @@
 {% block content %}
 
 <div class="container mb-4 pt-4">
-    <h1>Perfumes</h1>
+    <div class="row">
+        <div class="col-9">
+
+            <h1>Perfumes</h1>
+        </div>
+        <div class="col-3">
+            <a href="{{ url_for('perfumes') }}" class="btn btn-primary float-right" type="button">Back to all perfumes</a>
+
+        </div>
+    </div>
 </div>
 <div class="card">
     <h5 class="card-header text-white bg-primary">
@@ -56,9 +65,6 @@
             {% endfor %}
         </div>
     </div>
-</div>
-<div class="mt-5">
-    <a href="{{ url_for('perfumes') }}" class="btn btn-primary" type="button">Back to all perfumes</a>
 </div>
 <!-- MODAL -->
 <div class="modal fade" id="deletePerfumeModal" tabindex="-1" role="dialog" aria-labelledby="deletePerfumeModalLabel" aria-hidden="true">

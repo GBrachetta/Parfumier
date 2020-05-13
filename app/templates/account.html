@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="media">
-                <img class="rounded-circle account-img" src="{{ avatar }}">
+                <img class="rounded-circle account-img" src="{{ avatar }}" onerror="if (this.src != '../static/images/avatars/default.png') this.src = '../static/images/avatars/default.png';">
                 <div class="pl-3 media-body">
                     <h2 class="account-heading">{{ current_user.username }}</h2>
                     <p class="text-primary lead">{{ current_user.first_name}} {{ current_user.last_name}}</p>
