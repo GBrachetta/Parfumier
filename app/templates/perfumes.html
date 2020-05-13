@@ -1,11 +1,9 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-
 <div class="container mb-4 pt-4">
     <div class="row">
         <div class="col-9">
-
             <h1>Perfumes</h1>
         </div>
         <div class="col-3">
@@ -19,9 +17,6 @@
     <div class="row justify-content-center">
         {% for perfume in perfumes %}
         <section class="col-lg-3 col-md-4 col-sm-6 col-12 filter-div px-2 pb-1 pb-lg-3 text-center">
-
-
-
             <article class="card my-1 d-none d-sm-block hvr-grow" id="card-perfumes">
                 <div class="image-square">
                     <img class="" src="{{ url_for('static', filename='images/perfume_pics/' + perfume['perfumePicture']) }}" onerror="if (this.src != '../static/images/perfume_pics/generic.png') this.src = '../static/images/perfume_pics/generic.png';" alt="">
@@ -43,40 +38,9 @@
                     </div>
                 </footer>
             </article>
-
-
         </section>
         {% endfor %}
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 {% endblock content %}
