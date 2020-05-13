@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container content-section">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method=POST action="" enctype="multipart/form-data" id="form-perfume" novalidate>
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Edit Perfume</legend>
+                    <div class="form-group">
+                        {{ form.csrf_token }}
+                        {{ form.brand.label(class="form-control-label") }}
+                        {% if form.brand.errors %}
+                        {{ form.brand(class="form-control form-control-md is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.brand.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.brand(class="form-control form-control-md", placeholder="Enter brand")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.csrf_token }}
+                        {{ form.name.label(class="form-control-label") }}
+                        {% if form.name.errors %}
+                        {{ form.name(class="form-control form-control-md is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.name.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.name(class="form-control form-control-md", placeholder="Enter name")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.perfume_type.label(class="form-control-label") }}
+                        {% if form.perfume_type.errors %}
+                        {{ form.perfume_type(class="form-control form-control-md is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.perfume_type.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="input-group mb-3">
+                            <select class="custom-select" id="perfume_type" name="perfume_type">
+                                <option disabled selected>Choose type</option>
+                                {% for type in types %}
+                                <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.csrf_token }}
+                        {{ form.description.label(class="form-control-label") }}
+                        {% if form.description.errors %}
+                        {{ form.description(class="form-control form-control-md is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.description.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.description(class="form-control form-control-md", placeholder="Enter description")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-check">
+                        {{ form.public(class="form-check-input") }}
+                        {{ form.public.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-group mt-3">
+                        {{ form.picture.label(class="btn btn-outline-primary form-control-label") }}
+                        {{ form.picture(class="form-control-file") }}
+                        <span class="form-control-thumbnail"></span>
+                        <div class="pt-2">
+                            <span class="form-control-filename lead text-danger" data-text="Picture selected" id="pictureFileName"></span>
+                        </div>
+                        {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-primary")}}
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
+</div>
+{% endblock content%}
