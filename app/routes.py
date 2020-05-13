@@ -394,7 +394,6 @@ def edit_perfume(id):
 
                 new_value = {
                     "$set": {
-                        "author": current_user.username,
                         "brand": form.brand.data,
                         "name": form.name.data,
                         "perfume_type": form.perfume_type.data,
@@ -408,7 +407,6 @@ def edit_perfume(id):
             else:
                 new_value = {
                     "$set": {
-                        "author": current_user.username,
                         "brand": form.brand.data,
                         "name": form.name.data,
                         "perfume_type": form.perfume_type.data,
