@@ -15,6 +15,7 @@ from app.forms import (
     CreateTypeForm,
     EditTypeForm,
     EditPerfumeForm,
+    AddReviewForm,
 )
 from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
@@ -333,9 +334,10 @@ def perfumes():
     return render_template("perfumes.html", title="Perfumes", perfumes=cur)
 
 
-@app.route("/perfume/<id>")
+@app.route("/perfume/<id>", methods=["POST", "GET"])
 def perfume(id):
     perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
+    form = AddReviewForm()
     cur = mongo.db.perfumes.aggregate(
         [
             {
@@ -367,7 +369,7 @@ def perfume(id):
         ]
     )
     return render_template(
-        "perfume.html", title="Perfumes", cursor=cur, perfume=perfume
+        "perfume.html", title="Perfumes", cursor=cur, perfume=perfume, form=form
     )
 
 
@@ -431,6 +433,19 @@ def edit_perfume(id):
         form=form,
         types=mongo.db.types.find().sort("type_name"),
     )
+
+
+@app.route("/perfume/review/<id>", methods=["POST", "GET"])
+@login_required
+def review_perfume(id):
+    form = AddReviewForm()
+    perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
+    if form.validate_on_submit():
+        mongo.db.perfumes.update({'_id': perfume['_id']}, {"$push": {"review": form.review.data}})
+        flash('Your review has been received', 'success')
+        return redirect(url_for("perfume", id=perfume["_id"]))
+    return redirect(url_for("perfume", id=perfume["_id"]))
+    # return render_template("perfume.html", id=perfume)
 
 
 # ! Types
