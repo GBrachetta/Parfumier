@@ -40,7 +40,7 @@
         <div class="row">
             {% for item in cursor %}
             <div class="col-7">
-                Posted by <span class="text-success">{{ perfume.author }}</span>
+                Posted by <span class="text-success">{{ item['username'] }}</span>
                 <span class="text-muted">({{ item['firstName']}} {{ item['lastName']}})</span>
                 on {{ perfume.date_updated.strftime('%d-%m-%Y') }}<br>
 
@@ -70,13 +70,18 @@
         <div class="col-12">
             <h3 class="text-center">Reviews</h3>
             <ul class='reviews'>
-                {% for review in perfume.review %}
+                {% for item in perfume.review %}
                 <div class="card">
                     <div class="card-header">
-                    <h5>Nombre</h5>
+                        <h5>{{item['reviewer'] }} said on {{ item.date_reviewed.strftime('%d-%m-%Y') }}</h5>
                     </div>
-                    <div class="card-body">
-                        <li>{{ review | safe }}</li>
+                    <div class="p-3 row">
+                        <div class="col-1">
+                            <img class="avatar-perfume float-right" src="{{ url_for('static', filename='images/avatars/' + item['reviewer_picture']) }}" onerror="if (this.src != '../static/images/avatars/default.png') this.src = '../static/images/avatars/default.png';" loading="lazy" alt="Avatar">
+                        </div>
+                        <div class=" col-10">
+                            <li>{{ item['review_content'] | safe }}</li>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
@@ -118,7 +123,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <form method=POST action="{{ url_for('review_perfume', id=perfume._id) }}" id="form-review">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
