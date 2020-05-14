@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="media">
-                <img class="rounded-circle account-img" src="{{ avatar }}" onerror="if (this.src != '../static/images/avatars/default.png') this.src = '../static/images/avatars/default.png';">
+                <img class="rounded-circle account-img" src="{{ avatar }}"
+                    onerror="if (this.src != '../static/images/avatars/default.png') this.src = '../static/images/avatars/default.png';"
+                    loading="lazy">
                 <div class="pl-3 media-body">
                     <h2 class="account-heading">{{ current_user.username }}</h2>
                     <p class="text-primary lead">{{ current_user.first_name}} {{ current_user.last_name}}</p>
@@ -78,7 +80,8 @@
                             {{ form.avatar(class="form-control-file") }}
                             <span class="form-control-thumbnail"></span>
                             <div class="pt-2">
-                                <span class="form-control-filename lead text-danger" data-text="New avatar selected, please click update" id="fileName"></span>
+                                <span class="form-control-filename lead text-danger"
+                                    data-text="New avatar selected, please click update" id="fileName"></span>
                             </div>
                             {% if form.avatar.errors %}
                             {% for error in form.avatar.errors %}
@@ -89,7 +92,8 @@
                     </fieldset>
                     <div class="form-group">
                         {{ form.submit(class="btn btn-primary")}}
-                        <button type="button" class="btn btn-danger ml-3" data-toggle="modal" data-target="#deleteUserModal">Delete</button>
+                        <button type="button" class="btn btn-danger ml-3" data-toggle="modal"
+                            data-target="#deleteUserModal">Delete</button>
                     </div>
                 </form>
                 <br>
@@ -98,7 +102,8 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
