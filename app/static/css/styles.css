@@ -87,17 +87,17 @@ h6 {
     text-decoration: none;
 }
 
-#heading-collapsed:hover{
+#heading-collapsed:hover {
     color: rgb(255, 255, 255);
 }
 
-.avatar-perfume{
+.avatar-perfume {
     width: 50px;
     height: 50px;
     border-radius: 50%;
 }
 
-.picture-perfume{
+.picture-perfume {
     max-width: 250px;
 }
 
@@ -105,23 +105,26 @@ h6 {
     max-height: 100px;
 } */
 
-.view-more:hover{
+.view-more:hover {
     text-decoration: none;
     color: #444444;
     font-weight: 500;
 }
 
-.card-title{
+.card-title {
     font-size: 1.5em;
 }
 
-
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: red;
-  color: white;
-  text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+}
+
+.reviews  {
+    list-style: none;
 }
