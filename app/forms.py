@@ -173,8 +173,8 @@ class CreateTypeForm(FlaskForm):
         """
         DESCRIPTION
         """
-        type = mongo.db.types.find_one({"type_name": type_name.data})
-        if type:
+        typeName = mongo.db.types.find_one({"type_name": type_name.data})
+        if typeName:
             raise ValidationError("The type already exists.")
 
 
@@ -182,9 +182,25 @@ class EditTypeForm(FlaskForm):
     type_name = StringField("Type", validators=[DataRequired()])
     description = TextAreaField("Description")
     submit = SubmitField("Update")
+    # ! FIX THIS
 
-    def validate_type_name(self, type_name):
-        if type_name.data != type_name.data:
-            type = mongo.db.types.find_one({"type_name": type_name.data})
-            if type:
-                raise ValidationError("The type already exists.")
+    # def validate_type_name(self, type_name):
+    #     print(type_name.data)
+    #     print(FlaskForm.validate(type_name))
+    #     if type_name.data != mongo.db.types.find_one({"type_name": type_name.data}):
+    #         typeName = mongo.db.types.find_one({"type_name": type_name.data})
+    #         if typeName:
+    #             raise ValidationError("The type already exists.")
+
+
+# class EditTypeForm(FlaskForm):
+#     type_name = StringField("Type", validators=[DataRequired()])
+#     description = TextAreaField("Description")
+#     submit = SubmitField("Update")
+
+#     def validate_type_name(self, type_name):
+#         typeName = mongo.db.types.find_one({"type_name": type_name.data})
+#         if typeName:
+#             return False
+#         else:
+#             return True
