@@ -697,15 +697,9 @@ def edit_type(id):
     return render_template("edit_type.html", title="Edit Type", form=form)
 
 
-@app.route("/review/<id>")
+@app.route("/delete_review/<id>/<perfume_id>")
 @login_required
-def delete_review(id):
-    perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
-    # dummyID = ObjectId.from_datetime()
-    # print('================================================')
-    # print(f"REVIEW DATE HARDCODED INDEX: {perfume['review'][0]['date_reviewed']}")
-    # print(f"REVIEW ID EXAMPLE: {ObjectId.from_datetime(datetime.utcnow())}")
-    # print('================================================')
-    mongo.db.perfumes.update_one({}, {'$pull': {'review': {'_id': id}}})
+def delete_review(id, perfume_id):
+    mongo.db.perfumes.update_one({'_id': ObjectId(perfume_id)}, {'$pull': {'review': {'_id': ObjectId(id)}}})
     flash('Your review has been deleted!', 'success')
-    return redirect(url_for("perfume", id=perfume["perfume_id"]))
+    return redirect(url_for("perfume", id=perfume_id))
