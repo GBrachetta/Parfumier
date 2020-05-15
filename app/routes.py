@@ -143,6 +143,8 @@ def account():
             {"username": current_user.username}, {"$set": updated_user}
         )
         user = mongo.db.users.find_one({"email": form.email.data})
+        # Creates user_obj to log user in immediately preventing a logout when changing
+        # the key value in the class. Thanks to Yohan for this.
         user_obj = User(
             user["username"],
             user["first_name"],
