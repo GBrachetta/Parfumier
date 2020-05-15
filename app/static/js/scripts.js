@@ -21,3 +21,13 @@ const ELS_file = document.querySelectorAll(".form-control-file");
 ELS_file.forEach((el) => {
     el.addEventListener("change", imagePreviewer);
 });
+
+
+
+
+// $(document).ready(function () {
+//     $(".delete-review").click(function () {
+//         $("#cafeId").val($(this).data("id"));
+//         $("#deleteReviewModal").modal("show");
+//     });
+// });
