@@ -670,3 +670,11 @@ def edit_type(id):
             form.type_name.data = type["type_name"]
             form.description.data = type["description"]
     return render_template("edit_type.html", title="Edit Type", form=form)
+
+
+@app.route("/review/<id>")
+@login_required
+def delete_review(id):
+    perfume = mongo.db.perfumes.find_one({'_id': ObjectId(id)})
+    print(perfume['review'][0]['date_reviewed'])
+    return redirect(url_for("perfume", id=perfume['_id']))
