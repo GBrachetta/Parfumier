@@ -337,7 +337,6 @@ def perfumes():
 @app.route("/perfume/<id>", methods=["POST", "GET"])
 def perfume(id):
     perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
-    # reviews = mongo.db.perfumes.review.find_one({"_id": ObjectId(id)})  # TEST
     form = AddReviewForm()
     cur = mongo.db.perfumes.aggregate(
         [
@@ -446,30 +445,12 @@ def review_perfume(id):
     form = AddReviewForm()
     perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
     if form.validate_on_submit():
-        # ! don't delete from
-        # mongo.db.reviews.insert(
-        #     {
-        #         "review_author": current_user.username,
-        #         "review": form.review.data,
-        #         "review_date": datetime.utcnow(),
-        #         "review_avatar": current_user.avatar,
-        #     }
-        # )
-        # ! don't delete to
-        # review = mongo.db.reviews.find_one()
-        # print(mongo.db.reviews.find().limit(1).sort("$natural", -1))
-        # ! don't delete from
-        # my_review = mongo.db.reviews.find().sort("_id", -1).limit(1)[0]["_id"]
-        # mongo.db.perfumes.update(
-        #     {"_id": perfume["_id"]}, {"$push": {"review": my_review}}
-        # )
-        # ! don't delete to
         review_id = ObjectId.from_datetime(datetime.utcnow())
         mongo.db.perfumes.update(
             {"_id": perfume["_id"]},
             {
                 "$push": {
-                    "review": {
+                    "reviews": {
                         "_id": review_id,
                         "review_content": form.review.data,
                         "reviewer": current_user.username,
@@ -562,7 +543,7 @@ def delete_review(id, perfume_id):
     """
     mongo.db.perfumes.update_one(
         {"_id": ObjectId(perfume_id)},
-        {"$pull": {"review": {"_id": ObjectId(id)}}},
+        {"$pull": {"reviews": {"_id": ObjectId(id)}}},
     )
     flash("Your review has been deleted!", "success")
     return redirect(url_for("perfume", id=perfume_id))
@@ -574,7 +555,7 @@ def edit_review(id, perfume_id):
 
     mongo.db.perfumes.update_one(
         {"_id": ObjectId(perfume_id)},
-        {"$pull": {"review": {"_id": ObjectId(id)}}},
+        {"$pull": {"reviews": {"_id": ObjectId(id)}}},
     )
     flash("Your review has been updated!", "success")
     return redirect(url_for("perfume", id=perfume_id))

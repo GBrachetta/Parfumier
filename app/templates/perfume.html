@@ -70,7 +70,7 @@
             <h3 class="text-center">Reviews</h3>
             <ul class='reviews'>
 
-                {% for item in perfume.review|reverse %}
+                {% for item in perfume.reviews|reverse %}
                 <div class="card container">
                     <div class="row">
                         <div class="card-header col-9">
@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 {% endfor %}
-                {% if not perfume.review %}
+                {% if not perfume.reviews %}
                 <h5 class="text-center">
                     There are no reviews for this perfume
                 </h5>
