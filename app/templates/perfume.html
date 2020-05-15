@@ -70,10 +70,19 @@
         <div class="col-12">
             <h3 class="text-center">Reviews</h3>
             <ul class='reviews'>
+
                 {% for item in perfume.review %}
-                <div class="card">
-                    <div class="card-header">
-                        <h5>{{item['reviewer'] }} said on {{ item.date_reviewed.strftime('%d-%m-%Y') }}</h5>
+                <div class="card container">
+                    <div class="row">
+                        <div class="card-header col-9">
+                            <h5>{{item['reviewer'] }} said on {{ item.date_reviewed.strftime('%d-%m-%Y') }}</h5>
+                        </div>
+                        <div class="card-header col-3">
+                            {% if current_user.username == item['reviewer'] %}
+                            <a href="{{ url_for('delete_review', id=perfume._id) }}" class=" float-right btn btn-danger btn-sm mt-2 mx-3">Delete</a>
+                            <a href="" class="float-right btn btn-success btn-sm mt-2 px-3">Edit</a>
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="p-3 row">
                         <div class="col-1">
@@ -85,6 +94,14 @@
                     </div>
                 </div>
                 {% endfor %}
+                {% for item in perfume.review if perfume.review|length < 0 %}
+                <h1>Hola</h1>
+                {% endfor %}
+                {% if not perfume.review %}
+                <h5 class="text-center">
+                    There are no reviews for this perfume
+                </h5>
+                {% endif %}
             </ul>
         </div>
     </div>
