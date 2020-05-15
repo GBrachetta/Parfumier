@@ -61,7 +61,6 @@
             <div class="col mt-3">
             </div>
             {% endfor %}
-{{ item }}
         </div>
     </div>
 </div>
@@ -72,6 +71,7 @@
             <ul class='reviews'>
 
                 {% for item in perfume.review|reverse %}
+                {{item['_id']}}
                 <div class="card container">
                     <div class="row">
                         <div class="card-header col-9">
@@ -79,7 +79,7 @@
                         </div>
                         <div class="card-header col-3">
                             {% if current_user.username == item['reviewer'] %}
-                            <a href="{{ url_for('delete_review', id=perfume._id) }}" class=" float-right btn btn-danger btn-sm mt-2 mx-3">Delete</a>
+                            <a href="{{ url_for('delete_review', id=item._id, perfume_id=perfume._id) }}" class=" float-right btn btn-danger btn-sm mt-2 mx-3">Delete</a>
                             <a href="" class="float-right btn btn-success btn-sm mt-2 px-3">Edit</a>
                             {% endif %}
                         </div>
