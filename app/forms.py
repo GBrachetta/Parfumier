@@ -201,5 +201,10 @@ class EditTypeForm(FlaskForm):
 
 
 class AddReviewForm(FlaskForm):
-    review = TextAreaField('Review', validators=[DataRequired()])
+    review = TextAreaField("Review", validators=[DataRequired()])
     submit = SubmitField("Post Review")
+
+
+class EditReviewForm(FlaskForm):
+    review = TextAreaField("Review", validators=[DataRequired()])
+    submit = SubmitField("Update Review")
