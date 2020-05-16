@@ -148,7 +148,7 @@
                                 {% endfor %}
                             </div>
                             {% else %}
-                            {{ form.review(class="form-control form-control-md", placeholder="Review")}}
+                            {{ form.review(class="form-control form-control-md", placeholder="Review", id="description")}}
                             {% endif %}
                         </div>
                     </fieldset>
@@ -162,5 +162,7 @@
         </div>
     </div>
 </div>
-
 {% endblock content %}
+{% block CKEditor_js %}
+    <script src="{{ url_for('static', filename='js/cke.js') }}"></script>
+{% endblock CKEditor_js %}
