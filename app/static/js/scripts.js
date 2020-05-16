@@ -23,17 +23,17 @@ ELS_file.forEach((el) => {
 });
 
 // ? Fades flash messages after a timeout
-// $(document).ready(() => {
-//     setTimeout(function () {
-//         $("#flash").fadeOut("slow");
-//     }, 3000);
-// });
+$(document).ready(() => {
+    setTimeout(function () {
+        $("#flash").fadeOut("slow");
+    }, 3000);
+});
 
 
 // ? Same as above but sliding up
-$(document).ready(() => {
-    $("#flash").delay(3000).slideUp(1000);
-});
+// $(document).ready(() => {
+//     $("#flash").delay(3000).slideUp(1000);
+// });
 
 // $(document).ready(function () {
 //     $(".delete-review").click(function () {
