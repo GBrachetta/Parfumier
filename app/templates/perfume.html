@@ -78,8 +78,8 @@
                         </div>
                         <div class="card-header col-3">
                             {% if current_user.username == item['reviewer'] %}
-                            <a href="{{ url_for('delete_review', id=item._id, perfume_id=perfume._id) }}" class=" float-right btn btn-danger btn-sm mt-2 mx-3">Delete</a>
-                            <a href="{{ url_for('edit_review', id=item._id, perfume_id=perfume._id) }}" class="float-right btn btn-success btn-sm mt-2 px-3">Edit</a>
+                            <a href="{{ url_for('delete_review', review_id=item._id, perfume_id=perfume._id) }}" class=" float-right btn btn-danger btn-sm mt-2 mx-3">Delete</a>
+                            <a href="{{ url_for('edit_review', review_id=item._id, perfume_id=perfume._id) }}" class="float-right btn btn-success btn-sm mt-2 px-3">Edit</a>
                             {% endif %}
                         </div>
                     </div>
