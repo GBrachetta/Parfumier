@@ -16,6 +16,7 @@ from app.forms import (
     EditTypeForm,
     EditPerfumeForm,
     AddReviewForm,
+    EditReviewForm,
 )
 from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
@@ -554,10 +555,12 @@ def delete_review(id, perfume_id):
 @app.route("/edit_review/<id>/<perfume_id>", methods=["GET", "POST"])
 @login_required
 def edit_review(id, perfume_id):
-
-    mongo.db.perfumes.update_one(
-        {"_id": ObjectId(perfume_id)},
-        {"$pull": {"reviews": {"_id": ObjectId(id)}}},
-    )
+    form = EditReviewForm()
+    # if form.validate_on_submit():
+    # mongo.db.perfumes.update_one(
+    #     {"_id": ObjectId(perfume_id)},
+    #     {"$pull": {"reviews": {"_id": ObjectId(id)}}},
+    # )
+    print('hola')
     flash("Your review has been updated!", "success")
     return redirect(url_for("perfume", id=perfume_id))
