@@ -16,7 +16,7 @@ from app.forms import (
     EditTypeForm,
     EditPerfumeForm,
     AddReviewForm,
-    EditReviewForm,
+    # EditReviewForm,
 )
 from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
@@ -535,32 +535,25 @@ def edit_type(id):
     return render_template("edit_type.html", title="Edit Type", form=form)
 
 
-@app.route("/delete_review/<id>/<perfume_id>")
+@app.route("/delete_review/<review_id>/<perfume_id>")
 @login_required
-def delete_review(id, perfume_id):
-    """With help from:
-
-    Keyword arguments:
-    argument -- description
-    Return: return_description
-    """
+def delete_review(review_id, perfume_id):
     mongo.db.perfumes.update_one(
         {"_id": ObjectId(perfume_id)},
-        {"$pull": {"reviews": {"_id": ObjectId(id)}}},
+        {"$pull": {"reviews": {"_id": ObjectId(review_id)}}},
     )
     flash("Your review has been deleted!", "success")
     return redirect(url_for("perfume", id=perfume_id))
 
 
-@app.route("/edit_review/<id>/<perfume_id>", methods=["GET", "POST"])
+@app.route("/edit_review/<review_id>/<perfume_id>")
 @login_required
-def edit_review(id, perfume_id):
-    form = EditReviewForm()
+def edit_review(review_id, perfume_id):
+    # form = EditReviewForm()
     # if form.validate_on_submit():
-    # mongo.db.perfumes.update_one(
-    #     {"_id": ObjectId(perfume_id)},
-    #     {"$pull": {"reviews": {"_id": ObjectId(id)}}},
-    # )
-    print('hola')
+    mongo.db.perfumes.update(
+        {"_id": ObjectId(perfume_id), "reviews._id": ObjectId(review_id)},
+        {"$set": {"reviews.$.review_content": "This is my newest content."}},
+    )
     flash("Your review has been updated!", "success")
     return redirect(url_for("perfume", id=perfume_id))
