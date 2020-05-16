@@ -16,6 +16,7 @@ from app.forms import (
     EditTypeForm,
     EditPerfumeForm,
     AddReviewForm,
+    # EditReviewForm,
 )
 from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
@@ -143,6 +144,8 @@ def account():
             {"username": current_user.username}, {"$set": updated_user}
         )
         user = mongo.db.users.find_one({"email": form.email.data})
+        # Creates user_obj to log user in immediately preventing a logout when changing
+        # the key value in the class. Thanks to Yohan for this.
         user_obj = User(
             user["username"],
             user["first_name"],
@@ -334,160 +337,9 @@ def perfumes():
     return render_template("perfumes.html", title="Perfumes", perfumes=cur)
 
 
-# ! Test arena
-# @app.route("/perfume/<id>", methods=["POST", "GET"])
-# def perfume(id):
-#     perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
-#     form = AddReviewForm()
-#     cur = mongo.db.perfumes.aggregate([
-#         {
-#             '$lookup': {
-#                 'from': 'users',
-#                 'localField': 'author',
-#                 'foreignField': 'username',
-#                 'as': 'creator'
-#             }
-#         },
-#         {
-#             '$unwind': '$creator'
-#         },
-#         {
-#             '$unwind': {
-#                 'path': '$review',
-#                 'preserveNullAndEmptyArrays': True
-#             }
-#         },
-#         {
-#             '$lookup': {
-#                 'from': 'review',
-#                 'let': {'rid': {'$toString': '$review._id'}},
-#                 'pipeline': [{
-#                     '$match': {
-#                         '$expr': {
-#                             '$eq': ['$$rid', {'$toString': '$_id'}]
-#                         }
-#                     }
-#                 }],
-#                 'as': 'userReviews'
-#             }
-#         },
-#         {
-#             '$unwind': '$userReviews'
-#         },
-#         {
-#             '$lookup': {
-#                 'from': 'users',
-#                 'localField': 'userReviews.review_author',
-#                 'foreignField': 'username',
-#                 'as': 'reviewUserInfo'
-#             }
-#         },
-#         {
-#             '$unwind': '$reviewUserInfo'
-#         },
-#         {
-#             '$group': {
-#                 '_id': '$_id',
-#                 'perfumeName': {'$first': '$name'},
-#                 'perfumeBrand': {'$first': '$brand'},
-#                 'perfumeDescription': {'$first': '$description'},
-#                 'date_updated': {'$first': '$date_updated'},
-#                 'perfumePicture': {'$first': '$picture'},
-#                 'isPublic': {'$first': '$public'},
-#                 'perfumeType': {'$first': '$perfume_type'},
-#                 'username': {'$first': '$creator.username'},
-#                 'firstName': {'$first': '$creator.first_name'},
-#                 'lastName': {'$first': '$creator.last_name'},
-#                 'profilePicture': {'$first': '$creator.avatar'},
-#                 'userReviews': {
-#                     '$push': {
-#                         'reviewId': '$userReviews._id',
-#                         'review_author': '$userReviews.review_author',
-#                         'review': '$userReviews.review',
-#                         'review_author_first_name': '$reviewUserInfo.first_name',
-#                         'review_author_last_name': '$reviewUserInfo.last_name',
-#                         'review_author_email': '$reviewUserInfo.email',
-#                         'review_author_avatar': '$reviewUserInfo.avatar'
-#                     }
-#                 }
-#             }
-#         },
-#     ])
-#     for item in cur:
-#         print(item)
-#     return render_template(
-#         "perfume.html", title="Perfumes", cursor=cur, perfume=perfume, form=form
-#     )
-
-
-# ! La del INDIO
-# @app.route("/perfume/<id>", methods=["POST", "GET"])
-# def perfume(id):
-#     perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
-#     form = AddReviewForm()
-#     cur = mongo.db.perfumes.aggregate(
-#         [
-#             {
-#                 "$lookup": {
-#                     "from": "users",
-#                     "localField": "author",
-#                     "foreignField": "username",
-#                     "as": "creator",
-#                 }
-#             },
-#             {"$unwind": "$creator"},
-#             {
-#                 "$unwind": {
-#                     "path": "$review",
-#                     "preserveNullAndEmptyArrays": True,
-#                 }
-#             },
-#             {
-#                 "$project": {
-#                     "_id": "$_id",
-#                     "perfumeName": "$name",
-#                     "perfumeBrand": "$brand",
-#                     "perfumeDescription": "$description",
-#                     "date_updated": "$date_updated",
-#                     "perfumePicture": "$picture",
-#                     "isPublic": "$public",
-#                     "perfumeType": "$perfume_type",
-#                     "username": "$creator.username",
-#                     "firstName": "$creator.first_name",
-#                     "lastName": "$creator.last_name",
-#                     "profilePicture": "$creator.avatar",
-#                     "reviewId": {"$toString": "$review._id"},
-#                 }
-#             },
-#             {
-#                 "$lookup": {
-#                     "from": "reviews",
-#                     "let": {"rid": "$reviewId"},
-#                     "pipeline": [
-#                         {
-#                             "$match": {
-#                                 "$expr": {
-#                                     "$eq": ["$$rid", {"$toString": "$_id"}]
-#                                 }
-#                             }
-#                         }
-#                     ],
-#                     "as": "userReviews",
-#                 }
-#             },
-#             {"$match": {"_id": ObjectId(id)}},
-#         ]
-#     )
-#     return render_template(
-#         "perfume.html", title="Perfumes", cursor=cur, perfume=perfume, form=form
-#     )
-
-
-# ! Original Funcional
 @app.route("/perfume/<id>", methods=["POST", "GET"])
 def perfume(id):
     perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
-    # reviews = mongo.db.perfumes.review.find_one({"_id": ObjectId(id)})  # TEST
     form = AddReviewForm()
     cur = mongo.db.perfumes.aggregate(
         [
@@ -520,7 +372,11 @@ def perfume(id):
         ]
     )
     return render_template(
-        "perfume.html", title="Perfumes", cursor=cur, perfume=perfume, form=form,
+        "perfume.html",
+        title="Perfumes",
+        cursor=cur,
+        perfume=perfume,
+        form=form,
     )
 
 
@@ -592,30 +448,12 @@ def review_perfume(id):
     form = AddReviewForm()
     perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
     if form.validate_on_submit():
-        # ! don't delete from
-        # mongo.db.reviews.insert(
-        #     {
-        #         "review_author": current_user.username,
-        #         "review": form.review.data,
-        #         "review_date": datetime.utcnow(),
-        #         "review_avatar": current_user.avatar,
-        #     }
-        # )
-        # ! don't delete to
-        # review = mongo.db.reviews.find_one()
-        # print(mongo.db.reviews.find().limit(1).sort("$natural", -1))
-        # ! don't delete from
-        # my_review = mongo.db.reviews.find().sort("_id", -1).limit(1)[0]["_id"]
-        # mongo.db.perfumes.update(
-        #     {"_id": perfume["_id"]}, {"$push": {"review": my_review}}
-        # )
-        # ! don't delete to
         review_id = ObjectId.from_datetime(datetime.utcnow())
         mongo.db.perfumes.update(
             {"_id": perfume["_id"]},
             {
                 "$push": {
-                    "review": {
+                    "reviews": {
                         "_id": review_id,
                         "review_content": form.review.data,
                         "reviewer": current_user.username,
@@ -697,9 +535,25 @@ def edit_type(id):
     return render_template("edit_type.html", title="Edit Type", form=form)
 
 
-@app.route("/delete_review/<id>/<perfume_id>")
+@app.route("/delete_review/<review_id>/<perfume_id>")
 @login_required
-def delete_review(id, perfume_id):
-    mongo.db.perfumes.update_one({'_id': ObjectId(perfume_id)}, {'$pull': {'review': {'_id': ObjectId(id)}}})
-    flash('Your review has been deleted!', 'success')
+def delete_review(review_id, perfume_id):
+    mongo.db.perfumes.update_one(
+        {"_id": ObjectId(perfume_id)},
+        {"$pull": {"reviews": {"_id": ObjectId(review_id)}}},
+    )
+    flash("Your review has been deleted!", "success")
+    return redirect(url_for("perfume", id=perfume_id))
+
+
+@app.route("/edit_review/<review_id>/<perfume_id>")
+@login_required
+def edit_review(review_id, perfume_id):
+    # form = EditReviewForm()
+    # if form.validate_on_submit():
+    mongo.db.perfumes.update(
+        {"_id": ObjectId(perfume_id), "reviews._id": ObjectId(review_id)},
+        {"$set": {"reviews.$.review_content": "This is my newest content."}},
+    )
+    flash("Your review has been updated!", "success")
     return redirect(url_for("perfume", id=perfume_id))

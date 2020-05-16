@@ -21,3 +21,29 @@ const ELS_file = document.querySelectorAll(".form-control-file");
 ELS_file.forEach((el) => {
     el.addEventListener("change", imagePreviewer);
 });
+
+// ? Fades flash messages after a timeout
+$(document).ready(() => {
+    setTimeout(function () {
+        $("#flash").fadeOut("slow");
+    }, 3000);
+});
+
+
+// ? Same as above but sliding up
+// $(document).ready(() => {
+//     $("#flash").delay(3000).slideUp(1000);
+// });
+
+// $(document).ready(function () {
+//     $(".delete-review").click(function () {
+//         $("#cafeId").val($(this).data("id"));
+//         $("#deleteReviewModal").modal("show");
+//     });
+// });
+
+// $(document).on("click", ".open-AddBookDialog", function () {
+//     var myDeleteButtonId = $(this).data("id");
+//     $(".modal-footer #review_Id").val(myDeleteButtonId);
+// });
+

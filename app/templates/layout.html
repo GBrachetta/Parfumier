@@ -74,14 +74,12 @@
 
 
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="{{ url_for('static', filename='js/scripts.js' )}}"></script>
         <script src="//cdn.ckeditor.com/4.14.0/basic/ckeditor.js"></script>
-        <script type="text/javascript">
-            CKEDITOR.replace("description");
-            CKEDITOR.replace("review");
-        </script>
+        {% block CKEditor_js %}
+        {% endblock CKEditor_js %}
     </body>
 </html>
