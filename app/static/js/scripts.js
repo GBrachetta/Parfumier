@@ -29,6 +29,15 @@ $(document).ready(() => {
     }, 3000);
 });
 
+// 
+$(".delete-review").on("click", (evt) => {
+    evt.preventDefault();
+    const btnData = $(evt.currentTarget).data(); 
+    const $formDeleteReview = $("#form-delete-review");
+    $formDeleteReview.find('[name="review_id"]').val(btnData.review_id);
+    $formDeleteReview.find('[name="perfume_id"]').val(btnData.perfume_id);
+});
+
 
 // ? Same as above but sliding up
 // $(document).ready(() => {
