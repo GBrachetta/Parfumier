@@ -339,7 +339,7 @@ def perfumes():
     return render_template("perfumes.html", title="Perfumes", perfumes=cur)
 
 
-@app.route("/perfume/<id>", methods=["POST", "GET"])
+@app.route("/perfume/<id>", methods=["GET"])
 def perfume(id):
     perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
     form = AddReviewForm()
@@ -444,7 +444,7 @@ def edit_perfume(id):
     )
 
 
-@app.route("/perfume/review/<id>", methods=["POST", "GET"])
+@app.route("/perfume/review/<id>", methods=["POST"])
 @login_required
 def review_perfume(id):
     form = AddReviewForm()
@@ -471,7 +471,7 @@ def review_perfume(id):
 
 
 # ! Types
-@app.route("/type/new", methods=["GET", "POST"])
+@app.route("/type/new", methods=["POST"])
 @login_required
 def new_type():
     if current_user.is_admin:
@@ -537,7 +537,7 @@ def edit_type(id):
     return render_template("edit_type.html", title="Edit Type", form=form)
 
 
-@app.route("/delete_review", methods=["POST"])
+@app.route("/perfume/review", methods=["POST"])
 @login_required
 def delete_review():
     review_id = request.form.get("review_id")
