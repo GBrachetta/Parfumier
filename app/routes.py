@@ -16,7 +16,7 @@ from app.forms import (
     EditTypeForm,
     EditPerfumeForm,
     AddReviewForm,
-    # EditReviewForm,
+    EditReviewForm,
 )
 from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
@@ -63,7 +63,9 @@ def login():
             next_page = request.args.get("next")
             flash("You have logged in!", "info")
             return (
-                redirect(next_page) if next_page else redirect(url_for("index"))
+                redirect(next_page)
+                if next_page
+                else redirect(url_for("perfumes"))
             )
         else:
             flash("Please check your credentials", "warning")
@@ -178,7 +180,7 @@ def logout():
     """
     logout_user()
     flash("We hope to see you back soon again!", "warning")
-    return redirect(url_for("index"))
+    return redirect(url_for("perfumes"))
 
 
 @app.route("/reset_password", methods=["GET", "POST"])
@@ -549,11 +551,17 @@ def delete_review(review_id, perfume_id):
 @app.route("/edit_review/<review_id>/<perfume_id>")
 @login_required
 def edit_review(review_id, perfume_id):
-    # form = EditReviewForm()
+    form = EditReviewForm()
     # if form.validate_on_submit():
     mongo.db.perfumes.update(
         {"_id": ObjectId(perfume_id), "reviews._id": ObjectId(review_id)},
-        {"$set": {"reviews.$.review_content": "This is my newest content."}},
+        {
+            "$set": {
+                "reviews.$.review_content": form.review.data,
+                "reviews.$.date_reviewed": datetime.utcnow(),
+            }
+        },
     )
     flash("Your review has been updated!", "success")
     return redirect(url_for("perfume", id=perfume_id))
+    # return render_template("perfume.html", id=perfume_id)
