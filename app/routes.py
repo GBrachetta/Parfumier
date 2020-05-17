@@ -573,6 +573,7 @@ def delete_review():
 @login_required
 def edit_review(review_id):
     form = EditReviewForm()
+    review_id = request.form.get("review_id")
     perfume_id = request.form.get("perfume_id")
     # if form.validate_on_submit():
     mongo.db.perfumes.update(

@@ -42,3 +42,11 @@ $(".delete-review").on("click", (evt) => {
     $formDeleteReview.find('[name="review_id"]').val(btnData.review_id);
     $formDeleteReview.find('[name="perfume_id"]').val(btnData.perfume_id);
 });
+// Opens the delete review modal passing data to edit review
+$(".edit-review").on("click", (evt) => {
+    evt.preventDefault();
+    const btnData = $(evt.currentTarget).data();
+    const $formEditReview = $("#form-delete-review");
+    $formEditReview.find('[name="review_id"]').val(btnData.review_id);
+    $formEditReview.find('[name="perfume_id"]').val(btnData.perfume_id);
+});
