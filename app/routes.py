@@ -63,7 +63,13 @@ def login():
             next_page = request.args.get("next")
             flash("You have logged in!", "info")
             return (
+<<<<<<< HEAD
                 redirect(next_page) if next_page else redirect(url_for("perfumes"))
+=======
+                redirect(next_page)
+                if next_page
+                else redirect(url_for("perfumes"))
+>>>>>>> add_review
             )
         else:
             flash("Please check your credentials", "warning")

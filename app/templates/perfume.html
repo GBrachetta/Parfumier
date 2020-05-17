@@ -43,8 +43,12 @@
                 Posted by <span class="text-success">{{ item['username'] }}</span>
                 <span class="text-muted">({{ item['firstName']}} {{ item['lastName']}})</span>
                 on {{ perfume.date_updated.strftime('%d-%m-%Y') }}<br>
-
+                {% if current_user.is_authenticated %}
                 <button type="button" class="btn btn-success btn-sm mt-2" data-toggle="modal" data-target="#reviewPerfumeModal">Review</button>
+                {% else %}
+                <button disabled type="button" class="btn btn-success btn-sm mt-2" data-toggle="modal" data-target="#reviewPerfumeModal">Review</button>
+                <span class="ml-3">Please login to review</span>
+                {% endif %}
                 {% if current_user.is_authenticated and current_user.is_admin == True and current_user.username == perfume.author %}
 
                 <a href="{{ url_for('edit_perfume', id=perfume._id) }}" class="btn btn-primary btn-sm mt-2">Edit</a>
