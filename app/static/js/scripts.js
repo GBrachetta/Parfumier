@@ -29,30 +29,16 @@ $(document).ready(() => {
     }, 3000);
 });
 
-// 
-$(".delete-review").on("click", (evt) => {
-    evt.preventDefault();
-    const btnData = $(evt.currentTarget).data(); 
-    const $formDeleteReview = $("#form-delete-review");
-    $formDeleteReview.find('[name="review_id"]').val(btnData.review_id);
-    $formDeleteReview.find('[name="perfume_id"]').val(btnData.perfume_id);
-});
-
-
 // ? Same as above but sliding up
 // $(document).ready(() => {
 //     $("#flash").delay(3000).slideUp(1000);
 // });
 
-// $(document).ready(function () {
-//     $(".delete-review").click(function () {
-//         $("#cafeId").val($(this).data("id"));
-//         $("#deleteReviewModal").modal("show");
-//     });
-// });
-
-// $(document).on("click", ".open-AddBookDialog", function () {
-//     var myDeleteButtonId = $(this).data("id");
-//     $(".modal-footer #review_Id").val(myDeleteButtonId);
-// });
-
+// Opens the delete review modal passing data to delete review
+$(".delete-review").on("click", (evt) => {
+    evt.preventDefault();
+    const btnData = $(evt.currentTarget).data();
+    const $formDeleteReview = $("#form-delete-review");
+    $formDeleteReview.find('[name="review_id"]').val(btnData.review_id);
+    $formDeleteReview.find('[name="perfume_id"]').val(btnData.perfume_id);
+});
