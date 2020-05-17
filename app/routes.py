@@ -537,9 +537,11 @@ def edit_type(id):
     return render_template("edit_type.html", title="Edit Type", form=form)
 
 
-@app.route("/delete_review/<review_id>/<perfume_id>")
+@app.route("/delete_review", methods=["POST"])
 @login_required
-def delete_review(review_id, perfume_id):
+def delete_review():
+    review_id = request.form.get("review_id")
+    perfume_id = request.form.get("perfume_id")
     mongo.db.perfumes.update_one(
         {"_id": ObjectId(perfume_id)},
         {"$pull": {"reviews": {"_id": ObjectId(review_id)}}},
