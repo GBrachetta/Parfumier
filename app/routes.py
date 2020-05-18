@@ -37,7 +37,7 @@ def index():
     """
     DESCRIPTION
     """
-    return render_template("index.html")
+    return render_template("pages/index.html")
 
 
 @app.route("/login", methods=["POST", "GET"])
@@ -70,7 +70,7 @@ def login():
             )
         else:
             flash("Please check your credentials", "warning")
-    return render_template("login.html", title="Login", form=form)
+    return render_template("pages/login.html", title="Login", form=form)
 
 
 @app.route("/register", methods=["POST", "GET"])
@@ -111,7 +111,7 @@ def register():
             "info",
         )
         return redirect(url_for("login"))
-    return render_template("register.html", title="Register", form=form)
+    return render_template("pages/register.html", title="Register", form=form)
 
 
 @app.route("/account", methods=["POST", "GET"])
@@ -169,7 +169,7 @@ def account():
         form.avatar.data = current_user.avatar
     avatar = url_for("static", filename=f"images/avatars/{current_user.avatar}")
     return render_template(
-        "account.html", title="Account", form=form, avatar=avatar
+        "pages/account.html", title="Account", form=form, avatar=avatar
     )
 
 
@@ -198,7 +198,7 @@ def reset_request():
         flash("An email has been sent to reset your password", "success")
         return redirect(url_for("login"))
     return render_template(
-        "reset_request.html", title="Reset Password", form=form
+        "pages/reset_request.html", title="Reset Password", form=form
     )
 
 
@@ -233,7 +233,7 @@ def reset_token(token):
         flash("Your password has been updated. You are now logged in.", "info")
         return redirect(url_for("login"))
     return render_template(
-        "reset_token.html", title="Reset Password", form=form
+        "pages/reset_token.html", title="Reset Password", form=form
     )
 
 
@@ -290,7 +290,7 @@ def new_perfume():
         flash("You need to be an administrator to enter data.", "danger")
         return redirect(url_for("index"))
     return render_template(
-        "new_perfume.html",
+        "pages/new_perfume.html",
         title="New Perfume",
         form=form,
         types=mongo.db.types.find().sort("type_name"),
@@ -337,7 +337,7 @@ def perfumes():
             {"$sort": {"perfumeName": 1}},
         ]
     )
-    return render_template("perfumes.html", title="Perfumes", perfumes=cur)
+    return render_template("pages/perfumes.html", title="Perfumes", perfumes=cur)
 
 
 @app.route("/perfume/<id>", methods=["GET"])
@@ -375,7 +375,7 @@ def perfume(id):
         ]
     )
     return render_template(
-        "perfume.html",
+        "pages/perfume.html",
         title="Perfumes",
         cursor=cur,
         perfume=perfume,
@@ -438,7 +438,7 @@ def edit_perfume(id):
             form.description.data = perfume["description"]
             form.public.data = perfume["public"]
     return render_template(
-        "edit_perfume.html",
+        "pages/edit_perfume.html",
         title="Edit Perfume",
         form=form,
         types=mongo.db.types.find().sort("type_name"),
@@ -490,19 +490,19 @@ def new_type():
     else:
         flash("You need to be an administrator.", "danger")
         return redirect(url_for("index"))
-    return render_template("new_type.html", title="New Type", form=form)
+    return render_template("pages/new_type.html", title="New Type", form=form)
 
 
 @app.route("/types")
 def types():
     types = mongo.db.types.find().sort("type_name")
-    return render_template("types.html", types=types)
+    return render_template("pages/types.html", types=types)
 
 
 @app.route("/type/<id>")
 def type(id):
     type = mongo.db.types.find_one({"_id": ObjectId(id)})
-    return render_template("type.html", type=type)
+    return render_template("pages/type.html", type=type)
 
 
 @app.route("/type/<id>", methods=["POST"])
@@ -535,7 +535,7 @@ def edit_type(id):
         elif request.method == "GET":
             form.type_name.data = type["type_name"]
             form.description.data = type["description"]
-    return render_template("edit_type.html", title="Edit Type", form=form)
+    return render_template("pages/edit_type.html", title="Edit Type", form=form)
 
 
 @app.route("/perfume/review", methods=["POST"])
