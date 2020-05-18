@@ -7,13 +7,13 @@
         </div>
         <div class="col-3">
             {% if current_user.is_authenticated and current_user.is_admin == True %}
-            <a href="{{ url_for('new_perfume') }}" class="btn btn-primary float-right" type="button"
+                <a href="{{ url_for('new_perfume') }}" class="btn btn-primary float-right" type="button"
                 >Add new perfume</a>
             {% endif %}
         </div>
     </div>
 </div>
-
+<!-- Perfume card -->
 {% include "components/perfume-card.html" %}
 
 {% endblock content %}

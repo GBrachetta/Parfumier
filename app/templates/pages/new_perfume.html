@@ -14,7 +14,7 @@
                         {{ form.brand(class="form-control form-control-md is-invalid")}}
                         <div class="invalid-feedback">
                             {% for error in form.brand.errors %}
-                            <span>{{ error }}</span>
+                                <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
@@ -28,7 +28,7 @@
                         {{ form.name(class="form-control form-control-md is-invalid")}}
                         <div class="invalid-feedback">
                             {% for error in form.name.errors %}
-                            <span>{{ error }}</span>
+                                <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
@@ -41,12 +41,12 @@
                         <select class="custom-select is-invalid" id="perfume_type" name="perfume_type">
                             <option disabled selected>Choose type</option>
                             {% for type in types %}
-                            <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                <option value="{{ type.type_name }}">{{ type.type_name }}</option>
                             {% endfor %}
                         </select>
                         <div class="invalid-feedback">
                             {% for error in form.perfume_type.errors %}
-                            <span>{{ error }}</span>
+                                <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
@@ -54,7 +54,7 @@
                             <select class="custom-select" id="perfume_type" name="perfume_type">
                                 <option disabled selected>Choose type</option>
                                 {% for type in types %}
-                                <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                    <option value="{{ type.type_name }}">{{ type.type_name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -71,7 +71,7 @@
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.description(class="form-control form-control-md", placeholder="Enter description")}}
+                            {{ form.description(class="form-control form-control-md", placeholder="Enter description")}}
                         {% endif %}
                     </div>
                     <div class="form-check">

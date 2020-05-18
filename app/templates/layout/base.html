@@ -14,9 +14,9 @@
         />
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
         {% if title %}
-        <title>Parfumier - {{ title }}</title>
+            <title>Parfumier - {{ title }}</title>
         {% else %}
-        <title>Parfumier</title>
+            <title>Parfumier</title>
         {% endif %}
     </head>
 
@@ -25,18 +25,19 @@
         <header class="site-header">
             {% include "layout/navbar.html" %}
         </header>
-
-        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for
-        category, message in messages %}
-        <div class="alert alert-{{ category }}" role="alert" id="flash">
-            {{ message }}
-        </div>
-        {% endfor %} {% endif %} {% endwith %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" role="alert" id="flash">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <div class="container main-contents">
-            {% block content %} {% endblock content %}
+            {% block content %}
+            {% endblock content %}
         </div>
-
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
