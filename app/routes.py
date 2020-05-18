@@ -250,6 +250,51 @@ def delete_user():
 
 
 # ! PERFUMES
+@app.route("/perfumes")
+def perfumes():
+    """sumary_line
+    With a solution found on my question on Stack Overflow:
+    https://stackoverflow.com/questions/61732985/inner-join-like-with-mongodb-in-flask-jinja
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
+    cur = mongo.db.perfumes.aggregate(
+        [
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "author",
+                    "foreignField": "username",
+                    "as": "creator",
+                }
+            },
+            {"$unwind": "$creator"},
+            {
+                "$project": {
+                    "_id": "$_id",
+                    "perfumeName": "$name",
+                    "perfumeBrand": "$brand",
+                    "perfumeDescription": "$description",
+                    "date_updated": "$date_updated",
+                    "perfumePicture": "$picture",
+                    "isPublic": "$public",
+                    "perfumeType": "$perfume_type",
+                    "username": "$creator.username",
+                    "firstName": "$creator.first_name",
+                    "lastName": "$creator.last_name",
+                    "profilePicture": "$creator.avatar",
+                }
+            },
+            {"$sort": {"perfumeName": 1}},
+        ]
+    )
+    return render_template(
+        "pages/perfumes.html", title="Perfumes", perfumes=cur
+    )
+
+
 @app.route("/perfume/new", methods=["GET", "POST"])
 @login_required
 def new_perfume():
@@ -297,49 +342,6 @@ def new_perfume():
     )
 
 
-@app.route("/perfumes")
-def perfumes():
-    """sumary_line
-    With a solution found on my question on Stack Overflow:
-    https://stackoverflow.com/questions/61732985/inner-join-like-with-mongodb-in-flask-jinja
-    Keyword arguments:
-    argument -- description
-    Return: return_description
-    """
-
-    cur = mongo.db.perfumes.aggregate(
-        [
-            {
-                "$lookup": {
-                    "from": "users",
-                    "localField": "author",
-                    "foreignField": "username",
-                    "as": "creator",
-                }
-            },
-            {"$unwind": "$creator"},
-            {
-                "$project": {
-                    "_id": "$_id",
-                    "perfumeName": "$name",
-                    "perfumeBrand": "$brand",
-                    "perfumeDescription": "$description",
-                    "date_updated": "$date_updated",
-                    "perfumePicture": "$picture",
-                    "isPublic": "$public",
-                    "perfumeType": "$perfume_type",
-                    "username": "$creator.username",
-                    "firstName": "$creator.first_name",
-                    "lastName": "$creator.last_name",
-                    "profilePicture": "$creator.avatar",
-                }
-            },
-            {"$sort": {"perfumeName": 1}},
-        ]
-    )
-    return render_template("pages/perfumes.html", title="Perfumes", perfumes=cur)
-
-
 @app.route("/perfume/<id>", methods=["GET"])
 def perfume(id):
     perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
@@ -383,7 +385,7 @@ def perfume(id):
     )
 
 
-@app.route("/perfumes/<id>", methods=["POST"])
+@app.route("/perfume/<id>", methods=["POST"])
 @login_required
 def delete_perfume(id):
     if current_user.is_admin:
