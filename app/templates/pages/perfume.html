@@ -1,0 +1,58 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+
+<div class="container mb-4 pt-4">
+    <div class="row">
+        <div class="col-9">
+            <h1>Perfumes</h1>
+        </div>
+        <div class="col-3">
+            <a href="{{ url_for('perfumes') }}" class="btn btn-primary float-right" type="button">Back to all
+                perfumes</a>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <h5 class="card-header text-white bg-primary">
+        {{ perfume.name }}
+        </a>
+    </h5>
+    <div class="card-body">
+        <h4>Name: <a href="{{ url_for('perfume', id=perfume._id) }}"> {{ perfume.name }}</a></h4>
+        <h5>A perfume by <span class="lead text-primary font-weight-bold">{{ perfume.brand }}</span></h5>
+        <p>Type: {{ perfume.perfume_type }}</p>
+    </div>
+    <div class="container pb-5">
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <div class="card-body">
+                    {{ perfume.description | safe}}
+                </div>
+            </div>
+            <div class="col-4">
+                <img class="float-right picture-perfume" src="{{ url_for('static', filename='images/perfume_pics/' + perfume.picture) }}" onerror="if (this.src != '../static/images/perfume_pics/generic.png') this.src = '../static/images/perfume_pics/generic.png';" loading="lazy" alt="Perfume">
+            </div>
+        </div>
+
+    </div>
+    <hr>
+    <div class="container pt-2 pb-4">
+        <div class="row">
+        <!-- Footer of the perfume card with buttons triggering modals -->
+            {% include "components/perfume-cursor.html" %}
+        </div>
+    </div>
+</div>
+
+<!-- REVIEWS -->
+
+{% include "components/perfume-reviews.html" %}
+
+<!-- MODALS -->
+
+{% include "components/perfume-modals.html" %}
+
+{% endblock content %}
+{% block CKEditor_js %}
+    <script src="{{ url_for('static', filename='js/cke.js') }}"></script>
+{% endblock CKEditor_js %}

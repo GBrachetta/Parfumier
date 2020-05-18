@@ -1,0 +1,35 @@
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h3 class="text-center">Reviews</h3>
+            <ul class='reviews'>
+                {% for item in perfume.reviews|reverse %}
+                <div class="card container">
+                    <div class="row">
+                        <div class="card-header col-9">
+                            <h5>{{item['reviewer'] }} said on {{ item.date_reviewed.strftime('%d-%m-%Y') }}</h5>
+                        </div>
+                        <div class="card-header col-3">
+                            {% if current_user.username == item['reviewer'] %}
+                                <button type="button" class="btn btn-danger btn-sm mt-2 delete-review float-right ml-2" data-perfume_id="{{perfume['_id']}}" data-review_id="{{item['_id']}}" data-toggle="modal" data-target="#deleteReviewModal">Delete</button>
+                                <button type="button" class="btn btn-success btn-sm mt-2 edit-review float-right ml-2" data-perfume_id="{{perfume['_id']}}" data-review_id="{{item['_id']}}" data-toggle="modal" data-target="#editReviewPerfumeModal">Edit</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="p-3 row">
+                        <div class="col-1">
+                            <img class="avatar-perfume float-right" src="{{ url_for('static', filename='images/avatars/' + item['reviewer_picture']) }}" onerror="if (this.src != '../static/images/avatars/default.png') this.src = '../static/images/avatars/default.png';" loading="lazy" alt="Avatar">
+                        </div>
+                        <div class=" col-10">
+                            <li>{{ item['review_content'] | safe }}</li>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% if not perfume.reviews %}
+                    <h5 class="text-center">There are no reviews for this perfume</h5>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
