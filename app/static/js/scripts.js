@@ -1,4 +1,4 @@
-// With invaluable input from Roko Buljian
+// With invaluable input from Roko Buljan
 function imagePreviewer(ev) {
     const EL_input = this;
     const EL_form = EL_input.closest("form");
@@ -22,12 +22,14 @@ ELS_file.forEach((el) => {
     el.addEventListener("change", imagePreviewer);
 });
 
-// ? Fades flash messages after a timeout
+
+// Fades flash messages after a timeout
 $(document).ready(() => {
     setTimeout(function () {
         $("#flash").fadeOut("slow");
     }, 3000);
 });
+
 
 // ? Same as above but sliding up
 // $(document).ready(() => {
@@ -38,9 +40,9 @@ $(document).ready(() => {
 $(".delete-review").on("click", (evt) => {
     evt.preventDefault();
     const btnData = $(evt.currentTarget).data();
-    const $formDeleteReview = $("#form-delete-review");
-    $formDeleteReview.find('[name="review_id"]').val(btnData.review_id);
-    $formDeleteReview.find('[name="perfume_id"]').val(btnData.perfume_id);
+    const formDeleteReview = $("#form-delete-review");
+    formDeleteReview.find('[name="review_id"]').val(btnData.review_id);
+    formDeleteReview.find('[name="perfume_id"]').val(btnData.perfume_id);
 });
 
 
@@ -48,7 +50,7 @@ $(".delete-review").on("click", (evt) => {
 $(".edit-review").on("click", (evt) => {
     evt.preventDefault();
     const btnData = $(evt.currentTarget).data();
-    const $formEditReview = $("#form-edit-review");
-    $formEditReview.find('[name="review_id"]').val(btnData.review_id);
-    $formEditReview.find('[name="perfume_id"]').val(btnData.perfume_id);
+    const formEditReview = $("#form-edit-review");
+    formEditReview.find('[name="review_id"]').val(btnData.review_id);
+    formEditReview.find('[name="perfume_id"]').val(btnData.perfume_id);
 });
