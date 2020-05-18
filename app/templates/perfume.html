@@ -83,9 +83,7 @@
                         <div class="card-header col-3">
                             {% if current_user.username == item['reviewer'] %}
                             <button type="button" class="btn btn-danger btn-sm mt-2 delete-review float-right ml-2" data-perfume_id="{{perfume['_id']}}" data-review_id="{{item['_id']}}" data-toggle="modal" data-target="#deleteReviewModal">Delete</button>
-                            <button type="button" class="btn btn-info btn-sm mt-2 edit-review float-right ml-2" data-perfume_id="{{perfume['_id']}}" data-review_id="{{item['_id']}}" data-toggle="modal" data-target="#editReviewPerfumeModal">Edit!</button>
-
-                            <a href="{{ url_for('edit_review', review_id=item._id, perfume_id=perfume._id) }}" class="float-right btn btn-success btn-sm mt-2 px-3">Edit</a>
+                            <button type="button" class="btn btn-success btn-sm mt-2 edit-review float-right ml-2" data-perfume_id="{{perfume['_id']}}" data-review_id="{{item['_id']}}" data-toggle="modal" data-target="#editReviewPerfumeModal">Edit</button>
                             {% endif %}
                         </div>
                     </div>
@@ -207,8 +205,6 @@
                 <form method=POST action="{{ url_for('edit_review') }}" id="form-edit-review">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
-                    <input hidden name="review_id">
-                    <input hidden name="perfume_id">
                         <div class="form-group">
                             {% if form.review.errors %}
                             {{ form.review(class="form-control form-control-md is-invalid")}}
@@ -224,6 +220,8 @@
                     </fieldset>
                     <div class="modal-footer">
                         <div class="form-group">
+                            <input hidden name="review_id">
+                            <input hidden name="perfume_id">
                             {{ form.submit(class="btn btn-primary")}}
                         </div>
                     </div>
