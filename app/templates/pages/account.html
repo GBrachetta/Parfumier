@@ -102,26 +102,5 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteUserModal">Please Confirm Deletion</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>By clicking on the Delete button you will delete your account.</p>
-                <p><strong>This action cannot be undone.</strong></p>
-            </div>
-            <div class="modal-footer">
-                <form action="{{ url_for('delete_user' )}}" method="POST">
-                    <input type="submit" , class="btn btn-danger" value="Delete">
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+{% include "components/delete-user-modal.html" %}
 {% endblock content %}

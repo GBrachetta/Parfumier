@@ -472,7 +472,7 @@ def review_perfume(id):
 
 
 # ! Types
-@app.route("/type/new", methods=["POST"])
+@app.route("/type/new", methods=["POST", "GET"])
 @login_required
 def new_type():
     if current_user.is_admin:

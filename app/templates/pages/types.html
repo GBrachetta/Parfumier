@@ -13,20 +13,6 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        {% for type in types %}
-        <div class="card col-12 mb-1">
-            <div class="card-body">
-                <a href="{{ url_for('type', id=type._id) }}">
-                    <h5 class="card-title"><span class="lead text-primary font-weight-bold">{{ type.type_name }}</span></h5>
-                    <hr>
-                </a>
-                <p class="card-text">{{ type.description | safe}}</p>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
+{% include "components/type-card.html" %}
 
 {% endblock content %}

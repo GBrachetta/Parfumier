@@ -1,0 +1,29 @@
+<div class="container navpad">
+    <div class="row justify-content-center">
+        {% for perfume in perfumes %}
+        <section class="col-lg-3 col-md-4 col-sm-6 col-12 filter-div px-2 pb-1 pb-lg-3 text-center">
+            <article class="card my-1 d-none d-sm-block hvr-grow" id="card-perfumes">
+                <div class="image-square">
+                    <img class="img-fluid" src="{{ url_for('static', filename='images/perfume_pics/' + perfume['perfumePicture']) }}" onerror="if (this.src != '../static/images/perfume_pics/generic.png') this.src = '../static/images/perfume_pics/generic.png';" loading="lazy" alt="Perfume" />
+                </div>
+                <div class="card-body text-center py-2">
+                    <small class="d-none d-sm-block text-muted">{{ perfume['perfumeBrand'] }}</small>
+                    <h2 class="card-title">{{ perfume['perfumeName'] }}</h2>
+                    <a href="{{ url_for('perfume', id=perfume._id) }}">
+                        <p class="mb-0 view-more">VIEW MORE</p>
+                    </a>
+                </div>
+                <!--card footer-->
+                <footer class="card-footer p-1">
+                    <div class="d-flex flex-row justify-content-around card-xs">
+                        <div class="d-flex flex-column text-center">
+                            <small class="primary-color-text"><i class="material-icons">{{ perfume['perfumeType'] }}</i></small>
+                            <small class="text-muted">{{tag}}</small>
+                        </div>
+                    </div>
+                </footer>
+            </article>
+        </section>
+        {% endfor %}
+    </div>
+</div>
