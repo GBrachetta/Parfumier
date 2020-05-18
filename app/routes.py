@@ -17,6 +17,7 @@ from app.forms import (
     EditPerfumeForm,
     AddReviewForm,
     EditReviewForm,
+    # SearchForm,
 )
 from app.utils import save_avatar, send_reset_email, save_picture
 from datetime import datetime
@@ -572,3 +573,24 @@ def edit_review():
     elif request.method == "GET":
         form.review.data = review[{"_id": ObjectId(review_id)}]
     return redirect(url_for("perfume", id=perfume_id))
+
+
+# @app.route("/search", methods=["GET", "POST"])
+# def search():
+#     search = SearchForm(request.form)
+#     if request.method == "POST":
+#         return results(search)
+#     return render_template("search.html", form=search)
+
+
+# @app.route("/perfume/results")
+# def results(search):
+#     result = []
+#     if search.data["search"] == "":
+#         result = mongo.db.perfumes.find()
+#     if not result:
+#         flash("No results found!", "warning")
+#         return redirect(url_for("perfumes"))
+#     else:
+#         # display results
+#         return render_template("results.html", results=results)
