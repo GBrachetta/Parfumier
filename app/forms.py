@@ -14,6 +14,7 @@ from wtforms import (
     SubmitField,
     BooleanField,
     TextAreaField,
+    SelectField,
 )
 from flask_login import current_user
 from app import mongo
@@ -208,3 +209,9 @@ class AddReviewForm(FlaskForm):
 class EditReviewForm(FlaskForm):
     review = TextAreaField("Review", validators=[DataRequired()])
     submit = SubmitField("Update Review")
+
+
+class SearchForm(FlaskForm):
+    choices = [("Brand", "Brand"), ("Perfume", "Perfume"), ("Type", "Type")]
+    select = SelectField("Search:", choices=choices)
+    search = StringField("")
