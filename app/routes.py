@@ -597,23 +597,13 @@ def edit_review():
 #         # display results
 #         return render_template("results.html", results=results)
 
-# ! FINDS THEM
-# @app.route("/search")
-# def search():
-#     mongo.db.perfumes.create_index([("name", "text"), ("brand", "text")])
-#     db_query = request.args["db_query"]
-#     results = mongo.db.perfumes.find({"$text": {"$search": db_query}}).sort(
-#         "name", pymongo.ASCENDING
-#     )
-#     return render_template("pages/perfumes.html", results=results)
-
 
 @app.route("/search")
 def search():
     mongo.db.perfumes.create_index([("name", "text"), ("brand", "text")])
     db_query = request.args["db_query"]
     if db_query == "":
-        return redirect(url_for('perfumes'))
+        return redirect(url_for("perfumes"))
     else:
         print(db_query)
         results = mongo.db.perfumes.aggregate(
@@ -644,6 +634,7 @@ def search():
                         "profilePicture": "$creator.avatar",
                     }
                 },
+                {"$sort": {"perfumeName": 1}},
             ]
         )
         return render_template("pages/perfumes.html", perfumes=results)
