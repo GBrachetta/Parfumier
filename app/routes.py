@@ -550,20 +550,25 @@ def delete_review():
     return redirect(url_for("perfume", id=perfume_id))
 
 
-@app.route("/edit_review/<review_id>/<perfume_id>")
+@app.route("/review", methods=["GET", "POST"])
 @login_required
-def edit_review(review_id, perfume_id):
+def edit_review():
     form = EditReviewForm()
-    # if form.validate_on_submit():
-    mongo.db.perfumes.update(
-        {"_id": ObjectId(perfume_id), "reviews._id": ObjectId(review_id)},
-        {
-            "$set": {
-                "reviews.$.review_content": form.review.data,
-                "reviews.$.date_reviewed": datetime.utcnow(),
-            }
-        },
-    )
-    flash("Your review has been updated!", "success")
+    review_id = request.form.get("review_id")
+    perfume_id = request.form.get("perfume_id")
+    review = mongo.db.perfumes.find_one(ObjectId(perfume_id))
+    if form.validate_on_submit():
+        mongo.db.perfumes.update(
+            {"_id": ObjectId(perfume_id), "reviews._id": ObjectId(review_id)},
+            {
+                "$set": {
+                    "reviews.$.review_content": form.review.data,
+                    "reviews.$.date_reviewed": datetime.utcnow(),
+                }
+            },
+        )
+        flash("Your review has been updated!", "success")
+        return redirect(url_for("perfume", id=perfume_id))
+    elif request.method == "GET":
+        form.review.data = review[{"_id": ObjectId(review_id)}]
     return redirect(url_for("perfume", id=perfume_id))
-    # return render_template("perfume.html", id=perfume_id)
