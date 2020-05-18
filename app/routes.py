@@ -577,27 +577,6 @@ def edit_review():
     return redirect(url_for("perfume", id=perfume_id))
 
 
-# @app.route("/search", methods=["GET", "POST"])
-# def search():
-#     search = SearchForm(request.form)
-#     if request.method == "POST":
-#         return results(search)
-#     return render_template("search.html", form=search)
-
-
-# @app.route("/perfume/results")
-# def results(search):
-#     result = []
-#     if search.data["search"] == "":
-#         result = mongo.db.perfumes.find()
-#     if not result:
-#         flash("No results found!", "warning")
-#         return redirect(url_for("perfumes"))
-#     else:
-#         # display results
-#         return render_template("results.html", results=results)
-
-
 @app.route("/search")
 def search():
     mongo.db.perfumes.create_index([("name", "text"), ("brand", "text")])
