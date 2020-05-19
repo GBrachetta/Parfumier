@@ -259,7 +259,7 @@ def perfumes():
     argument -- description
     Return: return_description
     """
-    types = mongo.db.types.find()
+    types = mongo.db.types.find().sort("type_name")
     cur = mongo.db.perfumes.aggregate(
         [
             {
@@ -579,7 +579,8 @@ def edit_review():
 
 @app.route("/search")
 def search():
-    mongo.db.perfumes.create_index([("name", "text"), ("brand", "text")])
+    types = mongo.db.types.find().sort("type_name")
+    mongo.db.perfumes.create_index([("name", "text"), ("brand", "text"), ("perfume_type", "text")])
     db_query = request.args["db_query"]
     if db_query == "":
         return redirect(url_for("perfumes"))
@@ -616,18 +617,19 @@ def search():
                 {"$sort": {"perfumeName": 1}},
             ]
         )
-        return render_template("pages/perfumes.html", perfumes=results)
+        return render_template("pages/perfumes.html", perfumes=results, types=types)
 
 
 @app.route("/filter")
 def filter():
-    mongo.db.types.create_index([("perfume_type", "text")])
-    db_query = request.args["db_query"]
+    types = mongo.db.types.find().sort("type_name")
+    mongo.db.types.create_index([("type_name", "text")])
+    filter_query = request.args["filter_query"]
 
-    print(db_query)
+    print(filter_query)
     results = mongo.db.perfumes.aggregate(
         [
-            {"$match": {"$text": {"$search": db_query}}},
+            {"$match": {"$text": {"$search": filter_query}}},
             {
                 "$lookup": {
                     "from": "users",
@@ -656,49 +658,5 @@ def filter():
             {"$sort": {"perfumeName": 1}},
         ]
     )
-    return render_template("pages/perfumes.html", perfumes=results)
-
-
-# @app.route("/filter", methods=["GET", "POST"])
-# def filter():
-#     if request.method == "POST":
-#         for i in request.form:
-#             if i == "types":
-#                 filter_items = []
-#                 items = request.form.getlist("perfume_type")  # get as a list []
-#                 my_key = request.form  # get as a multdict
-#                 for item in items:  # iterate through the list
-#                     for key in my_key:  # grab key_name
-#                         filter_items.append({key: item})
-#                         results = mongo.db.recipe.find(
-#                             {"$and": [{"$or": filter_items}]}
-#                         )
-#                 total_results = mongo.db.recipe.find(
-#                     {"$and": [{"$or": filter_items}]}
-#                 ).count()
-#                 return render_template(
-#                     "filter.html",
-#                     title="Filtered Search",
-#                     results=results,
-#                     total_results=total_results,
-#                 )
-#             elif i == "health_labels":
-#                 filter_items = []
-#                 items = request.form.getlist("health_labels")
-#                 my_key = request.form
-#                 for item in items:
-#                     for key in my_key:
-#                         filter_items.append({key: item})
-#                         results = mongo.db.recipe.find(
-#                             {"$and": [{"$or": filter_items}]}
-#                         )
-#                 total_results = mongo.db.recipe.find(
-#                     {"$and": [{"$or": filter_items}]}
-#                 ).count()
-
-#                 return render_template(
-#                     "filter.html",
-#                     title="Filtered Search",
-#                     results=results,
-#                     total_results=total_results,
-#                 )
+    print(results)
+    return render_template("pages/perfumes.html", perfumes=results, types=types)
