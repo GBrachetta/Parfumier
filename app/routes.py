@@ -249,7 +249,6 @@ def delete_user():
     return redirect(url_for("index"))
 
 
-# ! PERFUMES
 @app.route("/perfumes")
 def perfumes():
     """sumary_line
@@ -473,7 +472,6 @@ def review_perfume(id):
     return redirect(url_for("perfume", id=perfume["_id"]))
 
 
-# ! Types
 @app.route("/type/new", methods=["POST", "GET"])
 @login_required
 def new_type():
