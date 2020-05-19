@@ -1,17 +1,5 @@
 {% extends 'layout/base.html' %} {% block content %}
-
-{% include "components/search-perfume.html" %}
-
-{% for result in results %}
-{% include "components/perfume-card.html" %}
-{% endfor %}
-
-
-<!-- New below this -->
-{% include "components/type-filter.html" %}
-
-
-
+{% include "components/search-and-filter.html" %}
 <div class="container mb-4 pt-4">
     <div class="row">
         <div class="col-9">
@@ -27,5 +15,4 @@
 </div>
 <!-- Perfume card -->
 {% include "components/perfume-card.html" %}
-
 {% endblock content %}
