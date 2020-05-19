@@ -1,6 +1,7 @@
 <div class="container navpad">
     <div class="row justify-content-center">
         {% for perfume in perfumes %}
+            {% if perfume %}
             <section class="col-lg-3 col-md-4 col-sm-6 col-12 filter-div px-2 pb-1 pb-lg-3 text-center">
                 <article class="card my-1 d-none d-sm-block hvr-grow" id="card-perfumes">
                     <div class="image-square">
@@ -24,6 +25,9 @@
                     </footer>
                 </article>
             </section>
+            {% else %}
+                <h1>NEED TO SORT A MESSAGE IN CASE NO PERFUMES FOUND!!</h1>
+            {% endif %}
         {% endfor %}
     </div>
 </div>
