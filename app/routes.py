@@ -614,7 +614,7 @@ def search():
                 {"$sort": {"perfumeName": 1}},
             ]
         )
-        return render_template("pages/perfumes.html", perfumes=results, types=types)
+        return render_template("pages/perfumes.html", perfumes=results, types=types, title="Perfumes")
 
 
 @app.route("/filter")
@@ -656,4 +656,4 @@ def filter():
                 {"$sort": {"perfumeName": 1}},
             ]
         )
-        return render_template("pages/perfumes.html", perfumes=results, types=types)
+        return render_template("pages/perfumes.html", perfumes=results, types=types, title="Perfumes")
