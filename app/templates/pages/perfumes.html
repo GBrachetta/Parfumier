@@ -3,10 +3,14 @@
 {% include "components/search-perfume.html" %}
 
 {% for result in results %}
-
 {% include "components/perfume-card.html" %}
-
 {% endfor %}
+
+
+<!-- New below this -->
+{% include "components/type-filter.html" %}
+
+
 
 <div class="container mb-4 pt-4">
     <div class="row">

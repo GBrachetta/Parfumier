@@ -259,7 +259,7 @@ def perfumes():
     argument -- description
     Return: return_description
     """
-
+    types = mongo.db.types.find().sort("type_name")
     cur = mongo.db.perfumes.aggregate(
         [
             {
@@ -291,7 +291,7 @@ def perfumes():
         ]
     )
     return render_template(
-        "pages/perfumes.html", title="Perfumes", perfumes=cur
+        "pages/perfumes.html", title="Perfumes", perfumes=cur, types=types
     )
 
 
@@ -579,12 +579,12 @@ def edit_review():
 
 @app.route("/search")
 def search():
-    mongo.db.perfumes.create_index([("name", "text"), ("brand", "text")])
+    types = mongo.db.types.find().sort("type_name")
+    mongo.db.perfumes.create_index([("name", "text"), ("brand", "text"), ("perfume_type", "text")])
     db_query = request.args["db_query"]
     if db_query == "":
         return redirect(url_for("perfumes"))
     else:
-        print(db_query)
         results = mongo.db.perfumes.aggregate(
             [
                 {"$match": {"$text": {"$search": db_query}}},
@@ -616,4 +616,46 @@ def search():
                 {"$sort": {"perfumeName": 1}},
             ]
         )
-        return render_template("pages/perfumes.html", perfumes=results)
+        return render_template("pages/perfumes.html", perfumes=results, types=types)
+
+
+@app.route("/filter")
+def filter():
+    types = mongo.db.types.find().sort("type_name")
+    mongo.db.types.create_index([("type_name", "text")])
+    filter_query = request.args["filter_query"]
+    if filter_query == "":
+        return redirect(url_for("perfumes"))
+    else:
+        results = mongo.db.perfumes.aggregate(
+            [
+                {"$match": {"$text": {"$search": filter_query}}},
+                {
+                    "$lookup": {
+                        "from": "users",
+                        "localField": "author",
+                        "foreignField": "username",
+                        "as": "creator",
+                    }
+                },
+                {"$unwind": "$creator"},
+                {
+                    "$project": {
+                        "_id": "$_id",
+                        "perfumeName": "$name",
+                        "perfumeBrand": "$brand",
+                        "perfumeDescription": "$description",
+                        "date_updated": "$date_updated",
+                        "perfumePicture": "$picture",
+                        "isPublic": "$public",
+                        "perfumeType": "$perfume_type",
+                        "username": "$creator.username",
+                        "firstName": "$creator.first_name",
+                        "lastName": "$creator.last_name",
+                        "profilePicture": "$creator.avatar",
+                    }
+                },
+                {"$sort": {"perfumeName": 1}},
+            ]
+        )
+        return render_template("pages/perfumes.html", perfumes=results, types=types)
