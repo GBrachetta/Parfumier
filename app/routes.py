@@ -577,22 +577,43 @@ def edit_review():
     return redirect(url_for("perfume", id=perfume_id))
 
 
-# @app.route("/search", methods=["GET", "POST"])
-# def search():
-#     search = SearchForm(request.form)
-#     if request.method == "POST":
-#         return results(search)
-#     return render_template("search.html", form=search)
-
-
-# @app.route("/perfume/results")
-# def results(search):
-#     result = []
-#     if search.data["search"] == "":
-#         result = mongo.db.perfumes.find()
-#     if not result:
-#         flash("No results found!", "warning")
-#         return redirect(url_for("perfumes"))
-#     else:
-#         # display results
-#         return render_template("results.html", results=results)
+@app.route("/search")
+def search():
+    mongo.db.perfumes.create_index([("name", "text"), ("brand", "text")])
+    db_query = request.args["db_query"]
+    if db_query == "":
+        return redirect(url_for("perfumes"))
+    else:
+        print(db_query)
+        results = mongo.db.perfumes.aggregate(
+            [
+                {"$match": {"$text": {"$search": db_query}}},
+                {
+                    "$lookup": {
+                        "from": "users",
+                        "localField": "author",
+                        "foreignField": "username",
+                        "as": "creator",
+                    }
+                },
+                {"$unwind": "$creator"},
+                {
+                    "$project": {
+                        "_id": "$_id",
+                        "perfumeName": "$name",
+                        "perfumeBrand": "$brand",
+                        "perfumeDescription": "$description",
+                        "date_updated": "$date_updated",
+                        "perfumePicture": "$picture",
+                        "isPublic": "$public",
+                        "perfumeType": "$perfume_type",
+                        "username": "$creator.username",
+                        "firstName": "$creator.first_name",
+                        "lastName": "$creator.last_name",
+                        "profilePicture": "$creator.avatar",
+                    }
+                },
+                {"$sort": {"perfumeName": 1}},
+            ]
+        )
+        return render_template("pages/perfumes.html", perfumes=results)

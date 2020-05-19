@@ -1,0 +1,11 @@
+<div class="row perfume-search justify-content-center">
+    <div class="col-md-6 text-center">
+        <form action="{{ url_for('search') }}" class="search-form">
+            <div class="input-grou mb-3">
+                <input type="text" class="form-control" id="db_query" name="db_query" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Search for a Perfume or Brand"><br>
+                <button class="btn btn-primary btn-sm ml-3" type="submit" name="Search">SEARCH</button>
+                <a href="{{ url_for('perfumes') }}" class="btn btn-sm btn-warning ml-3" type="submit" name="Search">CANCEL</a>
+            </div>
+        </form>
+    </div>
+</div>
