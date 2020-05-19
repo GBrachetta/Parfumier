@@ -1,9 +1,7 @@
 <div class="container navpad">
     <div class="row justify-content-center">
         {% for perfume in perfumes %}
-        {% if not perfume %}
-        <h1>No Perfumes Matched your query (NEED FIX)</h1>
-        {% else %}
+        {% if perfume %}
         <section class="col-lg-3 col-md-4 col-sm-6 col-12 filter-div px-2 pb-1 pb-lg-3 text-center">
             <article class="card my-1 d-none d-sm-block hvr-grow" id="card-perfumes">
                 <div class="image-square">
@@ -28,6 +26,8 @@
             </article>
         </section>
         {% endif %}
+        {% else %}
+        <h2>No Perfumes Matched your query</h2>
         {% endfor %}
     </div>
 </div>
