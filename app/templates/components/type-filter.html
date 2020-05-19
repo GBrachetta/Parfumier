@@ -1,13 +1,14 @@
 <div class="row justify-content-center">
     <div class="col-md-6 text-center">
-        <form action="{{ url_for('filter') }}">
+        <form action="{{ url_for("filter") }}" class="search-form">
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Filter by Type</label>
-                <select class="form-control" id="exampleFormControlSelect1">
+                <select class="form-control" id="filter_query" name="filter_query">
+                    <option disabled selected='true' name="none" value="none" id="none">Please select a type</option>
                     {% for type in types %}
-                    <option value="db_query" id="db_query" name="db_query">{{type['type_name']}}</option>
+                    <option value="{{type['type_name']}}" id="{{type['type_name']}}" name="{{type['type_name']}}">{{type['type_name']}}</option>
                     {% endfor %}
-                </select>
+                </select><br>
                 <button class="btn btn-primary btn-sm" type="submit">Submit</button>
             </div>
         </form>
