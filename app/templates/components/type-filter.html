@@ -4,7 +4,7 @@
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Filter by Type</label>
                 <select class="form-control" id="filter_query" name="filter_query">
-                    <option disabled selected='true' name="none" value="none" id="none">Please select a type</option>
+                    <option  selected='true' name="" value="" id="">Please select a type</option>
                     {% for type in types %}
                     <option value="{{type['type_name']}}" id="{{type['type_name']}}" name="{{type['type_name']}}">{{type['type_name']}}</option>
                     {% endfor %}
