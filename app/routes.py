@@ -1,4 +1,3 @@
-import os
 import logging
 from flask import render_template, redirect, flash, url_for, request
 from werkzeug.security import generate_password_hash
@@ -19,9 +18,11 @@ from app.forms import (
     EditReviewForm,
     # SearchForm,
 )
-from app.utils import save_avatar, send_reset_email, save_picture
+from app.utils import send_reset_email
 from datetime import datetime
 from bson.objectid import ObjectId
+from cloudinary.uploader import upload
+from cloudinary.utils import cloudinary_url
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -92,7 +93,7 @@ def register():
                 "email": form.email.data,
                 "password": hashed_password,
                 "is_admin": False,
-                "avatar": "default.png",
+                "avatar": "https://res.cloudinary.com/gbrachetta/image/upload/v1590003978/default.png",
             }
         )
         user = mongo.db.users.find_one({"email": form.email.data})
@@ -129,20 +130,21 @@ def account():
     }
     if form.validate_on_submit():
         if form.avatar.data:
-            avatar = save_avatar(form.avatar.data)
+            avatar_uploaded = upload(form.avatar.data)
+            # Options is a necessary parameter from Cloudinary in order to save 
+            # the thumbnails with the given settings.
+            avatar, options = cloudinary_url(
+                avatar_uploaded["public_id"],
+                format="jpg",
+                crop="fill",
+                width=150,
+                height=150,
+            )
             old_value = mongo.db.users.find_one(
                 {"username": current_user.username}
             )
             avatar = {"$set": {"avatar": avatar}}
             mongo.db.users.update_one(old_value, avatar)
-            if current_user.avatar != "default.png":
-                os.remove(
-                    os.path.join(
-                        app.root_path,
-                        "static/images/avatars",
-                        current_user.avatar,
-                    )
-                )
         mongo.db.users.update_one(
             {"username": current_user.username}, {"$set": updated_user}
         )
@@ -167,7 +169,7 @@ def account():
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
         form.avatar.data = current_user.avatar
-    avatar = url_for("static", filename=f"images/avatars/{current_user.avatar}")
+    avatar = current_user.avatar
     return render_template(
         "pages/account.html", title="Account", form=form, avatar=avatar
     )
@@ -301,7 +303,14 @@ def new_perfume():
         form = CreatePerfumeForm()
         if form.validate_on_submit():
             if form.picture.data:
-                picture = save_picture(form.picture.data)
+                picture_uploaded = upload(form.picture.data)
+                picture, options = cloudinary_url(
+                    picture_uploaded["public_id"],
+                    format="jpg",
+                    crop="fill",
+                    width=225,
+                    height=300,
+                )
                 mongo.db.perfumes.insert(
                     {
                         "author": current_user.username,
@@ -324,7 +333,7 @@ def new_perfume():
                         "description": form.description.data,
                         "date_updated": datetime.utcnow(),
                         "public": form.public.data,
-                        "picture": "generic.png",
+                        "picture": "https://res.cloudinary.com/gbrachetta/image/upload/v1590013198/generic.jpg",
                     }
                 )
 
@@ -403,7 +412,14 @@ def edit_perfume(id):
     if current_user.is_admin:
         if form.validate_on_submit():
             if form.picture.data:
-                picture = save_picture(form.picture.data)
+                picture_uploaded = upload(form.picture.data)
+                picture, options = cloudinary_url(
+                    picture_uploaded["public_id"],
+                    format="jpg",
+                    crop="fill",
+                    width=225,
+                    height=300,
+                )
                 new_value = {
                     "$set": {
                         "brand": form.brand.data,
