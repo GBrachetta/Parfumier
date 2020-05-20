@@ -15,11 +15,10 @@
                     </a>
                 </div>
                 <!--card footer-->
-                <footer class="card-footer p-1">
+                <footer class="card-footer p-1 {{ perfume['perfumeType'] }}">
                     <div class="d-flex flex-row justify-content-around card-xs">
                         <div class="d-flex flex-column text-center">
-                            <small class="primary-color-text"><i class="material-icons">{{ perfume['perfumeType'] }}</i></small>
-                            <small class="text-muted">{{tag}}</small>
+                            <small class="">{{ perfume['perfumeType'] }}</small>
                         </div>
                     </div>
                 </footer>

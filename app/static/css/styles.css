@@ -125,6 +125,57 @@ h6 {
     text-align: center;
 }
 
-.reviews  {
+.reviews {
     list-style: none;
+}
+
+.Woody {
+    background-color: rgb(77, 62, 31);
+    color: #ddd;
+}
+
+.Oriental {
+    background-color: rgb(218, 120, 120);
+}
+
+.Citrus {
+    background-color: rgb(235, 241, 146);
+}
+.Oceanic {
+    background-color: rgb(71, 128, 175);
+    color: #ddd;
+}
+
+.Chypre {
+    background-color: rgb(7, 97, 37);
+    color: #ddd;
+}
+
+.Spicy {
+    background-color: rgb(184, 120, 25);
+}
+
+.Green {
+    background-color: rgb(11, 250, 11);
+}
+
+.Floral {
+    background-color: rgb(226, 171, 197);
+}
+
+.Leather {
+    background-color: rgb(114, 86, 69);
+    color: #ddd;
+}
+
+.Balsamic {
+    background-color: rgb(174, 144, 231);
+}
+
+.Gourmand {
+    background-color: rgb(218, 82, 82);
+}
+
+.Fougère {
+    background-color: rgb(122, 151, 95);
 }
