@@ -19,6 +19,6 @@
         {% endif %}
     </div>
     <div class="col-4">
-        <img class="float-right avatar-perfume" src="{{ url_for('static', filename='images/avatars/' + item['profilePicture']) }}" onerror="if (this.src != '../static/images/avatars/default.png') this.src = '../static/images/avatars/default.png';" loading="lazy" alt="Avatar">
+        <img class="float-right avatar-perfume" src="{{ item['profilePicture'] }}" onerror="if (this.src != '../static/images/avatars/default.png') this.src = '../static/images/avatars/default.png';" loading="lazy" alt="Avatar">
     </div>
 {% endfor %}
