@@ -520,6 +520,10 @@ def delete_type(id):
 @login_required
 def edit_type(id):
     form = EditTypeForm()
+    current_type_name = mongo.db.types.find_one(
+        {"_id": ObjectId(id)}, {"_id": 0, "type_name": 1}
+    )
+    form.origin_type_name.data = current_type_name["type_name"]
     type = mongo.db.types.find_one({"_id": ObjectId(id)})
     if current_user.is_admin:
         if form.validate_on_submit():
@@ -578,7 +582,9 @@ def edit_review():
 @app.route("/search")
 def search():
     types = mongo.db.types.find().sort("type_name")
-    mongo.db.perfumes.create_index([("name", "text"), ("brand", "text"), ("perfume_type", "text")])
+    mongo.db.perfumes.create_index(
+        [("name", "text"), ("brand", "text"), ("perfume_type", "text")]
+    )
     db_query = request.args["db_query"]
     if db_query == "":
         return redirect(url_for("perfumes"))
@@ -614,7 +620,12 @@ def search():
                 {"$sort": {"perfumeName": 1}},
             ]
         )
-        return render_template("pages/perfumes.html", perfumes=results, types=types, title="Perfumes")
+        return render_template(
+            "pages/perfumes.html",
+            perfumes=results,
+            types=types,
+            title="Perfumes",
+        )
 
 
 @app.route("/filter")
@@ -656,4 +667,9 @@ def filter():
                 {"$sort": {"perfumeName": 1}},
             ]
         )
-        return render_template("pages/perfumes.html", perfumes=results, types=types, title="Perfumes")
+        return render_template(
+            "pages/perfumes.html",
+            perfumes=results,
+            types=types,
+            title="Perfumes",
+        )

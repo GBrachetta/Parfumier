@@ -15,6 +15,7 @@ from wtforms import (
     BooleanField,
     TextAreaField,
     SelectField,
+    HiddenField,
 )
 from flask_login import current_user
 from app import mongo
@@ -180,10 +181,16 @@ class CreateTypeForm(FlaskForm):
 
 
 class EditTypeForm(FlaskForm):
+    origin_type_name = HiddenField()
     type_name = StringField("Type", validators=[DataRequired()])
     description = TextAreaField("Description")
     submit = SubmitField("Update")
-    # ! FIX VALIDATOR
+    # https://stackoverflow.com/questions/61896450/check-duplication-when-edit-an-exist-database-field-with-wtforms-custom-validato
+
+    def validate_type_name(self, type_name):
+        typeName = mongo.db.types.find_one({"type_name": type_name.data})
+        if typeName and type_name.data != self.origin_type_name.data:
+            raise ValidationError("The type already exists")
 
 
 class AddReviewForm(FlaskForm):
