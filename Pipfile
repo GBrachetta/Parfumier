@@ -22,6 +22,7 @@ dnspython = "*"
 flask-wtf = "*"
 python-dotenv = "*"
 pillow = "*"
+cloudinary = "*"
 
 [requires]
 python_version = "3.7"
