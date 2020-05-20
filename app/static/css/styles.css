@@ -179,3 +179,8 @@ h6 {
 .Fougère {
     background-color: rgb(122, 151, 95);
 }
+
+.Amber {
+    background-color: rgb(207, 100, 0);
+    color: #ddd;
+}
