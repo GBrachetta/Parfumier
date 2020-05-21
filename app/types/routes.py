@@ -29,7 +29,7 @@ def new_type():
     return render_template("pages/new_type.html", title="New Type", form=form)
 
 
-@types.route("/all_types")
+@types.route("/types")
 def all_types():
     types = mongo.db.types.find().sort("type_name")
     return render_template("pages/types.html", types=types)
