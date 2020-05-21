@@ -1,57 +1,11 @@
 import os
-import secrets
-from app import app, mongo
-from PIL import Image
+from app import mongo
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import ssl
 import smtplib
 from app.models import User
 from flask import url_for
-
-
-def save_avatar(form_picture):
-    """Saves avatar to file system
-
-    Keyword arguments:
-    argument -- description
-    Return: returns a file to the file system with dimensions reduced
-            as defined in the output size.
-    """
-
-    random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.filename)
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join(
-        app.root_path, "static/images/avatars", picture_fn
-    )
-    output_size = (125, 125)
-    i = Image.open(form_picture)
-    i.thumbnail(output_size)
-    i.save(picture_path)
-    return picture_fn
-
-
-def save_picture(form_picture):
-    """Saves picture to file system
-
-    Keyword arguments:
-    argument -- description
-    Return: returns a file to the file system with dimensions reduced
-            as defined in the output size.
-    """
-
-    random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.filename)
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join(
-        app.root_path, "static/images/perfume_pics", picture_fn
-    )
-    output_size = (300, 300)
-    i = Image.open(form_picture)
-    i.thumbnail(output_size)
-    i.save(picture_path)
-    return picture_fn
 
 
 def send_reset_email(user):
