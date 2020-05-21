@@ -13,11 +13,11 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
                 {% if current_user.is_authenticated %}
-                <a class="nav-item nav-link" href="{{ url_for('usersBP.account') }}">Account</a>
-                <a class="nav-item nav-link" href="{{ url_for('usersBP.logout') }}">Logout</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
                 {% else %}
-                <a class="nav-item nav-link" href="{{ url_for('usersBP.login') }}">Login</a>
-                <a class="nav-item nav-link" href="{{ url_for('usersBP.register') }}">Register</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.login') }}">Login</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.register') }}">Register</a>
                 {% endif %}
             </div>
         </div>

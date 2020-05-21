@@ -5,14 +5,14 @@ from cloudinary.uploader import upload
 from cloudinary.utils import cloudinary_url
 from app import mongo
 from app.models import User
-from app.usersBP.forms import (
+from app.users.forms import (
     LoginForm,
     RegistrationForm,
     UpdateAccountForm,
     RequestResetForm,
     ResetPasswordForm,
 )
-from app.usersBP.utils import send_reset_email
+from app.users.utils import send_reset_email
 import logging
 
 # LOGGING
@@ -24,10 +24,10 @@ logging.basicConfig(
     datefmt="%Y-%m-%d %H:%M:%S",
 )
 
-usersBP = Blueprint("usersBP", __name__)
+users = Blueprint("users", __name__)
 
 
-@usersBP.route("/login", methods=["POST", "GET"])
+@users.route("/login", methods=["POST", "GET"])
 def login():
     """
     DESCRIPTION
@@ -60,7 +60,7 @@ def login():
     return render_template("pages/login.html", title="Login", form=form)
 
 
-@usersBP.route("/register", methods=["POST", "GET"])
+@users.route("/register", methods=["POST", "GET"])
 def register():
     """
     DESCRIPTION
@@ -97,11 +97,11 @@ def register():
             f"Account created for {form.username.data}. You are now logged in.",
             "info",
         )
-        return redirect(url_for("usersBP.login"))
+        return redirect(url_for("users.login"))
     return render_template("pages/register.html", title="Register", form=form)
 
 
-@usersBP.route("/account", methods=["POST", "GET"])
+@users.route("/account", methods=["POST", "GET"])
 @login_required
 def account():
     """
@@ -161,7 +161,7 @@ def account():
     )
 
 
-@usersBP.route("/logout")
+@users.route("/logout")
 @login_required
 def logout():
     """
@@ -172,7 +172,7 @@ def logout():
     return redirect(url_for("perfumesBP.perfumes"))
 
 
-@usersBP.route("/reset_password", methods=["GET", "POST"])
+@users.route("/reset_password", methods=["GET", "POST"])
 def reset_request():
     """
     DESCRIPTION
@@ -184,13 +184,13 @@ def reset_request():
         user = mongo.db.users.find_one({"email": form.email.data})
         send_reset_email(user)
         flash("An email has been sent to reset your password", "success")
-        return redirect(url_for("usersBP.login"))
+        return redirect(url_for("users.login"))
     return render_template(
         "pages/reset_request.html", title="Reset Password", form=form
     )
 
 
-@usersBP.route("/reset_password/<token>", methods=["GET", "POST"])
+@users.route("/reset_password/<token>", methods=["GET", "POST"])
 def reset_token(token):
     """
     DESCRIPTION
@@ -200,7 +200,7 @@ def reset_token(token):
     user = User.verify_reset_token(token)
     if user is None:
         flash("That is an invalid or expired token", "warning")
-        return redirect(url_for("usersBP.reset_request"))
+        return redirect(url_for("users.reset_request"))
     form = ResetPasswordForm()
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data)
@@ -219,13 +219,13 @@ def reset_token(token):
         )
         login_user(user_obj)
         flash("Your password has been updated. You are now logged in.", "info")
-        return redirect(url_for("usersBP.login"))
+        return redirect(url_for("users.login"))
     return render_template(
         "pages/reset_token.html", title="Reset Password", form=form
     )
 
 
-@usersBP.route("/delete_user", methods=["GET", "POST"])
+@users.route("/delete_user", methods=["GET", "POST"])
 @login_required
 def delete_user():
     """
