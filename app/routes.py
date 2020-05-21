@@ -406,7 +406,7 @@ def perfume(id):
     )
 
 
-@app.route("/perfume/<id>", methods=["POST"])
+@app.route("/perfume/<id>/delete", methods=["POST", "GET"])
 @login_required
 def delete_perfume(id):
     if current_user.is_admin:
@@ -702,3 +702,23 @@ def filter():
             types=types,
             title="Perfumes",
         )
+
+
+@app.errorhandler(404)
+def error_404(error):
+    return render_template("errors/404.html", title="Page not found"), 404
+
+
+@app.errorhandler(403)
+def error_403(error):
+    return render_template("errors/403.html", title="Page not found"), 403
+
+
+@app.errorhandler(500)
+def error_500(error):
+    return render_template("errors/500.html", title="Page not found"), 500
+
+
+@app.errorhandler(405)
+def error_405(error):
+    return render_template("errors/405.html", title="Page not found"), 405
