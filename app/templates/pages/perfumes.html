@@ -15,4 +15,15 @@
 </div>
 <!-- Perfume card -->
 {% include "components/perfume-card.html" %}
+<!-- Pagination -->
+<ul class="pagination">
+    {% for page_number in total_pages %} 
+    {% if page_number == page %}
+    <li class="active"><a>{{ page_number }}</a></li>
+    {% else %}
+    <li class=""><a href="{{ url_for('perfumes', page=page_number) }}">{{ page_number }}</a></li>
+    {% endif %} 
+    {% endfor %}
+</ul>
+
 {% endblock content %}

@@ -23,6 +23,7 @@ from datetime import datetime
 from bson.objectid import ObjectId
 from cloudinary.uploader import upload
 from cloudinary.utils import cloudinary_url
+import math
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -131,7 +132,7 @@ def account():
     if form.validate_on_submit():
         if form.avatar.data:
             avatar_uploaded = upload(form.avatar.data)
-            # Options is a necessary parameter from Cloudinary in order to save 
+            # Options is a necessary parameter from Cloudinary in order to save
             # the thumbnails with the given settings.
             avatar, options = cloudinary_url(
                 avatar_uploaded["public_id"],
@@ -261,6 +262,11 @@ def perfumes():
     Return: return_description
     """
     types = mongo.db.types.find().sort("type_name")
+    # Pagination
+    page_count = 8
+    page = int(request.args.get("page", 1))
+    total_perfumes = mongo.db.perfumes.count()
+    total_pages = range(1, int(math.ceil(total_perfumes / page_count)) + 1)
     cur = mongo.db.perfumes.aggregate(
         [
             {
@@ -289,10 +295,17 @@ def perfumes():
                 }
             },
             {"$sort": {"perfumeName": 1}},
+            {"$skip": (page - 1) * page_count},
+            {"$limit": page_count},
         ]
     )
     return render_template(
-        "pages/perfumes.html", title="Perfumes", perfumes=cur, types=types
+        "pages/perfumes.html",
+        title="Perfumes",
+        perfumes=cur,
+        types=types,
+        page=page,
+        total_pages=total_pages,
     )
 
 
