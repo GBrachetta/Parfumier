@@ -189,3 +189,24 @@ h6 {
     background-color: rgb(216, 35, 240);
     color: #ddd;
 }
+
+.pagination {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.pagination li{
+    padding: 10px 20px;
+}
+
+.pagination li:hover{
+    text-decoration: none;
+    background-color: rgb(216, 216, 216);
+}
+
+.pagination li.active {
+    background-color: #830e0e;
+    color: #ddd;
+}
