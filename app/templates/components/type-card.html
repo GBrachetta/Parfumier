@@ -3,7 +3,7 @@
         {% for type in types %}
             <div class="card col-12 mb-1">
                 <div class="card-body">
-                    <a href="{{ url_for('type', id=type._id) }}">
+                    <a href="{{ url_for('typesBP.type', id=type._id) }}">
                         <h5 class="card-title"><span class="lead text-primary font-weight-bold">{{ type.type_name }}</span></h5>
                         <hr>
                     </a>

@@ -10,7 +10,7 @@
                 <div class="card-body text-center py-2">
                     <small class="d-none d-sm-block text-muted">{{ perfume['perfumeBrand'] }}</small>
                     <h2 class="card-title">{{ perfume['perfumeName'] }}</h2>
-                    <a href="{{ url_for('perfume', id=perfume._id) }}">
+                    <a href="{{ url_for('perfumesBP.perfume', id=perfume._id) }}">
                         <p class="mb-0 view-more">VIEW MORE</p>
                     </a>
                 </div>

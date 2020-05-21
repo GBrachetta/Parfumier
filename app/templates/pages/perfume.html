@@ -7,7 +7,7 @@
             <h1>Perfumes</h1>
         </div>
         <div class="col-3">
-            <a href="{{ url_for('perfumes') }}" class="btn btn-primary float-right" type="button">Back to all
+            <a href="{{ url_for('perfumesBP.perfumes') }}" class="btn btn-primary float-right" type="button">Back to all
                 perfumes</a>
         </div>
     </div>
@@ -18,7 +18,7 @@
         </a>
     </h5>
     <div class="card-body">
-        <h4>Name: <a href="{{ url_for('perfume', id=perfume._id) }}"> {{ perfume.name }}</a></h4>
+        <h4>Name: <a href="{{ url_for('perfumesBP.perfume', id=perfume._id) }}"> {{ perfume.name }}</a></h4>
         <h5>A perfume by <span class="lead text-primary font-weight-bold">{{ perfume.brand }}</span></h5>
         <p>Type: {{ perfume.perfume_type }}</p>
     </div>

@@ -6,7 +6,7 @@
             <h1>Types of Perfumes: {{ type.type_name }}</h1>
         </div>
         <div class="col-3">
-            <a href="{{ url_for('types') }}" class="btn btn-primary float-right" type="button">Back to all types</a>
+            <a href="{{ url_for('typesBP.types') }}" class="btn btn-primary float-right" type="button">Back to all types</a>
         </div>
     </div>
 </div>
@@ -22,11 +22,11 @@
                 <hr />
                 {% if current_user.is_authenticated and current_user.is_admin == True and
                 current_user.username == type.author %}
-                    <a href="{{ url_for('edit_type', id=type._id) }}" class="btn btn-primary btn-sm" disabled>Edit</a>
+                    <a href="{{ url_for('typesBP.edit_type', id=type._id) }}" class="btn btn-primary btn-sm" disabled>Edit</a>
                     <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteTypeModal">
                     Delete </button>
                 {% elif current_user.is_authenticated and current_user.is_admin == True %}
-                    <a href="{{ url_for('edit_type', id=type._id) }}" class="btn btn-primary btn-sm" disabled>Edit</a>
+                    <a href="{{ url_for('typesBP.edit_type', id=type._id) }}" class="btn btn-primary btn-sm" disabled>Edit</a>
                     <button disabled type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteTypeModal">
                     Delete </button>
                     <span class="small ml-2">Only the author can delete this type. You can still edit it.</span>

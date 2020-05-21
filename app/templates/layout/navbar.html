@@ -6,18 +6,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-                <a class="nav-item nav-link" href="{{ url_for('index') }}">About</a>
-                <a class="nav-item nav-link" href="{{ url_for('perfumes') }}">Perfumes</a>
-                <a class="nav-item nav-link" href="{{ url_for('types') }}">Types</a>
+                <a class="nav-item nav-link" href="{{ url_for('mainBP.index') }}">About</a>
+                <a class="nav-item nav-link" href="{{ url_for('perfumesBP.perfumes') }}">Perfumes</a>
+                <a class="nav-item nav-link" href="{{ url_for('typesBP.types') }}">Types</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
                 {% if current_user.is_authenticated %}
-                <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
-                <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+                <a class="nav-item nav-link" href="{{ url_for('usersBP.account') }}">Account</a>
+                <a class="nav-item nav-link" href="{{ url_for('usersBP.logout') }}">Logout</a>
                 {% else %}
-                <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-                <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+                <a class="nav-item nav-link" href="{{ url_for('usersBP.login') }}">Login</a>
+                <a class="nav-item nav-link" href="{{ url_for('usersBP.register') }}">Register</a>
                 {% endif %}
             </div>
         </div>
