@@ -21,13 +21,13 @@ to prevent circular imports.
 from app import models
 
 from app.users.routes import users
-from app.perfumesBP.routes import perfumesBP
+from app.perfumes.routes import perfumes
 from app.types.routes import types
 from app.reviews.routes import reviews
 from app.main.routes import main
 
 app.register_blueprint(users)
-app.register_blueprint(perfumesBP)
+app.register_blueprint(perfumes)
 app.register_blueprint(types)
 app.register_blueprint(reviews)
 app.register_blueprint(main)

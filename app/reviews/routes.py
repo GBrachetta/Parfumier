@@ -31,8 +31,8 @@ def review_perfume(id):
             },
         )
         flash("Your review has been received", "success")
-        return redirect(url_for("perfumesBP.perfume", id=perfume["_id"]))
-    return redirect(url_for("perfumesBP.perfume", id=perfume["_id"]))
+        return redirect(url_for("perfumes.perfume", id=perfume["_id"]))
+    return redirect(url_for("perfumes.perfume", id=perfume["_id"]))
 
 
 @reviews.route("/perfume/review", methods=["POST"])
@@ -45,7 +45,7 @@ def delete_review():
         {"$pull": {"reviews": {"_id": ObjectId(review_id)}}},
     )
     flash("Your review has been deleted!", "success")
-    return redirect(url_for("perfumesBP.perfume", id=perfume_id))
+    return redirect(url_for("perfumes.perfume", id=perfume_id))
 
 
 @reviews.route("/review", methods=["GET", "POST"])
@@ -66,7 +66,7 @@ def edit_review():
             },
         )
         flash("Your review has been updated!", "success")
-        return redirect(url_for("perfumesBP.perfume", id=perfume_id))
+        return redirect(url_for("perfumes.perfume", id=perfume_id))
     elif request.method == "GET":
         form.review.data = review[{"_id": ObjectId(review_id)}]
-    return redirect(url_for("perfumesBP.perfume", id=perfume_id))
+    return redirect(url_for("perfumes.perfume", id=perfume_id))

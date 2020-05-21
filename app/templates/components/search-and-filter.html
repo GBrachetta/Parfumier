@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-md-6 text-center">
-        <form action="{{ url_for("perfumesBP.filter") }}" class="search-form">
+        <form action="{{ url_for("perfumes.filter") }}" class="search-form">
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Filter by Type</label>
                 <select class="form-control" id="filter_query" name="filter_query">
@@ -14,12 +14,12 @@
         </form>
     </div>
     <div class="col-md-6 text-center">
-        <form action="{{ url_for('perfumesBP.search') }}" class="search-form">
+        <form action="{{ url_for('perfumes.search') }}" class="search-form">
             <label for="">Search a Perfume or Brand</label>
             <div class="input-grou mb-3">
                 <input type="text" class="form-control" id="db_query" name="db_query" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Search for a Perfume or Brand"><br>
                 <button class="btn btn-primary btn-sm ml-3" type="submit" name="Search">SEARCH</button>
-                <a href="{{ url_for('perfumesBP.perfumes') }}" class="btn btn-sm btn-warning ml-3" type="submit" name="Search">CANCEL</a>
+                <a href="{{ url_for('perfumes.all_perfumes') }}" class="btn btn-sm btn-warning ml-3" type="submit" name="Search">CANCEL</a>
             </div>
         </form>
     </div>

@@ -13,7 +13,7 @@
                 <p><strong>This action cannot be undone.</strong></p>
             </div>
             <div class="modal-footer">
-                <form action="{{ url_for('perfumesBP.delete_perfume', id=perfume._id) }}" method="POST">
+                <form action="{{ url_for('perfumes.delete_perfume', id=perfume._id) }}" method="POST">
                     <input type="submit" , class="btn btn-danger" value="Delete">
                 </form>
             </div>

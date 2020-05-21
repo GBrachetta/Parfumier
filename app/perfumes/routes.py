@@ -4,7 +4,7 @@ from cloudinary.uploader import upload
 from cloudinary.utils import cloudinary_url
 from datetime import datetime
 from bson.objectid import ObjectId
-from app.perfumesBP.forms import CreatePerfumeForm, EditPerfumeForm
+from app.perfumes.forms import CreatePerfumeForm, EditPerfumeForm
 from app.reviews.forms import AddReviewForm
 from app import mongo
 import math
@@ -18,11 +18,11 @@ logging.basicConfig(
     datefmt="%Y-%m-%d %H:%M:%S",
 )
 
-perfumesBP = Blueprint("perfumesBP", __name__)
+perfumes = Blueprint("perfumes", __name__)
 
 
-@perfumesBP.route("/perfumes")
-def perfumes():
+@perfumes.route("/perfumes")
+def all_perfumes():
     """sumary_line
     With a solution found on my question on Stack Overflow:
     https://stackoverflow.com/questions/61732985/inner-join-like-with-mongodb-in-flask-jinja
@@ -78,7 +78,7 @@ def perfumes():
     )
 
 
-@perfumesBP.route("/perfume/new", methods=["GET", "POST"])
+@perfumes.route("/perfume/new", methods=["GET", "POST"])
 @login_required
 def new_perfume():
     if current_user.is_admin:
@@ -120,7 +120,7 @@ def new_perfume():
                 )
 
             flash("You added a new perfume!", "info")
-            return redirect(url_for("perfumesBP.perfumes"))
+            return redirect(url_for("perfumes.all_perfumes"))
     else:
         flash("You need to be an administrator to enter data.", "danger")
         return redirect(url_for("main.index"))
@@ -132,7 +132,7 @@ def new_perfume():
     )
 
 
-@perfumesBP.route("/perfume/<id>", methods=["GET"])
+@perfumes.route("/perfume/<id>", methods=["GET"])
 def perfume(id):
     perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
     form = AddReviewForm()
@@ -175,18 +175,18 @@ def perfume(id):
     )
 
 
-@perfumesBP.route("/perfume/<id>/delete", methods=["POST", "GET"])
+@perfumes.route("/perfume/<id>/delete", methods=["POST", "GET"])
 @login_required
 def delete_perfume(id):
     if current_user.is_admin:
         mongo.db.perfumes.delete_one({"_id": ObjectId(id)})
         flash("You deleted this perfume", "success")
-        return redirect(url_for("perfumesBP.perfumes"))
+        return redirect(url_for("perfumes.all_perfumes"))
     flash("Not allowed", "warning")
-    return redirect(url_for("perfumesBP.perfumes"))
+    return redirect(url_for("perfumes.all_perfumes"))
 
 
-@perfumesBP.route("/perfume/edit/<id>", methods=["POST", "GET"])
+@perfumes.route("/perfume/edit/<id>", methods=["POST", "GET"])
 @login_required
 def edit_perfume(id):
     form = EditPerfumeForm()
@@ -215,7 +215,7 @@ def edit_perfume(id):
                 }
                 mongo.db.perfumes.update_one(perfume, new_value)
                 flash("You updated the perfume", "info")
-                return redirect(url_for("perfumesBP.perfume", id=perfume["_id"]))
+                return redirect(url_for("perfumes.perfume", id=perfume["_id"]))
             else:
                 new_value = {
                     "$set": {
@@ -229,7 +229,7 @@ def edit_perfume(id):
                 }
                 mongo.db.perfumes.update_one(perfume, new_value)
                 flash("You updated the perfume", "info")
-                return redirect(url_for("perfumesBP.perfume", id=perfume["_id"]))
+                return redirect(url_for("perfumes.perfume", id=perfume["_id"]))
         elif request.method == "GET":
             form.brand.data = perfume["brand"]
             form.name.data = perfume["name"]
@@ -244,7 +244,7 @@ def edit_perfume(id):
     )
 
 
-@perfumesBP.route("/search")
+@perfumes.route("/search")
 def search():
     types = mongo.db.types.find().sort("type_name")
     mongo.db.perfumes.create_index(
@@ -252,7 +252,7 @@ def search():
     )
     db_query = request.args["db_query"]
     if db_query == "":
-        return redirect(url_for("perfumesBP.perfumes"))
+        return redirect(url_for("perfumes.all_perfumes"))
     else:
         results = mongo.db.perfumes.aggregate(
             [
@@ -293,13 +293,13 @@ def search():
         )
 
 
-@perfumesBP.route("/filter")
+@perfumes.route("/filter")
 def filter():
     types = mongo.db.types.find().sort("type_name")
     mongo.db.types.create_index([("type_name", "text")])
     filter_query = request.args["filter_query"]
     if filter_query == "":
-        return redirect(url_for("perfumesBP.perfumes"))
+        return redirect(url_for("perfumes.all_perfumes"))
     else:
         results = mongo.db.perfumes.aggregate(
             [

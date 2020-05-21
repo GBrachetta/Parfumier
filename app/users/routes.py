@@ -53,7 +53,7 @@ def login():
             return (
                 redirect(next_page)
                 if next_page
-                else redirect(url_for("perfumesBP.perfumes"))
+                else redirect(url_for("perfumes.all_perfumes"))
             )
         else:
             flash("Please check your credentials", "warning")
@@ -169,7 +169,7 @@ def logout():
     """
     logout_user()
     flash("We hope to see you back soon again!", "warning")
-    return redirect(url_for("perfumesBP.perfumes"))
+    return redirect(url_for("perfumes.all_perfumes"))
 
 
 @users.route("/reset_password", methods=["GET", "POST"])
