@@ -3,13 +3,13 @@ from flask_login import login_required, current_user
 from bson.objectid import ObjectId
 from datetime import datetime
 from app import mongo
-from app.reviewsBP.forms import AddReviewForm, EditReviewForm
+from app.reviews.forms import AddReviewForm, EditReviewForm
 
 
-reviewsBP = Blueprint("reviewsBP", __name__)
+reviews = Blueprint("reviews", __name__)
 
 
-@reviewsBP.route("/perfume/review/<id>", methods=["POST"])
+@reviews.route("/perfume/review/<id>", methods=["POST"])
 @login_required
 def review_perfume(id):
     form = AddReviewForm()
@@ -35,7 +35,7 @@ def review_perfume(id):
     return redirect(url_for("perfumesBP.perfume", id=perfume["_id"]))
 
 
-@reviewsBP.route("/perfume/review", methods=["POST"])
+@reviews.route("/perfume/review", methods=["POST"])
 @login_required
 def delete_review():
     review_id = request.form.get("review_id")
@@ -48,7 +48,7 @@ def delete_review():
     return redirect(url_for("perfumesBP.perfume", id=perfume_id))
 
 
-@reviewsBP.route("/review", methods=["GET", "POST"])
+@reviews.route("/review", methods=["GET", "POST"])
 @login_required
 def edit_review():
     form = EditReviewForm()

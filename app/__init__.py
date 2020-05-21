@@ -23,11 +23,11 @@ from app import models
 from app.users.routes import users
 from app.perfumesBP.routes import perfumesBP
 from app.typesBP.routes import typesBP
-from app.reviewsBP.routes import reviewsBP
+from app.reviews.routes import reviews
 from app.main.routes import main
 
 app.register_blueprint(users)
 app.register_blueprint(perfumesBP)
 app.register_blueprint(typesBP)
-app.register_blueprint(reviewsBP)
+app.register_blueprint(reviews)
 app.register_blueprint(main)

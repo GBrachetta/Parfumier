@@ -5,7 +5,7 @@ from cloudinary.utils import cloudinary_url
 from datetime import datetime
 from bson.objectid import ObjectId
 from app.perfumesBP.forms import CreatePerfumeForm, EditPerfumeForm
-from app.reviewsBP.forms import AddReviewForm
+from app.reviews.forms import AddReviewForm
 from app import mongo
 import math
 import logging
