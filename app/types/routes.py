@@ -2,13 +2,13 @@ from flask import Blueprint, redirect, url_for, render_template, flash, request
 from flask_login import current_user, login_required
 from bson.objectid import ObjectId
 from app import mongo
-from app.typesBP.forms import CreateTypeForm, EditTypeForm
+from app.types.forms import CreateTypeForm, EditTypeForm
 
 
-typesBP = Blueprint("typesBP", __name__)
+types = Blueprint("types", __name__)
 
 
-@typesBP.route("/type/new", methods=["POST", "GET"])
+@types.route("/type/new", methods=["POST", "GET"])
 @login_required
 def new_type():
     if current_user.is_admin:
@@ -22,37 +22,37 @@ def new_type():
                 }
             )
             flash("You added a new type!", "info")
-            return redirect(url_for("typesBP.types"))
+            return redirect(url_for("types.all_types"))
     else:
         flash("You need to be an administrator.", "danger")
         return redirect(url_for("main.index"))
     return render_template("pages/new_type.html", title="New Type", form=form)
 
 
-@typesBP.route("/types")
-def types():
+@types.route("/all_types")
+def all_types():
     types = mongo.db.types.find().sort("type_name")
     return render_template("pages/types.html", types=types)
 
 
-@typesBP.route("/type/<id>")
+@types.route("/type/<id>")
 def type(id):
     type = mongo.db.types.find_one({"_id": ObjectId(id)})
     return render_template("pages/type.html", type=type)
 
 
-@typesBP.route("/type/<id>", methods=["POST"])
+@types.route("/type/<id>", methods=["POST"])
 @login_required
 def delete_type(id):
     if current_user.is_admin:
         mongo.db.types.delete_one({"_id": ObjectId(id)})
         flash("You deleted this type", "success")
-        return redirect(url_for("typesBP.types"))
+        return redirect(url_for("types.all_types"))
     flash("Not allowed", "warning")
-    return redirect(url_for("typesBP.types"))
+    return redirect(url_for("types.all_types"))
 
 
-@typesBP.route("/type/edit/<id>", methods=["POST", "GET"])
+@types.route("/type/edit/<id>", methods=["POST", "GET"])
 @login_required
 def edit_type(id):
     form = EditTypeForm()
@@ -71,7 +71,7 @@ def edit_type(id):
             }
             mongo.db.types.update_one(type, new_value)
             flash("Type has been updated", "info")
-            return redirect(url_for("typesBP.type", id=type["_id"]))
+            return redirect(url_for("types.type", id=type["_id"]))
         elif request.method == "GET":
             form.type_name.data = type["type_name"]
             form.description.data = type["description"]

@@ -8,7 +8,7 @@
         </div>
         <div class="col-3">
             {% if current_user.is_authenticated and current_user.is_admin == True %}
-            <a href="{{ url_for('typesBP.new_type') }}" class="btn btn-primary float-right" type="button">Add new type</a>
+            <a href="{{ url_for('types.new_type') }}" class="btn btn-primary float-right" type="button">Add new type</a>
             {% endif %}
         </div>
     </div>
