@@ -25,7 +25,7 @@ def new_type():
             return redirect(url_for("typesBP.types"))
     else:
         flash("You need to be an administrator.", "danger")
-        return redirect(url_for("mainBP.index"))
+        return redirect(url_for("main.index"))
     return render_template("pages/new_type.html", title="New Type", form=form)
 
 

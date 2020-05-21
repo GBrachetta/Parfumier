@@ -123,7 +123,7 @@ def new_perfume():
             return redirect(url_for("perfumesBP.perfumes"))
     else:
         flash("You need to be an administrator to enter data.", "danger")
-        return redirect(url_for("mainBP.index"))
+        return redirect(url_for("main.index"))
     return render_template(
         "pages/new_perfume.html",
         title="New Perfume",

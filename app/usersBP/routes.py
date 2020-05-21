@@ -33,7 +33,7 @@ def login():
     DESCRIPTION
     """
     if current_user.is_authenticated:
-        return redirect(url_for("mainBP.index"))
+        return redirect(url_for("main.index"))
     form = LoginForm()
     if form.validate_on_submit():
         user = mongo.db.users.find_one({"email": form.email.data})
@@ -66,7 +66,7 @@ def register():
     DESCRIPTION
     """
     if current_user.is_authenticated:
-        return redirect(url_for("mainBP.index"))
+        return redirect(url_for("main.index"))
     form = RegistrationForm()
     users = mongo.db.users
     if form.validate_on_submit():
@@ -148,7 +148,7 @@ def account():
         )
         login_user(user_obj)
         flash("You have updated your information", "info")
-        return redirect(url_for("mainBP.index"))
+        return redirect(url_for("main.index"))
     elif request.method == "GET":
         form.username.data = current_user.username
         form.first_name.data = current_user.first_name
@@ -178,7 +178,7 @@ def reset_request():
     DESCRIPTION
     """
     if current_user.is_authenticated:
-        return redirect(url_for("mainBP.index"))
+        return redirect(url_for("main.index"))
     form = RequestResetForm()
     if form.validate_on_submit():
         user = mongo.db.users.find_one({"email": form.email.data})
@@ -196,7 +196,7 @@ def reset_token(token):
     DESCRIPTION
     """
     if current_user.is_authenticated:
-        return redirect(url_for("mainBP.index"))
+        return redirect(url_for("main.index"))
     user = User.verify_reset_token(token)
     if user is None:
         flash("That is an invalid or expired token", "warning")
@@ -234,4 +234,4 @@ def delete_user():
     mongo.db.users.remove({"username": current_user.username})
     logout_user()
     flash("You have deleted your account", "success")
-    return redirect(url_for("mainBP.index"))
+    return redirect(url_for("main.index"))

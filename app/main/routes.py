@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template
 
-mainBP = Blueprint("mainBP", __name__)
+main = Blueprint("main", __name__)
 
 
-@mainBP.route("/")
+@main.route("/")
 def index():
     """
     DESCRIPTION
