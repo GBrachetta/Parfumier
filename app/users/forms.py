@@ -1,6 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, EqualTo, Email, Length, ValidationError
+from wtforms.validators import (
+    DataRequired,
+    EqualTo,
+    Email,
+    Length,
+    ValidationError,
+)
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from app import mongo
