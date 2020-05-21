@@ -1,16 +1,14 @@
 from flask import Flask
 from flask_login import LoginManager
 from flask_pymongo import PyMongo
-from config import Config
+from app.config import Config
 
 app = Flask(__name__)
-
 app.config.from_object(Config)
 login_manager = LoginManager(app)
 login_manager.login_view = "users.login"
 login_manager.login_message = "Please log in."
 login_manager.login_message_category = "info"
-app.config["MONGO_URI"] = Config.MONGO_URI
 mongo = PyMongo(app)
 
 """
@@ -19,7 +17,6 @@ to prevent circular imports.
 """
 
 from app import models
-
 from app.users.routes import users
 from app.perfumes.routes import perfumes
 from app.types.routes import types
