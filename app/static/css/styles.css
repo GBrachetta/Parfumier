@@ -197,9 +197,9 @@ h6 {
     font-size: 1.2rem;
 }
 
-.pagination li{
+/* .pagination li{
     padding: 10px 20px;
-}
+} */
 
 .pagination li:hover{
     text-decoration: none;
@@ -207,6 +207,6 @@ h6 {
 }
 
 .pagination li.active {
-    background-color: #830e0e;
+    /* background-color: #830e0e; */
     color: #ddd;
 }

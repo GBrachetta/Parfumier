@@ -7,8 +7,7 @@
         </div>
         <div class="col-3">
             {% if current_user.is_authenticated and current_user.is_admin == True %}
-                <a href="{{ url_for('new_perfume') }}" class="btn btn-primary float-right" type="button"
-                >Add new perfume</a>
+            <a href="{{ url_for('new_perfume') }}" class="btn btn-primary float-right" type="button">Add new perfume</a>
             {% endif %}
         </div>
     </div>
@@ -16,14 +15,18 @@
 <!-- Perfume card -->
 {% include "components/perfume-card.html" %}
 <!-- Pagination -->
-<ul class="pagination">
-    {% for page_number in total_pages %} 
+<div class="pagination">
+    {% for page_number in total_pages %}
+    {% if page_number %}
     {% if page_number == page %}
-    <li class="active"><a>{{ page_number }}</a></li>
+    <a class="btn btn-info mb-4" href="{{ page_number }}">{{ page_number }}</a>
     {% else %}
-    <li class=""><a href="{{ url_for('perfumes', page=page_number) }}">{{ page_number }}</a></li>
-    {% endif %} 
+    <a class="btn btn-outline-info mb-4" href="{{ url_for('perfumes', page=page_number) }}">{{ page_number }}</a>
+    {% endif %}
+    {% else %}
+    ...
+    {% endif %}
     {% endfor %}
-</ul>
+</div>
 
 {% endblock content %}
