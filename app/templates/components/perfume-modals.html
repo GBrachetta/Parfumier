@@ -13,7 +13,7 @@
                 <p><strong>This action cannot be undone.</strong></p>
             </div>
             <div class="modal-footer">
-                <form action="{{ url_for('delete_perfume', id=perfume._id) }}" method="POST">
+                <form action="{{ url_for('perfumes.delete_perfume', id=perfume._id) }}" method="POST">
                     <input type="submit" , class="btn btn-danger" value="Delete">
                 </form>
             </div>
@@ -31,7 +31,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method=POST action="{{ url_for('review_perfume', id=perfume._id) }}" id="form-review">
+                <form method=POST action="{{ url_for('reviews.review_perfume', id=perfume._id) }}" id="form-review">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
                         <div class="form-group">
@@ -72,7 +72,7 @@
                 <p><strong>This action cannot be undone.</strong></p>
             </div>
             <div class="modal-footer">
-                <form id="form-delete-review" action="{{ url_for('delete_review') }}" method="POST">
+                <form id="form-delete-review" action="{{ url_for('reviews.delete_review') }}" method="POST">
                     <input hidden name="review_id">
                     <input hidden name="perfume_id">
                     <input type="submit" class="btn btn-danger" value="Delete">
@@ -92,7 +92,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method=POST action="{{ url_for('edit_review') }}" id="form-edit-review">
+                <form method=POST action="{{ url_for('reviews.edit_review') }}" id="form-edit-review">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
                         <div class="form-group">

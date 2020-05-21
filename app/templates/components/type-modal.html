@@ -12,7 +12,7 @@
                 <p><strong>This action cannot be undone.</strong></p>
             </div>
             <div class="modal-footer">
-                <form action="{{ url_for('delete_type', id=type._id) }}" method="POST">
+                <form action="{{ url_for('types.delete_type', id=type._id) }}" method="POST">
                     <input type="submit" , class="btn btn-danger" value="Delete" />
                 </form>
             </div>

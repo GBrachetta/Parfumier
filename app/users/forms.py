@@ -1,33 +1,15 @@
-import logging
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import (
     DataRequired,
     EqualTo,
-    ValidationError,
     Email,
     Length,
+    ValidationError,
 )
-from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import (
-    StringField,
-    PasswordField,
-    SubmitField,
-    BooleanField,
-    TextAreaField,
-    SelectField,
-    HiddenField,
-)
 from flask_login import current_user
 from app import mongo
-
-# LOGGING
-logging.basicConfig(
-    level=logging.DEBUG,
-    filename="app.log",
-    filemode="w",
-    format="%(asctime)s %(name)s - %(filename)s :: %(lineno)d - %(levelname)s - %(message)s\n",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
 
 
 class RegistrationForm(FlaskForm):
@@ -144,66 +126,3 @@ class ResetPasswordForm(FlaskForm):
         "Confirm Password", validators=[DataRequired(), EqualTo("password")]
     )
     submit = SubmitField("Reset Password")
-
-
-class CreatePerfumeForm(FlaskForm):
-    brand = StringField("Brand", validators=[DataRequired()])
-    name = StringField("Name", validators=[DataRequired()])
-    description = TextAreaField("Description")
-    public = BooleanField("Public")
-    submit = SubmitField("Create")
-    picture = FileField("Picture", validators=[FileAllowed(["jpg", "png"])])
-    perfume_type = StringField("Type", validators=[DataRequired()])
-
-
-class EditPerfumeForm(FlaskForm):
-    brand = StringField("Brand", validators=[DataRequired()])
-    name = StringField("Name", validators=[DataRequired()])
-    description = TextAreaField("Description")
-    public = BooleanField("Public")
-    submit = SubmitField("Update")
-    picture = FileField("Picture", validators=[FileAllowed(["jpg", "png"])])
-    perfume_type = StringField("Type", validators=[DataRequired()])
-
-
-class CreateTypeForm(FlaskForm):
-    type_name = StringField("Type", validators=[DataRequired()])
-    description = TextAreaField("Description")
-    submit = SubmitField("Create")
-
-    def validate_type_name(self, type_name):
-        """
-        DESCRIPTION
-        """
-        typeName = mongo.db.types.find_one({"type_name": type_name.data})
-        if typeName:
-            raise ValidationError("The type already exists.")
-
-
-class EditTypeForm(FlaskForm):
-    origin_type_name = HiddenField()
-    type_name = StringField("Type", validators=[DataRequired()])
-    description = TextAreaField("Description")
-    submit = SubmitField("Update")
-    # https://stackoverflow.com/questions/61896450/check-duplication-when-edit-an-exist-database-field-with-wtforms-custom-validato
-
-    def validate_type_name(self, type_name):
-        typeName = mongo.db.types.find_one({"type_name": type_name.data})
-        if typeName and type_name.data != self.origin_type_name.data:
-            raise ValidationError("The type already exists")
-
-
-class AddReviewForm(FlaskForm):
-    review = TextAreaField("Review", validators=[DataRequired()])
-    submit = SubmitField("Post Review")
-
-
-class EditReviewForm(FlaskForm):
-    review = TextAreaField("Review", validators=[DataRequired()])
-    submit = SubmitField("Update Review")
-
-
-class SearchForm(FlaskForm):
-    choices = [("Brand", "Brand"), ("Perfume", "Perfume"), ("Type", "Type")]
-    select = SelectField("Search:", choices=choices)
-    search = StringField("")

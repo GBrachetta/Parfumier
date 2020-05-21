@@ -7,7 +7,7 @@
         </div>
         <div class="col-3">
             {% if current_user.is_authenticated and current_user.is_admin == True %}
-            <a href="{{ url_for('new_perfume') }}" class="btn btn-primary float-right" type="button">Add new perfume</a>
+            <a href="{{ url_for('perfumes.new_perfume') }}" class="btn btn-primary float-right" type="button">Add new perfume</a>
             {% endif %}
         </div>
     </div>
@@ -21,7 +21,7 @@
     {% if page_number == page %}
     <a class="btn btn-info mb-4" href="{{ page_number }}">{{ page_number }}</a>
     {% else %}
-    <a class="btn btn-outline-info mb-4" href="{{ url_for('perfumes', page=page_number) }}">{{ page_number }}</a>
+    <a class="btn btn-outline-info mb-4" href="{{ url_for('perfumes.all_perfumes', page=page_number) }}">{{ page_number }}</a>
     {% endif %}
     {% else %}
     ...

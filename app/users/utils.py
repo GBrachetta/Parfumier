@@ -38,7 +38,7 @@ def send_reset_email(user):
 
 To reset your password, please visit the following link:
 
-{url_for('reset_token', token=token, _external=True)}
+{url_for('users.reset_token', token=token, _external=True)}
 
 If you did not make this request then simply ignore this email and no changes will be made.
 
@@ -52,7 +52,7 @@ Parfumier
     <h3>Dear <strong>{receiver['username']}</strong>,</h3><br>
        <p>You have requested to reset your password for your account on Parfumier.<br>
        <p>To reset your password, please visit the following link:<br><br>
-       <a href="{url_for('reset_token', token=token, _external=True)}">Reset Password</a><br><br>
+       <a href="{url_for('users.reset_token', token=token, _external=True)}">Reset Password</a><br><br>
        If you did not make this request then simply ignore this email and no changes will be made.<br><br>
        Best Regards,<br>
        <em>Parfumier</em>
