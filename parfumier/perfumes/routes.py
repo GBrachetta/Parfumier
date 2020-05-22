@@ -132,9 +132,16 @@ def new_perfume():
     )
 
 
-@perfumes.route("/perfume/<id>", methods=["GET"])
-def perfume(id):
-    perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
+@perfumes.route("/perfume/<perfume_id>", methods=["GET"])
+def perfume(perfume_id):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
+    current_perfume = mongo.db.perfumes.find_one({"_id": ObjectId(perfume_id)})
     form = AddReviewForm()
     cur = mongo.db.perfumes.aggregate(
         [
@@ -163,14 +170,14 @@ def perfume(id):
                     "profilePicture": "$creator.avatar",
                 }
             },
-            {"$match": {"_id": ObjectId(id)}},
+            {"$match": {"_id": ObjectId(perfume_id)}},
         ]
     )
     return render_template(
         "pages/perfume.html",
         title="Perfumes",
         cursor=cur,
-        perfume=perfume,
+        perfume=current_perfume,
         form=form,
     )
 
@@ -193,11 +200,18 @@ def delete_perfume(perfume_id):
     return redirect(url_for("perfumes.all_perfumes"))
 
 
-@perfumes.route("/perfume/edit/<id>", methods=["POST", "GET"])
+@perfumes.route("/perfume/edit/<perfume_id>", methods=["POST", "GET"])
 @login_required
-def edit_perfume(id):
+def edit_perfume(perfume_id):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     form = EditPerfumeForm()
-    current_perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
+    current_perfume = mongo.db.perfumes.find_one({"_id": ObjectId(perfume_id)})
     if current_user.is_admin:
         if form.validate_on_submit():
             if form.picture.data:
@@ -224,7 +238,7 @@ def edit_perfume(id):
                 }
                 mongo.db.perfumes.update_one(current_perfume, new_value)
                 flash("You updated the perfume", "info")
-                return redirect(url_for("perfumes.perfume", id=current_perfume["_id"]))
+                return redirect(url_for("perfumes.perfume", perfume_id=current_perfume["_id"]))
             new_value = {
                 "$set": {
                     "brand": form.brand.data,
@@ -237,7 +251,7 @@ def edit_perfume(id):
             }
             mongo.db.perfumes.update_one(current_perfume, new_value)
             flash("You updated the perfume", "info")
-            return redirect(url_for("perfumes.perfume", id=current_perfume["_id"]))
+            return redirect(url_for("perfumes.perfume", perfume_id=current_perfume["_id"]))
         form.brand.data = current_perfume["brand"]
         form.name.data = current_perfume["name"]
         form.perfume_type.data = current_perfume["perfume_type"]
