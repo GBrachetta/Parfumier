@@ -1,7 +1,7 @@
+from datetime import datetime
 from flask import flash, redirect, Blueprint, url_for, request
 from flask_login import login_required, current_user
 from bson.objectid import ObjectId
-from datetime import datetime
 from parfumier import mongo
 from parfumier.reviews.forms import AddReviewForm, EditReviewForm
 

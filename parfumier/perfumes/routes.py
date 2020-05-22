@@ -1,13 +1,13 @@
+from datetime import datetime
+import math
 from flask import render_template, redirect, flash, url_for, request, Blueprint
 from flask_login import login_required, current_user
 from cloudinary.uploader import upload
 from cloudinary.utils import cloudinary_url
-from datetime import datetime
 from bson.objectid import ObjectId
 from parfumier.perfumes.forms import CreatePerfumeForm, EditPerfumeForm
 from parfumier.reviews.forms import AddReviewForm
 from parfumier import mongo
-import math
 
 perfumes = Blueprint("perfumes", __name__)
 
