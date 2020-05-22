@@ -1,3 +1,4 @@
+"""sumary_line"""
 from flask import Blueprint, redirect, url_for, render_template, flash, request
 from flask_login import current_user, login_required
 from bson.objectid import ObjectId
@@ -11,6 +12,13 @@ types = Blueprint("types", __name__)
 @types.route("/type/new", methods=["POST", "GET"])
 @login_required
 def new_type():
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     if current_user.is_admin:
         form = CreateTypeForm()
         if form.validate_on_submit():
@@ -31,14 +39,21 @@ def new_type():
 
 @types.route("/types")
 def all_types():
-    types = mongo.db.types.find().sort("type_name")
-    return render_template("pages/types.html", types=types)
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
+    the_types = mongo.db.types.find().sort("type_name")
+    return render_template("pages/types.html", types=the_types)
 
 
 @types.route("/type/<id>")
 def type(id):
-    type = mongo.db.types.find_one({"_id": ObjectId(id)})
-    return render_template("pages/type.html", type=type)
+    one_type = mongo.db.types.find_one({"_id": ObjectId(id)})
+    return render_template("pages/type.html", type=one_type)
 
 
 @types.route("/type/<id>", methods=["POST"])
