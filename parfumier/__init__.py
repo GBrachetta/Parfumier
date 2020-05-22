@@ -1,3 +1,4 @@
+"""sumary_line"""
 from flask import Flask
 from flask_login import LoginManager
 from flask_pymongo import PyMongo
@@ -12,6 +13,12 @@ mongo = PyMongo()
 
 
 def create_app(config_class=Config):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     app = Flask(__name__)
     app.config.from_object(Config)
     login_manager.init_app(app)
