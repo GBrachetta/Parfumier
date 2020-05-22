@@ -1,8 +1,7 @@
 import logging
 from werkzeug.security import check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from app import login_manager, mongo
-from flask import current_app
+from app import login_manager, mongo, app
 
 # LOGGING
 logging.basicConfig(
@@ -65,7 +64,7 @@ class User:
         """
         DESCRIPTION
         """
-        s = Serializer(current_app.config["SECRET_KEY"], expires_sec)
+        s = Serializer(app.config["SECRET_KEY"], expires_sec)
         return s.dumps({"email": self.email}).decode("utf-8")
 
     @staticmethod
@@ -73,7 +72,7 @@ class User:
         """
         DESCRIPTION
         """
-        s = Serializer(current_app.config["SECRET_KEY"])
+        s = Serializer(app.config["SECRET_KEY"])
         try:
             email = s.loads(token)["email"]
         except Exception:
