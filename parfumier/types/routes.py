@@ -1,5 +1,5 @@
 """sumary_line"""
-from flask import Blueprint, redirect, url_for, render_template, flash, request
+from flask import Blueprint, redirect, url_for, render_template, flash
 from flask_login import current_user, login_required
 from bson.objectid import ObjectId
 from parfumier import mongo
@@ -108,7 +108,6 @@ def edit_type(type_id):
             mongo.db.types.update_one(current_type_value, new_value)
             flash("Type has been updated", "info")
             return redirect(url_for("types.show_type", type_id=current_type_value["_id"]))
-        elif request.method == "GET":
-            form.type_name.data = current_type_value["type_name"]
-            form.description.data = current_type_value["description"]
+        form.type_name.data = current_type_value["type_name"]
+        form.description.data = current_type_value["description"]
     return render_template("pages/edit_type.html", title="Edit Type", form=form)
