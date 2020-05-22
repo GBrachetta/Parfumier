@@ -195,6 +195,8 @@ def edit_perfume(id):
         if form.validate_on_submit():
             if form.picture.data:
                 picture_uploaded = upload(form.picture.data)
+                # "options" is a needed parameter in order for cloudinary to
+                # format the thumbnail server-side
                 picture, options = cloudinary_url(
                     picture_uploaded["public_id"],
                     format="jpg",
@@ -216,26 +218,24 @@ def edit_perfume(id):
                 mongo.db.perfumes.update_one(perfume, new_value)
                 flash("You updated the perfume", "info")
                 return redirect(url_for("perfumes.perfume", id=perfume["_id"]))
-            else:
-                new_value = {
-                    "$set": {
-                        "brand": form.brand.data,
-                        "name": form.name.data,
-                        "perfume_type": form.perfume_type.data,
-                        "description": form.description.data,
-                        "date_updated": datetime.utcnow(),
-                        "public": form.public.data,
-                    }
+            new_value = {
+                "$set": {
+                    "brand": form.brand.data,
+                    "name": form.name.data,
+                    "perfume_type": form.perfume_type.data,
+                    "description": form.description.data,
+                    "date_updated": datetime.utcnow(),
+                    "public": form.public.data,
                 }
-                mongo.db.perfumes.update_one(perfume, new_value)
-                flash("You updated the perfume", "info")
-                return redirect(url_for("perfumes.perfume", id=perfume["_id"]))
-        elif request.method == "GET":
-            form.brand.data = perfume["brand"]
-            form.name.data = perfume["name"]
-            form.perfume_type.data = perfume["perfume_type"]
-            form.description.data = perfume["description"]
-            form.public.data = perfume["public"]
+            }
+            mongo.db.perfumes.update_one(perfume, new_value)
+            flash("You updated the perfume", "info")
+            return redirect(url_for("perfumes.perfume", id=perfume["_id"]))
+        form.brand.data = perfume["brand"]
+        form.name.data = perfume["name"]
+        form.perfume_type.data = perfume["perfume_type"]
+        form.description.data = perfume["description"]
+        form.public.data = perfume["public"]
     return render_template(
         "pages/edit_perfume.html",
         title="Edit Perfume",
