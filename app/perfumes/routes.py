@@ -8,15 +8,6 @@ from app.perfumes.forms import CreatePerfumeForm, EditPerfumeForm
 from app.reviews.forms import AddReviewForm
 from app import mongo
 import math
-import logging
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    filename="app.log",
-    filemode="w",
-    format="%(asctime)s %(name)s - %(filename)s :: %(lineno)d - %(levelname)s - %(message)s\n",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
 
 perfumes = Blueprint("perfumes", __name__)
 

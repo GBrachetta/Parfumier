@@ -1,16 +1,6 @@
-import logging
 from werkzeug.security import check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from app import login_manager, mongo, app
-
-# LOGGING
-logging.basicConfig(
-    level=logging.DEBUG,
-    filename="app.log",
-    filemode="w",
-    format="%(asctime)s %(name)s - %(filename)s :: %(lineno)d - %(levelname)s - %(message)s\n",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
 
 
 class User:

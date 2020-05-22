@@ -13,16 +13,7 @@ from app.users.forms import (
     ResetPasswordForm,
 )
 from app.users.utils import send_reset_email
-import logging
 
-# LOGGING
-logging.basicConfig(
-    level=logging.DEBUG,
-    filename="app.log",
-    filemode="w",
-    format="%(asctime)s %(name)s - %(filename)s :: %(lineno)d - %(levelname)s - %(message)s\n",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
 
 users = Blueprint("users", __name__)
 
