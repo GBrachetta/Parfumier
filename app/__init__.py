@@ -26,11 +26,13 @@ def create_app(config_class=Config):
     from app.types.routes import types
     from app.reviews.routes import reviews
     from app.main.routes import main
+    from app.errors.handlers import errors
 
     app.register_blueprint(users)
     app.register_blueprint(perfumes)
     app.register_blueprint(types)
     app.register_blueprint(reviews)
     app.register_blueprint(main)
+    app.register_blueprint(errors)
 
     return app
