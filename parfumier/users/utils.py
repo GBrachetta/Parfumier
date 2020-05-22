@@ -1,10 +1,10 @@
 import os
-from app import mongo
+from parfumier import mongo
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import ssl
 import smtplib
-from app.models import User
+from parfumier.models import User
 from flask import url_for
 
 

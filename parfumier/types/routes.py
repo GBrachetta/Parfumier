@@ -1,8 +1,8 @@
 from flask import Blueprint, redirect, url_for, render_template, flash, request
 from flask_login import current_user, login_required
 from bson.objectid import ObjectId
-from app import mongo
-from app.types.forms import CreateTypeForm, EditTypeForm
+from parfumier import mongo
+from parfumier.types.forms import CreateTypeForm, EditTypeForm
 
 
 types = Blueprint("types", __name__)

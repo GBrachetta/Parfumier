@@ -3,16 +3,16 @@ from flask_login import current_user, login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash
 from cloudinary.uploader import upload
 from cloudinary.utils import cloudinary_url
-from app import mongo
-from app.models import User
-from app.users.forms import (
+from parfumier import mongo
+from parfumier.models import User
+from parfumier.users.forms import (
     LoginForm,
     RegistrationForm,
     UpdateAccountForm,
     RequestResetForm,
     ResetPasswordForm,
 )
-from app.users.utils import send_reset_email
+from parfumier.users.utils import send_reset_email
 
 
 users = Blueprint("users", __name__)

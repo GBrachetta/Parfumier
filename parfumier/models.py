@@ -2,10 +2,10 @@ from werkzeug.security import check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 # Working
-from app import login_manager, mongo, app
+# from app import login_manager, mongo, app
 # Want this working instead (Replace 'current_app' with 'app' underneath if this isn't working!)
-# from app import login_manager, mongo
-# from flask import current_app
+from flask import current_app
+from parfumier import login_manager, mongo
 
 
 class User:
@@ -59,7 +59,7 @@ class User:
         """
         DESCRIPTION
         """
-        s = Serializer(app.config["SECRET_KEY"], expires_sec)
+        s = Serializer(current_app.config["SECRET_KEY"], expires_sec)
         return s.dumps({"email": self.email}).decode("utf-8")
 
     @staticmethod
@@ -67,7 +67,7 @@ class User:
         """
         DESCRIPTION
         """
-        s = Serializer(app.config["SECRET_KEY"])
+        s = Serializer(current_app.config["SECRET_KEY"])
         try:
             email = s.loads(token)["email"]
         except Exception:

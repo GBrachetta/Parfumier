@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, HiddenField
 from wtforms.validators import DataRequired, ValidationError
-from app import mongo
+from parfumier import mongo
 
 
 class CreateTypeForm(FlaskForm):
