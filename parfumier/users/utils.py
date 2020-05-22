@@ -1,11 +1,14 @@
+"""
+Docstring
+"""
 import os
-from parfumier import mongo
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import ssl
 import smtplib
-from parfumier.models import User
 from flask import url_for
+from parfumier import mongo
+from parfumier.models import User
 
 
 def send_reset_email(user):
