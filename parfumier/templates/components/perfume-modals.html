@@ -31,7 +31,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method=POST action="{{ url_for('reviews.review_perfume', id=perfume._id) }}" id="form-review">
+                <form method=POST action="{{ url_for('reviews.review_perfume', perfume_id=perfume._id) }}" id="form-review">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
                         <div class="form-group">

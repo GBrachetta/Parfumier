@@ -1,3 +1,4 @@
+"""sumary_line"""
 from datetime import datetime
 from flask import flash, redirect, Blueprint, url_for, request
 from flask_login import login_required, current_user
@@ -9,11 +10,18 @@ from parfumier.reviews.forms import AddReviewForm, EditReviewForm
 reviews = Blueprint("reviews", __name__)
 
 
-@reviews.route("/perfume/review/<id>", methods=["POST"])
+@reviews.route("/perfume/review/<perfume_id>", methods=["POST"])
 @login_required
-def review_perfume(id):
+def review_perfume(perfume_id):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     form = AddReviewForm()
-    perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
+    perfume = mongo.db.perfumes.find_one({"_id": ObjectId(perfume_id)})
     if form.validate_on_submit():
         review_id = ObjectId.from_datetime(datetime.utcnow())
         mongo.db.perfumes.update(
@@ -38,6 +46,13 @@ def review_perfume(id):
 @reviews.route("/perfume/review", methods=["POST"])
 @login_required
 def delete_review():
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     review_id = request.form.get("review_id")
     perfume_id = request.form.get("perfume_id")
     mongo.db.perfumes.update_one(
@@ -51,6 +66,13 @@ def delete_review():
 @reviews.route("/review", methods=["GET", "POST"])
 @login_required
 def edit_review():
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     form = EditReviewForm()
     review_id = request.form.get("review_id")
     perfume_id = request.form.get("perfume_id")
