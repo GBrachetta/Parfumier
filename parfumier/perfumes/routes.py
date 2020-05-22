@@ -190,7 +190,7 @@ def delete_perfume(id):
 @login_required
 def edit_perfume(id):
     form = EditPerfumeForm()
-    perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
+    current_perfume = mongo.db.perfumes.find_one({"_id": ObjectId(id)})
     if current_user.is_admin:
         if form.validate_on_submit():
             if form.picture.data:
@@ -215,9 +215,9 @@ def edit_perfume(id):
                         "picture": picture,
                     }
                 }
-                mongo.db.perfumes.update_one(perfume, new_value)
+                mongo.db.perfumes.update_one(current_perfume, new_value)
                 flash("You updated the perfume", "info")
-                return redirect(url_for("perfumes.perfume", id=perfume["_id"]))
+                return redirect(url_for("perfumes.perfume", id=current_perfume["_id"]))
             new_value = {
                 "$set": {
                     "brand": form.brand.data,
@@ -228,14 +228,14 @@ def edit_perfume(id):
                     "public": form.public.data,
                 }
             }
-            mongo.db.perfumes.update_one(perfume, new_value)
+            mongo.db.perfumes.update_one(current_perfume, new_value)
             flash("You updated the perfume", "info")
-            return redirect(url_for("perfumes.perfume", id=perfume["_id"]))
-        form.brand.data = perfume["brand"]
-        form.name.data = perfume["name"]
-        form.perfume_type.data = perfume["perfume_type"]
-        form.description.data = perfume["description"]
-        form.public.data = perfume["public"]
+            return redirect(url_for("perfumes.perfume", id=current_perfume["_id"]))
+        form.brand.data = current_perfume["brand"]
+        form.name.data = current_perfume["name"]
+        form.perfume_type.data = current_perfume["perfume_type"]
+        form.description.data = current_perfume["description"]
+        form.public.data = current_perfume["public"]
     return render_template(
         "pages/edit_perfume.html",
         title="Edit Perfume",
