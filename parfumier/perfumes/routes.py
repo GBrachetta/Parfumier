@@ -261,6 +261,7 @@ def edit_perfume(perfume_id):
         "pages/edit_perfume.html",
         title="Edit Perfume",
         form=form,
+        current_perfume=current_perfume,
         types=mongo.db.types.find().sort("type_name"),
     )
 
