@@ -1,4 +1,6 @@
+"""sumary_line"""
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import (
     DataRequired,
@@ -7,7 +9,6 @@ from wtforms.validators import (
     Length,
     ValidationError,
 )
-from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from parfumier import mongo
 

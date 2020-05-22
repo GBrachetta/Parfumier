@@ -1,4 +1,6 @@
+"""sumary_line"""
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import (
     StringField,
     TextAreaField,
@@ -7,10 +9,16 @@ from wtforms import (
     SelectField,
 )
 from wtforms.validators import DataRequired
-from flask_wtf.file import FileField, FileAllowed
 
 
 class CreatePerfumeForm(FlaskForm):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     brand = StringField("Brand", validators=[DataRequired()])
     name = StringField("Name", validators=[DataRequired()])
     description = TextAreaField("Description")
@@ -21,6 +29,13 @@ class CreatePerfumeForm(FlaskForm):
 
 
 class EditPerfumeForm(FlaskForm):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     brand = StringField("Brand", validators=[DataRequired()])
     name = StringField("Name", validators=[DataRequired()])
     description = TextAreaField("Description")
@@ -31,6 +46,13 @@ class EditPerfumeForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     choices = [("Brand", "Brand"), ("Perfume", "Perfume"), ("Type", "Type")]
     select = SelectField("Search:", choices=choices)
     search = StringField("")

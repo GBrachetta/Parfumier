@@ -1,3 +1,6 @@
+"""
+Docstring
+"""
 from flask import Blueprint, redirect, url_for, render_template, flash, request
 from flask_login import current_user, login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash
@@ -46,8 +49,7 @@ def login():
                 if next_page
                 else redirect(url_for("perfumes.all_perfumes"))
             )
-        else:
-            flash("Please check your credentials", "warning")
+        flash("Please check your credentials", "warning")
     return render_template("pages/login.html", title="Login", form=form)
 
 
@@ -59,10 +61,10 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for("main.index"))
     form = RegistrationForm()
-    users = mongo.db.users
+    all_users = mongo.db.users
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data)
-        users.insert(
+        all_users.insert(
             {
                 "username": form.username.data,
                 "first_name": form.first_name.data,
@@ -70,7 +72,8 @@ def register():
                 "email": form.email.data,
                 "password": hashed_password,
                 "is_admin": False,
-                "avatar": "https://res.cloudinary.com/gbrachetta/image/upload/v1590003978/default.png",
+                "avatar": ("https://res.cloudinary.com/gbrachetta/"
+                           "image/upload/v1590003978/default.png"),
             }
         )
         user = mongo.db.users.find_one({"email": form.email.data})
@@ -140,12 +143,13 @@ def account():
         login_user(user_obj)
         flash("You have updated your information", "info")
         return redirect(url_for("main.index"))
-    elif request.method == "GET":
-        form.username.data = current_user.username
-        form.first_name.data = current_user.first_name
-        form.last_name.data = current_user.last_name
-        form.email.data = current_user.email
-        form.avatar.data = current_user.avatar
+    # the if form.validate_on_submit() checks for method POST, so no elif is needed
+    # to check for method GET after the return.
+    form.username.data = current_user.username
+    form.first_name.data = current_user.first_name
+    form.last_name.data = current_user.last_name
+    form.email.data = current_user.email
+    form.avatar.data = current_user.avatar
     avatar = current_user.avatar
     return render_template(
         "pages/account.html", title="Account", form=form, avatar=avatar
