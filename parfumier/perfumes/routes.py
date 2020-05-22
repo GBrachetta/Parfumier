@@ -1,3 +1,4 @@
+"""sumary_line"""
 from datetime import datetime
 import math
 from flask import render_template, redirect, flash, url_for, request, Blueprint
@@ -72,6 +73,13 @@ def all_perfumes():
 @perfumes.route("/perfume/new", methods=["GET", "POST"])
 @login_required
 def new_perfume():
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     if current_user.is_admin:
         form = CreatePerfumeForm()
         if form.validate_on_submit():
@@ -106,7 +114,8 @@ def new_perfume():
                         "description": form.description.data,
                         "date_updated": datetime.utcnow(),
                         "public": form.public.data,
-                        "picture": "https://res.cloudinary.com/gbrachetta/image/upload/v1590013198/generic.jpg",
+                        "picture": ("https://res.cloudinary.com/gbrachetta/"
+                                    "image/upload/v1590013198/generic.jpg"),
                     }
                 )
 
@@ -237,6 +246,13 @@ def edit_perfume(id):
 
 @perfumes.route("/search")
 def search():
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     types = mongo.db.types.find().sort("type_name")
     mongo.db.perfumes.create_index(
         [("name", "text"), ("brand", "text"), ("perfume_type", "text")]
