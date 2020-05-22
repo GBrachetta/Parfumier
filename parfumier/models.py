@@ -1,3 +1,4 @@
+"""sumary_line"""
 from werkzeug.security import check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
@@ -10,7 +11,13 @@ class User:
     """
 
     def __init__(
-        self, username, first_name, last_name, email, _id, is_admin, avatar
+            self, username,
+            first_name,
+            last_name,
+            email,
+            _id,
+            is_admin,
+            avatar,
     ):
         self.username = username
         self.first_name = first_name
@@ -55,33 +62,40 @@ class User:
         """
         DESCRIPTION
         """
-        s = Serializer(current_app.config["SECRET_KEY"], expires_sec)
-        return s.dumps({"email": self.email}).decode("utf-8")
+        ser = Serializer(current_app.config["SECRET_KEY"], expires_sec)
+        return ser.dumps({"email": self.email}).decode("utf-8")
 
     @staticmethod
     def verify_reset_token(token):
         """
         DESCRIPTION
         """
-        s = Serializer(current_app.config["SECRET_KEY"])
+        ser = Serializer(current_app.config["SECRET_KEY"])
         try:
-            email = s.loads(token)["email"]
+            email = ser.loads(token)["email"]
         except Exception:
             return None
         return mongo.db.users.find_one({"email": email})
 
 
 class Perfume:
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     def __init__(
-        self,
-        author,
-        brand,
-        name,
-        description,
-        date_updated,
-        public,
-        picture,
-        perfume_type,
+            self,
+            author,
+            brand,
+            name,
+            description,
+            date_updated,
+            public,
+            picture,
+            perfume_type,
     ):
         self.author = author
         self.brand = brand
@@ -94,6 +108,13 @@ class Perfume:
 
 
 class Types:
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     def __init__(self, type_name, description, author):
         self.type_name = type_name
         self.description = description
