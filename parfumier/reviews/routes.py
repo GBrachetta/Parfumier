@@ -89,6 +89,5 @@ def edit_review():
         )
         flash("Your review has been updated!", "success")
         return redirect(url_for("perfumes.perfume", id=perfume_id))
-    elif request.method == "GET":
-        form.review.data = review[{"_id": ObjectId(review_id)}]
+    form.review.data = review[{"_id": ObjectId(review_id)}]
     return redirect(url_for("perfumes.perfume", id=perfume_id))
