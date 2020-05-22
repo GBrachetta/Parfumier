@@ -300,8 +300,8 @@ def search():
         )
 
 
-@perfumes.route("/filter")
-def filter():
+@perfumes.route("/filters")
+def filters():
     types = mongo.db.types.find().sort("type_name")
     mongo.db.types.create_index([("type_name", "text")])
     filter_query = request.args["filter_query"]
