@@ -1,9 +1,5 @@
 from werkzeug.security import check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-
-# Working
-# from app import login_manager, mongo, app
-# Want this working instead (Replace 'current_app' with 'app' underneath if this isn't working!)
 from flask import current_app
 from parfumier import login_manager, mongo
 
