@@ -50,32 +50,53 @@ def all_types():
     return render_template("pages/types.html", types=the_types)
 
 
-@types.route("/type/<id>")
-def type(id):
-    one_type = mongo.db.types.find_one({"_id": ObjectId(id)})
+@types.route("/type/<type_id>")
+def show_type(type_id):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
+    one_type = mongo.db.types.find_one({"_id": ObjectId(type_id)})
     return render_template("pages/type.html", type=one_type)
 
 
-@types.route("/type/<id>", methods=["POST"])
+@types.route("/type/<type_id>", methods=["POST"])
 @login_required
-def delete_type(id):
+def delete_type(type_id):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     if current_user.is_admin:
-        mongo.db.types.delete_one({"_id": ObjectId(id)})
+        mongo.db.types.delete_one({"_id": ObjectId(type_id)})
         flash("You deleted this type", "success")
         return redirect(url_for("types.all_types"))
     flash("Not allowed", "warning")
     return redirect(url_for("types.all_types"))
 
 
-@types.route("/type/edit/<id>", methods=["POST", "GET"])
+@types.route("/type/edit/<type_id>", methods=["POST", "GET"])
 @login_required
-def edit_type(id):
+def edit_type(type_id):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     form = EditTypeForm()
     current_type_name = mongo.db.types.find_one(
-        {"_id": ObjectId(id)}, {"_id": 0, "type_name": 1}
+        {"_id": ObjectId(type_id)}, {"_id": 0, "type_name": 1}
     )
     form.origin_type_name.data = current_type_name["type_name"]
-    type = mongo.db.types.find_one({"_id": ObjectId(id)})
+    current_type_value = mongo.db.types.find_one({"_id": ObjectId(type_id)})
     if current_user.is_admin:
         if form.validate_on_submit():
             new_value = {
@@ -84,10 +105,10 @@ def edit_type(id):
                     "description": form.description.data,
                 }
             }
-            mongo.db.types.update_one(type, new_value)
+            mongo.db.types.update_one(current_type_value, new_value)
             flash("Type has been updated", "info")
-            return redirect(url_for("types.type", id=type["_id"]))
+            return redirect(url_for("types.show_type", type_id=current_type_value["_id"]))
         elif request.method == "GET":
-            form.type_name.data = type["type_name"]
-            form.description.data = type["description"]
+            form.type_name.data = current_type_value["type_name"]
+            form.description.data = current_type_value["description"]
     return render_template("pages/edit_type.html", title="Edit Type", form=form)
