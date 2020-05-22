@@ -302,46 +302,52 @@ def search():
 
 @perfumes.route("/filters")
 def filters():
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     types = mongo.db.types.find().sort("type_name")
     mongo.db.types.create_index([("type_name", "text")])
     filter_query = request.args["filter_query"]
     if filter_query == "":
         return redirect(url_for("perfumes.all_perfumes"))
-    else:
-        results = mongo.db.perfumes.aggregate(
-            [
-                {"$match": {"$text": {"$search": filter_query}}},
-                {
-                    "$lookup": {
-                        "from": "users",
-                        "localField": "author",
-                        "foreignField": "username",
-                        "as": "creator",
-                    }
-                },
-                {"$unwind": "$creator"},
-                {
-                    "$project": {
-                        "_id": "$_id",
-                        "perfumeName": "$name",
-                        "perfumeBrand": "$brand",
-                        "perfumeDescription": "$description",
-                        "date_updated": "$date_updated",
-                        "perfumePicture": "$picture",
-                        "isPublic": "$public",
-                        "perfumeType": "$perfume_type",
-                        "username": "$creator.username",
-                        "firstName": "$creator.first_name",
-                        "lastName": "$creator.last_name",
-                        "profilePicture": "$creator.avatar",
-                    }
-                },
-                {"$sort": {"perfumeName": 1}},
-            ]
-        )
-        return render_template(
-            "pages/perfumes.html",
-            perfumes=results,
-            types=types,
-            title="Perfumes",
-        )
+    results = mongo.db.perfumes.aggregate(
+        [
+            {"$match": {"$text": {"$search": filter_query}}},
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "author",
+                    "foreignField": "username",
+                    "as": "creator",
+                }
+            },
+            {"$unwind": "$creator"},
+            {
+                "$project": {
+                    "_id": "$_id",
+                    "perfumeName": "$name",
+                    "perfumeBrand": "$brand",
+                    "perfumeDescription": "$description",
+                    "date_updated": "$date_updated",
+                    "perfumePicture": "$picture",
+                    "isPublic": "$public",
+                    "perfumeType": "$perfume_type",
+                    "username": "$creator.username",
+                    "firstName": "$creator.first_name",
+                    "lastName": "$creator.last_name",
+                    "profilePicture": "$creator.avatar",
+                }
+            },
+            {"$sort": {"perfumeName": 1}},
+        ]
+    )
+    return render_template(
+        "pages/perfumes.html",
+        perfumes=results,
+        types=types,
+        title="Perfumes",
+    )
