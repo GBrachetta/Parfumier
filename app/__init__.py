@@ -45,7 +45,7 @@ login_manager.login_message_category = "info"
 mongo = PyMongo()
 
 
-def create_app(config_class=Config):
+def create_app(config_class=Config(object)):
     app = Flask(__name__)
     app.config.from_object(Config)
     login_manager.init_app(app)
