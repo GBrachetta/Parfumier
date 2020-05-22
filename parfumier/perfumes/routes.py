@@ -175,11 +175,18 @@ def perfume(id):
     )
 
 
-@perfumes.route("/perfume/<id>/delete", methods=["POST", "GET"])
+@perfumes.route("/perfume/<perfume_id>/delete", methods=["POST", "GET"])
 @login_required
-def delete_perfume(id):
+def delete_perfume(perfume_id):
+    """sumary_line
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+
     if current_user.is_admin:
-        mongo.db.perfumes.delete_one({"_id": ObjectId(id)})
+        mongo.db.perfumes.delete_one({"_id": ObjectId(perfume_id)})
         flash("You deleted this perfume", "success")
         return redirect(url_for("perfumes.all_perfumes"))
     flash("Not allowed", "warning")
