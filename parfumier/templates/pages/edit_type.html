@@ -38,6 +38,7 @@
                     </fieldset>
                     <div class="form-group">
                         {{ form.submit(class="btn btn-primary")}}
+                        <a class="btn btn-outline-primary" href="{{ url_for("types.show_type", type_id=current_type._id) }}">Cancel</a>
                     </div>
                 </form>
                 <br>

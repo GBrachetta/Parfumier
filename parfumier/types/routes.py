@@ -92,6 +92,7 @@ def edit_type(type_id):
     """
 
     form = EditTypeForm()
+    current_type = mongo.db.types.find_one({"_id": ObjectId(type_id)})
     current_type_name = mongo.db.types.find_one(
         {"_id": ObjectId(type_id)}, {"_id": 0, "type_name": 1}
     )
@@ -110,4 +111,4 @@ def edit_type(type_id):
             return redirect(url_for("types.show_type", type_id=current_type_value["_id"]))
         form.type_name.data = current_type_value["type_name"]
         form.description.data = current_type_value["description"]
-    return render_template("pages/edit_type.html", title="Edit Type", form=form)
+    return render_template("pages/edit_type.html", title="Edit Type", form=form, current_type=current_type)
