@@ -6,7 +6,7 @@
                 <select class="form-control" id="filter_query" name="filter_query">
                     <option selected='true'>Please select a type</option>
                     {% for type in types %}
-                    <option value="{{ url_for('perfumes.filters', filter_query=type['type_name']) }}">{{type['type_name']}}</option>
+                    <option value="{{type['type_name']}}">{{type['type_name']}}</option>
                     {% endfor %}
                     <option value="{{ url_for('types.new_type') }}">Create new type...</option>
                 </select><br>
