@@ -1,0 +1,105 @@
+{# myapp/templates/macros.html #}
+
+<!-- Highlight the current tab -->
+{% macro nav_link(endpoint, text) %}
+{% if request.endpoint is not none %}
+{% if request.endpoint.endswith(endpoint) %}
+<a class="active teal item" href="{{ url_for(endpoint) }}">{{ text }}</a>
+{% else %}
+<a class="item" href="{{ url_for(endpoint) }}">{{ text }}</a>
+{% endif %}
+{% else %}
+<a class="item" href="{{ url_for(endpoint) }}">{{ text }}</a>
+{% endif %}
+{% endmacro %}
+
+<!-- Render a WTForm form's field (with it's possible associated errors) from a WTForms form -->
+{% macro render_field(field) %}
+<div class="field">
+    {{ field(name_=field.name, id=field.name, placeholder=field.description, class_="field") }}
+</div>
+{% if field.errors %}
+<ul>
+    {% for error in field.errors %}
+    <li class="form-error">{{ error }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endmacro %}
+
+{% macro custom_render(ftype,field,align,label) %}
+{% if ftype == 'field_inline' %}
+<div class="{{ftype}} {{align}} right-margin-1">
+    {% if label in ['yes','on_top'] %}
+    {{ field.label }}
+    {% endif %}
+    {{ field(name_=field.name, id=field.name, placeholder=field.description, class_="field_inline") }}
+
+</div>
+{% elif ftype == 'field' %}
+{% if label in ['yes','on_top'] %}
+{{ field.label }}
+{% endif %}
+{{ field(name_=field.name, id=field.name, placeholder=field.description, class_="field_inline") }}
+{% elif ftype == 'hipaa_form' %}
+<div class="field_hipaa">
+    {{ field(name_=field.name, id=field.name, placeholder=field.description, class_="field_hipaa") }}
+</div>
+{% elif ftype == 'field_in_table' %}
+{{ field(name_=field.name, id=field.name, placeholder=field.description, class_="field_in_table", style="width:85%") }}
+{% endif %}
+{% if field.errors %}
+<ul>
+    {% for error in field.errors %}
+    <li class="form-error">{{ error }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endmacro %}
+
+{% macro custom_render_table(ftype,field,align,label) %}
+{% if ftype == 'field_inline' %}
+<div class="{{ftype}} {{align}} right-margin-3">
+    <div class="table_row_plain">
+        {% if label == 'yes' %}
+        <div class="tbl_cell_plain">
+            {{ field.label }}
+        </div>
+        {% endif %}
+        <div class="tbl_cell_plain">
+            {% if label == 'on_top' %}
+            {{ field.label }}
+            {% endif %}
+            {{ field(name_=field.name, id=field.name, placeholder=field.description, class_="field_inline") }}
+        </div>
+    </div>
+</div>
+{% elif ftype == 'field' %}
+<div class="table_row_plain">
+    {% if label == 'yes' %}
+    <div class="tbl_cell_plain">
+        {{ field.label }}
+    </div>
+    {% endif %}
+    <div class="tbl_cell_plain">
+        {% if label == 'on_top' %}
+        {{ field.label }}
+        {% endif %}
+        {{ field(name_=field.name, id=field.name, placeholder=field.description, class_="field_inline") }}
+    </div>
+</div>
+{% elif ftype == 'hipaa_form' %}
+<div class="field_hipaa">
+    {{ field(name_=field.name, id=field.name, placeholder=field.description, class_="field_hipaa") }}
+</div>
+{% elif ftype == 'field_in_table' %}
+{{ field(name_=field.name, id=field.name, placeholder=field.description, class_="field_in_table", style="width:85%") }}
+{% endif %}
+{% if field.errors %}
+<ul>
+    {% for error in field.errors %}
+    <li class="form-error">{{ error }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endmacro %}
