@@ -22,14 +22,12 @@ ELS_file.forEach((el) => {
     el.addEventListener("change", imagePreviewer);
 });
 
-
 // Fades flash messages after a timeout
 $(document).ready(() => {
     setTimeout(function () {
         $("#flash").fadeOut("slow");
     }, 3000);
 });
-
 
 // ? Same as above but sliding up
 // $(document).ready(() => {
@@ -45,7 +43,6 @@ $(".delete-review").on("click", (evt) => {
     formDeleteReview.find('[name="perfume_id"]').val(btnData.perfume_id);
 });
 
-
 // Opens the edit review modal passing data to edit review
 $(".edit-review").on("click", (evt) => {
     evt.preventDefault();
@@ -54,3 +51,13 @@ $(".edit-review").on("click", (evt) => {
     formEditReview.find('[name="review_id"]').val(btnData.review_id);
     formEditReview.find('[name="perfume_id"]').val(btnData.perfume_id);
 });
+
+
+// Triggers the filter query - Deals with a different route
+// for the option outside the loop (create new type)
+function checkSelected() {
+    if (this.value === "/type/new") return (window.location = this.value);
+    if (this.value) this.closest("form").submit();
+}
+const EL_select = document.querySelector("#filter_query");
+if (EL_select) EL_select.addEventListener("change", checkSelected);
