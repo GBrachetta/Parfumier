@@ -1,3 +1,4 @@
+{% import "macros.html" as m %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -41,9 +42,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        <script src="{{ url_for('static', filename='js/scripts.js' )}}"></script>
         <script src="//cdn.ckeditor.com/4.14.0/basic/ckeditor.js"></script>
-        {% block CKEditor_js %}
-        {% endblock CKEditor_js %}
+        <script src="{{ url_for('static', filename='js/scripts.js' )}}"></script>
+
     </body>
 </html>

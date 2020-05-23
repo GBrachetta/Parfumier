@@ -61,7 +61,7 @@
                         </div>
                         <div class="form-group">
                             {{ form.csrf_token }}
-                            {{ form.description.label(class="form-control-label") }}
+                            {{ form.description.label(class="form-control-label ckeditor") }}
                             {% if form.description.errors %}
                             {{ form.description(class="form-control form-control-md is-invalid")}}
                             <div class="invalid-feedback">
@@ -70,7 +70,7 @@
                                 {% endfor %}
                             </div>
                             {% else %}
-                            {{ form.description(class="form-control form-control-md", placeholder="Enter description")}}
+                            {{ form.description(class="form-control form-control-md ckeditor", placeholder="Enter description")}}
                             {% endif %}
                         </div>
                         <div class="form-check">
@@ -101,6 +101,3 @@
         </div>
     </div>
 {% endblock content%}
-{% block CKEditor_js %}
-    <script src="{{ url_for('static', filename='js/cke.js') }}"></script>
-{% endblock CKEditor_js %}

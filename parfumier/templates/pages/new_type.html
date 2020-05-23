@@ -32,7 +32,7 @@
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.description(class="form-control form-control-md", placeholder="Enter type")}}
+                        {{ form.description(class="form-control form-control-md ckeditor", placeholder="Enter type")}}
                         {% endif %}
                     </div>
 
@@ -46,6 +46,3 @@
     </div>
 </div>
 {% endblock content%}
-{% block CKEditor_js %}
-    <script src="{{ url_for('static', filename='js/cke.js') }}"></script>
-{% endblock CKEditor_js %}
