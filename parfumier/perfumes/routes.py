@@ -7,7 +7,7 @@ from cloudinary.uploader import upload
 from cloudinary.utils import cloudinary_url
 from bson.objectid import ObjectId
 from parfumier.perfumes.forms import CreatePerfumeForm, EditPerfumeForm
-from parfumier.reviews.forms import AddReviewForm
+from parfumier.reviews.forms import AddReviewForm, EditReviewForm
 from parfumier import mongo
 
 perfumes = Blueprint("perfumes", __name__)
@@ -142,7 +142,8 @@ def perfume(perfume_id):
     """
 
     current_perfume = mongo.db.perfumes.find_one({"_id": ObjectId(perfume_id)})
-    form = AddReviewForm()
+    add_review_form = AddReviewForm()
+    edit_review_form = EditReviewForm()
     cur = mongo.db.perfumes.aggregate(
         [
             {
@@ -178,7 +179,8 @@ def perfume(perfume_id):
         title="Perfumes",
         cursor=cur,
         perfume=current_perfume,
-        form=form,
+        add_review_form=add_review_form,
+        edit_review_form=edit_review_form
     )
 
 
