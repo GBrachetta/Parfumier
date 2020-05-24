@@ -32,24 +32,24 @@
             </div>
             <div class="modal-body">
                 <form method=POST action="{{ url_for('reviews.review_perfume', perfume_id=perfume._id) }}" id="form-review">
-                    {{ form.hidden_tag() }}
+                    {{ add_review_form.hidden_tag() }}
                     <fieldset class="form-group">
                         <div class="form-group">
-                            {% if form.review.errors %}
-                            {{ form.review(class="form-control form-control-md is-invalid")}}
+                            {% if add_review_form.review.errors %}
+                            {{ add_review_form.review(class="form-control form-control-md is-invalid")}}
                             <div class="invalid-feedback">
-                                {% for error in form.review.errors %}
+                                {% for error in add_review_form.review.errors %}
                                 <span>{{ error }}</span>
                                 {% endfor %}
                             </div>
                             {% else %}
-                            {{ form.review(class="form-control form-control-md ckeditor", placeholder="Review")}}
+                            {{ add_review_form.review(class="form-control form-control-md ckeditor", placeholder="Review")}}
                             {% endif %}
                         </div>
                     </fieldset>
                     <div class="modal-footer">
                         <div class="form-group">
-                            {{ form.submit(class="btn btn-primary")}}
+                            {{ add_review_form.submit(class="btn btn-primary")}}
                         </div>
                     </div>
                 </form>
@@ -93,18 +93,18 @@
             </div>
             <div class="modal-body">
                 <form method=POST action="{{ url_for('reviews.edit_review') }}" id="form-edit-review">
-                    {{ form.hidden_tag() }}
+                    {{ edit_review_form.hidden_tag() }}
                     <fieldset class="form-group">
                         <div class="form-group">
-                            {% if form.review.errors %}
-                            {{ form.review(class="form-control form-control-md is-invalid")}}
+                            {% if edit_review_form.review.errors %}
+                            {{ edit_review_form.review(class="form-control form-control-md is-invalid")}}
                             <div class="invalid-feedback">
-                                {% for error in form.review.errors %}
+                                {% for error in edit_review_form.review.errors %}
                                 <span>{{ error }}</span>
                                 {% endfor %}
                             </div>
                             {% else %}
-                            {{ form.review(class="form-control form-control-md ckeditor", placeholder="Review")}}
+                            {{ edit_review_form.review(class="form-control form-control-md ckeditor", placeholder="Review")}}
                             {% endif %}
                         </div>
                     </fieldset>
@@ -112,7 +112,7 @@
                         <div class="form-group">
                             <input hidden name="review_id">
                             <input hidden name="perfume_id">
-                            {{ form.submit(class="btn btn-primary")}}
+                            {{ edit_review_form.submit(class="btn btn-primary")}}
                         </div>
                     </div>
                 </form>
