@@ -1,7 +1,7 @@
-{% for item in cursor %}
+{% for author in cursor %}
     <div class="col-7">
-        Posted by <span class="text-success">{{ item['username'] }}</span>
-        <span class="text-muted">({{ item['firstName']}} {{ item['lastName']}})</span>
+        Posted by <span class="text-success">{{ author['username'] }}</span>
+        <span class="text-muted">({{ author['firstName']}} {{ author['lastName']}})</span>
         on {{ perfume.date_updated.strftime('%d-%m-%Y') }}<br>
         {% if current_user.is_authenticated %}
             <button type="button" class="btn btn-success btn-sm mt-2" data-toggle="modal" data-target="#reviewPerfumeModal">Review</button>
@@ -19,6 +19,6 @@
         {% endif %}
     </div>
     <div class="col-4">
-        <img class="float-right avatar-perfume" src="{{ item['profilePicture'] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" alt="Avatar">
+        <img class="float-right avatar-perfume" src="{{ author['profilePicture'] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" alt="Avatar">
     </div>
 {% endfor %}
