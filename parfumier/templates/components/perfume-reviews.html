@@ -3,7 +3,7 @@
         <div class="col-12">
             <h3 class="text-center">Reviews</h3>
             <ul class='reviews'>
-                {% for review in perfume.reviews|reverse %}
+                {% for review in perfume.reviews|sort(attribute='date_reviewed', reverse = True) %}
                 <div class="card container">
                     <div class="row">
                         <div class="card-header col-9">
