@@ -7,7 +7,7 @@
             <div class="media">
                 <img class="rounded-circle account-img" src="{{ avatar }}"
                     onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';"
-                    loading="lazy">
+                    loading="lazy" width=125 height=125 >
                 <div class="pl-3 media-body">
                     <h2 class="account-heading">{{ current_user.username }}</h2>
                     <p class="text-primary lead">{{ current_user.first_name}} {{ current_user.last_name}}</p>
