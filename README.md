@@ -1,70 +1,83 @@
-# Parfumier
+# Parfumier <!-- omit in toc -->
 
 > An app that allows users to create a profile, edit it, add their profile image and interact with a database with perfumes.
 
-## Table of Contents
+## Table of Contents <!-- omit in toc -->
 
-- [Parfumier](#parfumier)
-  - [Table of Contents](#table-of-contents)
-  - [UX](#ux)
-  - [Project Goals](#project-goals)
-  - [User Stories](#user-stories)
-  - [Design Choices](#design-choices)
-  - [Wireframes](#wireframes)
-  - [Features](#features)
-  - [Information Architecture](#information-architecture)
-  - [Technologies Used](#technologies-used)
-  - [Testing](#testing)
-  - [Issues found and status](#issues-found-and-status)
-  - [Deployment](#deployment)
-  - [Credits](#credits)
-  - [Disclaimer](#disclaimer)
+- [1. Introduction](#1-introduction)
+- [2. UX](#2-ux)
+- [3. Project Goals](#3-project-goals)
+- [4. User Stories](#4-user-stories)
+- [5. Design Choices](#5-design-choices)
+- [6. Wireframes](#6-wireframes)
+- [7. Features](#7-features)
+- [8. Information Architecture](#8-information-architecture)
+- [9. Technologies Used](#9-technologies-used)
+- [10. Testing](#10-testing)
+- [11. Issues found and status](#11-issues-found-and-status)
+- [12. Deployment](#12-deployment)
+- [13. Credits](#13-credits)
+- [14. Disclaimer](#14-disclaimer)
 
-======
+---
 
-## UX
+## 1. Introduction
 
-- Who is this website for?
-- Who are the primary target groups?
-- What is it that they (the users) want to achieve?
-- How is my project the best way to help them achieve those things?
-- How do users achieve each of the following goals:
+## 2. UX
 
-## Project Goals
+- Who is this website for
+
+- Who are the primary target groups
+
+- What is it that they (the users) want to achieve
+
+- How is my project the best way to help them achieve those things
+
+- How do users achieve each of the following goals
+
+## 3. Project Goals
 
 - User Goals
+
 - Visitor Goals
 
-## User Stories
+## 4. User Stories
 
-## Design Choices
+## 5. Design Choices
 
-## Wireframes
+## 6. Wireframes
 
-## Features
+## 7. Features
 
 - Existing Features
+
   - Login
+
   - Account managments
+
   - Profile Picture (updatable)
+
   - Perfumes
+
   - Admins
+
   - Perfume Photos
+
   - Default photos
 
 - Future Goals
 
-## Information Architecture
+## 8. Information Architecture
 
 - Database Choice
 
-      For this project we were instructed to use MongoDB as our database.
+For this project we were instructed to use MongoDB as our database.
 
-      MongoDB is a non-relational database but I achieved finding ways to combine data from multiple collections by using aggregation, such as in the colde below:
+MongoDB is a non-relational database but I achieved finding ways to combine data from multiple collections by using aggregation, such as in the colde below:
 
 - Data Storage
 
-## Technologies Used
+## 9. Technologies Used
 
 - MongoDB
 - Python
@@ -73,29 +86,36 @@
 - CSS
 - Cloudinary
 
-## Testing
+## 10. Testing
 
-## Issues found and status
+## 11. Issues found and status
 
 - Custom Validator for types
+
 - Aggregation
-- Cloudinary
+
 - onerror default to picture
+
+- Cloudinary
+
 - filters
+
 - search
+
 - ckedit
+
 - Quote all testing as noted in external doc
 
-## Deployment
+## 12. Deployment
 
 - Heroku
 - Variables
 
-## Credits
+## 13. Credits
 
 - Content
 - Media
 - Code
 - Acknowledgements
 
-## Disclaimer
+## 14. Disclaimer
