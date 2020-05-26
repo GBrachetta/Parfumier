@@ -4,118 +4,203 @@
 
 ## Table of Contents <!-- omit in toc -->
 
-- [1. Introduction](#1-introduction)
-- [2. UX](#2-ux)
-- [3. Project Goals](#3-project-goals)
-- [4. User Stories](#4-user-stories)
-- [5. Design Choices](#5-design-choices)
-- [6. Wireframes](#6-wireframes)
-- [7. Features](#7-features)
-- [8. Information Architecture](#8-information-architecture)
-- [9. Technologies Used](#9-technologies-used)
-- [10. Testing](#10-testing)
-- [11. Issues found and status](#11-issues-found-and-status)
-- [12. Deployment](#12-deployment)
-- [13. Credits](#13-credits)
-- [14. Disclaimer](#14-disclaimer)
+- [Introduction](#introduction)
+- [UX](#ux)
+  - [Who is this website for](#who-is-this-website-for)
+  - [Who are the primary target groups](#who-are-the-primary-target-groups)
+  - [What is it that they (the users) want to achieve](#what-is-it-that-they-the-users-want-to-achieve)
+  - [How is my project the best way to help them achieve those things](#how-is-my-project-the-best-way-to-help-them-achieve-those-things)
+  - [How do users achieve each of the following goals](#how-do-users-achieve-each-of-the-following-goals)
+- [Project Goals](#project-goals)
+  - [User Goals](#user-goals)
+  - [Visitor Goals](#visitor-goals)
+- [User Stories](#user-stories)
+- [Design Choices](#design-choices)
+- [Wireframes](#wireframes)
+- [Features](#features)
+  - [Existing Features](#existing-features)
+    - [Login](#login)
+    - [Account managments](#account-managments)
+    - [Profile Picture (updatable)](#profile-picture-updatable)
+    - [Perfumes](#perfumes)
+    - [Admins](#admins)
+    - [Perfume Photos](#perfume-photos)
+    - [Default photos](#default-photos)
+  - [Future Goals](#future-goals)
+- [Information Architecture](#information-architecture)
+  - [Database Choice](#database-choice)
+  - [Data Storage](#data-storage)
+- [Technologies Used](#technologies-used)
+  - [MongoDB](#mongodb)
+  - [Python](#python)
+  - [JavaScript](#javascript)
+  - [HTML](#html)
+  - [CSS](#css)
+  - [Cloudinary](#cloudinary)
+- [Testing](#testing)
+- [Issues found and status](#issues-found-and-status)
+  - [Custom Validator for types](#custom-validator-for-types)
+  - [Aggregation](#aggregation)
+  - [onerror default to picture](#onerror-default-to-picture)
+  - [Images](#images)
+  - [filters](#filters)
+    - [search](#search)
+    - [ckedit](#ckedit)
+    - [Quote all testing as noted in external doc](#quote-all-testing-as-noted-in-external-doc)
+  - [Deployment](#deployment)
+    - [Heroku](#heroku)
+    - [Variables](#variables)
+  - [Credits](#credits)
+    - [Content](#content)
+    - [Media](#media)
+    - [Code](#code)
+    - [Acknowledgements](#acknowledgements)
+- [Disclaimer](#disclaimer)
 
 ---
 
-## 1. Introduction
+## Introduction
 
-## 2. UX
+## UX
 
-- Who is this website for
+### Who is this website for
 
-- Who are the primary target groups
+### Who are the primary target groups
 
-- What is it that they (the users) want to achieve
+### What is it that they (the users) want to achieve
 
-- How is my project the best way to help them achieve those things
+### How is my project the best way to help them achieve those things
 
-- How do users achieve each of the following goals
+### How do users achieve each of the following goals
 
-## 3. Project Goals
+## Project Goals
 
-- User Goals
+### User Goals
 
-- Visitor Goals
+### Visitor Goals
 
-## 4. User Stories
+## User Stories
 
-## 5. Design Choices
+## Design Choices
 
-## 6. Wireframes
+## Wireframes
 
-## 7. Features
+## Features
 
-- Existing Features
+### Existing Features
 
-  - Login
+#### Login
 
-  - Account managments
+#### Account managments
 
-  - Profile Picture (updatable)
+#### Profile Picture (updatable)
 
-  - Perfumes
+#### Perfumes
 
-  - Admins
+#### Admins
 
-  - Perfume Photos
+#### Perfume Photos
 
-  - Default photos
+#### Default photos
 
-- Future Goals
+### Future Goals
 
-## 8. Information Architecture
+## Information Architecture
 
-- Database Choice
+### Database Choice
 
 For this project we were instructed to use MongoDB as our database.
 
-MongoDB is a non-relational database but I achieved finding ways to combine data from multiple collections by using aggregation, such as in the colde below:
+MongoDB is a non-relational database but I still decided to have three different collections and find ways to combine data from them by using aggregation, such as in the colde below:
 
-- Data Storage
+``` python
+cur = mongo.db.perfumes.aggregate(
+    [
+        {
+            "$lookup": {
+                "from": "users",
+                "localField": "author",
+                "foreignField": "username",
+                "as": "creator",
+            }
+        },
+        {"$unwind": "$creator"},
+        {
+            "$project": {
+                "_id": "$_id",
+                "perfumeName": "$name",
+                "perfumeBrand": "$brand",
+                "perfumeDescription": "$description",
+                "date_updated": "$date_updated",
+                "perfumePicture": "$picture",
+                "isPublic": "$public",
+                "perfumeType": "$perfume_type",
+                "username": "$creator.username",
+                "firstName": "$creator.first_name",
+                "lastName": "$creator.last_name",
+                "profilePicture": "$creator.avatar",
+            }
+        },
+        {"$match": {"_id": ObjectId(perfume_id)}},
+    ]
+)
+```
 
-## 9. Technologies Used
+### Data Storage
 
-- MongoDB
-- Python
-- JavaScript
-- HTML
-- CSS
-- Cloudinary
+## Technologies Used
 
-## 10. Testing
+### MongoDB
 
-## 11. Issues found and status
+### Python
 
-- Custom Validator for types
+### JavaScript
 
-- Aggregation
+### HTML
 
-- onerror default to picture
+### CSS
 
-- Cloudinary
+### Cloudinary
 
-- filters
+## Testing
 
-- search
+## Issues found and status
 
-- ckedit
+During the project I met several challenges, as this was my first experience with both Python and MongoDB (or any database for that matter).
+Some of them are summarised below.
 
-- Quote all testing as noted in external doc
+### Custom Validator for types
 
-## 12. Deployment
+While
 
-- Heroku
-- Variables
+### Aggregation
 
-## 13. Credits
+### onerror default to picture
 
-- Content
-- Media
-- Code
-- Acknowledgements
+### Images
 
-## 14. Disclaimer
+### filters
+
+#### search
+
+#### ckedit
+
+#### Quote all testing as noted in external doc
+
+### Deployment
+
+#### Heroku
+
+#### Variables
+
+### Credits
+
+#### Content
+
+#### Media
+
+#### Code
+
+#### Acknowledgements
+
+## Disclaimer
