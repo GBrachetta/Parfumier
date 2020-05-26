@@ -63,7 +63,7 @@ if (EL_select) EL_select.addEventListener("change", checkSelected);
 
 
 $(document).on("click", "#editFormButton", function (e) {
-    // $("#editReviewContent").val("");
+    $("#editReviewContent").val("");
     var reviewText = $(this)
         .parents("div.row")
         .siblings("div.p-3.row")
