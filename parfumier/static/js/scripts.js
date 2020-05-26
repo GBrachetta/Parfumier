@@ -66,11 +66,11 @@ if (EL_select) EL_select.addEventListener("change", checkSelected);
 // Worked out together with the help from a gentleman on this question on SO:
 //https://stackoverflow.com/questions/61989485/pre-populate-current-value-of-wtforms-field-in-order-to-edit-it/62013979?noredirect=1#comment109698792_62013979
 $(document).on("click", "#editFormButton", function (e) {
-    var reviewText = $(this)
+    const reviewText = $(this)
         .parents("div.row")
         .siblings("div.p-3.row")
         .children("div#reviewContent")
         .children()
         .text();
-    CKEDITOR.instances.edit_review.setData("<p>" + reviewText + "</p>");
+    CKEDITOR.instances.edit_review.setData(reviewText);
 });
