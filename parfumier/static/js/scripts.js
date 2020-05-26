@@ -52,7 +52,6 @@ $(".edit-review").on("click", (evt) => {
     formEditReview.find('[name="perfume_id"]').val(btnData.perfume_id);
 });
 
-
 // Triggers the filter query - Deals with a different route
 // for the option outside the loop (create new type)
 function checkSelected() {
@@ -61,3 +60,16 @@ function checkSelected() {
 }
 const EL_select = document.querySelector("#filter_query");
 if (EL_select) EL_select.addEventListener("change", checkSelected);
+
+
+$(document).on("click", "#editFormButton", function (e) {
+    // $("#editReviewContent").val("");
+    var reviewText = $(this)
+        .parents("div.row")
+        .siblings("div.p-3.row")
+        .children("div#reviewContent")
+        .children()
+        .text();
+    console.log(reviewText);
+    $("#editReviewContent").val(reviewText);
+});

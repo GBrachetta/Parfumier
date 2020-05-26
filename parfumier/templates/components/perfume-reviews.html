@@ -12,7 +12,7 @@
                         <div class="card-header col-3">
                             {% if current_user.username == review['reviewer'] %}
                                 <button type="button" class="btn btn-danger btn-sm mt-2 delete-review float-right ml-2" data-perfume_id="{{perfume['_id']}}" data-review_id="{{review['_id']}}" data-toggle="modal" data-target="#deleteReviewModal">Delete</button>
-                                <button type="button" class="btn btn-success btn-sm mt-2 edit-review float-right ml-2" data-perfume_id="{{perfume['_id']}}" data-review_id="{{review['_id']}}" data-toggle="modal" data-target="#editReviewPerfumeModal">Edit</button>
+                                <button type="button" class="btn btn-success btn-sm mt-2 edit-review float-right ml-2" data-perfume_id="{{perfume['_id']}}" data-review_id="{{review['_id']}}" data-toggle="modal" data-target="#editReviewPerfumeModal" id="editFormButton">Edit</button>
                             {% endif %}
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                         <div class="col-1">
                             <img class="avatar-perfume float-right" src="{{ review['reviewer_picture'] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width=100 height=100 alt="Avatar">
                         </div>
-                        <div class=" col-10">
+                        <div class=" col-10" id="reviewContent">
                             <li>{{ review['review_content'] | safe }}</li>
                         </div>
                     </div>
