@@ -44,6 +44,7 @@ $(".delete-review").on("click", (evt) => {
 });
 
 // Opens the edit review modal passing data to edit review
+// !
 $(".edit-review").on("click", (evt) => {
     evt.preventDefault();
     const btnData = $(evt.currentTarget).data();
@@ -51,7 +52,6 @@ $(".edit-review").on("click", (evt) => {
     formEditReview.find('[name="review_id"]').val(btnData.review_id);
     formEditReview.find('[name="perfume_id"]').val(btnData.perfume_id);
 });
-
 
 // Triggers the filter query - Deals with a different route
 // for the option outside the loop (create new type)
@@ -61,3 +61,16 @@ function checkSelected() {
 }
 const EL_select = document.querySelector("#filter_query");
 if (EL_select) EL_select.addEventListener("change", checkSelected);
+
+// Pre-populates the content of the review to edit it, in the modal.
+// Worked out together with the help from a gentleman on this question on SO:
+//https://stackoverflow.com/questions/61989485/pre-populate-current-value-of-wtforms-field-in-order-to-edit-it/62013979?noredirect=1#comment109698792_62013979
+$(document).on("click", "#editFormButton", function (e) {
+    var reviewText = $(this)
+        .parents("div.row")
+        .siblings("div.p-3.row")
+        .children("div#reviewContent")
+        .children()
+        .text();
+    CKEDITOR.instances.edit_review.setData("<p>" + reviewText + "</p>");
+});

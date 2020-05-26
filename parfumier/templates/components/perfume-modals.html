@@ -96,15 +96,15 @@
                     {{ edit_review_form.hidden_tag() }}
                     <fieldset class="form-group">
                         <div class="form-group">
-                            {% if edit_review_form.review.errors %}
-                            {{ edit_review_form.review(class="form-control form-control-md is-invalid")}}
+                            {% if edit_review_form.edit_review.errors %}
+                            {{ edit_review_form.edit_review(class="form-control form-control-md is-invalid")}}
                             <div class="invalid-feedback">
-                                {% for error in edit_review_form.review.errors %}
+                                {% for error in edit_review_form.edit_review.errors %}
                                 <span>{{ error }}</span>
                                 {% endfor %}
                             </div>
                             {% else %}
-                            {{ edit_review_form.review(class="form-control form-control-md ckeditor", placeholder="Review")}}
+                            {{ edit_review_form.edit_review(class="form-control form-control-md ckeditor", placeholder="Review")}}
                             {% endif %}
                         </div>
                     </fieldset>
