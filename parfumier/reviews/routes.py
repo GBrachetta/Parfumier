@@ -83,8 +83,8 @@ def edit_review():
             {"_id": ObjectId(perfume_id), "reviews._id": ObjectId(review_id)},
             {
                 "$set": {
-                    "reviews.$.review_content": form.review.data,
-                    "reviews.$.date_reviewed": datetime.utcnow(),
+                    "reviews.$.review_content": form.edit_review.data,
+                    # "reviews.$.date_reviewed": datetime.utcnow(),
                 }
             },
         )

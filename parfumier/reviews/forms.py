@@ -24,5 +24,5 @@ class EditReviewForm(FlaskForm):
     Return: return_description
     """
 
-    review = TextAreaField("Review", validators=[DataRequired()])
+    edit_review = TextAreaField("Review", validators=[DataRequired()])
     submit = SubmitField("Update Review")
