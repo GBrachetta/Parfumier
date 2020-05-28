@@ -2,20 +2,19 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteUserModal">Please Confirm Deletion</h5>
+                <h4 class="modal-title">Please Confirm</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>By clicking on the Delete button you will delete your account.</p>
-                <p><strong>This action cannot be undone.</strong></p>
+                <p>You are about to delete your account.</p>
+                <p class="warning-modals">This action cannot be undone.</p>
             </div>
             <div class="modal-footer">
                 <form action="{{ url_for('users.delete_user' )}}" method="POST">
-                    <input type="submit" , class="btn btn-danger" value="Delete">
+                    <input type="submit" , class="btn  shadow-sm button-red" value="Delete">
                 </form>
             </div>
         </div>
     </div>
-</div>
