@@ -267,7 +267,7 @@ div.social-icons .background-twitter {
     color: #454e56;
 }
 
-.border-purple{
+.border-purple {
     border-color: #eadff7;
 }
 
@@ -340,12 +340,21 @@ div.social-icons .background-twitter {
     color: rgb(182, 127, 127);
 }
 
-.project-card-no-image h3{
+.project-card-no-image h3 {
     font-size: 1rem;
 }
 
-@media only screen and (min-width: 768px) {
-.project-card-no-image h3{
-    font-size: 1.3rem;
+#filter_query,
+#db_query {
+    color: rgb(131, 153, 176);
 }
+
+#db_query::placeholder {
+    color: rgb(131, 153, 176);
+}
+
+@media only screen and (min-width: 768px) {
+    .project-card-no-image h3 {
+        font-size: 1.3rem;
+    }
 }
