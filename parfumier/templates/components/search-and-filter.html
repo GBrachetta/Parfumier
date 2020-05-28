@@ -4,7 +4,7 @@
         <div class="col-md-6">
             <form id="form" action="{{ url_for("perfumes.filters") }}" class="shadow-none pb-0">
                 <div class="form-group shadow-sm">
-                    <select class="form-control" id="filter_query" name="filter_query">
+                    <select class="custom-select border-white shadow-sm" id="filter_query" name="filter_query">
                         <option selected='true' id="option-selected">Filter by type</option>
                         {% for type in types %}
                         <option value="{{type['type_name']}}">{{type['type_name']}}</option>
