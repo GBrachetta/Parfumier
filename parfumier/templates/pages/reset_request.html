@@ -1,35 +1,37 @@
 {% extends 'layout/base.html' %}
 {% block content %}
 
-<div class="container content-section">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form action="" method="post" novalidate>
-                {{ form.hidden_tag() }}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Reset Password</legend>
-                    <div class="form-group">
-                        {{ form.csrf_token }}
-                        {{ form.email.label(class="form-control-label") }}
-                        {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-md is-invalid")}}
-                        <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
-                            <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                        {% else %}
-                        {{ form.email(class="form-control form-control-md", placeholder="Enter your email", type="email")}}
-                        {% endif %}
-                    </div>
-                </fieldset>
+<main class="page contact-page">
+    <section class="portfolio-block contact">
+        <div class="container">
+            <div class="heading">
+                <h2 class="text-capitalize">Reset Password</h2>
+            </div>
+            <form class="shadow-sm" action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+
                 <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-primary")}}
+                    {{ form.csrf_token }}
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                    {{ form.email(class="border-white shadow-sm item form-control form-control-md is-invalid")}}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.email(class="border-white shadow-sm item form-control form-control-md", type="email")}}
+                    {% endif %}
                 </div>
+
+                <div class="form-group">
+                    {{ form.submit(class="btn shadow-sm button-blue")}}
+                </div>
+
             </form>
         </div>
-    </div>
-</div>
-
+    </section>
+</main>
 
 {% endblock content %}
