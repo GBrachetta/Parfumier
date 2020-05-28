@@ -235,6 +235,13 @@ div.social-icons .background-twitter {
     color: #585e65;
 }
 
+.button-blue-small {
+    margin-left: 0px;
+    margin-top: 40px;
+    background-color: #c7e2f5;
+    color: #585e65;
+}
+
 .button-green {
     margin-left: 0px;
     margin-top: 40px;
