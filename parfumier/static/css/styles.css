@@ -257,6 +257,20 @@ div.social-icons .background-twitter {
     background-color: #ffe0ce;
 }
 
+.button-purple {
+    background-color: #eadff7;
+    color: #454e56;
+}
+
+.button-yellow {
+    background-color: #f5db98;
+    color: #454e56;
+}
+
+.border-purple{
+    border-color: #eadff7;
+}
+
 /* Text */
 .portfolio-block .heading h2 {
     color: rgb(149, 122, 227);
@@ -318,10 +332,20 @@ div.social-icons .background-twitter {
 }
 
 .edit-user-email {
-    color: rgb(142,166,187);
+    color: rgb(142, 166, 187);
 }
 
-.warning-modals{
+.warning-modals {
     font-weight: 700;
     color: rgb(182, 127, 127);
+}
+
+.project-card-no-image h3{
+    font-size: 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+.project-card-no-image h3{
+    font-size: 1.3rem;
+}
 }
