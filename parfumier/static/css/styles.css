@@ -259,6 +259,7 @@ div.social-icons .background-twitter {
 
 .button-purple {
     background-color: #eadff7;
+    margin-top: 40px;
     color: #454e56;
 }
 
@@ -368,4 +369,18 @@ div.social-icons .background-twitter {
 .button-go {
     background-color: rgb(205, 241, 196);
     color: rgb(116, 109, 109);
+}
+
+.content-review{
+    font-size: 14px;
+    color: #454e56;
+}
+
+.name-reviewer{
+    color: rgb(64, 109, 208);
+    font-weight: bold;
+}
+
+.review-in-prefume{
+    font-size: 14px;
 }
