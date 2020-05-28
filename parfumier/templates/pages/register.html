@@ -1,15 +1,18 @@
 {% extends "layout/base.html" %}
 {% block content %}
-<div class="container content-section">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form method=POST action="" novalidate>
+
+<main class="page contact-page">
+    <section class="portfolio-block contact">
+        <div class="container">
+            <div class="heading">
+                <h2 class="text-capitalize">Register</h2>
+            </div>
+            <form  class="shadow-sm" method=POST action="" novalidate>
                 {{ form.hidden_tag() }}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Please Register</legend>
+
                     <div class="form-group">
                         {{ form.csrf_token }}
-                        {{ form.username.label(class="form-control-label") }}
+                        {{ form.username.label(class="form-control-label border-white shadow-sm item") }}
                         {% if form.username.errors %}
                         {{ form.username(class="form-control form-control-md is-invalid")}}
                         <div class="invalid-feedback">
@@ -18,12 +21,13 @@
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.username(class="form-control form-control-md", placeholder="Enter your username")}}
+                        {{ form.username(class="form-control form-control-md border-white shadow-sm item")}}
                         {% endif %}
                     </div>
+
                     <div class="form-group">
                         {{ form.csrf_token }}
-                        {{ form.first_name.label(class="form-control-label") }}
+                        {{ form.first_name.label(class="form-control-label border-white shadow-sm item") }}
                         {% if form.first_name.errors %}
                         {{ form.first_name(class="form-control form-control-md is-invalid")}}
                         <div class="invalid-feedback">
@@ -32,70 +36,74 @@
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.first_name(class="form-control form-control-md", placeholder="Enter your first name")}}
+                        {{ form.first_name(class="form-control form-control-md border-white shadow-sm item")}}
                         {% endif %}
                     </div>
+
                     <div class="form-group">
                         {{ form.csrf_token }}
                         {{ form.last_name.label(class="form-control-label") }}
                         {% if form.last_name.errors %}
-                        {{ form.last_name(class="form-control form-control-md is-invalid")}}
+                        {{ form.last_name(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
                         <div class="invalid-feedback">
                             {% for error in form.last_name.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.last_name(class="form-control form-control-md", placeholder="Enter your last name")}}
+                        {{ form.last_name(class="form-control form-control-md border-white shadow-sm item")}}
                         {% endif %}
                     </div>
+
                     <div class="form-group">
                         {{ form.csrf_token }}
                         {{ form.email.label(class="form-control-label") }}
                         {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-md is-invalid")}}
+                        {{ form.email(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
                         <div class="invalid-feedback">
                             {% for error in form.email.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.email(class="form-control form-control-md", placeholder="Enter your email", type="email")}}
+                        {{ form.email(class="form-control form-control-md border-white shadow-sm item", type="email")}}
                         {% endif %}
                     </div>
+
                     <div class="form-group">
                         {{ form.password.label(class="form-control-label")}}
                         {% if form.password.errors %}
-                        {{ form.password(class="form-control form-control-md is-invalid")}}
+                        {{ form.password(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
                         <div class="invalid-feedback">
                             {% for error in form.password.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.password(class="form-control form-control-md", placeholder="Enter your password")}}
+                        {{ form.password(class="form-control form-control-md border-white shadow-sm item")}}
                         {% endif %}
                     </div>
+
                     <div class="form-group">
                         {{ form.confirm_password.label(class="form-control-label")}}
                         {% if form.confirm_password.errors %}
-                        {{ form.confirm_password(class="form-control form-control-md is-invalid")}}
+                        {{ form.confirm_password(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
                         <div class="invalid-feedback">
                             {% for error in form.confirm_password.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.confirm_password(class="form-control form-control-md", placeholder="Confirm your password")}}
+                        {{ form.confirm_password(class="form-control form-control-md border-white shadow-sm item")}}
                         {% endif %}
                     </div>
-                </fieldset>
+
                 <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-primary")}}
+                    {{ form.submit(class="btn shadow-sm button-blue")}}
                 </div>
             </form>
-            <br>
         </div>
-    </div>
-</div>
+    </section>
+</main>
+
 {% endblock content%}
