@@ -238,7 +238,7 @@ div.social-icons .background-twitter {
 .button-blue-small {
     margin-left: 0px;
     margin-top: 40px;
-    background-color: #c7e2f5;
+    background-color: #d2e3f4;
     color: #585e65;
 }
 
@@ -309,13 +309,11 @@ div.social-icons .background-twitter {
     height: 164px;
     background-size: cover;
     background-repeat: no-repeat;
-    margin-left: 77px;
     position: absolute;
     border-radius: 5px;
 }
 
 #form-profile .form-control-thumbnail {
-    /* position: absolute; */
     border-radius: 50%;
     display: inline-block;
     width: 100px;
