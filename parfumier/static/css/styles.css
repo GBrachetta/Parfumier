@@ -269,6 +269,7 @@ div.social-icons .background-twitter {
 
 .border-purple {
     border-color: #eadff7;
+    color: #585e65;
 }
 
 /* Text */
@@ -357,4 +358,14 @@ div.social-icons .background-twitter {
     .project-card-no-image h3 {
         font-size: 1.3rem;
     }
+}
+
+.input-group-text {
+    background-color: #c7e2f5;
+    color: rgb(152, 157, 162);
+}
+
+.button-go {
+    background-color: rgb(205, 241, 196);
+    color: rgb(116, 109, 109);
 }

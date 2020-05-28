@@ -1,32 +1,41 @@
 {% extends 'layout/base.html' %} {% block content %}
-{% include "components/search-and-filter.html" %}
-<div class="container mb-4 pt-4">
-    <div class="row">
-        <div class="col-9">
-            <h1>Perfumes</h1>
-        </div>
-        <div class="col-3">
+
+<main class="page projets-page">
+    <section class="portfolio-block projects compact-grid container">
+
+
+        {% include "components/search-and-filter.html" %}
+        <div class="container mb-4 pt-4">
+            <div class="col-12 text-center mb-4">
+                <a class="btn button-purple" href="{{ url_for("perfumes.all_perfumes") }}" role="button" >All Perfumes</a>
+            </div>
+            <div class="row no-gutters">
+            </div>
+
+            <!-- Perfume card -->
+            {% include "components/perfume-card.html" %}
+            <!-- Pagination -->
+            <div class="pagination">
+                {% for page_number in total_pages %}
+                {% if page_number %}
+                {% if page_number == page %}
+                <a class="btn btn-info mb-4" href="{{ page_number }}">{{ page_number }}</a>
+                {% else %}
+                <a class="btn btn-outline-info mb-4" href="{{ url_for('perfumes.all_perfumes', page=page_number) }}">{{ page_number }}</a>
+                {% endif %}
+                {% else %}
+                ...
+                {% endif %}
+                {% endfor %}
+            </div>
             {% if current_user.is_authenticated and current_user.is_admin == True %}
-            <a href="{{ url_for('perfumes.new_perfume') }}" class="btn btn-primary float-right" type="button">Add new perfume</a>
+
+            <div class="col-12 text-center mt-4">
+                <a class="btn button-purple" href="{{ url_for('perfumes.new_perfume') }}" role="button">Create New Perfume</a>
+            </div>
             {% endif %}
-        </div>
-    </div>
-</div>
-<!-- Perfume card -->
-{% include "components/perfume-card.html" %}
-<!-- Pagination -->
-<div class="pagination">
-    {% for page_number in total_pages %}
-    {% if page_number %}
-    {% if page_number == page %}
-    <a class="btn btn-info mb-4" href="{{ page_number }}">{{ page_number }}</a>
-    {% else %}
-    <a class="btn btn-outline-info mb-4" href="{{ url_for('perfumes.all_perfumes', page=page_number) }}">{{ page_number }}</a>
-    {% endif %}
-    {% else %}
-    ...
-    {% endif %}
-    {% endfor %}
-</div>
+
+    </section>
+</main>
 
 {% endblock content %}
