@@ -65,12 +65,23 @@ if (EL_select) EL_select.addEventListener("change", checkSelected);
 // Pre-populates the content of the review to edit it, in the modal.
 // Worked out together with the help from a gentleman on this question on SO:
 //https://stackoverflow.com/questions/61989485/pre-populate-current-value-of-wtforms-field-in-order-to-edit-it/62013979?noredirect=1#comment109698792_62013979
+// $(document).on("click", "#editFormButton", function (e) {
+//     const reviewText = $(this)
+//         .parents("div.row")
+//         .siblings("div.p-3.row")
+//         .children("div#reviewContent")
+//         .children()
+//         .text();
+//     CKEDITOR.instances.edit_review.setData(reviewText);
+// });
+
+
 $(document).on("click", "#editFormButton", function (e) {
     const reviewText = $(this)
-        .parents("div.row")
-        .siblings("div.p-3.row")
-        .children("div#reviewContent")
-        .children()
+        .parents("div")
+        .siblings("div.review-content")
+        .children(".content-review")
         .text();
+        console.log(reviewText);
     CKEDITOR.instances.edit_review.setData(reviewText);
 });
