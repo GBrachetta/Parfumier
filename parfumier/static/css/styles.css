@@ -313,3 +313,8 @@ div.social-icons .background-twitter {
 .edit-user-email {
     color: rgb(142,166,187);
 }
+
+.warning-modals{
+    font-weight: 700;
+    color: rgb(182, 127, 127);
+}
