@@ -1,6 +1,6 @@
 """sumary_line"""
 from datetime import datetime
-from flask import flash, redirect, Blueprint, url_for, request
+from flask import flash, redirect, Blueprint, url_for, request, render_template
 from flask_login import login_required, current_user
 from bson.objectid import ObjectId
 from parfumier import mongo
@@ -21,7 +21,38 @@ def review_perfume(perfume_id):
     """
 
     form = AddReviewForm()
+    form_edit = EditReviewForm()
     perfume = mongo.db.perfumes.find_one({"_id": ObjectId(perfume_id)})
+    cur = mongo.db.perfumes.aggregate(
+        [
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "author",
+                    "foreignField": "username",
+                    "as": "creator",
+                }
+            },
+            {"$unwind": "$creator"},
+            {
+                "$project": {
+                    "_id": "$_id",
+                    "perfumeName": "$name",
+                    "perfumeBrand": "$brand",
+                    "perfumeDescription": "$description",
+                    "date_updated": "$date_updated",
+                    "perfumePicture": "$picture",
+                    "isPublic": "$public",
+                    "perfumeType": "$perfume_type",
+                    "username": "$creator.username",
+                    "firstName": "$creator.first_name",
+                    "lastName": "$creator.last_name",
+                    "profilePicture": "$creator.avatar",
+                }
+            },
+            {"$match": {"_id": ObjectId(perfume_id)}},
+        ]
+    )
     if form.validate_on_submit():
         review_id = ObjectId.from_datetime(datetime.utcnow())
         mongo.db.perfumes.update(
@@ -40,7 +71,13 @@ def review_perfume(perfume_id):
         )
         flash("Your review has been received", "success")
         return redirect(url_for("perfumes.perfume", perfume_id=perfume["_id"]))
-    return redirect(url_for("perfumes.perfume", perfume_id=perfume["_id"]))
+    return render_template(
+        "pages/perfume.html",
+        perfume=perfume,
+        add_review_form=form,
+        edit_review_form=form_edit,
+        cursor=cur,
+    )
 
 
 @reviews.route("/perfume/review", methods=["POST"])

@@ -9,6 +9,7 @@
             </div>
             <form class="shadow-sm" method=POST action="" enctype="multipart/form-data" id="form-profile" novalidate>
                 {{ form.hidden_tag() }}
+                {{ form.csrf_token }}
 
                 <div class="form-row edit-user-header mb-4">
                     <div class="col-12 col-md-3 text-right text-md-left">

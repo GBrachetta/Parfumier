@@ -267,6 +267,12 @@ div.social-icons .background-twitter {
 .button-yellow {
     background-color: #f5db98;
     color: #454e56;
+    margin-top: 40px;
+}
+
+.button-yellow-nom {
+    background-color: #f5db98;
+    color: #454e56;
 }
 
 .border-purple {
@@ -286,6 +292,10 @@ div.social-icons .background-twitter {
     color: rgb(149, 122, 227);
     font-size: 40px;
     font-family: "Alex Brush", cursive;
+}
+
+.portfolio-block form {
+    padding-bottom: 50px;
 }
 
 .small-links {
@@ -414,4 +424,99 @@ div.social-icons .background-twitter {
 
 .text-muted {
     font-size: 12px;
+}
+
+#form-perfume .form-control-thumbnail {
+    width: 140px;
+    height: 164px;
+    margin-bottom: 0;
+    border: none;
+}
+
+.new-pic-select {
+    position: absolute;
+    color: #fff;
+    background-color: rgba(227, 122, 195, 0.6);
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+    margin-top: 65px;
+}
+
+.type-Aromatic {
+    border-color: rgb(151, 31, 155);
+}
+
+.type-Amber {
+    border-color: rgb(122, 72, 24);
+}
+
+.type-Balsamic {
+    border-color: rgb(137, 160, 118);
+}
+
+.type-Bright {
+    border-color: rgb(214, 159, 216);
+}
+
+.type-Chypre {
+    border-color: rgb(60, 155, 31);
+}
+
+.type-Citrus {
+    border-color: rgb(229, 255, 0);
+}
+
+.type-Bouquet {
+    border-color: rgb(97, 44, 197);
+}
+
+.type-Fougère {
+    border-color: rgb(115, 255, 0);
+}
+
+.type-Fruity {
+    border-color: rgb(216, 49, 49);
+}
+
+.type-Gourmand {
+    border-color: rgb(255, 136, 0);
+}
+
+.type-Green {
+    border-color: rgb(164, 240, 23);
+}
+
+.type-Leather {
+    border-color: rgb(71, 44, 8);
+}
+
+.type-Oceanic {
+    border-color: rgb(25, 110, 190);
+}
+
+.type-Oriental {
+    border-color: rgb(230, 201, 106);
+}
+
+.type-Single {
+    border-color: rgb(161, 89, 202);
+}
+
+.type-Spicy {
+    border-color: rgb(142, 145, 2);
+}
+
+.type-Woody {
+    border-color: rgb(143, 82, 13);
+}
+
+.navbar-brand {
+    font-family: "Alex Brush", cursive;
+    text-transform: capitalize;
+}
+
+.portfolio-navbar .logo {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
 }

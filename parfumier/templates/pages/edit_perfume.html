@@ -9,10 +9,17 @@
             </div>
             <form method=POST action="" enctype="multipart/form-data" id="form-perfume" novalidate>
                 {{ form.hidden_tag() }}
-                <div class="form-row mb-4" >
-                    <div class="col-12 col-md-3 text-right text-md-left">
-                        <span class="form-control-thumbnail"></span><br></div>
-                    <div class="col-12 col-md-9 text-right pl-3">
+                {{ form.csrf_token }}
+                <div class="form-row mb-4">
+                    <div class="col-6 col-md-3 text-center">
+                        <img src="{{ current_perfume.picture }}" alt="picture" width="140" height="164">
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <p class="form-control-thumbnail border-white">
+                            <p class="form-control-filename new-pic-select ml-4 shadow-sm" data-text="New Picture" id="pictureFileName"></p>
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-6 text-right pl-3">
                         <p class="edit-user-username">{{ current_perfume.name }}</p>
                         <p class="edit-user-names">{{ current_perfume.brand }}</p>
                         <p class="edit-user-email">{{ current_perfume.perfume_type }}</p>
@@ -20,7 +27,6 @@
                 </div>
 
                 <div class="form-group">
-                    {{ form.csrf_token }}
                     {{ form.brand.label(class="form-control-label") }}
                     {% if form.brand.errors %}
                     {{ form.brand(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
@@ -93,13 +99,9 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="col-6">
+                    <div class="col-12 col-sm-4 text-center text-sm-left">
                         {{ form.picture.label(class="btn shadow-sm button-green form-control-label") }}
                         {{ form.picture(class="form-control-file") }}
-                        <span class="form-control-thumbnail"></span>
-                        <div class="pt-2">
-                            <span class="form-control-filename lead text-danger" data-text="Picture selected" id="pictureFileName"></span>
-                        </div>
                         {% if form.picture.errors %}
                         {% for error in form.picture.errors %}
                         <span class="text-danger">{{ error }}</span></br>
@@ -107,7 +109,11 @@
                         {% endif %}
                     </div>
 
-                    <div class="col-6 text-right">
+                    <div class="col-12 col-sm-4 text-center">
+                        <a class="btn button-yellow" href="{{ url_for("perfumes.perfume", perfume_id=current_perfume._id) }}">Cancel</a>
+                    </div>
+
+                    <div class="col-12 col-sm-4 text-center text-sm-right">
                         {{ form.submit(class="btn button-blue-small shadow-sm text-center")}}
                     </div>
                 </div>

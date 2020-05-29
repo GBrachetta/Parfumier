@@ -21,8 +21,9 @@
             </div>
             <form class="shadow-sm" action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
+                {{ form.csrf_token }}
+                
                 <div class="form-group">
-                    {{ form.csrf_token }}
                         {{ form.password.label(class="form-control-label") }}
                         {% if form.password.errors %}
                         {{ form.password(class="item border-white shadow-sm form-control form-control-md is-invalid")}}
