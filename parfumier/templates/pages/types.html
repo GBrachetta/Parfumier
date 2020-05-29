@@ -11,7 +11,7 @@
             <div class="row">
                 {% for type in types %}
                     <div class="col-6 col-md-4 col-lg-3">
-                        <div class="border-purple project-card-no-image px-0 text-center">
+                        <div class="project-card-no-image px-0 text-center type-{{ type.type_name }}">
                             <h3>{{ type.type_name }}</h3>
                             <a class="btn btn-sm shadow-sm button-yellow" role="button" href="{{ url_for('types.show_type', type_id=type._id) }}">More</a>
                             <div class="tags"></div>
