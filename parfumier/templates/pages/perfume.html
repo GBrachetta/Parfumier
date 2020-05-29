@@ -93,7 +93,7 @@ START MY NEW REVIEWS
                                                             <span class="name-reviewer">{{review['reviewer'] }}</span> said:&nbsp;
                                                             <div class="content-review">{{ review['review_content'] | safe }}
                                                             </div>
-                                                            <small class="text-muted">{{ review.date_reviewed.strftime('%d-%m-%Y') }}</small></p>
+                                                            <small class="text-muted">{{ review.date_reviewed.strftime('%d %B, %Y @%-H:%Mh') }}</small></p>
                                                     </div>
                                                     <div class="col-12 col-lg-3 text-center" style="padding-right: 0px;margin-bottom: 10px;">
                                                         {% if current_user.username == review['reviewer'] %}
