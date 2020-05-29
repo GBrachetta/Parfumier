@@ -424,7 +424,7 @@ div.social-icons .background-twitter {
 }
 
 .new-pic-select {
-    position: fixed;
+    position: absolute;
     color: #fff;
     background-color: rgba(227, 122, 195, 0.6);
     padding-left: 4px;
