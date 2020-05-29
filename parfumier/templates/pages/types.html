@@ -1,0 +1,37 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+
+<main class="page projets-page">
+    <section class="portfolio-block project-no-images">
+        <div class="container">
+            <div class="heading">
+                <h2 class="text-capitalize">Perfume Types</h2>
+            </div>
+
+            <div class="row">
+                {% for type in types %}
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="project-card-no-image px-0 text-center type-{{ type.type_name }}">
+                            <h3>{{ type.type_name }}</h3>
+                            <a class="btn btn-sm shadow-sm button-yellow" role="button" href="{{ url_for('types.show_type', type_id=type._id) }}">More</a>
+                            <div class="tags"></div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {% if current_user.is_authenticated and current_user.is_admin == True %}
+                    <div class="col-12 text-center mt-4">
+                        <a href="{{ url_for('types.new_type') }}" class="btn button-purple shadow-sm" type="button">Create new type</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+
+
+{% endblock content %}

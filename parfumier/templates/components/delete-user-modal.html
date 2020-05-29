@@ -1,0 +1,20 @@
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Please Confirm</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>You are about to delete your account.</p>
+                <p class="warning-modals">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <form action="{{ url_for('users.delete_user' )}}" method="POST">
+                    <input type="submit" , class="btn  shadow-sm button-red" value="Delete">
+                </form>
+            </div>
+        </div>
+    </div>

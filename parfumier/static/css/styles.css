@@ -1,0 +1,539 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&family=Lato:wght@300;400;700&family=Montserrat:ital,wght@0,400;0,600;0,700;1,300&family=Quicksand:wght@300;400;500;700&display=swap");
+body {
+    font-family: "Quicksand", sans-serif !important;
+}
+/* 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #444444;
+}
+
+.content-section {
+    background: #ffffff;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#flash {
+    font-size: 1em;
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 2em;
+}
+
+.account-img {
+    width: 125px;
+    height: 125px;
+}
+
+.form-control-file {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+#form-perfume .form-control-thumbnail {
+    display: inline-block;
+    width: 164px;
+    height: 164px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-left: 77px;
+    position: absolute;
+    border-radius: 5px;
+}
+
+#form-profile .form-control-thumbnail {
+    position: absolute;
+    border-radius: 50%;
+    display: inline-block;
+    width: 46px;
+    height: 46px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-left: 25px;
+}
+
+@media only screen and (min-width: 768px) {
+    #flash {
+        font-size: 1.5em;
+        text-align: center;
+        width: 40%;
+        margin: 0 auto;
+        margin-bottom: 2em;
+    }
+}
+
+.card-header .fa {
+    transition: 0.3s transform ease-in-out;
+}
+.card-header .collapsed .fa {
+    transform: rotate(90deg);
+}
+
+#heading-collapsed {
+    color: #ddd;
+    text-decoration: none;
+}
+
+#heading-collapsed:hover {
+    color: rgb(255, 255, 255);
+}
+
+.avatar-perfume {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.picture-perfume {
+    max-width: 250px;
+}
+
+
+
+.view-more:hover {
+    text-decoration: none;
+    color: #444444;
+    font-weight: 500;
+}
+
+.card-title {
+    font-size: 1.5em;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+}
+
+.reviews {
+    list-style: none;
+}
+
+.Woody {
+    background-color: rgb(77, 62, 31);
+    color: #ddd;
+}
+
+.Oriental {
+    background-color: rgb(218, 120, 120);
+}
+
+.Citrus {
+    background-color: rgb(235, 241, 146);
+}
+.Oceanic {
+    background-color: rgb(71, 128, 175);
+    color: #ddd;
+}
+
+.Chypre {
+    background-color: rgb(7, 97, 37);
+    color: #ddd;
+}
+
+.Spicy {
+    background-color: rgb(184, 120, 25);
+}
+
+.Green {
+    background-color: rgb(11, 250, 11);
+}
+
+.Floral {
+    background-color: rgb(226, 171, 197);
+}
+
+.Leather {
+    background-color: rgb(114, 86, 69);
+    color: #ddd;
+}
+
+.Balsamic {
+    background-color: rgb(174, 144, 231);
+}
+
+.Gourmand {
+    background-color: rgb(218, 82, 82);
+}
+
+.Fougère {
+    background-color: rgb(122, 151, 95);
+}
+
+.Amber {
+    background-color: rgb(207, 100, 0);
+    color: #ddd;
+}
+
+.Fruity {
+    background-color: rgb(216, 35, 240);
+    color: #ddd;
+}
+
+.pagination {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+
+
+.pagination li:hover{
+    text-decoration: none;
+    background-color: rgb(216, 216, 216);
+}
+
+.pagination li.active {
+    color: #ddd;
+} */
+
+/* New Style */
+
+/* Navbar */
+#navbar {
+    filter: brightness(114%) hue-rotate(46deg) invert(0%);
+}
+
+.portfolio-navbar .navbar-nav .nav-link {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+}
+
+/* Footer */
+div.social-icons .background-facebook {
+    background-color: rgb(64, 109, 208);
+}
+
+div.social-icons .background-instagram {
+    background-color: rgb(193, 65, 57);
+}
+
+div.social-icons .background-twitter {
+    background-color: rgb(76, 153, 224);
+}
+
+.button-blue {
+    margin-left: 0px;
+    margin-top: 40px;
+    height: 40px;
+    background-color: #c7e2f5;
+    color: #585e65;
+}
+
+.button-blue-small {
+    margin-left: 0px;
+    margin-top: 40px;
+    background-color: #d2e3f4;
+    color: #585e65;
+}
+
+.button-green {
+    margin-left: 0px;
+    margin-top: 40px;
+    margin-bottom: 0;
+    color: #585e65;
+    background-color: #cdf1c4;
+}
+
+.button-red {
+    margin-left: 0px;
+    margin-top: 40px;
+    color: #585e65;
+    margin-right: 0px;
+    background-color: #ffe0ce;
+}
+
+.button-purple {
+    background-color: #eadff7;
+    margin-top: 40px;
+    color: #454e56;
+}
+
+.button-yellow {
+    background-color: #f5db98;
+    color: #454e56;
+    margin-top: 40px;
+}
+
+.button-yellow-nom {
+    background-color: #f5db98;
+    color: #454e56;
+}
+
+.border-purple {
+    border-color: #eadff7;
+    color: #585e65;
+}
+
+/* Text */
+.portfolio-block .heading h2 {
+    color: rgb(149, 122, 227);
+    font-size: 70px;
+    font-family: "Alex Brush", cursive;
+    text-transform: unset;
+}
+
+.portfolio-block .heading h4 {
+    color: rgb(149, 122, 227);
+    font-size: 40px;
+    font-family: "Alex Brush", cursive;
+}
+
+.portfolio-block form {
+    padding-bottom: 50px;
+}
+
+.small-links {
+    font-size: 12px;
+    color: rgb(86, 174, 231);
+}
+
+.muted-texts {
+    font-size: 12px;
+    color: rgb(149, 149, 149);
+}
+
+.account-img {
+    width: 125px;
+    height: 125px;
+}
+
+/* Styling Preview Avatar */
+.form-control-file {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+#form-perfume .form-control-thumbnail {
+    display: inline-block;
+    width: 164px;
+    height: 164px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    border-radius: 5px;
+}
+
+#form-profile .form-control-thumbnail {
+    border-radius: 50%;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.edit-user-username {
+    font-size: 30px;
+    color: rgb(100, 136, 171);
+}
+
+.edit-user-names {
+    color: rgb(72, 165, 177);
+}
+
+.edit-user-email {
+    color: rgb(142, 166, 187);
+}
+
+.warning-modals {
+    font-weight: 700;
+    color: rgb(182, 127, 127);
+}
+
+.project-card-no-image h3 {
+    font-size: 1rem;
+}
+
+#filter_query,
+#db_query {
+    color: rgb(131, 153, 176);
+}
+
+#db_query::placeholder {
+    color: rgb(131, 153, 176);
+}
+
+@media only screen and (min-width: 768px) {
+    .project-card-no-image h3 {
+        font-size: 1.3rem;
+    }
+}
+
+.input-group-text {
+    background-color: #c7e2f5;
+    color: rgb(152, 157, 162);
+}
+
+.button-go {
+    background-color: rgb(205, 241, 196);
+    color: rgb(116, 109, 109);
+}
+
+.content-review {
+    font-size: 14px;
+    color: #454e56;
+}
+
+.name-reviewer {
+    color: rgb(64, 109, 208);
+    font-weight: bold;
+}
+
+.review-in-prefume {
+    font-size: 14px;
+}
+
+.links-footer a {
+    font-size: 14px;
+}
+
+.meta-heading {
+    font-size: 10px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.perfume-avatar {
+    width: 75px;
+    height: 75px;
+    margin-top: 20px;
+}
+
+.review-avatar {
+    width: 60px;
+    height: 60px;
+}
+
+.text-muted {
+    font-size: 12px;
+}
+
+#form-perfume .form-control-thumbnail {
+    width: 140px;
+    height: 164px;
+    margin-bottom: 0;
+    border: none;
+}
+
+.new-pic-select {
+    position: absolute;
+    color: #fff;
+    background-color: rgba(227, 122, 195, 0.6);
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+    margin-top: 65px;
+}
+
+.type-Aromatic {
+    border-color: rgb(151, 31, 155);
+    background-color: rgba(151, 31, 155,.1);
+}
+
+.type-Amber {
+    border-color: rgb(122, 72, 24);
+    background-color: rgba(122, 72, 24,.1);
+}
+
+.type-Balsamic {
+    border-color: rgb(137, 160, 118);
+    background-color: rgba(137, 160, 118,.1);
+}
+
+.type-Bright {
+    border-color: rgb(214, 159, 216);
+    background-color: rgba(214, 159, 216,.1);
+}
+
+.type-Chypre {
+    border-color: rgb(60, 155, 31);
+    background-color: rgba(60, 155, 31,.1);
+}
+
+.type-Citrus {
+    border-color: rgb(229, 255, 0);
+    background-color: rgba(229, 255, 0,.1);
+}
+
+.type-Floral {
+    border-color: rgb(97, 44, 197);
+    background-color: rgba(98, 44, 197, 0.1);
+}
+
+.type-Fougère {
+    border-color: rgb(115, 255, 0);
+    background-color: rgb(115, 255, 0,.1);
+}
+
+.type-Fruity {
+    border-color: rgb(216, 49, 49);
+    background-color: rgba(216, 49, 49,.1);
+}
+
+.type-Gourmand {
+    border-color: rgb(255, 136, 0);
+    background-color: rgba(255, 136, 0,.1);
+}
+
+.type-Green {
+    border-color: rgb(164, 240, 23);
+    background-color: rgba(164, 240, 23,.1);
+}
+
+.type-Leather {
+    border-color: rgb(71, 44, 8);
+    background-color: rgba(71, 44, 8,.1);
+}
+
+.type-Oceanic {
+    border-color: rgb(25, 110, 190);
+    background-color: rgba(25, 110, 190,.1);
+}
+
+.type-Oriental {
+    border-color: rgb(230, 201, 106);
+    background-color: rgba(230, 201, 106,.1);
+}
+
+.type-Single {
+    border-color: rgb(161, 89, 202);
+    background-color: rgba(161, 89, 202,.1);
+}
+
+.type-Spicy {
+    border-color: rgb(142, 145, 2);
+    background-color: rgba(142, 145, 2,.1);
+}
+
+.type-Woody {
+    border-color: rgb(143, 82, 13);
+    background-color: rgba(143, 82, 13,.1);
+}
+
+.navbar-brand {
+    font-family: "Alex Brush", cursive;
+    text-transform: capitalize;
+}
+
+.portfolio-navbar .logo {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+}

@@ -1,0 +1,34 @@
+<div class="heading">
+    <h2 class="text-capitalize">Perfumes</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form id="form" action="{{ url_for("perfumes.filters") }}" class="shadow-none pb-0">
+                <div class="form-group shadow-sm">
+                    <select class="custom-select border-white shadow-sm" id="filter_query" name="filter_query">
+                        <option selected='true' id="option-selected">Filter by type</option>
+                        {% for type in types %}
+                        <option value="{{type['type_name']}}">{{type['type_name']}}</option>
+                        {% endfor %}
+                        <option value="{{ url_for('types.new_type') }}">Create new type...</option>
+                    </select>
+
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form class="shadow-none pb-0 search-form" action="{{ url_for('perfumes.search') }}">
+                <div class="form-group shadow-sm">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Search</span>
+                        </div>
+                        <input class="border rounded-0 form-control" type="text" id="db_query" name="db_query" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Perfume or Brand">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary border rounded button-go" type="submit">Go!</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

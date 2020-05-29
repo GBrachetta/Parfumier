@@ -1,0 +1,30 @@
+{% extends 'layout/base.html' %} {% block content %}
+
+<main class="page contact-page">
+    <section class="portfolio-block contact">
+        <div class="container">
+            <div class="heading">
+                <h2 class=" titles">Welcome to Parfumier</h2>
+
+
+                {% if current_user.is_authenticated %}
+                <h3>Welcome, {{ current_user.username.title() }}!</h3>
+                {% endif %}
+                <p class="my-5 lead">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla distinctio nihil
+                    deleniti laboriosam tempora reprehenderit autem enim et nisi iure, dignissimos
+                    illum, quia maiores dolorum quae officia! Nam aperiam adipisci, doloremque quod quas
+                    dolores hic voluptatibus laudantium minima architecto quo quae harum tempora, saepe,
+                    veritatis veniam vero dolor earum deleniti assumenda possimus nobis. Laudantium
+                    commodi reprehenderit et corporis velit cum dolores quae animi architecto ex
+                    repellendus possimus voluptates dolorum nulla ad eius, dolorem maiores natus unde
+                    molestiae quibusdam! Doloribus, hic voluptas. Ad doloribus sequi beatae earum
+                    laborum eligendi unde. Autem laborum nemo voluptatibus minima labore ut fugiat rerum
+                    maiores accusamus.
+                </p>
+                <img class="img-fluid mb-5" src="https://cdn.myonlinestore.eu/943d3925-6be1-11e9-a722-44a8421b9960/images/VitexNaturaWholesale%20Grasse%20Perfume%20flowers.jpg" loading="lazy" width=500 height=300 alt="Flower Field" />
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock content %}

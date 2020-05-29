@@ -1,0 +1,31 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "*"
+pylint = "*"
+pylint-flask = "*"
+flake8 = "*"
+black = "*"
+autopep8 = "*"
+pep8 = "*"
+
+[packages]
+flask = "*"
+flask-login = "*"
+email-validator = "*"
+gunicorn = "*"
+flask-pymongo = "*"
+dnspython = "*"
+flask-wtf = "*"
+python-dotenv = "*"
+pillow = "*"
+cloudinary = "*"
+
+[requires]
+python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
