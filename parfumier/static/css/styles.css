@@ -270,6 +270,11 @@ div.social-icons .background-twitter {
     margin-top: 40px;
 }
 
+.button-yellow-nom {
+    background-color: #f5db98;
+    color: #454e56;
+}
+
 .border-purple {
     border-color: #eadff7;
     color: #585e65;
