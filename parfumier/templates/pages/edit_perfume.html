@@ -9,10 +9,10 @@
             </div>
             <form method=POST action="" enctype="multipart/form-data" id="form-perfume" novalidate>
                 {{ form.hidden_tag() }}
-                <div class="form-row" style="margin-bottom: 25px;">
+                <div class="form-row mb-4" >
                     <div class="col-12 col-md-3 text-right text-md-left">
                         <span class="form-control-thumbnail"></span><br></div>
-                    <div class="col-12 col-md-9 text-right" style="padding-left: 25px;">
+                    <div class="col-12 col-md-9 text-right pl-3">
                         <p class="edit-user-username">{{ current_perfume.name }}</p>
                         <p class="edit-user-names">{{ current_perfume.brand }}</p>
                         <p class="edit-user-email">{{ current_perfume.perfume_type }}</p>

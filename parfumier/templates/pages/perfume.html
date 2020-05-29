@@ -5,43 +5,43 @@
 MY NEW CONTENT
 -->
 <main class="page project-page">
-    <section class="portfolio-block project" style="font-family: Montserrat, sans-serif;">
+    <section class="portfolio-block project">
         <div class="container">
             <!-- Start: Main Heading -->
             <div class="heading">
-                <h2 class="text-capitalize" style="font-family: 'Alex Brush', cursive;font-size: 70px;color: rgb(149,122,227);">{{ perfume.name }}</h2>
+                <h2 class="text-capitalize">{{ perfume.name }}</h2>
             </div>
             <!-- End: Main Heading -->
             <!-- START "CURSOR" -->
             {% for author in cursor %}
             <div class="row">
                 <!-- Start: Left Column Perfume -->
-                <div class="col-12 col-lg-2 text-center meta left-perfume-container" style="padding-left: 15px;">
-                    <div class="text-left tags"><span class="meta-heading" style="font-size: 10px;margin-bottom: 0px;margin-top: 5px;">Brand</span>
+                <div class="col-12 col-lg-2 text-center meta left-perfume-container pl-3">
+                    <div class="text-left tags"><span class="meta-heading">Brand</span>
                         <span class="text-info">{{ perfume.brand }}</span>
-                        <span class="meta-heading" style="font-size: 10px;margin-top: 5px;margin-bottom: 0px;">Type of perfume</span>
+                        <span class="meta-heading">Type of perfume</span>
                         <span class="text-info">{{ perfume.perfume_type }}</span>
-                        <span class="meta-heading" style="font-size: 10px;margin-top: 5px;margin-bottom: 0px;">Date Posted</span>
+                        <span class="meta-heading">Date Posted</span>
                         <span class="text-muted">{{ perfume.date_updated.strftime('%d-%m-%Y') }}</span>
-                        <span class="meta-heading" style="font-size: 10px;margin-bottom: 0px;margin-top: 5px;">Posted by</span>
-                        <span class="text-info">{{ author['username'] }}</span><span class="text-muted" style="font-size: 12px;">({{ author['firstName']}} {{ author['lastName']}})</span></div>
+                        <span class="meta-heading">Posted by</span>
+                        <span class="text-info">{{ author['username'] }}</span><span class="text-muted">({{ author['firstName']}} {{ author['lastName']}})</span></div>
                     <div class="row">
-                        <div class="col-12 text-left perfume-avatar-container" style="margin-bottom: 20px;">
-                            <img class="rounded-circle img-fluid perfume-avatar" style="width: 75px;height: 75px;margin-top: 20px;" src="{{ author['profilePicture'] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width=100 height=100 alt="Avatar">
+                        <div class="col-12 text-left perfume-avatar-container mb-2">
+                            <img class="rounded-circle img-fluid perfume-avatar" src="{{ author['profilePicture'] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width=100 height=100 alt="Avatar">
                         </div>
                     </div>
                 </div>
                 <!-- End: Left Column Perfume -->
                 <!-- Start: Main Content Perfume Column -->
-                <div class="col-12 col-md-8 col-lg-7 info" style="font-family: Montserrat, sans-serif;">
+                <div class="col-12 col-md-8 col-lg-7 info">
                     <h3>{{ perfume.name }}, by {{ perfume.brand }}</h3>
                     <p>{{ perfume.description | safe}}</p>
                     <div class="row">
-                        <div class="col-12 col-sm-6 text-center text-sm-left" style="margin-bottom: 10px;">
+                        <div class="col-12 col-sm-6 text-center text-sm-left mb-2">
                             <button class="btn btn-sm shadow-sm button-purple" type="button" data-toggle="modal" data-target="#reviewPerfumeModal">Review</button>
                             <a class="shadow-sm btn btn-sm button-green" href="{{ url_for('perfumes.all_perfumes') }}">Back</a>
                         </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-right" style="margin-bottom: 10px;">
+                        <div class="col-12 col-sm-6 text-center text-sm-right mb-2">
                             {% if current_user.is_authenticated and current_user.is_admin == True and current_user.username == perfume.author %}
                             <a class="shadow-sm btn btn-sm button-blue-small" href="{{ url_for('perfumes.edit_perfume', perfume_id=perfume._id) }}" role="button">Edit</a>
                             <button type="button" class="btn btn-sm shadow-sm button-red" data-toggle="modal" data-target="#deletePerfumeModal">Delete</button>
@@ -69,8 +69,8 @@ MY NEW CONTENT
 START MY NEW REVIEWS
 -->
 <div class="row">
-    <div class="col perfume-reviews-container" style="margin-top: 30px;padding-top: 30px;">
-        <div class=" border-white" style="background-color: rgb(255,255,255);padding-bottom: 0px;">
+    <div class="col perfume-reviews-container mt-4 pt-4">
+        <div class=" border-white">
             <h3 class="text-center">Reviews</h3>
         </div>
         <div class="row justify-content-center">
@@ -83,10 +83,10 @@ START MY NEW REVIEWS
                                 <div class="media">
                                     <div class="media-body">
                                         <div class="media">
-                                            <div class="media-body" style="overflow:visible;">
-                                                <div class="row justify-content-center" style="margin-bottom: 10px;">
-                                                    <div class="col-12 col-md-2 text-lg-center text-xl-right" style="margin-bottom: 16px;">
-                                                        <img class="rounded-circle img-fluid mr-3" style="width: 60px;height: 60px;" src="{{ review['reviewer_picture'] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width=100 height=100 alt="avatar">
+                                            <div class="media-body">
+                                                <div class="row justify-content-center mb-2">
+                                                    <div class="col-12 col-md-2 text-lg-center text-xl-right mb-3">
+                                                        <img class=" review-avatar rounded-circle img-fluid mr-3" src="{{ review['reviewer_picture'] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width=100 height=100 alt="avatar">
                                                     </div>
                                                     <div class="review-content col-12 col-md-6">
                                                         <p class="review-in-prefume">
@@ -95,7 +95,7 @@ START MY NEW REVIEWS
                                                             </div>
                                                             <small class="text-muted">{{ review.date_reviewed.strftime('%d %B, %Y @%-H:%Mh') }}</small></p>
                                                     </div>
-                                                    <div class="col-12 col-lg-3 text-center" style="padding-right: 0px;margin-bottom: 10px;">
+                                                    <div class="col-12 col-lg-3 text-center pr-0 mb-2">
                                                         {% if current_user.username == review['reviewer'] %}
                                                         <button type="button" class="btn btn-sm shadow-sm edit-review button-blue-small" data-perfume_id="{{perfume['_id']}}" data-review_id="{{review['_id']}}" data-toggle="modal" data-target="#editReviewPerfumeModal" id="editFormButton">Edit</button>
                                                         <button class="btn btn-sm shadow-sm delete-review button-red" data-perfume_id="{{perfume['_id']}}" data-review_id="{{review['_id']}}" type="button" data-toggle="modal" data-target="#deleteReviewModal">Delete</button>

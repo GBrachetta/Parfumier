@@ -287,8 +287,6 @@ div.social-icons .background-twitter {
     font-family: "Alex Brush", cursive;
 }
 
-
-
 .small-links {
     font-size: 12px;
     color: rgb(86, 174, 231);
@@ -378,16 +376,41 @@ div.social-icons .background-twitter {
     color: rgb(116, 109, 109);
 }
 
-.content-review{
+.content-review {
     font-size: 14px;
     color: #454e56;
 }
 
-.name-reviewer{
+.name-reviewer {
     color: rgb(64, 109, 208);
     font-weight: bold;
 }
 
-.review-in-prefume{
+.review-in-prefume {
     font-size: 14px;
+}
+
+.links-footer a {
+    font-size: 14px;
+}
+
+.meta-heading {
+    font-size: 10px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.perfume-avatar {
+    width: 75px;
+    height: 75px;
+    margin-top: 20px;
+}
+
+.review-avatar {
+    width: 60px;
+    height: 60px;
+}
+
+.text-muted {
+    font-size: 12px;
 }

@@ -1,5 +1,5 @@
 <div class="container my-5">
-    <div class="card-header border-white" style="background-color: rgb(255,255,255);padding-bottom: 0px;">
+    <div class="card-header border-white">
         <h3 class="text-center">Reviews</h3>
     </div>
     <div class="row justify-content-center">
@@ -12,10 +12,10 @@
                             <div class="media">
                                 <div class="media-body">
                                     <div class="media">
-                                        <div class="media-body" style="overflow:visible;">
-                                            <div class="row justify-content-center" style="margin-bottom: 10px;">
-                                                <div class="col-12 col-md-2 text-lg-center text-xl-right" style="margin-bottom: 16px;">
-                                                    <img class="rounded-circle img-fluid mr-3" style="width: 60px;height: 60px;" src="{{ review['reviewer_picture'] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width=100 height=100 alt="avatar">
+                                        <div class="media-body">
+                                            <div class="row justify-content-center mb-2">
+                                                <div class="col-12 col-md-2 text-lg-center text-xl-right mb-3">
+                                                    <img class="rounded-circle img-fluid mr-3" src="{{ review['reviewer_picture'] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width=100 height=100 alt="avatar">
                                                 </div>
                                                 <div class="review-content col-12 col-md-6">
                                                     <p class="review-in-prefume">
@@ -24,7 +24,7 @@
                                                         </div>
                                                         <small class="text-muted">{{ review.date_reviewed.strftime('%d-%m-%Y') }}</small></p>
                                                 </div>
-                                                <div class="col-12 col-lg-3 text-center" style="padding-right: 0px;margin-bottom: 10px;">
+                                                <div class="col-12 col-lg-3 text-center pr-0 mb-2">
                                                     {% if current_user.username == review['reviewer'] %}
                                                     <button type="button" class="btn btn-sm shadow-sm edit-review button-blue-small" data-perfume_id="{{perfume['_id']}}" data-review_id="{{review['_id']}}" data-toggle="modal" data-target="#editReviewPerfumeModal" id="editFormButton">Edit</button>
                                                     <button class="btn btn-sm shadow-sm delete-review button-red" data-perfume_id="{{perfume['_id']}}" data-review_id="{{review['_id']}}" type="button" data-toggle="modal" data-target="#deleteReviewModal">Delete</button>
