@@ -29,7 +29,6 @@ $(document).ready(() => {
     }, 3000);
 });
 
-
 // Opens the delete review modal passing data to delete review
 $(".delete-review").on("click", (evt) => {
     evt.preventDefault();
@@ -67,6 +66,9 @@ $(document).on("click", "#editFormButton", function (e) {
         .siblings("div.review-content")
         .children(".content-review")
         .text();
-        console.log(reviewText);
     CKEDITOR.instances.edit_review.setData(reviewText);
 });
+
+// Shows modal with validation error in the event of submitting form in the modal
+// with no data on a DataRequired field.
+$(".is-invalid").closest(".modal").modal("show");
