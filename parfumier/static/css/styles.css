@@ -267,6 +267,7 @@ div.social-icons .background-twitter {
 .button-yellow {
     background-color: #f5db98;
     color: #454e56;
+    margin-top: 40px;
 }
 
 .border-purple {
@@ -286,6 +287,10 @@ div.social-icons .background-twitter {
     color: rgb(149, 122, 227);
     font-size: 40px;
     font-family: "Alex Brush", cursive;
+}
+
+.portfolio-block form{
+    padding-bottom: 50px;
 }
 
 .small-links {
