@@ -278,7 +278,16 @@ div.social-icons .background-twitter {
     color: rgb(149, 122, 227);
     font-size: 70px;
     font-family: "Alex Brush", cursive;
+    text-transform: unset;
 }
+
+.portfolio-block .heading h4 {
+    color: rgb(149, 122, 227);
+    font-size: 40px;
+    font-family: "Alex Brush", cursive;
+}
+
+
 
 .small-links {
     font-size: 12px;
