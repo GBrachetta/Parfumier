@@ -415,3 +415,20 @@ div.social-icons .background-twitter {
 .text-muted {
     font-size: 12px;
 }
+
+#form-perfume .form-control-thumbnail {
+    width: 140px;
+    height: 164px;
+    margin-bottom: 0;
+    border: none;
+}
+
+.new-pic-select {
+    position: fixed;
+    color: #fff;
+    background-color: rgba(227, 122, 195, 0.6);
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+    margin-top: 65px;
+}
