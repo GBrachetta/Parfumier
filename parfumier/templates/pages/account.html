@@ -1,106 +1,112 @@
 {% extends 'layout/base.html' %}
 {% block content %}
 
-<div class="container content-section">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="media">
-                <img class="rounded-circle account-img" src="{{ avatar }}"
-                    onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';"
-                    loading="lazy" width=125 height=125 >
-                <div class="pl-3 media-body">
-                    <h2 class="account-heading">{{ current_user.username }}</h2>
-                    <p class="text-primary lead">{{ current_user.first_name}} {{ current_user.last_name}}</p>
-                    <p class="text-secondary">{{ current_user.email}}</p>
-                </div>
+<main class="page contact-page">
+    <section class="portfolio-block contact">
+        <div class="container">
+            <div class="heading">
+                <h2 class="text-capitalize titles">Edit Account</h2>
             </div>
-        </div>
-    </div>
-    <div class="container content-section">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form method=POST action="" enctype="multipart/form-data" id="form-profile" novalidate>
-                    {{ form.hidden_tag() }}
-                    <fieldset class="form-group">
-                        <legend class="border-bottom mb-4">Update your Account</legend>
-                        <div class="form-group">
-                            {{ form.username.label(class="form-control-label") }}
-                            {% if form.username.errors %}
-                            {{ form.username(class="form-control form-control-md is-invalid")}}
-                            <div class="invalid-feedback">
-                                {% for error in form.username.errors %}
-                                <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                            {% else %}
-                            {{ form.username(class="form-control form-control-md", placeholder="Enter your username")}}
-                            {% endif %}
-                        </div>
-                        <div class="form-group">
-                            {{ form.first_name.label(class="form-control-label") }}
-                            {% if form.first_name.errors %}
-                            {{ form.first_name(class="form-control form-control-md is-invalid")}}
-                            <div class="invalid-feedback">
-                                {% for error in form.first_name.errors %}
-                                <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                            {% else %}
-                            {{ form.first_name(class="form-control form-control-md", placeholder="Enter your first name")}}
-                            {% endif %}
-                        </div>
-                        <div class="form-group">
-                            {{ form.last_name.label(class="form-control-label") }}
-                            {% if form.last_name.errors %}
-                            {{ form.last_name(class="form-control form-control-md is-invalid")}}
-                            <div class="invalid-feedback">
-                                {% for error in form.last_name.errors %}
-                                <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                            {% else %}
-                            {{ form.last_name(class="form-control form-control-md", placeholder="Enter your last name")}}
-                            {% endif %}
-                        </div>
-                        <div class="form-group">
-                            {{ form.email.label(class="form-control-label") }}
-                            {% if form.email.errors %}
-                            {{ form.email(class="form-control form-control-md is-invalid")}}
-                            <div class="invalid-feedback">
-                                {% for error in form.email.errors %}
-                                <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                            {% else %}
-                            {{ form.email(class="form-control form-control-md", placeholder="Enter your email", type="email")}}
-                            {% endif %}
-                        </div>
-                        <div class="form-group">
-                            {{ form.avatar.label(class="btn btn-outline-primary form-control-label") }}
-                            {{ form.avatar(class="form-control-file") }}
-                            <span class="form-control-thumbnail"></span>
-                            <div class="pt-2">
-                                <span class="form-control-filename lead text-danger"
-                                    data-text="New avatar selected, please click update" id="fileName"></span>
-                            </div>
-                            {% if form.avatar.errors %}
-                            {% for error in form.avatar.errors %}
-                            <span class="text-danger">{{ error }}</span></br>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
-                    </fieldset>
-                    <div class="form-group">
-                        {{ form.submit(class="btn btn-primary")}}
-                        <button type="button" class="btn btn-danger ml-3" data-toggle="modal"
-                            data-target="#deleteUserModal">Delete</button>
+            <form class="shadow-sm" method=POST action="" enctype="multipart/form-data" id="form-profile" novalidate>
+                {{ form.hidden_tag() }}
+
+                <div class="form-row edit-user-header mb-4">
+                    <div class="col-12 col-md-3 text-right text-md-left">
+                        <img class="rounded-circle img-fluid edit-user-avatar" src="{{ avatar }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width="125" height="125" alt="avatar">
                     </div>
-                </form>
-                <br>
-            </div>
+                    <div class="pl-4 col-12 col-md-6 text-right text-md-left edit-user-data">
+                        <p class="edit-user-username">{{ current_user.username }}</p>
+                        <p class="edit-user-names">{{ current_user.first_name}} {{ current_user.last_name}}</p>
+                        <p class="edit-user-email">{{ current_user.email}}</p>
+                    </div>
+                    <div class="col-12 col-md-3 avatar-preview text-center">
+                        <span class="form-control-thumbnail"></span><br>
+                        <p class="form-control-filename text-danger" data-text="New avatar" id="fileName"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+                    {% if form.username.errors %}
+                    {{ form.username(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.username(class="form-control form-control-md border-white shadow-sm item")}}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.first_name.label(class="form-control-label") }}
+                    {% if form.first_name.errors %}
+                    {{ form.first_name(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                    <div class="invalid-feedback">
+                        {% for error in form.first_name.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.first_name(class="form-control form-control-md border-white shadow-sm item")}}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.last_name.label(class="form-control-label") }}
+                    {% if form.last_name.errors %}
+                    {{ form.last_name(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                    <div class="invalid-feedback">
+                        {% for error in form.last_name.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.last_name(class="form-control form-control-md border-white shadow-sm item")}}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.email(class="form-control form-control-md border-white shadow-sm item")}}
+                    {% endif %}
+                </div>
+
+                <div class="form-row buttons-edit-account">
+
+                    <div class="form-group form-row buttons-edit-account col-12 col-sm-4 text-center text-md-left">
+                        {{ form.avatar.label(class="btn button-green form-control-label shadow-sm") }}
+                        {{ form.avatar(class="form-control-file") }}
+                        <div class="pt-2">
+                            <span class="form-control-filename text-danger" data-text="New avatar selected, please click update" id="fileName"></span>
+                        </div>
+                        {% if form.avatar.errors %}
+                        {% for error in form.avatar.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-sm-4 text-center">
+                        {{ form.submit(class="btn button-blue text-center shadow-sm")}}
+                    </div>
+
+                    <div class="col-12 col-sm-4 text-center text-md-right">
+                        <button type="button" class="btn shadow-sm button-red ml-3" data-toggle="modal" data-target="#deleteUserModal">Delete Account</button>
+                    </div>
+            </form>
         </div>
-    </div>
-</div>
+    </section>
+</main>
+
 <!-- Modal -->
 {% include "components/delete-user-modal.html" %}
 {% endblock content %}

@@ -1,18 +1,37 @@
 {% extends 'layout/base.html' %}
 {% block content %}
 
-<div class="container mb-4 pt-4">
-    <div class="row">
-        <div class="col-9">
-            <h1>Types of Perfumes</h1>
+<main class="page projets-page">
+    <section class="portfolio-block project-no-images">
+        <div class="container">
+            <div class="heading">
+                <h2 class="text-capitalize">Perfume Types</h2>
+            </div>
+
+            <div class="row">
+                {% for type in types %}
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="border-purple project-card-no-image px-0 text-center">
+                            <h3>{{ type.type_name }}</h3>
+                            <a class="btn btn-sm shadow-sm button-yellow" role="button" href="{{ url_for('types.show_type', type_id=type._id) }}">More</a>
+                            <div class="tags"></div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {% if current_user.is_authenticated and current_user.is_admin == True %}
+                    <div class="col-12 text-center mt-4">
+                        <a href="{{ url_for('types.new_type') }}" class="btn button-purple shadow-sm" type="button">Create new type</a>
+                    </div>
+                {% endif %}
+            </div>
         </div>
-        <div class="col-3">
-            {% if current_user.is_authenticated and current_user.is_admin == True %}
-            <a href="{{ url_for('types.new_type') }}" class="btn btn-primary float-right" type="button">Add new type</a>
-            {% endif %}
-        </div>
-    </div>
-</div>
-{% include "components/type-card.html" %}
+    </section>
+</main>
+
+
+
+
+
 
 {% endblock content %}

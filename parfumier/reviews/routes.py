@@ -10,7 +10,7 @@ from parfumier.reviews.forms import AddReviewForm, EditReviewForm
 reviews = Blueprint("reviews", __name__)
 
 
-@reviews.route("/perfume/review/<perfume_id>", methods=["POST"])
+@reviews.route("/perfume/review/<perfume_id>", methods=["POST", "GET"])
 @login_required
 def review_perfume(perfume_id):
     """sumary_line

@@ -1,10 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap");
-
+/* @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&family=Lato:wght@300;400;700&family=Montserrat:ital,wght@0,400;0,600;0,700;1,300&family=Quicksand:wght@300;400;500;700&display=swap");
 body {
-    margin-top: 6rem;
     font-family: "Quicksand", sans-serif !important;
 }
-
+/* 
 h1,
 h2,
 h3,
@@ -44,10 +43,8 @@ h6 {
     display: inline-block;
     width: 164px;
     height: 164px;
-    /* background-size: 100% auto; */
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-origin: border-box; */
     margin-left: 77px;
     position: absolute;
     border-radius: 5px;
@@ -61,7 +58,6 @@ h6 {
     height: 46px;
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-origin: border-box; */
     margin-left: 25px;
 }
 
@@ -101,9 +97,7 @@ h6 {
     max-width: 250px;
 }
 
-/* .card-img-top{
-    max-height: 100px;
-} */
+
 
 .view-more:hover {
     text-decoration: none;
@@ -197,9 +191,7 @@ h6 {
     font-size: 1.2rem;
 }
 
-/* .pagination li{
-    padding: 10px 20px;
-} */
+
 
 .pagination li:hover{
     text-decoration: none;
@@ -207,6 +199,195 @@ h6 {
 }
 
 .pagination li.active {
-    /* background-color: #830e0e; */
     color: #ddd;
+} */
+
+/* New Style */
+
+/* Navbar */
+#navbar {
+    filter: brightness(114%) hue-rotate(46deg) invert(0%);
+}
+
+.portfolio-navbar .navbar-nav .nav-link {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+}
+
+/* Footer */
+div.social-icons .background-facebook {
+    background-color: rgb(64, 109, 208);
+}
+
+div.social-icons .background-instagram {
+    background-color: rgb(193, 65, 57);
+}
+
+div.social-icons .background-twitter {
+    background-color: rgb(76, 153, 224);
+}
+
+.button-blue {
+    margin-left: 0px;
+    margin-top: 40px;
+    height: 40px;
+    background-color: #c7e2f5;
+    color: #585e65;
+}
+
+.button-blue-small {
+    margin-left: 0px;
+    margin-top: 40px;
+    background-color: #d2e3f4;
+    color: #585e65;
+}
+
+.button-green {
+    margin-left: 0px;
+    margin-top: 40px;
+    color: #585e65;
+    background-color: #cdf1c4;
+}
+
+.button-red {
+    margin-left: 0px;
+    margin-top: 40px;
+    color: #585e65;
+    margin-right: 0px;
+    background-color: #ffe0ce;
+}
+
+.button-purple {
+    background-color: #eadff7;
+    margin-top: 40px;
+    color: #454e56;
+}
+
+.button-yellow {
+    background-color: #f5db98;
+    color: #454e56;
+}
+
+.border-purple {
+    border-color: #eadff7;
+    color: #585e65;
+}
+
+/* Text */
+.portfolio-block .heading h2 {
+    color: rgb(149, 122, 227);
+    font-size: 70px;
+    font-family: "Alex Brush", cursive;
+    text-transform: unset;
+}
+
+.portfolio-block .heading h4 {
+    color: rgb(149, 122, 227);
+    font-size: 40px;
+    font-family: "Alex Brush", cursive;
+}
+
+
+
+.small-links {
+    font-size: 12px;
+    color: rgb(86, 174, 231);
+}
+
+.muted-texts {
+    font-size: 12px;
+    color: rgb(149, 149, 149);
+}
+
+.account-img {
+    width: 125px;
+    height: 125px;
+}
+
+/* Styling Preview Avatar */
+.form-control-file {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+#form-perfume .form-control-thumbnail {
+    display: inline-block;
+    width: 164px;
+    height: 164px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    border-radius: 5px;
+}
+
+#form-profile .form-control-thumbnail {
+    border-radius: 50%;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.edit-user-username {
+    font-size: 30px;
+    color: rgb(100, 136, 171);
+}
+
+.edit-user-names {
+    color: rgb(72, 165, 177);
+}
+
+.edit-user-email {
+    color: rgb(142, 166, 187);
+}
+
+.warning-modals {
+    font-weight: 700;
+    color: rgb(182, 127, 127);
+}
+
+.project-card-no-image h3 {
+    font-size: 1rem;
+}
+
+#filter_query,
+#db_query {
+    color: rgb(131, 153, 176);
+}
+
+#db_query::placeholder {
+    color: rgb(131, 153, 176);
+}
+
+@media only screen and (min-width: 768px) {
+    .project-card-no-image h3 {
+        font-size: 1.3rem;
+    }
+}
+
+.input-group-text {
+    background-color: #c7e2f5;
+    color: rgb(152, 157, 162);
+}
+
+.button-go {
+    background-color: rgb(205, 241, 196);
+    color: rgb(116, 109, 109);
+}
+
+.content-review{
+    font-size: 14px;
+    color: #454e56;
+}
+
+.name-reviewer{
+    color: rgb(64, 109, 208);
+    font-weight: bold;
+}
+
+.review-in-prefume{
+    font-size: 14px;
 }

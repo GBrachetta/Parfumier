@@ -1,52 +1,134 @@
 {% extends 'layout/base.html' %}
 {% block content %}
 
-<div class="container mb-4 pt-4">
-    <div class="row">
-        <div class="col-9">
-            <h1>Perfumes</h1>
-        </div>
-        <div class="col-3">
-            <a href="{{ url_for('perfumes.all_perfumes') }}" class="btn btn-primary float-right" type="button">Back to all
-                perfumes</a>
-        </div>
-    </div>
-</div>
-<div class="card">
-    <h5 class="card-header text-white bg-primary">
-        {{ perfume.name }}
-        </a>
-    </h5>
-    <div class="card-body">
-        <h4>Name: <a href="{{ url_for('perfumes.perfume', perfume_id=perfume._id) }}"> {{ perfume.name }}</a></h4>
-        <h5>A perfume by <span class="lead text-primary font-weight-bold">{{ perfume.brand }}</span></h5>
-        <p>Type: {{ perfume.perfume_type }}</p>
-    </div>
-    <div class="container pb-5">
-        <div class="row justify-content-center">
-            <div class="col-7">
-                <div class="card-body">
-                    {{ perfume.description | safe}}
+<!--
+MY NEW CONTENT
+-->
+<main class="page project-page">
+    <section class="portfolio-block project" style="font-family: Montserrat, sans-serif;">
+        <div class="container">
+            <!-- Start: Main Heading -->
+            <div class="heading">
+                <h2 class="text-capitalize" style="font-family: 'Alex Brush', cursive;font-size: 70px;color: rgb(149,122,227);">{{ perfume.name }}</h2>
+            </div>
+            <!-- End: Main Heading -->
+            <!-- START "CURSOR" -->
+            {% for author in cursor %}
+            <div class="row">
+                <!-- Start: Left Column Perfume -->
+                <div class="col-12 col-lg-2 text-center meta left-perfume-container" style="padding-left: 15px;">
+                    <div class="text-left tags"><span class="meta-heading" style="font-size: 10px;margin-bottom: 0px;margin-top: 5px;">Brand</span>
+                        <span class="text-info">{{ perfume.brand }}</span>
+                        <span class="meta-heading" style="font-size: 10px;margin-top: 5px;margin-bottom: 0px;">Type of perfume</span>
+                        <span class="text-info">{{ perfume.perfume_type }}</span>
+                        <span class="meta-heading" style="font-size: 10px;margin-top: 5px;margin-bottom: 0px;">Date Posted</span>
+                        <span class="text-muted">{{ perfume.date_updated.strftime('%d-%m-%Y') }}</span>
+                        <span class="meta-heading" style="font-size: 10px;margin-bottom: 0px;margin-top: 5px;">Posted by</span>
+                        <span class="text-info">{{ author['username'] }}</span><span class="text-muted" style="font-size: 12px;">({{ author['firstName']}} {{ author['lastName']}})</span></div>
+                    <div class="row">
+                        <div class="col-12 text-left perfume-avatar-container" style="margin-bottom: 20px;">
+                            <img class="rounded-circle img-fluid perfume-avatar" style="width: 75px;height: 75px;margin-top: 20px;" src="{{ author['profilePicture'] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width=100 height=100 alt="Avatar">
+                        </div>
+                    </div>
+                </div>
+                <!-- End: Left Column Perfume -->
+                <!-- Start: Main Content Perfume Column -->
+                <div class="col-12 col-md-8 col-lg-7 info" style="font-family: Montserrat, sans-serif;">
+                    <h3>{{ perfume.name }}, by {{ perfume.brand }}</h3>
+                    <p>{{ perfume.description | safe}}</p>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-left" style="margin-bottom: 10px;">
+                            <button class="btn btn-sm shadow-sm button-purple" type="button" data-toggle="modal" data-target="#reviewPerfumeModal">Review</button>
+                            <a class="shadow-sm btn btn-sm button-green" href="{{ url_for('perfumes.all_perfumes') }}">Back</a>
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-right" style="margin-bottom: 10px;">
+                            {% if current_user.is_authenticated and current_user.is_admin == True and current_user.username == perfume.author %}
+                            <a class="shadow-sm btn btn-sm button-blue-small" href="{{ url_for('perfumes.edit_perfume', perfume_id=perfume._id) }}" role="button">Edit</a>
+                            <button type="button" class="btn btn-sm shadow-sm button-red" data-toggle="modal" data-target="#deletePerfumeModal">Delete</button>
+                            {% elif current_user.is_authenticated and current_user.is_admin == True %}
+                            <a class="shadow-sm btn btn-sm button-blue-small" href="{{ url_for('perfumes.edit_perfume', perfume_id=perfume._id) }}" role="button">Edit</a>
+                            <button disabled type="button" class="btn btn-sm shadow-sm button-red" data-toggle="modal" data-target="#deletePerfumeModal">Delete</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <!-- End: Main Content Perfume Column -->
+                <!-- Start: Perfume Picture Column -->
+                <div class="col-12 col-md-4 col-lg-3 text-center text-md-right align-self-center">
+                    <img class="perfume-photo" src="{{ perfume.picture }}" onerror="if (this.src != '../static/images/generic.jpg') this.src = '../static/images/generic.jpg';" loading="lazy" width=225 height=300 alt="Perfume">
                 </div>
             </div>
-            <div class="col-4">
-                <img class="float-right picture-perfume" src="{{ perfume.picture }}" onerror="if (this.src != '../static/images/generic.jpg') this.src = '../static/images/generic.jpg';" loading="lazy" width=225 height=300 alt="Perfume">
+            {% endfor %}
+        </div>
+    </section>
+</main>
+<!-- End: Perfume Picture Column -->
+<!-- END "CURSOR" -->
+
+<!--
+START MY NEW REVIEWS
+-->
+<div class="row">
+    <div class="col perfume-reviews-container" style="margin-top: 30px;padding-top: 30px;">
+        <div class=" border-white" style="background-color: rgb(255,255,255);padding-bottom: 0px;">
+            <h3 class="text-center">Reviews</h3>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12">
+                {% for review in perfume.reviews|sort(attribute='date_reviewed', reverse = True) %}
+                <div class="card border-white">
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item border rounded-0 border-white">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <div class="media">
+                                            <div class="media-body" style="overflow:visible;">
+                                                <div class="row justify-content-center" style="margin-bottom: 10px;">
+                                                    <div class="col-12 col-md-2 text-lg-center text-xl-right" style="margin-bottom: 16px;">
+                                                        <img class="rounded-circle img-fluid mr-3" style="width: 60px;height: 60px;" src="{{ review['reviewer_picture'] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width=100 height=100 alt="avatar">
+                                                    </div>
+                                                    <div class="review-content col-12 col-md-6">
+                                                        <p class="review-in-prefume">
+                                                            <span class="name-reviewer">{{review['reviewer'] }}</span> said:&nbsp;
+                                                            <div class="content-review">{{ review['review_content'] | safe }}
+                                                            </div>
+                                                            <small class="text-muted">{{ review.date_reviewed.strftime('%d %B, %Y @%-H:%Mh') }}</small></p>
+                                                    </div>
+                                                    <div class="col-12 col-lg-3 text-center" style="padding-right: 0px;margin-bottom: 10px;">
+                                                        {% if current_user.username == review['reviewer'] %}
+                                                        <button type="button" class="btn btn-sm shadow-sm edit-review button-blue-small" data-perfume_id="{{perfume['_id']}}" data-review_id="{{review['_id']}}" data-toggle="modal" data-target="#editReviewPerfumeModal" id="editFormButton">Edit</button>
+                                                        <button class="btn btn-sm shadow-sm delete-review button-red" data-perfume_id="{{perfume['_id']}}" data-review_id="{{review['_id']}}" type="button" data-toggle="modal" data-target="#deleteReviewModal">Delete</button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                {% endfor %}
+                {% if not perfume.reviews %}
+                <div class="row portfolio-block">
+                    <div class="col-12 my-5 heading">
+                        <h2 class="text-center text-lowercase">There are no reviews for this perfume</h2>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
-
-    </div>
-    <hr>
-    <div class="container pt-2 pb-4">
-        <div class="row">
-        <!-- Footer of the perfume card with buttons triggering modals -->
-            {% include "components/perfume-cursor.html" %}
-        </div>
+        <!-- End: Reviews -->
     </div>
 </div>
+<!--
+    END MY NEW CONTENT
+-->
 
-<!-- REVIEWS -->
-
-{% include "components/perfume-reviews.html" %}
+<!-- include "components/perfume-reviews.html" -->
 
 <!-- MODALS -->
 

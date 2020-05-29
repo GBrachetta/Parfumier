@@ -74,7 +74,7 @@ class UpdateAccountForm(FlaskForm):
     first_name = StringField("First Name")
     last_name = StringField("Last Name")
     avatar = FileField(
-        "Choose your avatar", validators=[FileAllowed(["jpg", "png"])]
+        "Choose Avatar", validators=[FileAllowed(["jpg", "png"])]
     )
 
     submit = SubmitField("Update")
@@ -121,9 +121,9 @@ class ResetPasswordForm(FlaskForm):
     """
 
     password = PasswordField(
-        "Password", validators=[DataRequired(), Length(min=6)]
+        "New Password", validators=[DataRequired(), Length(min=6)]
     )
     confirm_password = PasswordField(
-        "Confirm Password", validators=[DataRequired(), EqualTo("password")]
+        "Confirm New Password", validators=[DataRequired(), EqualTo("password")]
     )
     submit = SubmitField("Reset Password")

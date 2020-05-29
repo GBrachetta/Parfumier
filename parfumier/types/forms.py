@@ -13,7 +13,7 @@ class CreateTypeForm(FlaskForm):
     Return: return_description
     """
 
-    type_name = StringField("Type", validators=[DataRequired()])
+    type_name = StringField("Type Name", validators=[DataRequired()])
     description = TextAreaField("Description")
     submit = SubmitField("Create")
 

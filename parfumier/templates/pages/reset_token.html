@@ -1,49 +1,62 @@
 {% extends 'layout/base.html' %}
 {% block content %}
 
-<div class="container content-section">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form action="" method="post" novalidate>
-                {{ form.hidden_tag() }}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Reset Password</legend>
                     <div class="form-group">
-                        {{ form.csrf_token }}
+
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<main class="page contact-page">
+    <section class="portfolio-block contact">
+        <div class="container">
+            <div class="heading">
+                <h2 class="text-capitalize" style="color: rgb(149,122,227);font-size: 70px;font-family: 'Alex Brush', cursive;">Reset Password</h2>
+            </div>
+            <form class="shadow-sm" action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.csrf_token }}
                         {{ form.password.label(class="form-control-label") }}
                         {% if form.password.errors %}
-                        {{ form.password(class="form-control form-control-md is-invalid")}}
+                        {{ form.password(class="item border-white shadow-sm form-control form-control-md is-invalid")}}
                         <div class="invalid-feedback">
                             {% for error in form.password.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.password(class="form-control form-control-md", placeholder="Enter your new password")}}
+                        {{ form.password(class="border-white shadow-sm form-control form-control-md")}}
                         {% endif %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.csrf_token }}
-                        {{ form.confirm_password.label(class="form-control-label") }}
-                        {% if form.confirm_password.errors %}
-                        {{ form.confirm_password(class="form-control form-control-md is-invalid")}}
-                        <div class="invalid-feedback">
-                            {% for error in form.confirm_password.errors %}
-                            <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                        {% else %}
-                        {{ form.confirm_password(class="form-control form-control-md")}}
-                        {% endif %}
-                    </div>
-                </fieldset>
+                </div>
+
                 <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-primary", placeholder="Confirm your new password")}}
+                    {{ form.confirm_password.label(class="form-control-label") }}
+                    {% if form.confirm_password.errors %}
+                    {{ form.confirm_password(class="border-white shadow-sm item form-control form-control-md is-invalid")}}
+                    <div class="invalid-feedback">
+                        {% for error in form.confirm_password.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.confirm_password(class="form-control form-control-md border-white shadow-sm item")}}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.submit(class="btn shadow-sm button-blue", placeholder="Confirm your new password")}}
                 </div>
             </form>
         </div>
-    </div>
-</div>
+    </section>
+</main>
 
 
 {% endblock content %}
