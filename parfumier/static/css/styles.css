@@ -510,3 +510,13 @@ div.social-icons .background-twitter {
 .type-Woody {
     border-color: rgb(143, 82, 13);
 }
+
+.navbar-brand {
+    font-family: "Alex Brush", cursive;
+    text-transform: capitalize;
+}
+
+.portfolio-navbar .logo {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+}
