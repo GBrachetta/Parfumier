@@ -71,4 +71,6 @@ $(document).on("click", "#editFormButton", function (e) {
 
 // Shows modal with validation error in the event of submitting form in the modal
 // with no data on a DataRequired field.
+// This hack is a temporary workaround. Future version should have
+// JS dealing with forms on the frontend.
 $(".is-invalid").closest(".modal").modal("show");
