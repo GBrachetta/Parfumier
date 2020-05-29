@@ -11,7 +11,7 @@
                 {{ form.hidden_tag() }}
                 <div class="form-row" style="margin-bottom: 25px;">
                     <div class="col-12 col-md-3 text-right text-md-left">
-                    <span class="form-control-thumbnail"></span><br></div>
+                        <span class="form-control-thumbnail"></span><br></div>
                     <div class="col-12 col-md-9 text-right" style="padding-left: 25px;">
                         <p class="edit-user-username">{{ current_perfume.name }}</p>
                         <p class="edit-user-names">{{ current_perfume.brand }}</p>
@@ -52,7 +52,7 @@
                     {{ form.perfume_type.label(class="form-control-label") }}
                     {% if form.perfume_type.errors %}
                     <select class="custom-select is-invalid" id="perfume_type" name="perfume_type">
-                        <option disabled selected>Choose type</option>
+                        <option disabled>Choose type</option>
                         {% for type in types %}
                         <option value="{{ type.type_name }}">{{ type.type_name }}</option>
                         {% endfor %}
@@ -65,9 +65,13 @@
                     {% else %}
                     <div class="input-group mb-3">
                         <select class="custom-select border-white shadow-sm" id="perfume_type" name="perfume_type">
-                            <option disabled selected>Choose type</option>
+                            <option value="None given" disabled>Choose type</option>
                             {% for type in types %}
+                            {% if type.type_name == form.perfume_type.data %}
+                            <option value="{{ form.perfume_type.data }}" selected>{{ form.perfume_type.data }}</option>
+                            {% else %}
                             <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                            {% endif %}
                             {% endfor %}
                         </select>
                     </div>
