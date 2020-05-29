@@ -445,70 +445,87 @@ div.social-icons .background-twitter {
 
 .type-Aromatic {
     border-color: rgb(151, 31, 155);
+    background-color: rgba(151, 31, 155,.1);
 }
 
 .type-Amber {
     border-color: rgb(122, 72, 24);
+    background-color: rgba(122, 72, 24,.1);
 }
 
 .type-Balsamic {
     border-color: rgb(137, 160, 118);
+    background-color: rgba(137, 160, 118,.1);
 }
 
 .type-Bright {
     border-color: rgb(214, 159, 216);
+    background-color: rgba(214, 159, 216,.1);
 }
 
 .type-Chypre {
     border-color: rgb(60, 155, 31);
+    background-color: rgba(60, 155, 31,.1);
 }
 
 .type-Citrus {
     border-color: rgb(229, 255, 0);
+    background-color: rgba(229, 255, 0,.1);
 }
 
-.type-Bouquet {
+.type-Floral {
     border-color: rgb(97, 44, 197);
+    background-color: rgba(98, 44, 197, 0.1);
 }
 
 .type-Fougère {
     border-color: rgb(115, 255, 0);
+    background-color: rgb(115, 255, 0,.1);
 }
 
 .type-Fruity {
     border-color: rgb(216, 49, 49);
+    background-color: rgba(216, 49, 49,.1);
 }
 
 .type-Gourmand {
     border-color: rgb(255, 136, 0);
+    background-color: rgba(255, 136, 0,.1);
 }
 
 .type-Green {
     border-color: rgb(164, 240, 23);
+    background-color: rgba(164, 240, 23,.1);
 }
 
 .type-Leather {
     border-color: rgb(71, 44, 8);
+    background-color: rgba(71, 44, 8,.1);
 }
 
 .type-Oceanic {
     border-color: rgb(25, 110, 190);
+    background-color: rgba(25, 110, 190,.1);
 }
 
 .type-Oriental {
     border-color: rgb(230, 201, 106);
+    background-color: rgba(230, 201, 106,.1);
 }
 
 .type-Single {
     border-color: rgb(161, 89, 202);
+    background-color: rgba(161, 89, 202,.1);
 }
 
 .type-Spicy {
     border-color: rgb(142, 145, 2);
+    background-color: rgba(142, 145, 2,.1);
 }
 
 .type-Woody {
     border-color: rgb(143, 82, 13);
+    background-color: rgba(143, 82, 13,.1);
 }
 
 .navbar-brand {
