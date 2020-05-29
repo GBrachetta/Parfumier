@@ -83,12 +83,10 @@
 
                 <div class="form-row buttons-edit-account">
 
-                    <div class="form-group form-row buttons-edit-account col-12 col-sm-4 text-center text-md-left">
+                    <div class="col-12 col-sm-4 text-center text-md-left">
                         {{ form.avatar.label(class="btn button-green form-control-label shadow-sm") }}
                         {{ form.avatar(class="form-control-file") }}
-                        <div class="pt-2">
-                            <span class="form-control-filename text-danger" data-text="New avatar selected, please click update" id="fileName"></span>
-                        </div>
+
                         {% if form.avatar.errors %}
                         {% for error in form.avatar.errors %}
                         <span class="text-danger">{{ error }}</span></br>
