@@ -1,7 +1,7 @@
 """sumary_line"""
 from flask_wtf import FlaskForm
 from wtforms import TextAreaField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, ValidationError
 
 
 class AddReviewForm(FlaskForm):
@@ -14,6 +14,20 @@ class AddReviewForm(FlaskForm):
 
     review = TextAreaField("Review", validators=[DataRequired()])
     submit = SubmitField("Post Review")
+
+    def validate_review(self, review):
+        text = (
+            review.data.replace("<p>", "")
+            .replace("</p>", "")
+            .replace("&nbsp;", "")
+            .replace("&ensp;", "")
+            .replace("&emsp;", "")
+            .replace("<br>", "")
+        )
+        if not text:
+            raise ValidationError(
+                "Please enter content in your review."
+            )
 
 
 class EditReviewForm(FlaskForm):
