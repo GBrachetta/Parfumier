@@ -19,6 +19,7 @@ class AddReviewForm(FlaskForm):
         text = (
             review.data.replace("<p>", "")
             .replace("</p>", "")
+            .replace("&nbsp; ", "")
             .replace("&nbsp;", "")
             .replace("&ensp;", "")
             .replace("&emsp;", "")
@@ -26,7 +27,7 @@ class AddReviewForm(FlaskForm):
         )
         if not text:
             raise ValidationError(
-                "Please enter content in your review."
+                "You cannot enter a blank review."
             )
 
 
@@ -40,3 +41,18 @@ class EditReviewForm(FlaskForm):
 
     edit_review = TextAreaField("Review", validators=[DataRequired()])
     submit = SubmitField("Update Review")
+
+    def validate_edit(self, edit_review):
+        text = (
+            edit_review.data.replace("<p>", "")
+            .replace("</p>", "")
+            .replace("&nbsp; ", "")
+            .replace("&nbsp;", "")
+            .replace("&ensp;", "")
+            .replace("&emsp;", "")
+            .replace("<br>", "")
+        )
+        if not text:
+            raise ValidationError(
+                "Please delete your review if you don't want to include content."
+            )
