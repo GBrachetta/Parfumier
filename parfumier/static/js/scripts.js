@@ -65,7 +65,8 @@ $(document).on("click", "#editFormButton", function (e) {
         .parents("div")
         .siblings("div.review-content")
         .children(".content-review")
-        .text();
+        .html();
+    console.log(reviewText);
     CKEDITOR.instances.edit_review.setData(reviewText);
 });
 
