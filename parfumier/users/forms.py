@@ -34,7 +34,19 @@ class RegistrationForm(FlaskForm):
     first_name = StringField("First Name")
     last_name = StringField("Last Name")
     password = PasswordField(
-        "Password", validators=[DataRequired(), Length(min=6)]
+        "Password",
+        validators=[
+            DataRequired(),
+            Length(min=8, message="Password must be 8 characters long"),
+            Regexp(
+                "^(?=.*?[A-Za-z])", message="Password must contain a letter.",
+            ),
+            Regexp("^(?=.*?[0-9])", message="Password must contain a number.",),
+            Regexp(
+                "^(?=.*?[#?!@$%^&*-])",
+                message="Password must contain a special character.",
+            ),
+        ],
     )
     confirm_password = PasswordField(
         "Confirm Password", validators=[DataRequired(), EqualTo("password")]
@@ -65,7 +77,7 @@ class LoginForm(FlaskForm):
 
     email = StringField("Email", validators=[DataRequired(), Email()])
     password = PasswordField(
-        "Password", validators=[DataRequired(), Length(min=6)]
+        "Password", validators=[DataRequired()]
     )
     remember = BooleanField("Remember Me")
     submit = SubmitField("Login")
@@ -138,7 +150,19 @@ class ResetPasswordForm(FlaskForm):
     """
 
     password = PasswordField(
-        "New Password", validators=[DataRequired(), Length(min=6)]
+        "New Password",
+        validators=[
+            DataRequired(),
+            Length(min=8, message="Password must be 8 characters long."),
+            Regexp(
+                "^(?=.*?[A-Za-z])", message="Password must contain a letter.",
+            ),
+            Regexp("^(?=.*?[0-9])", message="Password must contain a number.",),
+            Regexp(
+                "^(?=.*?[#?!@$%^&*-])",
+                message="Password must contain a special character.",
+            ),
+        ],
     )
     confirm_password = PasswordField(
         "Confirm New Password", validators=[DataRequired(), EqualTo("password")]
