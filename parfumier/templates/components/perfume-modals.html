@@ -86,7 +86,7 @@
                     <fieldset class="form-group">
                         <div class="form-group">
                             {% if edit_review_form.edit_review.errors %}
-                            {{ edit_review_form.edit_review(class="form-control form-control-md is-invalid")}}
+                            {{ edit_review_form.edit_review(class="form-control form-control-md ckeditor is-invalid")}}
                             <div class="invalid-feedback">
                                 {% for error in edit_review_form.edit_review.errors %}
                                 <span>{{ error }}</span>
