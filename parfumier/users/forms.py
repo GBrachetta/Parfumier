@@ -8,6 +8,7 @@ from wtforms.validators import (
     Email,
     Length,
     ValidationError,
+    Regexp,
 )
 from flask_login import current_user
 from parfumier import mongo
@@ -19,7 +20,15 @@ class RegistrationForm(FlaskForm):
     """
 
     username = StringField(
-        "Username", validators=[DataRequired(), Length(min=2, max=20)]
+        "Username",
+        validators=[
+            DataRequired(),
+            Length(min=2, max=20),
+            Regexp(
+                "^\\w+$",
+                message="Only letters, numbers and underscores are allowed in the username",
+            ),
+        ],
     )
     email = StringField("Email", validators=[DataRequired(), Email()])
     first_name = StringField("First Name")
@@ -68,7 +77,15 @@ class UpdateAccountForm(FlaskForm):
     """
 
     username = StringField(
-        "Username", validators=[DataRequired(), Length(min=2, max=20)]
+        "Username",
+        validators=[
+            DataRequired(),
+            Length(min=2, max=20),
+            Regexp(
+                "^\\w+$",
+                message="Only letters, numbers and underscores are allowed in the username",
+            ),
+        ],
     )
     email = StringField("Email", validators=[DataRequired(), Email()])
     first_name = StringField("First Name")
