@@ -174,10 +174,6 @@ def perfume(perfume_id):
             {"$match": {"_id": ObjectId(perfume_id)}},
         ]
     )
-    # ! Hardcoding the index to check if it is here the place to show content in the
-    # ! EditReviewForm (it is) - Need to find a way to get here the right review
-    # ! coming from reviews.edit_review
-    # edit_review_form.review.data = current_perfume['reviews'][0]['review_content']
     return render_template(
         "pages/perfume.html",
         title="Perfumes",
