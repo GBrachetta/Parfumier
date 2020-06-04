@@ -2,6 +2,8 @@
 
 > An app that allows users to create a profile, edit it, add their profile image and interact with a database with perfumes.
 
+![Mockup](wireframes/images/mockup.png)
+
 ## Table of Contents <!-- omit in toc -->
 
 - [Introduction](#introduction)
@@ -16,6 +18,7 @@
   - [Visitor Goals](#visitor-goals)
 - [User Stories](#user-stories)
 - [Design Choices](#design-choices)
+  - [Colors](#colors)
 - [Wireframes](#wireframes)
 - [Features](#features)
   - [Existing Features](#existing-features)
@@ -61,9 +64,13 @@
 
 ## Introduction
 
+The current app is my third submission for my studies at Code Institue and it was inspired by my love for fragrances.
+
 ## UX
 
 ### Who is this website for
+
+This website is intended for all pefume lovers, people curious about perfumes, or people wishing to exchange comments, reviews and experiences around perfumes.
 
 ### Who are the primary target groups
 
@@ -82,6 +89,12 @@
 ## User Stories
 
 ## Design Choices
+
+### Colors
+
+The colors chosen for the app are all soft shades of pastel colors allowing users to make a visual connection with the world of perfumes: flowers, herbs, spices and woods.
+
+![Color Palette](wireframes/images/palette.png)
 
 ## Wireframes
 
@@ -199,8 +212,24 @@ While
 
 #### Media
 
+The media (pictures) contained in this app has been borrowed from [Fragrantica](https://www.fragrantica.com/) without any comercial intention.
+
 #### Code
+
+Code was entirely written by the author for the present app, albeit on ocassions inspired by freely available tutorials, instructional documentation and open source examples.
+On such instances, the sources have been mentioned in the code where it corresponds.
+Notable sources of information, inspiration and source to sort problems are:
+
+- [Stack Overflow](https://stackoverflow.com/)
+- [W3Schools](https://www.w3schools.com/)
 
 #### Acknowledgements
 
+I would like to specially thank the help of:
+
+- [Roko Buljan](https://github.com/rokobuljan), for his help and input.
+- [Simen Daehlin](https://github.com/Eventyret), my mentor for this project.
+
 ## Disclaimer
+
+This app and its deployment are for instructional purposes only, not intended comercially in any way and its eventual copyright infringments involuntary.
