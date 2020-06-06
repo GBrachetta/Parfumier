@@ -26,7 +26,7 @@ class RegistrationForm(FlaskForm):
             Length(min=2, max=20),
             Regexp(
                 "^\\w+$",
-                message="Only letters, numbers and underscores are allowed in the username",
+                message="Only letters, numbers and underscores are allowed.",
             ),
         ],
     )
@@ -76,9 +76,7 @@ class LoginForm(FlaskForm):
     """
 
     email = StringField("Email", validators=[DataRequired(), Email()])
-    password = PasswordField(
-        "Password", validators=[DataRequired()]
-    )
+    password = PasswordField("Password", validators=[DataRequired()])
     remember = BooleanField("Remember Me")
     submit = SubmitField("Login")
 
@@ -95,7 +93,7 @@ class UpdateAccountForm(FlaskForm):
             Length(min=2, max=20),
             Regexp(
                 "^\\w+$",
-                message="Only letters, numbers and underscores are allowed in the username",
+                message="Only letters, numbers and underscores are allowed.",
             ),
         ],
     )
