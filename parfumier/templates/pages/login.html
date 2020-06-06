@@ -10,7 +10,7 @@
             <form class="shadow-sm" action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
                 {{ form.csrf_token }}
-                
+
                 <div class="form-group">
                     {{ form.email.label(class="form-control-label") }}
                     {% if form.email.errors %}
