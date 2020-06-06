@@ -122,10 +122,11 @@ def account():
                 width=150,
                 height=150,
             )
+            avatar_link = avatar.replace("http", "https")
             old_value = mongo.db.users.find_one(
                 {"username": current_user.username}
             )
-            avatar = {"$set": {"avatar": avatar}}
+            avatar = {"$set": {"avatar": avatar_link}}
             mongo.db.users.update_one(old_value, avatar)
         mongo.db.users.update_one(
             {"username": current_user.username}, {"$set": updated_user}

@@ -92,6 +92,7 @@ def new_perfume():
                     width=225,
                     height=300,
                 )
+                picture_link = picture.replace("http", "https")
                 mongo.db.perfumes.insert(
                     {
                         "author": current_user.username,
@@ -101,7 +102,7 @@ def new_perfume():
                         "description": form.description.data,
                         "date_updated": datetime.utcnow(),
                         "public": form.public.data,
-                        "picture": picture,
+                        "picture": picture_link,
                     }
                 )
             else:
@@ -229,6 +230,7 @@ def edit_perfume(perfume_id):
                     width=225,
                     height=300,
                 )
+                picture_link = picture.replace("http", "https")
                 new_value = {
                     "$set": {
                         "brand": form.brand.data,
@@ -237,7 +239,7 @@ def edit_perfume(perfume_id):
                         "description": form.description.data,
                         "date_updated": datetime.utcnow(),
                         "public": form.public.data,
-                        "picture": picture,
+                        "picture": picture_link,
                     }
                 }
                 mongo.db.perfumes.update_one(current_perfume, new_value)
