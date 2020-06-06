@@ -21,4 +21,4 @@ def about():
     Return: return_description
     """
 
-    return render_template("pages/index.html")
+    return render_template("pages/index.html", title="About")
