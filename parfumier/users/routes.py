@@ -72,8 +72,10 @@ def register():
                 "email": form.email.data,
                 "password": hashed_password,
                 "is_admin": False,
-                "avatar": ("https://res.cloudinary.com/gbrachetta/"
-                           "image/upload/v1590003978/default.png"),
+                "avatar": (
+                    "https://res.cloudinary.com/gbrachetta/"
+                    "image/upload/v1590003978/default.png"
+                ),
             }
         )
         user = mongo.db.users.find_one({"email": form.email.data})
@@ -129,8 +131,8 @@ def account():
             {"username": current_user.username}, {"$set": updated_user}
         )
         user = mongo.db.users.find_one({"email": form.email.data})
-        # Creates user_obj to log user in immediately preventing a logout when changing
-        # the key value in the class. Thanks to Yohan for this.
+        # Creates user_obj to log user in immediately preventing a logout when
+        # changing the key value in the class. Thanks to Yohan for this.
         user_obj = User(
             user["username"],
             user["first_name"],
@@ -143,8 +145,8 @@ def account():
         login_user(user_obj)
         flash("You have updated your information", "info")
         return redirect(url_for("main.index"))
-    # the if form.validate_on_submit() checks for method POST, so no elif is needed
-    # to check for method GET after the return.
+    # the if form.validate_on_submit() checks for method POST, so no
+    # elif is needed to check for method GET after the return.
     form.username.data = current_user.username
     form.first_name.data = current_user.first_name
     form.last_name.data = current_user.last_name
