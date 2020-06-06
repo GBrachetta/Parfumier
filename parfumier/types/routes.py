@@ -47,7 +47,7 @@ def all_types():
     """
 
     the_types = mongo.db.types.find().sort("type_name")
-    return render_template("pages/types.html", types=the_types)
+    return render_template("pages/types.html", types=the_types, title="Types")
 
 
 @types.route("/type/<type_id>")
@@ -60,7 +60,9 @@ def show_type(type_id):
     """
 
     one_type = mongo.db.types.find_one({"_id": ObjectId(type_id)})
-    return render_template("pages/type.html", type=one_type)
+    return render_template(
+        "pages/type.html", type=one_type, title=one_type["type_name"]
+    )
 
 
 @types.route("/type/<type_id>", methods=["POST"])
@@ -108,7 +110,14 @@ def edit_type(type_id):
             }
             mongo.db.types.update_one(current_type_value, new_value)
             flash("Type has been updated", "info")
-            return redirect(url_for("types.show_type", type_id=current_type_value["_id"]))
+            return redirect(
+                url_for("types.show_type", type_id=current_type_value["_id"])
+            )
         form.type_name.data = current_type_value["type_name"]
         form.description.data = current_type_value["description"]
-    return render_template("pages/edit_type.html", title="Edit Type", form=form, current_type=current_type)
+    return render_template(
+        "pages/edit_type.html",
+        title="Edit Type",
+        form=form,
+        current_type=current_type,
+    )
