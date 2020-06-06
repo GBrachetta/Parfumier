@@ -11,14 +11,14 @@ def error_404(error):
 
 @errors.app_errorhandler(403)
 def error_403(error):
-    return render_template("errors/403.html", title="Page not found"), 403
+    return render_template("errors/403.html", title="Error 403"), 403
 
 
 @errors.app_errorhandler(500)
 def error_500(error):
-    return render_template("errors/500.html", title="Page not found"), 500
+    return render_template("errors/500.html", title="Error 500"), 500
 
 
 @errors.app_errorhandler(405)
 def error_405(error):
-    return render_template("errors/405.html", title="Page not found"), 405
+    return render_template("errors/405.html", title="Error 405"), 405
