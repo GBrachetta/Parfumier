@@ -44,11 +44,11 @@
 - [Issues found and status](#issues-found-and-status)
   - [Custom Validator for types](#custom-validator-for-types)
   - [Aggregation](#aggregation)
-  - [onerror default to picture](#onerror-default-to-picture)
+  - [Onerror default to picture](#onerror-default-to-picture)
   - [Images](#images)
   - [filters](#filters)
-    - [search](#search)
-    - [ckedit](#ckedit)
+    - [Search](#search)
+    - [CKEdit](#ckedit)
     - [Quote all testing as noted in external doc](#quote-all-testing-as-noted-in-external-doc)
   - [Deployment](#deployment)
     - [Heroku](#heroku)
@@ -88,6 +88,30 @@ This website is intended for all pefume lovers, people curious about perfumes, o
 
 ## User Stories
 
+> As a user, I would like to ______________"
+
+- Find information about perfumes.
+- Be able to see what the bottle looks like.
+- Be able to search for a particular perfume.
+- Be able to filter perfumes by type.
+- Learn more about types of perfumes.
+- Be able to read reviews on a perfume.
+- Be able to write my own review on a perfume.
+- Be able to create an account and modify it.
+- Be able to upload an avatar or photo of my choice, and preview it before I do so.
+- Be able to change that photo at any point.
+- See my photo next to my reviews on perfumes.
+- Be able to create a new password in case I forgot my current one.
+- Be able to edit or delete my reviews on a perfume.
+- Be able to delete my account.
+
+> As an administrator, I would like to do all of the above, plus ______________"
+
+- Be able to create, modify and delete perfumes.
+- Be able to upload a photo of the perfume, and to change it.
+- Be able to preview the photo I'm about to upload.
+- Be able to create, modify and delete types of perfumes.
+
 ## Design Choices
 
 ### Colors
@@ -104,13 +128,23 @@ The colors chosen for the app are all soft shades of pastel colors allowing user
 
 #### Login
 
+- Users can create an account.
+
 #### Account managments
 
+- Users can edit their account.
+
 #### Profile Picture (updatable)
+
+- Users can upload a profile picture.
 
 #### Perfumes
 
 #### Admins
+
+- Admins have access to functionalities reserved only to them, such as
+  - Creating a perfume.
+  - Deleting a perfume.
 
 #### Perfume Photos
 
@@ -175,6 +209,14 @@ cur = mongo.db.perfumes.aggregate(
 
 ### Cloudinary
 
+The app originally saved media files to the file system, but that caused some issues:
+
+- The local and remote file systems are different spaces, so pictures uploaded while on development didn't exist remotely (and vice-versa).
+- Heroku's file system is ephemeral, meaning that it is rebuilt on each deployment. That causes that all pictures uploaded at a certain point get destroyed on subsequent deploys, making the media file practically unmanageable.
+
+With this in mind I decided considered saving photos to a cloud-based solution reachable both locally and remotely.
+The options I considered were Imgur and Cloudinary, and chose the latter due to its set of features and ease of use and setup.
+
 ## Testing
 
 ## Issues found and status
@@ -188,15 +230,56 @@ While
 
 ### Aggregation
 
-### onerror default to picture
+### Onerror default to picture
+
+If for some reason outside my control a remote image weren't found for a user or a perfume, I decided to put in place the following method in the templates to ensure at least that the visitor wouldn't see a broken image icon.
 
 ### Images
 
 ### filters
 
-#### search
+#### Search
 
-#### ckedit
+I userd the following to index my collections and allow users to perform searches on the indexed fields:
+
+```python
+@perfumes.route("/search")
+def search():
+    types = mongo.db.types.find().sort("type_name")
+    mongo.db.perfumes.create_index(
+        [("name", "text"), ("brand", "text"), ("perfume_type", "text")]
+    ) # This creates the indexes for the three mentioned fields, allowing users to search the collection
+    db_query = request.args["db_query"]
+    # If no text is entered, returns all the perfumes.
+    if db_query == "":
+        return redirect(url_for("perfumes.all_perfumes"))
+    # I then use the aggregate method to render the search results including
+    # the necessary fields from other collections, such as the avatar,
+    # and sort that aggregate by name.
+    results = mongo.db.perfumes.aggregate(
+        [
+            {"$match": {"$text": {"$search": db_query}}},
+            {
+                "$lookup": {...}
+            },
+            {"$unwind": "$creator"},
+            {
+                "$project": {...}
+            },
+            {"$sort": {"perfumeName": 1}},
+        ]
+    )
+    return render_template(
+        "pages/perfumes.html",
+        perfumes=results,
+        types=types,
+        title="Perfumes",
+    )
+```
+
+#### CKEdit
+
+This was my choice in order to give admins and users the possibility to enter text in Rich Text Format.
 
 #### Quote all testing as noted in external doc
 
