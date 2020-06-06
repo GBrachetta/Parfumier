@@ -26,9 +26,7 @@ class AddReviewForm(FlaskForm):
             .replace("<br>", "")
         )
         if not text:
-            raise ValidationError(
-                "You cannot enter a blank review."
-            )
+            raise ValidationError("You cannot enter a blank review.")
 
 
 class EditReviewForm(FlaskForm):
