@@ -18,13 +18,13 @@
   - [Visitor Goals](#visitor-goals)
 - [User Stories](#user-stories)
 - [Design Choices](#design-choices)
+  - [Buttons](#buttons)
   - [Colors](#colors)
 - [Wireframes](#wireframes)
 - [Features](#features)
   - [Existing Features](#existing-features)
     - [Login](#login)
-    - [Account managments](#account-managments)
-    - [Profile Picture (updatable)](#profile-picture-updatable)
+    - [Account managment](#account-managment)
     - [Perfumes](#perfumes)
     - [Admins](#admins)
     - [Perfume Photos](#perfume-photos)
@@ -114,6 +114,10 @@ This website is intended for all pefume lovers, people curious about perfumes, o
 
 ## Design Choices
 
+### Buttons
+
+I chose to have well rounded buttons.
+
 ### Colors
 
 The colors chosen for the app are all soft shades of pastel colors allowing users to make a visual connection with the world of perfumes: flowers, herbs, spices and woods.
@@ -137,17 +141,21 @@ The colors chosen for the app are all soft shades of pastel colors allowing user
 
 #### Login
 
-- Users can create an account.
+Users can create an account and log in.
+This gives registered users the possibility to add reviews to perfumes, edit them and delete them.
 
-#### Account managments
+#### Account managment
 
-- Users can edit their account.
-
-#### Profile Picture (updatable)
-
-- Users can upload a profile picture.
+- Users can edit their account and change their information.
+- Users can upload a picture or avatar which will represent their interaction with the app. The picture can also be changed at any point.
+- Users have the possibility to delete their account.
+- Users can request a password reset in case they forget their password.
 
 #### Perfumes
+
+- Admins are able to create, edit and delete perfumes.
+- Admins can upload and change a picture for the above perfumes.
+- All users and not registered visitors can browse and search the full database and access all perfumes and reviews.
 
 #### Admins
 
