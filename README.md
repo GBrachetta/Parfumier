@@ -122,6 +122,15 @@ The colors chosen for the app are all soft shades of pastel colors allowing user
 
 ## Wireframes
 
+- [Login Page](wireframes/login.png)
+- [Account Page](wireframes/account.png)
+- [Register Page](wireframes/register.png)
+- [All Perfumes](wireframes/perfumes.png)
+- [Individual Perfume](wireframes/perfume.png)
+- [All Types](wireframes/types.png)
+- [Individual Type](wireframes/type.png)
+- [About](wireframes/about.png)
+
 ## Features
 
 ### Existing Features
