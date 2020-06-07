@@ -20,7 +20,7 @@
                                                     </div>
                                                     <div class="review-content col-12 col-md-6">
                                                         <p class="review-in-prefume">
-                                                            <span class="name-reviewer">{{review['reviewer'] }}</span> said:&nbsp;
+                                                            <span class="name-reviewer">{{review['reviewer'].title() }}</span> said:&nbsp;
                                                             <div class="content-review">{{ review['review_content'] | safe }}
                                                             </div>
                                                             <small class="text-muted">{{ review.date_reviewed.strftime('%d %B, %Y @%-H:%Mh') }}</small></p>
