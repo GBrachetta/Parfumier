@@ -10,7 +10,10 @@
             <form method=POST action="" enctype="multipart/form-data" id="form-perfume" novalidate>
                 {{ form.hidden_tag() }}
                 <div class="form-row mb-4">
-                    <div class="col-12 col-md-3 text-right text-md-left"><span class="form-control-thumbnail"></span><br></div>
+                    <div class="col-12 col-md-3 text-right text-md-left">
+                    <span class="form-control-thumbnail"></span><br>
+                    <p class="form-control-filename new-pic-select mr-0 shadow-sm" data-text="Picture" id="pictureFileName"></p>
+                    </div>
                     <div class="col-12 col-md-9 text-right pl-4">
                         <p class="edit-user-username">Perfume Name</p>
                         <p class="edit-user-names">Brand</p>
@@ -22,7 +25,7 @@
                     {{ form.csrf_token }}
                     {{ form.brand.label(class="form-control-label") }}
                     {% if form.brand.errors %}
-                    {{ form.brand(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                    {{ form.brand(class="form-control form-control-md is-invalid border-white shadow-sm item") }}
                     <div class="invalid-feedback">
                         {% for error in form.brand.errors %}
                         <span>{{ error }}</span>
@@ -36,7 +39,7 @@
                 <div class="form-group">
                     {{ form.name.label(class="form-control-label") }}
                     {% if form.name.errors %}
-                    {{ form.name(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                    {{ form.name(class="form-control form-control-md is-invalid border-white shadow-sm item") }}
                     <div class="invalid-feedback">
                         {% for error in form.name.errors %}
                         <span>{{ error }}</span>
@@ -76,35 +79,29 @@
                 <div class="form-group">
                     {{ form.description.label(class="form-control-label") }}
                     {% if form.description.errors %}
-                    {{ form.description(class="form-control form-control-md is-invalid border-white shadow-sm")}}
+                    {{ form.description(class="form-control form-control-md is-invalid border-white shadow-sm") }}
                     <div class="invalid-feedback">
                         {% for error in form.description.errors %}
                         <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                     {% else %}
-                    {{ form.description(class="form-control form-control-md ckeditor border-white shadow-sm", placeholder="Enter description")}}
+                    {{ form.description(class="form-control form-control-md ckeditor border-white shadow-sm", placeholder="Enter description") }}
                     {% endif %}
                 </div>
 
                 <div class="form-row">
                     <div class="col-6">
-
                         {{ form.picture.label(class="btn shadow-sm button-green form-control-label") }}
                         {{ form.picture(class="form-control-file") }}
-                        <span class="form-control-thumbnail"></span>
-                        <div class="pt-2">
-                            <span class="form-control-filename lead text-danger" data-text="Picture selected" id="pictureFileName"></span>
-                        </div>
                         {% if form.picture.errors %}
                         {% for error in form.picture.errors %}
                         <span class="text-danger">{{ error }}</span></br>
                         {% endfor %}
                         {% endif %}
-
                     </div>
                     <div class="col-6 text-right">
-                        {{ form.submit(class="btn button-blue-small shadow-sm text-center")}}
+                        {{ form.submit(class="btn button-blue-small shadow-sm text-center") }}
 
                     </div>
                 </div>
