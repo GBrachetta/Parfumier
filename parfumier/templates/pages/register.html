@@ -14,89 +14,89 @@
                     <div class="form-group">
                         {{ form.username.label(class="form-control-label border-white shadow-sm item") }}
                         {% if form.username.errors %}
-                        {{ form.username(class="form-control form-control-md is-invalid")}}
+                        {{ form.username(class="form-control form-control-md is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.username.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.username(class="form-control form-control-md border-white shadow-sm item")}}
+                        {{ form.username(class="form-control form-control-md border-white shadow-sm item") }}
                         {% endif %}
                     </div>
 
                     <div class="form-group">
                         {{ form.first_name.label(class="form-control-label border-white shadow-sm item") }}
                         {% if form.first_name.errors %}
-                        {{ form.first_name(class="form-control form-control-md is-invalid")}}
+                        {{ form.first_name(class="form-control form-control-md is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.first_name.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.first_name(class="form-control form-control-md border-white shadow-sm item")}}
+                        {{ form.first_name(class="form-control form-control-md border-white shadow-sm item") }}
                         {% endif %}
                     </div>
 
                     <div class="form-group">
                         {{ form.last_name.label(class="form-control-label") }}
                         {% if form.last_name.errors %}
-                        {{ form.last_name(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                        {{ form.last_name(class="form-control form-control-md is-invalid border-white shadow-sm item") }}
                         <div class="invalid-feedback">
                             {% for error in form.last_name.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.last_name(class="form-control form-control-md border-white shadow-sm item")}}
+                        {{ form.last_name(class="form-control form-control-md border-white shadow-sm item") }}
                         {% endif %}
                     </div>
 
                     <div class="form-group">
                         {{ form.email.label(class="form-control-label") }}
                         {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                        {{ form.email(class="form-control form-control-md is-invalid border-white shadow-sm item") }}
                         <div class="invalid-feedback">
                             {% for error in form.email.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.email(class="form-control form-control-md border-white shadow-sm item", type="email")}}
+                        {{ form.email(class="form-control form-control-md border-white shadow-sm item", type="email") }}
                         {% endif %}
                     </div>
 
                     <div class="form-group">
-                        {{ form.password.label(class="form-control-label")}}
+                        {{ form.password.label(class="form-control-label") }}
                         {% if form.password.errors %}
-                        {{ form.password(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                        {{ form.password(class="form-control form-control-md is-invalid border-white shadow-sm item") }}
                         <div class="invalid-feedback">
                             {% for error in form.password.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.password(class="form-control form-control-md border-white shadow-sm item")}}
+                        {{ form.password(class="form-control form-control-md border-white shadow-sm item") }}
                         {% endif %}
                     </div>
 
                     <div class="form-group">
-                        {{ form.confirm_password.label(class="form-control-label")}}
+                        {{ form.confirm_password.label(class="form-control-label") }}
                         {% if form.confirm_password.errors %}
-                        {{ form.confirm_password(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                        {{ form.confirm_password(class="form-control form-control-md is-invalid border-white shadow-sm item") }}
                         <div class="invalid-feedback">
                             {% for error in form.confirm_password.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.confirm_password(class="form-control form-control-md border-white shadow-sm item")}}
+                        {{ form.confirm_password(class="form-control form-control-md border-white shadow-sm item") }}
                         {% endif %}
                     </div>
 
                 <div class="form-group">
-                    {{ form.submit(class="btn shadow-sm button-blue")}}
+                    {{ form.submit(class="btn shadow-sm button-blue") }}
                 </div>
             </form>
         </div>
