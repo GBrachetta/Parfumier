@@ -92,6 +92,7 @@ def new_perfume():
                     width=225,
                     height=300,
                 )
+                picture_link = picture.replace("http", "https")
                 mongo.db.perfumes.insert(
                     {
                         "author": current_user.username,
@@ -101,7 +102,7 @@ def new_perfume():
                         "description": form.description.data,
                         "date_updated": datetime.utcnow(),
                         "public": form.public.data,
-                        "picture": picture,
+                        "picture": picture_link,
                     }
                 )
             else:
@@ -114,8 +115,10 @@ def new_perfume():
                         "description": form.description.data,
                         "date_updated": datetime.utcnow(),
                         "public": form.public.data,
-                        "picture": ("https://res.cloudinary.com/gbrachetta/"
-                                    "image/upload/v1590013198/generic.jpg"),
+                        "picture": (
+                            "https://res.cloudinary.com/gbrachetta/"
+                            "image/upload/v1590013198/generic.jpg"
+                        ),
                     }
                 )
 
@@ -174,17 +177,13 @@ def perfume(perfume_id):
             {"$match": {"_id": ObjectId(perfume_id)}},
         ]
     )
-    # ! Hardcoding the index to check if it is here the place to show content in the
-    # ! EditReviewForm (it is) - Need to find a way to get here the right review
-    # ! coming from reviews.edit_review
-    # edit_review_form.review.data = current_perfume['reviews'][0]['review_content']
     return render_template(
         "pages/perfume.html",
-        title="Perfumes",
+        title=current_perfume["name"],
         cursor=cur,
         perfume=current_perfume,
         add_review_form=add_review_form,
-        edit_review_form=edit_review_form
+        edit_review_form=edit_review_form,
     )
 
 
@@ -231,6 +230,7 @@ def edit_perfume(perfume_id):
                     width=225,
                     height=300,
                 )
+                picture_link = picture.replace("http", "https")
                 new_value = {
                     "$set": {
                         "brand": form.brand.data,
@@ -239,12 +239,16 @@ def edit_perfume(perfume_id):
                         "description": form.description.data,
                         "date_updated": datetime.utcnow(),
                         "public": form.public.data,
-                        "picture": picture,
+                        "picture": picture_link,
                     }
                 }
                 mongo.db.perfumes.update_one(current_perfume, new_value)
                 flash("You updated the perfume", "info")
-                return redirect(url_for("perfumes.perfume", perfume_id=current_perfume["_id"]))
+                return redirect(
+                    url_for(
+                        "perfumes.perfume", perfume_id=current_perfume["_id"]
+                    )
+                )
             new_value = {
                 "$set": {
                     "brand": form.brand.data,
@@ -257,7 +261,9 @@ def edit_perfume(perfume_id):
             }
             mongo.db.perfumes.update_one(current_perfume, new_value)
             flash("You updated the perfume", "info")
-            return redirect(url_for("perfumes.perfume", perfume_id=current_perfume["_id"]))
+            return redirect(
+                url_for("perfumes.perfume", perfume_id=current_perfume["_id"])
+            )
         form.brand.data = current_perfume["brand"]
         form.name.data = current_perfume["name"]
         form.perfume_type.data = current_perfume["perfume_type"]
@@ -320,10 +326,7 @@ def search():
         ]
     )
     return render_template(
-        "pages/perfumes.html",
-        perfumes=results,
-        types=types,
-        title="Perfumes",
+        "pages/perfumes.html", perfumes=results, types=types, title="Perfumes",
     )
 
 
@@ -373,8 +376,5 @@ def filters():
         ]
     )
     return render_template(
-        "pages/perfumes.html",
-        perfumes=results,
-        types=types,
-        title="Perfumes",
+        "pages/perfumes.html", perfumes=results, types=types, title="Perfumes",
     )

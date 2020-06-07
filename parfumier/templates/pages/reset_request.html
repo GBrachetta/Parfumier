@@ -14,19 +14,19 @@
                     {{ form.csrf_token }}
                     {{ form.email.label(class="form-control-label") }}
                     {% if form.email.errors %}
-                    {{ form.email(class="border-white shadow-sm item form-control form-control-md is-invalid")}}
+                    {{ form.email(class="border-white shadow-sm item form-control form-control-md is-invalid") }}
                     <div class="invalid-feedback">
                         {% for error in form.email.errors %}
                         <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                     {% else %}
-                    {{ form.email(class="border-white shadow-sm item form-control form-control-md", type="email")}}
+                    {{ form.email(class="border-white shadow-sm item form-control form-control-md", type="email") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.submit(class="btn shadow-sm button-blue")}}
+                    {{ form.submit(class="btn shadow-sm button-blue") }}
                 </div>
 
             </form>

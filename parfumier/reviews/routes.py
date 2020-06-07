@@ -77,6 +77,7 @@ def review_perfume(perfume_id):
         add_review_form=form,
         edit_review_form=form_edit,
         cursor=cur,
+        title="Perfume"
     )
 
 
@@ -112,20 +113,14 @@ def edit_review():
 
     form = EditReviewForm()
     review_id = request.form.get("review_id")
-    print(review_id)
     perfume_id = request.form.get("perfume_id")
-    # review = mongo.db.perfumes.find_one(ObjectId(perfume_id))
     if form.validate_on_submit():
         mongo.db.perfumes.update(
             {"_id": ObjectId(perfume_id), "reviews._id": ObjectId(review_id)},
-            {
-                "$set": {
-                    "reviews.$.review_content": form.edit_review.data,
-                    # "reviews.$.date_reviewed": datetime.utcnow(),
-                }
-            },
+            {"$set": {"reviews.$.review_content": form.edit_review.data, }},
         )
         flash("Your review has been updated!", "success")
         return redirect(url_for("perfumes.perfume", perfume_id=perfume_id))
     # form.review.data = review[{"_id": ObjectId(review_id)}]
+    flash("Your review has not been changed", "danger")
     return redirect(url_for("perfumes.perfume", perfume_id=perfume_id))

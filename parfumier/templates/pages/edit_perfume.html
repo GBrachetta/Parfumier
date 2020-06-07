@@ -29,7 +29,7 @@
                 <div class="form-group">
                     {{ form.brand.label(class="form-control-label") }}
                     {% if form.brand.errors %}
-                    {{ form.brand(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                    {{ form.brand(class="form-control form-control-md is-invalid border-white shadow-sm item") }}
                     <div class="invalid-feedback">
                         {% for error in form.brand.errors %}
                         <span>{{ error }}</span>
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     {{ form.name.label(class="form-control-label") }}
                     {% if form.name.errors %}
-                    {{ form.name(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                    {{ form.name(class="form-control form-control-md is-invalid border-white shadow-sm item") }}
                     <div class="invalid-feedback">
                         {% for error in form.name.errors %}
                         <span>{{ error }}</span>
@@ -87,14 +87,14 @@
                 <div class="form-group">
                     {{ form.description.label(class="form-control-label") }}
                     {% if form.description.errors %}
-                    {{ form.description(class="form-control form-control-md is-invalid border-white shadow-sm")}}
+                    {{ form.description(class="form-control form-control-md is-invalid border-white shadow-sm") }}
                     <div class="invalid-feedback">
                         {% for error in form.description.errors %}
                         <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                     {% else %}
-                    {{ form.description(class="form-control form-control-md ckeditor border-white shadow-sm", placeholder="Enter description")}}
+                    {{ form.description(class="form-control form-control-md ckeditor border-white shadow-sm", placeholder="Enter description") }}
                     {% endif %}
                 </div>
 
@@ -114,7 +114,7 @@
                     </div>
 
                     <div class="col-12 col-sm-4 text-center text-sm-right">
-                        {{ form.submit(class="btn button-blue-small shadow-sm text-center")}}
+                        {{ form.submit(class="btn button-blue-small shadow-sm text-center") }}
                     </div>
                 </div>
             </form>

@@ -14,7 +14,7 @@
                     {{ form.csrf_token }}
                     {{ form.type_name.label(class="form-control-label") }}
                     {% if form.type_name.errors %}
-                    {{ form.type_name(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                    {{ form.type_name(class="form-control form-control-md is-invalid border-white shadow-sm item") }}
                     <div class="invalid-feedback">
                         {% for error in form.type_name.errors %}
                         <span>{{ error }}</span>
@@ -28,7 +28,7 @@
                 <div class="form-group">
                     {{ form.description.label(class="form-control-label") }}
                     {% if form.description.errors %}
-                    {{ form.description(class="form-control form-control-md is-invalid border-white shadow-sm item")}}
+                    {{ form.description(class="form-control form-control-md is-invalid border-white shadow-sm item") }}
                     <div class="invalid-feedback">
                         {% for error in form.description.errors %}
                         <span>{{ error }}</span>
@@ -41,7 +41,7 @@
 
                 <div class="form-row">
                     <div class="col-12 text-left">
-                        {{ form.submit(class="btn button-blue text-center shadow-sm mt-2")}}
+                        {{ form.submit(class="btn button-blue text-center shadow-sm mt-2") }}
                     </div>
                 </div>
             </form>

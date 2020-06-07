@@ -8,6 +8,7 @@ from wtforms.validators import (
     Email,
     Length,
     ValidationError,
+    Regexp,
 )
 from flask_login import current_user
 from parfumier import mongo
@@ -19,13 +20,33 @@ class RegistrationForm(FlaskForm):
     """
 
     username = StringField(
-        "Username", validators=[DataRequired(), Length(min=2, max=20)]
+        "Username",
+        validators=[
+            DataRequired(),
+            Length(min=2, max=20),
+            Regexp(
+                "^\\w+$",
+                message="Only letters, numbers and underscores are allowed.",
+            ),
+        ],
     )
     email = StringField("Email", validators=[DataRequired(), Email()])
     first_name = StringField("First Name")
     last_name = StringField("Last Name")
     password = PasswordField(
-        "Password", validators=[DataRequired(), Length(min=6)]
+        "Password",
+        validators=[
+            DataRequired(),
+            Length(min=8, message="Password must be 8 characters long"),
+            Regexp(
+                "^(?=.*?[A-Za-z])", message="Password must contain a letter.",
+            ),
+            Regexp("^(?=.*?[0-9])", message="Password must contain a number.",),
+            Regexp(
+                "^(?=.*?[#?!@$%^&*-])",
+                message="Password must contain a special character.",
+            ),
+        ],
     )
     confirm_password = PasswordField(
         "Confirm Password", validators=[DataRequired(), EqualTo("password")]
@@ -36,7 +57,7 @@ class RegistrationForm(FlaskForm):
         """
         DESCRIPTION
         """
-        user = mongo.db.users.find_one({"username": username.data})
+        user = mongo.db.users.find_one({"username": username.data.lower()})
         if user:
             raise ValidationError("The username already exists.")
 
@@ -44,7 +65,7 @@ class RegistrationForm(FlaskForm):
         """
         DESCRIPTION
         """
-        user = mongo.db.users.find_one({"email": email.data})
+        user = mongo.db.users.find_one({"email": email.data.lower()})
         if user:
             raise ValidationError("The email already exists.")
 
@@ -55,9 +76,7 @@ class LoginForm(FlaskForm):
     """
 
     email = StringField("Email", validators=[DataRequired(), Email()])
-    password = PasswordField(
-        "Password", validators=[DataRequired(), Length(min=6)]
-    )
+    password = PasswordField("Password", validators=[DataRequired()])
     remember = BooleanField("Remember Me")
     submit = SubmitField("Login")
 
@@ -68,13 +87,21 @@ class UpdateAccountForm(FlaskForm):
     """
 
     username = StringField(
-        "Username", validators=[DataRequired(), Length(min=2, max=20)]
+        "Username",
+        validators=[
+            DataRequired(),
+            Length(min=2, max=20),
+            Regexp(
+                "^\\w+$",
+                message="Only letters, numbers and underscores are allowed.",
+            ),
+        ],
     )
     email = StringField("Email", validators=[DataRequired(), Email()])
     first_name = StringField("First Name")
     last_name = StringField("Last Name")
     avatar = FileField(
-        "Choose Avatar", validators=[FileAllowed(["jpg", "png"])]
+        "Choose Avatar", validators=[FileAllowed(["jpg", "png", "jpeg"])]
     )
 
     submit = SubmitField("Update")
@@ -83,8 +110,8 @@ class UpdateAccountForm(FlaskForm):
         """
         DESCRIPTION
         """
-        if username.data != current_user.username:
-            user = mongo.db.users.find_one({"username": username.data})
+        if username.data.lower() != current_user.username:
+            user = mongo.db.users.find_one({"username": username.data.lower()})
             if user:
                 raise ValidationError("The username already exists.")
 
@@ -92,8 +119,8 @@ class UpdateAccountForm(FlaskForm):
         """
         DESCRIPTION
         """
-        if email.data != current_user.email:
-            user = mongo.db.users.find_one({"email": email.data})
+        if email.data.lower() != current_user.email:
+            user = mongo.db.users.find_one({"email": email.data.lower()})
             if user:
                 raise ValidationError("The email already exists.")
 
@@ -121,7 +148,19 @@ class ResetPasswordForm(FlaskForm):
     """
 
     password = PasswordField(
-        "New Password", validators=[DataRequired(), Length(min=6)]
+        "New Password",
+        validators=[
+            DataRequired(),
+            Length(min=8, message="Password must be 8 characters long."),
+            Regexp(
+                "^(?=.*?[A-Za-z])", message="Password must contain a letter.",
+            ),
+            Regexp("^(?=.*?[0-9])", message="Password must contain a number.",),
+            Regexp(
+                "^(?=.*?[#?!@$%^&*-])",
+                message="Password must contain a special character.",
+            ),
+        ],
     )
     confirm_password = PasswordField(
         "Confirm New Password", validators=[DataRequired(), EqualTo("password")]
