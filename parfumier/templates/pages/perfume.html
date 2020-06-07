@@ -1,4 +1,4 @@
-{% extends 'layout/base.html' %}
+{% extends "layout/base.html" %}
 {% block content %}
 
 <main class="page project-page">
@@ -17,12 +17,12 @@
                         <span class="meta-heading">Type of perfume</span>
                         <span class="text-info">{{ perfume.perfume_type.title() }}</span>
                         <span class="meta-heading">Date Posted</span>
-                        <span class="text-muted">{{ perfume.date_updated.strftime('%d-%m-%Y') }}</span>
+                        <span class="text-muted">{{ perfume.date_updated.strftime("%d-%m-%Y") }}</span>
                         <span class="meta-heading">Posted by</span>
-                        <span class="text-info">{{ author['username'].title() }}</span><span class="text-muted">({{ author['firstName'].title() }} {{ author['lastName'].title() }})</span></div>
+                        <span class="text-info">{{ author["username"].title() }}</span><span class="text-muted">({{ author["firstName"].title() }} {{ author["lastName"].title() }})</span></div>
                     <div class="row">
                         <div class="col-12 text-left perfume-avatar-container mb-2">
-                            <img class="rounded-circle img-fluid perfume-avatar" src="{{ author['profilePicture'] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width=100 height=100 alt="Avatar">
+                            <img class="rounded-circle img-fluid perfume-avatar" src="{{ author["profilePicture"] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width=100 height=100 alt="Avatar">
                         </div>
                     </div>
                 </div>
@@ -34,14 +34,14 @@
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-left mb-2">
                             <button class="btn btn-sm shadow-sm button-purple" type="button" data-toggle="modal" data-target="#reviewPerfumeModal">Review</button>
-                            <a class="shadow-sm btn btn-sm button-green" href="{{ url_for('perfumes.all_perfumes') }}">Back</a>
+                            <a class="shadow-sm btn btn-sm button-green" href="{{ url_for("perfumes.all_perfumes") }}">Back</a>
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-right mb-2">
                             {% if current_user.is_authenticated and current_user.is_admin == True and current_user.username == perfume.author %}
-                            <a class="shadow-sm btn btn-sm button-blue-small" href="{{ url_for('perfumes.edit_perfume', perfume_id=perfume._id) }}" role="button">Edit</a>
+                            <a class="shadow-sm btn btn-sm button-blue-small" href="{{ url_for("perfumes.edit_perfume", perfume_id=perfume._id) }}" role="button">Edit</a>
                             <button type="button" class="btn btn-sm shadow-sm button-red" data-toggle="modal" data-target="#deletePerfumeModal">Delete</button>
                             {% elif current_user.is_authenticated and current_user.is_admin == True %}
-                            <a class="shadow-sm btn btn-sm button-blue-small" href="{{ url_for('perfumes.edit_perfume', perfume_id=perfume._id) }}" role="button">Edit</a>
+                            <a class="shadow-sm btn btn-sm button-blue-small" href="{{ url_for("perfumes.edit_perfume", perfume_id=perfume._id) }}" role="button">Edit</a>
                             <button disabled type="button" class="btn btn-sm shadow-sm button-red" data-toggle="modal" data-target="#deletePerfumeModal">Delete</button>
                             {% endif %}
                         </div>
