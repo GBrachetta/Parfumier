@@ -12,7 +12,7 @@
                 <p class="warning-modals">This action cannot be undone.</p>
             </div>
             <div class="modal-footer">
-                <form action="{{ url_for('users.delete_user' )}}" method="POST">
+                <form action="{{ url_for("users.delete_user") }}" method="POST">
                     <input type="submit" , class="btn  shadow-sm button-red" value="Delete">
                 </form>
             </div>
