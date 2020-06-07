@@ -30,7 +30,7 @@ def login():
         return redirect(url_for("main.index"))
     form = LoginForm()
     if form.validate_on_submit():
-        user = mongo.db.users.find_one({"email": form.email.data})
+        user = mongo.db.users.find_one({"email": form.email.data.lower()})
         if user and User.check_password(user["password"], form.password.data):
             user_obj = User(
                 user["username"],
@@ -66,10 +66,10 @@ def register():
         hashed_password = generate_password_hash(form.password.data)
         all_users.insert(
             {
-                "username": form.username.data,
+                "username": form.username.data.lower(),
                 "first_name": form.first_name.data,
                 "last_name": form.last_name.data,
-                "email": form.email.data,
+                "email": form.email.data.lower(),
                 "password": hashed_password,
                 "is_admin": False,
                 "avatar": (
@@ -78,7 +78,7 @@ def register():
                 ),
             }
         )
-        user = mongo.db.users.find_one({"email": form.email.data})
+        user = mongo.db.users.find_one({"email": form.email.data.lower()})
         user_obj = User(
             user["username"],
             user["first_name"],
@@ -104,12 +104,6 @@ def account():
     DESCRIPTION
     """
     form = UpdateAccountForm()
-    updated_user = {
-        "username": form.username.data,
-        "first_name": form.first_name.data,
-        "last_name": form.last_name.data,
-        "email": form.email.data,
-    }
     if form.validate_on_submit():
         if form.avatar.data:
             avatar_uploaded = upload(form.avatar.data)
@@ -129,9 +123,17 @@ def account():
             avatar = {"$set": {"avatar": avatar_link}}
             mongo.db.users.update_one(old_value, avatar)
         mongo.db.users.update_one(
-            {"username": current_user.username}, {"$set": updated_user}
+            {"username": current_user.username},
+            {
+                "$set": {
+                    "username": form.username.data.lower(),
+                    "first_name": form.first_name.data,
+                    "last_name": form.last_name.data,
+                    "email": form.email.data.lower(),
+                }
+            },
         )
-        user = mongo.db.users.find_one({"email": form.email.data})
+        user = mongo.db.users.find_one({"email": form.email.data.lower()})
         # Creates user_obj to log user in immediately preventing a logout when
         # changing the key value in the class. Thanks to Yohan for this.
         user_obj = User(
@@ -179,7 +181,7 @@ def reset_request():
         return redirect(url_for("main.index"))
     form = RequestResetForm()
     if form.validate_on_submit():
-        user = mongo.db.users.find_one({"email": form.email.data})
+        user = mongo.db.users.find_one({"email": form.email.data.lower()})
         send_reset_email(user)
         flash("An email has been sent to reset your password", "success")
         return redirect(url_for("users.login"))

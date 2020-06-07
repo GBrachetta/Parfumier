@@ -57,7 +57,7 @@ class RegistrationForm(FlaskForm):
         """
         DESCRIPTION
         """
-        user = mongo.db.users.find_one({"username": username.data})
+        user = mongo.db.users.find_one({"username": username.data.lower()})
         if user:
             raise ValidationError("The username already exists.")
 
@@ -65,7 +65,7 @@ class RegistrationForm(FlaskForm):
         """
         DESCRIPTION
         """
-        user = mongo.db.users.find_one({"email": email.data})
+        user = mongo.db.users.find_one({"email": email.data.lower()})
         if user:
             raise ValidationError("The email already exists.")
 
@@ -110,8 +110,8 @@ class UpdateAccountForm(FlaskForm):
         """
         DESCRIPTION
         """
-        if username.data != current_user.username:
-            user = mongo.db.users.find_one({"username": username.data})
+        if username.data.lower() != current_user.username:
+            user = mongo.db.users.find_one({"username": username.data.lower()})
             if user:
                 raise ValidationError("The username already exists.")
 
@@ -119,8 +119,8 @@ class UpdateAccountForm(FlaskForm):
         """
         DESCRIPTION
         """
-        if email.data != current_user.email:
-            user = mongo.db.users.find_one({"email": email.data})
+        if email.data.lower() != current_user.email:
+            user = mongo.db.users.find_one({"email": email.data.lower()})
             if user:
                 raise ValidationError("The email already exists.")
 
