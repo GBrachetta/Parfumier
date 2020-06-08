@@ -50,14 +50,14 @@
     - [Search](#search)
     - [CKEdit](#ckedit)
     - [Quote all testing as noted in external doc](#quote-all-testing-as-noted-in-external-doc)
-  - [Deployment](#deployment)
-    - [Heroku](#heroku)
-    - [Variables](#variables)
-  - [Credits](#credits)
-    - [Content](#content)
-    - [Media](#media)
-    - [Code](#code)
-    - [Acknowledgements](#acknowledgements)
+- [Deployment](#deployment)
+  - [Local Development](#local-development)
+  - [Heroku](#heroku)
+- [Credits](#credits)
+  - [Content](#content)
+  - [Media](#media)
+  - [Code](#code)
+  - [Acknowledgements](#acknowledgements)
 - [Disclaimer](#disclaimer)
 
 ---
@@ -170,6 +170,44 @@ This gives registered users the possibility to add reviews to perfumes, edit the
 ### Future Goals
 
 ## Information Architecture
+
+```json
+{
+    "perfumes": {
+        "_id": "<ObjectId>",
+        "author": "<string>",
+        "brand": "<string>",
+        "name": "<string>",
+        "perfume_type": "<string>",
+        "descritpion": "<text field>",
+        "date_updated": "<date>",
+        "public": "<boolean>",
+        "picture": "<string>",
+        "reviews": {
+            "_id": "<ObjectId>",
+            "review_content": "<text field>",
+            "reviewer": "<string>",
+            "date_reviewed": "<date>",
+            "reviewer_picture": "<string>"
+        }
+    },
+    "users": {
+        "_id": "<ObjectId>",
+        "username": "<string>",
+        "first_name": "<string>",
+        "last_name": "<string>",
+        "email": "<string>",
+        "password": "<string>",
+        "is_admin": "<boolean>",
+        "avatar": "<string>"
+    },
+    "types": {
+        "_id": "<ObjectId>",
+        "type_name": "<string>",
+        "description": "<text field>"
+    }
+}
+```
 
 ### Database Choice
 
@@ -300,21 +338,55 @@ This was my choice in order to give admins and users the possibility to enter te
 
 #### Quote all testing as noted in external doc
 
-### Deployment
+## Deployment
 
-#### Heroku
+### Local Development
 
-#### Variables
+This project can be ran locally by going to this [Repository link](https://github.com/GBrachetta/Parfumier) and clicking on the Clone or Download button and copying the link provided.
 
-### Credits
+![clone](wireframes/images/clone.png)
 
-#### Content
+In your IDE, open a Terminal window and change to the directory where you want to clone this project and type `Git clone "your copied link"`.
 
-#### Media
+After pressing Enter the project will be created and cloned locally.
+
+Alternatively you can download the zipped file, decompress it and use your IDE of choice to access it.
+
+To run it locally, though, and to achieve full functionality, a series of settings must be performed by the user which won't be discussed here, such as creating an account with Cloudinary for the images to upload to their servers, having the right credentials for the email server for the reset password functionality and installing all necessary dependencies.
+Additionally, the user should create a database (local or remote) using MongoDB and call the collections as described in the [Information Architecture](#information-architecture) section and create 2 enviroment variables: "MONGO_URI" and "SECRET_KEY". "MONGO_URI" should be the connection string for the database, while "SECRET_KEY" should be a more or less random sequence of characters.
+
+During development I had all these variables in place, working directly from my machine with the remote servers.
+
+### Heroku
+
+[Heroku](https://www.heroku.com/) was chosen as the deployment platform for this project.
+The steps to deploy the local app to Heroku were as follow:
+
+- In Heroku, created an app. The app must have an unique name.
+- Linked that app to the GitHub repository by going to the "Deploy" tab in the main app menu.
+- Selected a branch to deploy automatically (alternatively one could opt to deploy manually instead).
+- In the Settings tab, added the corresponding Config Variables as present in my local development:
+  - CLOUDINARY_URL (Allowing to upload pictures to my Cloudinary account)
+  - MAIL_PASSWORD (Used by python mail to connect to my smtp server to deal with sending emails)
+  - MAIL_USERNAME (Same as above)
+  - MONGO_URI (Connecting string to my MongoDB)
+  - SECRET_KEY
+- I used [Pipenv](https://pipenv.pypa.io/en/latest/) to deal with my virtual enviroment, which creates a pipfile for the dependencies needed for the app and a pipfile.lock to deal with versioning of these dependencies.
+- This pipfile renders the file 'requirements.txt' unnecessary, so it was not included in the project.
+- I installed the dependency [Gunicorn](https://gunicorn.org/) which is a Python WSGI HTTP Server.
+- I also created a "Procfile", needed by Heroku in order to know how to run the app and instructed it to run my app using the Gunicorn server in it.
+- When deploying, Heroku reads the pipfiles to install the dependencies, reads the Procfile and the Config Variables inserted above.
+- After that process, the app was live and running remotely in Heroku's servers.
+
+## Credits
+
+### Content
+
+### Media
 
 The media (pictures) contained in this app has been borrowed from [Fragrantica](https://www.fragrantica.com/) without any comercial intention.
 
-#### Code
+### Code
 
 Code was entirely written by the author for the present app, albeit on ocassions inspired by freely available tutorials, instructional documentation and open source examples.
 On such instances, the sources have been mentioned in the code where it corresponds.
@@ -323,7 +395,7 @@ Notable sources of information, inspiration and source to sort problems are:
 - [Stack Overflow](https://stackoverflow.com/)
 - [W3Schools](https://www.w3schools.com/)
 
-#### Acknowledgements
+### Acknowledgements
 
 I would like to specially thank the help of:
 
