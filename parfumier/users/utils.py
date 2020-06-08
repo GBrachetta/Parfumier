@@ -43,7 +43,8 @@ To reset your password, please visit the following link:
 
 {url_for('users.reset_token', token=token, _external=True)}
 
-If you did not make this request then simply ignore this email and no changes will be made.
+If you did not make this request then simply ignore this email and no changes
+ will be made.
 
 Best regards,
 
@@ -52,11 +53,14 @@ Parfumier
     html = f"""
     <html>
     <body>
-    <h3>Dear <strong>{receiver['username']}</strong>,</h3><br>
-       <p>You have requested to reset your password for your account on Parfumier.<br>
+    <h3>Dear <strong>{receiver['username'].title()}</strong>,</h3><br>
+       <p>You have requested to reset your password for your
+        account on Parfumier.<br>
        <p>To reset your password, please visit the following link:<br><br>
-       <a href="{url_for('users.reset_token', token=token, _external=True)}">Reset Password</a><br><br>
-       If you did not make this request then simply ignore this email and no changes will be made.<br><br>
+       <a href="{url_for('users.reset_token', token=token, _external=True)}">
+       Reset Password</a><br><br>
+       If you did not make this request then simply ignore this email and no
+        changes will be made.<br><br>
        Best Regards,<br>
        <em>Parfumier</em>
     </p>
