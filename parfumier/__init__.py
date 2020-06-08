@@ -3,6 +3,7 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_pymongo import PyMongo
 from parfumier.config import Config
+from flask_compress import Compress
 
 
 login_manager = LoginManager()
@@ -10,6 +11,7 @@ login_manager.login_view = "users.login"
 login_manager.login_message = "Please log in."
 login_manager.login_message_category = "info"
 mongo = PyMongo()
+compress = Compress()
 
 
 def create_app(config_class=Config):
@@ -21,6 +23,7 @@ def create_app(config_class=Config):
     """
     app = Flask(__name__)
     app.config.from_object(Config)
+    compress.init_app(app)
     login_manager.init_app(app)
     mongo.init_app(app)
     from parfumier.users.routes import users
