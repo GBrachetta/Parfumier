@@ -41,7 +41,9 @@ class RegistrationForm(FlaskForm):
             Regexp(
                 "^(?=.*?[A-Za-z])", message="Password must contain a letter.",
             ),
-            Regexp("^(?=.*?[0-9])", message="Password must contain a number.",),
+            Regexp(
+                "^(?=.*?[0-9])", message="Password must contain a number.",
+            ),
             Regexp(
                 "^(?=.*?[#?!@$%^&*-])",
                 message="Password must contain a special character.",
@@ -137,7 +139,7 @@ class RequestResetForm(FlaskForm):
         """
         DESCRIPTION
         """
-        user = mongo.db.users.find_one({"email": email.data})
+        user = mongo.db.users.find_one({"email": email.data.lower()})
         if user is None:
             raise ValidationError("There is no accout with that email.")
 
@@ -155,7 +157,9 @@ class ResetPasswordForm(FlaskForm):
             Regexp(
                 "^(?=.*?[A-Za-z])", message="Password must contain a letter.",
             ),
-            Regexp("^(?=.*?[0-9])", message="Password must contain a number.",),
+            Regexp(
+                "^(?=.*?[0-9])", message="Password must contain a number.",
+            ),
             Regexp(
                 "^(?=.*?[#?!@$%^&*-])",
                 message="Password must contain a special character.",
@@ -163,6 +167,7 @@ class ResetPasswordForm(FlaskForm):
         ],
     )
     confirm_password = PasswordField(
-        "Confirm New Password", validators=[DataRequired(), EqualTo("password")]
+        "Confirm New Password",
+        validators=[DataRequired(), EqualTo("password")],
     )
     submit = SubmitField("Reset Password")

@@ -24,7 +24,9 @@ class CreatePerfumeForm(FlaskForm):
     description = TextAreaField("Description")
     public = BooleanField("Public")
     submit = SubmitField("Create")
-    picture = FileField("Picture", validators=[FileAllowed(["jpg", "png", "jpeg"])])
+    picture = FileField(
+        "Picture", validators=[FileAllowed(["jpg", "png", "jpeg"])]
+    )
     perfume_type = StringField("Type", validators=[DataRequired()])
 
 
@@ -41,7 +43,9 @@ class EditPerfumeForm(FlaskForm):
     description = TextAreaField("Description")
     public = BooleanField("Public")
     submit = SubmitField("Update")
-    picture = FileField("Picture", validators=[FileAllowed(["jpg", "png", "jpeg"])])
+    picture = FileField(
+        "Picture", validators=[FileAllowed(["jpg", "png", "jpeg"])]
+    )
     perfume_type = StringField("Type", validators=[DataRequired()])
 
 
