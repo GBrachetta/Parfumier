@@ -382,6 +382,8 @@ The steps to deploy the local app to Heroku were as follow:
 
 ### Content
 
+The description of the perfumes has been freely adapted from [Fragrantica](www.fragrantica.com).
+
 ### Media
 
 The media (pictures) contained in this app has been borrowed from [Fragrantica](https://www.fragrantica.com/) without any comercial intention.
