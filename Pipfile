@@ -23,6 +23,7 @@ flask-wtf = "*"
 python-dotenv = "*"
 pillow = "*"
 cloudinary = "*"
+flask-compress = "*"
 
 [requires]
 python_version = "3.7"
