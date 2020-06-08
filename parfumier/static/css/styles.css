@@ -1,6 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&family=Lato:wght@300;400;700&family=Montserrat:ital,wght@0,400;0,600;0,700;1,300&family=Quicksand:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:ital,wght@0,400;0,600;0,700;1,300&display=swap");
+
 body {
-    font-family: "Quicksand", sans-serif !important;
+    font-family: "Montserrat", sans-serif;
 }
 
 /* Navbar */
@@ -9,7 +10,6 @@ body {
 }
 
 .portfolio-navbar .navbar-nav .nav-link {
-    font-family: "Montserrat", sans-serif;
     font-weight: 500;
 }
 
