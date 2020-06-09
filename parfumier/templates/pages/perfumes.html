@@ -1,4 +1,4 @@
-{% extends 'layout/base.html' %} {% block content %}
+{% extends "layout/base.html" %} {% block content %}
 
 <main class="page projets-page">
     <section class="portfolio-block projects compact-grid container">
@@ -22,7 +22,7 @@
                     {% if page_number == page %}
                     <a class="btn button-red mb-4" href="{{ page_number }}">{{ page_number }}</a>
                     {% else %}
-                    <a class="btn button-blue-small mb-4" href="{{ url_for('perfumes.all_perfumes', page=page_number) }}">{{ page_number }}</a>
+                    <a class="btn button-blue-small mb-4" href="{{ url_for("perfumes.all_perfumes", page=page_number) }}">{{ page_number }}</a>
                     {% endif %}
                     {% else %}
                     ...
@@ -33,7 +33,7 @@
             {% if current_user.is_authenticated and current_user.is_admin == True %}
 
             <div class="col-12 text-center mt-4">
-                <a class="btn button-purple" href="{{ url_for('perfumes.new_perfume') }}" role="button">Create New Perfume</a>
+                <a class="btn button-purple" href="{{ url_for("perfumes.new_perfume") }}" role="button">Create New Perfume</a>
             </div>
             {% endif %}
 

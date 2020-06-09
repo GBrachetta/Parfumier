@@ -9,16 +9,21 @@ class AddReviewForm(FlaskForm):
 
     In addition to its 2 fields it has a custom validator.
     Since CKEditor (my WYSIWYG editor for text fields) creates
-    html, DataRequired() isn't enough to check for an empty
-    text field, so this custom validator replaces all html
-    with empty strings to allow for an accurate validation
-    error in case the user attempts to enter an empty review.
+    html.
     """
 
     review = TextAreaField("Review", validators=[DataRequired()])
     submit = SubmitField("Post Review")
 
     def validate_review(self, review):
+        """Custom validator
+
+        DataRequired() isn't enough to check for an empty
+        text field, so this custom validator replaces all html
+        with empty strings to allow for an accurate validation
+        error in case the user attempts to enter an empty review.
+        """
+
         text = (
             review.data.replace("<p>", "")
             .replace("</p>", "")
