@@ -1,0 +1,35 @@
+<!-- CREATE REVIEW MODAL -->
+<div class="modal fade" role="dialog" tabindex="-1" id="reviewPerfumeModal" aria-labelledby="reviewPerfumeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Please leave a review</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form method=POST action="{{ url_for("reviews.review_perfume", perfume_id=perfume._id) }}" id="form-review" class="shadow-none" novalidate>
+                <div class="modal-body">
+                    {{ add_review_form.hidden_tag() }}
+                    <div class="form-group">
+                        {% if add_review_form.review.errors %}
+                        {{ add_review_form.review(class="form-control form-control-md is-invalid ckeditor") }}
+                        <div class="invalid-feedback">
+                            {% for error in add_review_form.review.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ add_review_form.review(class="form-control form-control-md ckeditor", placeholder="Review") }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        {{ add_review_form.submit(class="btn btn-sm shadow-sm button-blue") }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

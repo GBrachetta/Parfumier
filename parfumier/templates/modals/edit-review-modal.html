@@ -1,0 +1,35 @@
+<div class="modal fade" role="dialog" tabindex="-1" id="editReviewPerfumeModal" aria-labelledby="editReviewPerfumeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit your review</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <form class="shadow-none" method=POST action="{{ url_for("reviews.edit_review") }}" id="form-edit-review">
+                    {{ edit_review_form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <div class="form-group">
+                            {% if edit_review_form.edit_review.errors %}
+                            {{ edit_review_form.edit_review(class="form-control form-control-md ckeditor is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in edit_review_form.edit_review.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ edit_review_form.edit_review(class="form-control form-control-md ckeditor", placeholder="Review") }}
+                            {% endif %}
+                        </div>
+                    </fieldset>
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <input hidden name="review_id">
+                            <input hidden name="perfume_id">
+                            {{ edit_review_form.submit(class="btn btn-sm shadow-sm button-blue") }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
