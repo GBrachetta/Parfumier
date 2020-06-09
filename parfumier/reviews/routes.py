@@ -131,6 +131,5 @@ def edit_review():
         )
         flash("Your review has been updated!", "success")
         return redirect(url_for("perfumes.perfume", perfume_id=perfume_id))
-    # form.review.data = review[{"_id": ObjectId(review_id)}]
     flash("Your review has not been changed", "danger")
     return redirect(url_for("perfumes.perfume", perfume_id=perfume_id))
