@@ -1,4 +1,4 @@
-"""sumary_line"""
+"""Imports from Flask, the database and needed forms"""
 from datetime import datetime
 from flask import flash, redirect, Blueprint, url_for, request, render_template
 from flask_login import login_required, current_user
@@ -13,11 +13,16 @@ reviews = Blueprint("reviews", __name__)
 @reviews.route("/perfume/review/<perfume_id>", methods=["POST", "GET"])
 @login_required
 def review_perfume(perfume_id):
-    """sumary_line
+    """Route used to create a review
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    After defining all objects to be passed to the template (including
+    the cursor with the aggregated perfume) the method updates the array
+    of objects in the perfumes collection with the corresponding review.
+    It records who posted the review (including a link to their avatar),
+    the date of the review and the content with the html produced by
+    CKEditor from the text area field.
+    The id of the review is created using ObjectId with the current
+    creation moment, assigning a virtually unique id to each review.
     """
 
     form = AddReviewForm()
@@ -84,11 +89,13 @@ def review_perfume(perfume_id):
 @reviews.route("/perfume/review", methods=["POST"])
 @login_required
 def delete_review():
-    """sumary_line
+    """Deletes a particular review
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    This simply deletes a review based on the combination of
+    the id from both the perfume and the review itself.
+    As this comes from a modal, that information is passed
+    through the hidden inputs in the modal, from the main
+    corresponding template.
     """
 
     review_id = request.form.get("review_id")
@@ -104,11 +111,14 @@ def delete_review():
 @reviews.route("/review", methods=["GET", "POST"])
 @login_required
 def edit_review():
-    """sumary_line
+    """Edits an existing review
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Similar to the previous method, this one also collects the necessary
+    identificators from the hidden fields containing the ids passed from
+    the main template.
+    It then simply updates the existing review.
+    A JavaScript function pre-populates the form displaying the current
+    contents of the review to be modified.
     """
 
     form = EditReviewForm()
