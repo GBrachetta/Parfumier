@@ -1,0 +1,39 @@
+<form class="shadow-sm" method=POST action="" id="form-perfume" novalidate>
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.type_name.label(class="form-control-label") }}
+        {% if form.type_name.errors %}
+        {{ form.type_name(class="form-control form-control-md is-invalid border-white shadow-sm item") }}
+        <div class="invalid-feedback">
+            {% for error in form.type_name.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.type_name(class="form-control form-control-md border-white shadow-sm item") }}
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form.description.label(class="form-control-label") }}
+        {% if form.description.errors %}
+        {{ form.description(class="form-control form-control-md is-invalid border-white shadow-sm item") }}
+        <div class="invalid-feedback">
+            {% for error in form.description.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.description(class="form-control form-control-md ckeditor border-white shadow-sm item") }}
+        {% endif %}
+    </div>
+
+    <div class="form-row">
+        <div class="col-12 text-left">
+            {{ form.submit(class="btn button-blue-small text-center shadow-sm mt-0") }}
+            <a class="btn button-yellow-nom" href="{{ url_for("types.show_type", type_id=current_type._id) }}">Cancel</a>
+
+        </div>
+    </div>
+</form>

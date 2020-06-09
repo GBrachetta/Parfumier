@@ -7,49 +7,7 @@
             <div class="heading">
                 <h2 class="text-capitalize titles">log in</h2>
             </div>
-            <form class="shadow-sm" action="" method="post" novalidate>
-                {{ form.hidden_tag() }}
-
-                <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-                    {% if form.email.errors %}
-                    {{ form.email(class="border-white shadow-sm form-control item form-control form-control-md is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.email.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                    {{ form.email(class="border-white shadow-sm form-control item form-control form-control-md", type="email") }}
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    {{ form.password.label(class="form-control-label") }}
-                    {% if form.password.errors %}
-                    {{ form.password(class="border-white shadow-sm form-control item form-control form-control-md is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.password.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                    {{ form.password(class="border-white shadow-sm form-control item form-control form-control-md") }}
-                    {% endif %}
-                </div>
-
-                <div class="form-check">
-                    {{ form.remember(class="form-check-input") }}
-                    {{ form.remember.label(class="form-check-label muted-texts") }}
-                </div>
-
-                <div class="form-group">
-                    {{ form.submit(class="btn shadow-sm button-blue") }}
-                </div>
-
-                <a class="small-links" href="{{ url_for("users.reset_request") }}" >Forgot Password?</a>
-                <a class="float-right small-links" href="{{ url_for("users.register") }}">Register</a>
-            </form>
+            {% include "forms/login-form.html" %}
         </div>
     </section>
 </main>

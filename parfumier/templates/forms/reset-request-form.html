@@ -1,0 +1,22 @@
+<form class="shadow-sm" action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.email.label(class="form-control-label") }}
+        {% if form.email.errors %}
+        {{ form.email(class="border-white shadow-sm item form-control form-control-md is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.email.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.email(class="border-white shadow-sm item form-control form-control-md", type="email") }}
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form.submit(class="btn shadow-sm button-blue") }}
+    </div>
+
+</form>
