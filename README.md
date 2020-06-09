@@ -174,41 +174,51 @@ Admins can upload photos using Cloudinary. In case a photo is not provided durin
 
 ## Information Architecture
 
+Perfumes Collection
+
 ```json
-{
-    "perfumes": {
+"perfumes": {
+    "_id": "<ObjectId>",
+    "author": "<string>",
+    "brand": "<string>",
+    "name": "<string>",
+    "perfume_type": "<string>",
+    "descritpion": "<text field>",
+    "date_updated": "<date>",
+    "public": "<boolean>",
+    "picture": "<string>",
+    "reviews": {
         "_id": "<ObjectId>",
-        "author": "<string>",
-        "brand": "<string>",
-        "name": "<string>",
-        "perfume_type": "<string>",
-        "descritpion": "<text field>",
-        "date_updated": "<date>",
-        "public": "<boolean>",
-        "picture": "<string>",
-        "reviews": {
-            "_id": "<ObjectId>",
-            "review_content": "<text field>",
-            "reviewer": "<string>",
-            "date_reviewed": "<date>",
-            "reviewer_picture": "<string>"
-        }
-    },
-    "users": {
-        "_id": "<ObjectId>",
-        "username": "<string>",
-        "first_name": "<string>",
-        "last_name": "<string>",
-        "email": "<string>",
-        "password": "<string>",
-        "is_admin": "<boolean>",
-        "avatar": "<string>"
-    },
-    "types": {
-        "_id": "<ObjectId>",
-        "type_name": "<string>",
-        "description": "<text field>"
-    }
+        "review_content": "<text field>",
+        "reviewer": "<string>",
+        "date_reviewed": "<date>",
+        "reviewer_picture": "<string>"
+}
+```
+
+Users collection
+
+```json
+"users": {
+    "_id": "<ObjectId>",
+    "username": "<string>",
+    "first_name": "<string>",
+    "last_name": "<string>",
+    "email": "<string>",
+    "password": "<string>",
+    "is_admin": "<boolean>",
+    "avatar": "<string>"
+}
+```
+
+Types collection
+
+```json
+"types": {
+    "_id": "<ObjectId>",
+    "type_name": "<string>",
+    "description": "<text field>",
+    "author": "<string>"
 }
 ```
 
