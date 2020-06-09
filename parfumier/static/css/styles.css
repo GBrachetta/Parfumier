@@ -38,11 +38,19 @@ div.social-icons .background-twitter {
     color: #585e65;
 }
 
+.button-blue:hover {
+    background-color: #a0caf5;
+}
+
 .button-blue-small {
     margin-left: 0px;
     margin-top: 40px;
     background-color: #d2e3f4;
     color: #585e65;
+}
+
+.button-blue-small:hover {
+    background-color: #a0caf5;
 }
 
 .button-green {
@@ -53,6 +61,10 @@ div.social-icons .background-twitter {
     background-color: #cdf1c4;
 }
 
+.button-green:hover {
+    background-color: #aef19d;
+}
+
 .button-red {
     margin-left: 0px;
     margin-top: 40px;
@@ -61,16 +73,28 @@ div.social-icons .background-twitter {
     background-color: #ffe0ce;
 }
 
+.button-red:hover {
+    background-color: #fabf9d;
+}
+
 .button-purple {
     background-color: #eadff7;
     margin-top: 40px;
     color: #454e56;
 }
 
+.button-purple:hover {
+    background-color: #d4b3fa;
+}
+
 .button-yellow {
     background-color: #f5db98;
     color: #454e56;
     margin-top: 40px;
+}
+
+.button-yellow:hover {
+    background-color: #f7d274;
 }
 
 .button-yellow-nom {
@@ -177,8 +201,12 @@ div.social-icons .background-twitter {
 }
 
 .button-go {
-    background-color: #cdf1c4;
+    background-color: #c7e2f5;
     color: #746d6d;
+}
+
+.button-go:hover{
+    background-color: #d4b3fa;
 }
 
 .content-review {
