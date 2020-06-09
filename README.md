@@ -28,7 +28,6 @@
     - [Perfumes](#perfumes)
     - [Admins](#admins)
     - [Perfume Photos](#perfume-photos)
-    - [Default photos](#default-photos)
   - [Future Goals](#future-goals)
 - [Information Architecture](#information-architecture)
   - [Database Choice](#database-choice)
@@ -130,14 +129,14 @@ The colors chosen for the app are all soft shades of pastel colors allowing user
 
 ## Wireframes
 
-- [Login Page](wireframes/login.png)
-- [Account Page](wireframes/account.png)
-- [Register Page](wireframes/register.png)
-- [All Perfumes](wireframes/perfumes.png)
-- [Individual Perfume](wireframes/perfume.png)
-- [All Types](wireframes/types.png)
-- [Individual Type](wireframes/type.png)
-- [About](wireframes/about.png)
+- ![Login Page](wireframes/login.png)
+- ![Account Page](wireframes/account.png)
+- ![Register Page](wireframes/register.png)
+- ![All Perfumes](wireframes/perfumes.png)
+- ![Individual Perfume](wireframes/perfume.png)
+- ![All Types](wireframes/types.png)
+- ![Individual Type](wireframes/type.png)
+- ![About](wireframes/about.png)
 
 ## Features
 
@@ -169,7 +168,7 @@ This gives registered users the possibility to add reviews to perfumes, edit the
 
 #### Perfume Photos
 
-#### Default photos
+Admins can upload photos using Cloudinary. In case a photo is not provided during the creation of the perfume, a default generic picture is saved to the database.
 
 ### Future Goals
 
@@ -277,6 +276,7 @@ cur = mongo.db.perfumes.aggregate(
 - ![heroku](https://img.shields.io/static/v1?label=Heroku&message=brachetta@me.com&color=blueviolet&logo=heroku) Heroku, the patform to deploy the app.
 - ![balsamiq](https://img.shields.io/static/v1?label=Balsamiq&message=3.5.17&color=ff2800&logo=balsamiq) Balsamiq: to create the wireframes of this project.
 - ![cloudinary](https://img.shields.io/static/v1?label=Cloudinary&message=1.21&color=red&logo=cloudinary) Cloudinary: to upload and host images.
+- ![ckeditor](https://img.shields.io/static/v1?label=CKEditor&message=4&color=yellowgreen&logo=ckeditor) CKEditor: to display a WYSIWYG editor in the text area fields.
 
 ### About Cloudinary
 
@@ -328,7 +328,7 @@ If for some reason outside my control a remote image weren't found for a user or
 
 #### Search
 
-I userd the following to index my collections and allow users to perform searches on the indexed fields:
+I userd the following method to index my collections and allow users to perform searches on the indexed fields:
 
 ```python
 @perfumes.route("/search")
@@ -367,7 +367,7 @@ def search():
 
 #### CKEditor
 
-This was my choice in order to give admins and users the possibility to enter text in Rich Text Format.
+CKEDitor version 4 was my choice in order to give admins and users the possibility to enter text in Rich Text Format.
 
 #### Quote all testing as noted in external doc
 
