@@ -1,13 +1,12 @@
-"""sumary_line"""
+"""Only os needed for the config file"""
 import os
 
 
 class Config:
-    """sumary_line
+    """Reads variables
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Reads the variables from my hidden file (locally)
+    and my config variables (Heroku)
     """
 
     SECRET_KEY = os.environ.get("SECRET_KEY")
