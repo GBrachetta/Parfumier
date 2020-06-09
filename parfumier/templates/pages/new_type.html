@@ -11,7 +11,6 @@
                 {{ form.hidden_tag() }}
 
                 <div class="form-group">
-                    {{ form.csrf_token }}
                     {{ form.type_name.label(class="form-control-label") }}
                     {% if form.type_name.errors %}
                     {{ form.type_name(class="form-control form-control-md is-invalid border-white shadow-sm item") }}

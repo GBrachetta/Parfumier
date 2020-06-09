@@ -1,5 +1,9 @@
 """
-Docstring
+Imports required for the below routes.
+These include, besides all flask tools, the methods required to generate a
+password hash, Cloudinary's imports to allow to upload the user avatar,
+Mongodb, the User class, the necessary forms and the method from utils.py
+used to send an email with a token to reset the password.
 """
 from flask import Blueprint, redirect, url_for, render_template, flash, request
 from flask_login import current_user, login_user, login_required, logout_user
@@ -23,9 +27,19 @@ users = Blueprint("users", __name__)
 
 @users.route("/login", methods=["POST", "GET"])
 def login():
+    """Logs the user in
+
+    If the user is already authenticated, it redirects to the main route.
+    Otherwise finds the user by the email address, and if the password matches
+    the one in the database logs them in.
+    It also uses the field 'remember me' to mantain the user in session.
+    Uses the user_obj variable to log them in with flask_login, passing also
+    that remember me boolean, and redirects to all the perfumes, habilitating
+    the logged in user to interact with the database.
+    In case the email or the password are incorrect or don't match, it
+    redirects to the login page again with a warning message.
     """
-    DESCRIPTION
-    """
+
     if current_user.is_authenticated:
         return redirect(url_for("main.index"))
     form = LoginForm()
@@ -55,9 +69,17 @@ def login():
 
 @users.route("/register", methods=["POST", "GET"])
 def register():
+    """Registers a new user
+
+    If the form validates (i.e. if the username and email are unique)
+    a new user is created, assigning them by default a 'non-admin'
+    status and a default avatar which can be changed later on.
+    It also hashes the password.
+    Finds the user after creating it and logs them immediately in.
+    In case the form doesn't validate, it displays the corresponding
+    validation errors.
     """
-    DESCRIPTION
-    """
+
     if current_user.is_authenticated:
         return redirect(url_for("main.index"))
     form = RegistrationForm()
@@ -90,7 +112,7 @@ def register():
         )
         login_user(user_obj)
         flash(
-            f"Account created for {form.username.data}. You are now logged in.",
+            f"Account created for {form.username.data}. You are logged in.",
             "info",
         )
         return redirect(url_for("users.login"))
@@ -100,9 +122,18 @@ def register():
 @users.route("/account", methods=["POST", "GET"])
 @login_required
 def account():
+    """Allows to edit the account information
+
+    If the form passes validation, first checks if there is data in
+    the image field. If there is, then uses cloudinary (again with
+    the needed 'options' parameter) to upload, format and assign the
+    user that image.
+    Replaces http with https before recording the link in the document.
+    Same as in the previous route, it finds the user and logs them in
+    immediately after updating the account.
+    Pre-populates the form with the current data from the database.
     """
-    DESCRIPTION
-    """
+
     form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.avatar.data:
@@ -164,9 +195,11 @@ def account():
 @users.route("/logout")
 @login_required
 def logout():
+    """Logs user out
+
+    Uses logout_user from flask_login to log the user out.
     """
-    DESCRIPTION
-    """
+
     logout_user()
     flash("We hope to see you back soon again!", "warning")
     return redirect(url_for("perfumes.all_perfumes"))
@@ -174,9 +207,13 @@ def logout():
 
 @users.route("/reset_password", methods=["GET", "POST"])
 def reset_request():
+    """Sends an email to reset password
+
+    Using the method from the utils.py file, this route sends the user
+    (if the email address exists) an email with a temporary token to reset
+    their password in case they forgot it.
     """
-    DESCRIPTION
-    """
+
     if current_user.is_authenticated:
         return redirect(url_for("main.index"))
     form = RequestResetForm()
@@ -192,9 +229,15 @@ def reset_request():
 
 @users.route("/reset_password/<token>", methods=["GET", "POST"])
 def reset_token(token):
+    """Resets the password
+
+    Uses the method from utils.py to check for the validity of the token.
+    If the token is valid, a form with two fields gives the user the
+    possibility to create and confirm a new password, which similarly
+    to the register account, will be hashed.
+    Finds the user and logs them immediately in.
     """
-    DESCRIPTION
-    """
+
     if current_user.is_authenticated:
         return redirect(url_for("main.index"))
     user = User.verify_reset_token(token)
@@ -228,9 +271,12 @@ def reset_token(token):
 @users.route("/delete_user", methods=["GET", "POST"])
 @login_required
 def delete_user():
+    """Deletes the current user
+
+    Finds the current user in the database and removes it and
+    logs it out.
     """
-    DESCRIPTION
-    """
+
     mongo.db.users.remove({"username": current_user.username})
     logout_user()
     flash("You have deleted your account", "success")

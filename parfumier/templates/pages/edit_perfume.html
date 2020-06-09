@@ -9,7 +9,6 @@
             </div>
             <form method=POST action="" enctype="multipart/form-data" id="form-perfume" novalidate>
                 {{ form.hidden_tag() }}
-                {{ form.csrf_token }}
                 <div class="form-row mb-4">
                     <div class="col-6 col-md-3 text-center">
                         <img src="{{ current_perfume.picture }}" alt="picture" width="140" height="164">

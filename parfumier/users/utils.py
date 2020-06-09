@@ -1,5 +1,8 @@
 """
-Docstring
+Imports os to read variables, MIMEText and MIMEMultipart to
+be able to send multipar emails through Python, ssl and smtplib
+to allow communicating with the email server, Mongodb and the
+User model to be able to send them the reset password email.
 """
 import os
 from email.mime.text import MIMEText
@@ -12,11 +15,18 @@ from parfumier.models import User
 
 
 def send_reset_email(user):
-    """Sends a multipart email using python email
+    """Sends a multipart email using python mail
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    After collecting the required parameters, it finds the user's
+    email address and creates a multipart email to be sent with a token
+    and a link to create a new password.
+    A default html email will be attempted first, and a fallback text version
+    will be used as an alternative in case it's necessary.
+    This method uses my own smtp server, in which I created an Ad Hoc email
+    address to be used for this app.
+    Background information for this method to be found here:
+    https://realpython.com/python-send-email/ and adapted to my settings and
+    needs with parameters from my mail server.
     """
 
     reset_user = User(

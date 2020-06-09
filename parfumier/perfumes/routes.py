@@ -1,4 +1,8 @@
-"""sumary_line"""
+"""Besides the flask imports, math was imported to deal with
+pagination, datetime to stamp current creation date, cloudinary_url
+and upload to deal with uploading images and ObjectId to find and deal
+with objects by their id.
+"""
 from datetime import datetime
 import math
 from flask import render_template, redirect, flash, url_for, request, Blueprint
@@ -15,15 +19,16 @@ perfumes = Blueprint("perfumes", __name__)
 
 @perfumes.route("/perfumes")
 def all_perfumes():
-    """sumary_line
+    """Displays all pefumes
+
     With a solution found on my question on Stack Overflow:
     https://stackoverflow.com/questions/61732985/inner-join-like-with-mongodb-in-flask-jinja
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Adds pagination (8 items per page) and uses aggregation to
+    combine multiple collections.
+    Returns a cursor with the said aggregation amongst pagination objects
+    and the types collection ordered by name.
     """
     types = mongo.db.types.find().sort("type_name")
-    # Pagination
     page_count = 8
     page = int(request.args.get("page", 1))
     total_perfumes = mongo.db.perfumes.count()
@@ -73,11 +78,12 @@ def all_perfumes():
 @perfumes.route("/perfume/new", methods=["GET", "POST"])
 @login_required
 def new_perfume():
-    """sumary_line
+    """Creates a new perfume (only admins)
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Uses Cloudinary to upload images. The variable 'options' throws a
+    warning but it's necessary to specify Cloudinary's settings.
+    In case a picture isn't chosen, the function defaults to a
+    pre-chosen generic photo present in Cloudinary.
     """
 
     if current_user.is_admin:
@@ -137,11 +143,12 @@ def new_perfume():
 
 @perfumes.route("/perfume/<perfume_id>", methods=["GET"])
 def perfume(perfume_id):
-    """sumary_line
+    """Returns an individual perfume
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Uses aggregation to combine perfumes and types in order
+    to display details about a particular perfume.
+    Includes the review form in order to allow for reviews
+    to be placed over those individual perfumes.
     """
 
     current_perfume = mongo.db.perfumes.find_one({"_id": ObjectId(perfume_id)})
@@ -190,11 +197,9 @@ def perfume(perfume_id):
 @perfumes.route("/perfume/<perfume_id>/delete", methods=["POST", "GET"])
 @login_required
 def delete_perfume(perfume_id):
-    """sumary_line
+    """Deletes a perfume
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Simply deletes one perfume found through its ObjectId.
     """
 
     if current_user.is_admin:
@@ -208,11 +213,15 @@ def delete_perfume(perfume_id):
 @perfumes.route("/perfume/edit/<perfume_id>", methods=["POST", "GET"])
 @login_required
 def edit_perfume(perfume_id):
-    """sumary_line
+    """Edits an existing perfume
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    If the user is an admin and the form validates, checks if there is a
+    picture to be uploaded, in which case it uses the cloudinary import
+    with its options to format and resize it.
+    The function also replaces the http protocol rendered by cloudinary
+    with https to serve them securely.
+    It then updates the existing record. This existing record populates
+    the form with its current values.
     """
 
     form = EditPerfumeForm()
@@ -280,11 +289,14 @@ def edit_perfume(perfume_id):
 
 @perfumes.route("/search")
 def search():
-    """sumary_line
+    """Allows to search by determined fields
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Creates an index over the collection on the 'name', 'brand'
+    and 'type' fields to allow searching through those.
+    This command indexes the remote Mongodb database.
+    It returns all the perfumes if nothing has been entered
+    in the search form.
+    It returns the 'results' cursor, sorted alphabetically.
     """
 
     types = mongo.db.types.find().sort("type_name")
@@ -332,11 +344,15 @@ def search():
 
 @perfumes.route("/filters")
 def filters():
-    """sumary_line
+    """Allows to query the db by type
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Similar to the previous function, but this indexes by type only.
+    In combination with its JavaScritp function checkSelected(), it
+    triggers the query without further interaction from the user
+    such as pressing a submit button.
+    It also contains a shortcut to create a new type if the proper
+    option is selected.
+    As in most perfumes and types routes, this one uses aggregation.
     """
 
     types = mongo.db.types.find().sort("type_name")

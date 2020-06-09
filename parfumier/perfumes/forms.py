@@ -1,4 +1,5 @@
-"""sumary_line"""
+"""Imports form-related items, types of fields
+and items related with importing files"""
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import (
@@ -12,11 +13,10 @@ from wtforms.validators import DataRequired
 
 
 class CreatePerfumeForm(FlaskForm):
-    """sumary_line
+    """Form to create new perfumes
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Includes validators, and allows for certain types of image files
+    only to be uploaded in the picture field.
     """
 
     brand = StringField("Brand", validators=[DataRequired()])
@@ -31,11 +31,9 @@ class CreatePerfumeForm(FlaskForm):
 
 
 class EditPerfumeForm(FlaskForm):
-    """sumary_line
+    """Form to edit perfumes
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Same validators as the previous one.
     """
 
     brand = StringField("Brand", validators=[DataRequired()])
@@ -50,11 +48,11 @@ class EditPerfumeForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
-    """sumary_line
+    """Form allowing to seach through the databse
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Allows to search by brand, Perfume name and type of perfume.
+    The corresponding route deals with indexing the aggregate
+    through all these three fields.
     """
 
     choices = [("Brand", "Brand"), ("Perfume", "Perfume"), ("Type", "Type")]

@@ -1,15 +1,18 @@
-"""sumary_line"""
+"""Imports needed for the forms. Types of fields and validators"""
 from flask_wtf import FlaskForm
 from wtforms import TextAreaField, SubmitField
 from wtforms.validators import DataRequired, ValidationError
 
 
 class AddReviewForm(FlaskForm):
-    """sumary_line
+    """Form to add a review
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    In addition to its 2 fields it has a custom validator.
+    Since CKEditor (my WYSIWYG editor for text fields) creates
+    html, DataRequired() isn't enough to check for an empty
+    text field, so this custom validator replaces all html
+    with empty strings to allow for an accurate validation
+    error in case the user attempts to enter an empty review.
     """
 
     review = TextAreaField("Review", validators=[DataRequired()])
@@ -30,11 +33,9 @@ class AddReviewForm(FlaskForm):
 
 
 class EditReviewForm(FlaskForm):
-    """sumary_line
+    """Form to edit a review
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Similar to the one above
     """
 
     edit_review = TextAreaField("Review", validators=[DataRequired()])

@@ -1,4 +1,7 @@
-"""sumary_line"""
+"""
+Imports the required tools, including fields, validators, mongodb
+and flask_login current_user to identify them
+"""
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
@@ -15,8 +18,14 @@ from parfumier import mongo
 
 
 class RegistrationForm(FlaskForm):
-    """
-    DESCRIPTION
+    """Form to allow for the registration of a new user
+
+    Includes its fields and validators, inluding a minimum and maximum
+    length for the username, and also forbidding spaces and characters
+    other than letters, numbers and underscores using regex.
+    Several validators put in place to require a length, at least a letter,
+    a number and a special character for the password in order to ensure
+    a strong one.
     """
 
     username = StringField(
@@ -56,25 +65,33 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField("Register")
 
     def validate_username(self, username):
+        """Custom validator
+
+        It checks the database to prevent the creation of a
+        duplicate (already existing) username.
         """
-        DESCRIPTION
-        """
+
         user = mongo.db.users.find_one({"username": username.data.lower()})
         if user:
             raise ValidationError("The username already exists.")
 
     def validate_email(self, email):
+        """Custom validator
+
+        Same as the one above, this one prevents the creation
+        of an email address already present in the database,
+        specially relevant since users log in using this field.
         """
-        DESCRIPTION
-        """
+
         user = mongo.db.users.find_one({"email": email.data.lower()})
         if user:
             raise ValidationError("The email already exists.")
 
 
 class LoginForm(FlaskForm):
-    """
-    DESCRIPTION
+    """Form to log in user
+
+    Includes DataRequired validators for its corresponding fields.
     """
 
     email = StringField("Email", validators=[DataRequired(), Email()])
@@ -84,8 +101,12 @@ class LoginForm(FlaskForm):
 
 
 class UpdateAccountForm(FlaskForm):
-    """
-    DESCRIPTION
+    """Form to edit and update account information
+
+    Similar to the register form, this includes a regex validator to
+    only allow for letters, numbers and underscores in case the user
+    wants to edit and update their username.
+    The avatar field only allows for basic image formats.
     """
 
     username = StringField(
@@ -109,18 +130,26 @@ class UpdateAccountForm(FlaskForm):
     submit = SubmitField("Update")
 
     def validate_username(self, username):
+        """Custom validator
+
+        Checks if the user wants to update their username and if it's different
+        from the current one, raises a validation error in case
+        that username already exists in the dabase.
+        It uses flask_login to check the data in current_user.
         """
-        DESCRIPTION
-        """
+
         if username.data.lower() != current_user.username:
             user = mongo.db.users.find_one({"username": username.data.lower()})
             if user:
                 raise ValidationError("The username already exists.")
 
     def validate_email(self, email):
+        """Custom validator
+
+        Similar to the one above, checks for duplicated email addresses
+        in the database in case the user wishes to change their current one.
         """
-        DESCRIPTION
-        """
+
         if email.data.lower() != current_user.email:
             user = mongo.db.users.find_one({"email": email.data.lower()})
             if user:
@@ -128,25 +157,32 @@ class UpdateAccountForm(FlaskForm):
 
 
 class RequestResetForm(FlaskForm):
-    """
-    DESCRIPTION
+    """Form to request a password reset
+
+    Only two fields are required for this form, with its necessary validators.
     """
 
     email = StringField("Email", validators=[DataRequired(), Email()])
     submit = SubmitField("Request Password Reset")
 
     def validate_email(self, email):
+        """Custom validator
+
+        Queries the database to check if the email exists.
+        If it doesn't, it raises a validation error warning about it.
         """
-        DESCRIPTION
-        """
+
         user = mongo.db.users.find_one({"email": email.data.lower()})
         if user is None:
             raise ValidationError("There is no accout with that email.")
 
 
 class ResetPasswordForm(FlaskForm):
-    """
-    DESCRIPTION
+    """Form to reset password
+
+    Similar to the one used in the register user route, this one
+    also has several validators in place to permit only passwords
+    that match certain requirements.
     """
 
     password = PasswordField(
