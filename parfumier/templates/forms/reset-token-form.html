@@ -1,0 +1,35 @@
+<form class="shadow-sm" action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.password.label(class="form-control-label") }}
+        {% if form.password.errors %}
+        {{ form.password(class="item border-white shadow-sm form-control form-control-md is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.password.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.password(class="border-white shadow-sm form-control form-control-md") }}
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form.confirm_password.label(class="form-control-label") }}
+        {% if form.confirm_password.errors %}
+        {{ form.confirm_password(class="border-white shadow-sm item form-control form-control-md is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.confirm_password.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.confirm_password(class="form-control form-control-md border-white shadow-sm item") }}
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form.submit(class="btn shadow-sm button-blue", placeholder="Confirm your new password") }}
+    </div>
+</form>

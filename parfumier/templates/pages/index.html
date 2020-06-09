@@ -5,8 +5,6 @@
         <div class="container">
             <div class="heading">
                 <h2 class=" titles">Welcome to Parfumier</h2>
-
-
                 {% if current_user.is_authenticated %}
                 <h3>Welcome, {{ current_user.username.title() }}!</h3>
                 {% endif %}

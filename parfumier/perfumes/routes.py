@@ -134,7 +134,7 @@ def new_perfume():
         flash("You need to be an administrator to enter data.", "danger")
         return redirect(url_for("main.index"))
     return render_template(
-        "pages/new_perfume.html",
+        "pages/new-perfume.html",
         title="New Perfume",
         form=form,
         types=mongo.db.types.find().sort("type_name"),
@@ -279,7 +279,7 @@ def edit_perfume(perfume_id):
         form.description.data = current_perfume["description"]
         form.public.data = current_perfume["public"]
     return render_template(
-        "pages/edit_perfume.html",
+        "pages/edit-perfume.html",
         title="Edit Perfume",
         form=form,
         current_perfume=current_perfume,
