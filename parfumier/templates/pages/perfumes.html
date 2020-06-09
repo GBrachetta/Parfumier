@@ -20,9 +20,9 @@
                     {% for page_number in total_pages %}
                     {% if page_number %}
                     {% if page_number == page %}
-                    <a class="btn button-red mb-4" href="{{ page_number }}">{{ page_number }}</a>
+                    <a class="btn button-red mb-4 mr-1" href="{{ url_for("perfumes.all_perfumes", page=page_number) }}">{{ page_number }}</a>
                     {% else %}
-                    <a class="btn button-blue-small mb-4" href="{{ url_for("perfumes.all_perfumes", page=page_number) }}">{{ page_number }}</a>
+                    <a class="btn button-blue-small mb-4 mr-1" href="{{ url_for("perfumes.all_perfumes", page=page_number) }}">{{ page_number }}</a>
                     {% endif %}
                     {% else %}
                     ...
