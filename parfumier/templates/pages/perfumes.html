@@ -2,36 +2,17 @@
 
 <main class="page projets-page">
     <section class="portfolio-block projects compact-grid container">
-
-
+        <!-- Search & Filter -->
         {% include "components/search-and-filter.html" %}
         <div class="container mb-4 pt-4">
             <div class="col-12 text-center mb-4">
                 <a class="btn button-purple" href="{{ url_for("perfumes.all_perfumes") }}" role="button">All Perfumes</a>
             </div>
-            <div class="row no-gutters">
-            </div>
-
             <!-- Perfume card -->
             {% include "components/perfume-card.html" %}
             <!-- Pagination -->
-            <div class="row justify-content-center mt-3">
-                <div class="pagination">
-                    {% for page_number in total_pages %}
-                    {% if page_number %}
-                    {% if page_number == page %}
-                    <a class="btn button-red mb-4 mr-1" href="{{ url_for("perfumes.all_perfumes", page=page_number) }}">{{ page_number }}</a>
-                    {% else %}
-                    <a class="btn button-blue-small mb-4 mr-1" href="{{ url_for("perfumes.all_perfumes", page=page_number) }}">{{ page_number }}</a>
-                    {% endif %}
-                    {% else %}
-                    ...
-                    {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
+            {% include "components/pagination.html" %}
             {% if current_user.is_authenticated and current_user.is_admin == True %}
-
             <div class="col-12 text-center mt-4">
                 <a class="btn button-purple" href="{{ url_for("perfumes.new_perfume") }}" role="button">Create New Perfume</a>
             </div>
