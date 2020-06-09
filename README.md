@@ -34,21 +34,19 @@
   - [Database Choice](#database-choice)
   - [Data Storage](#data-storage)
 - [Technologies Used](#technologies-used)
-  - [MongoDB](#mongodb)
-  - [Python](#python)
-  - [JavaScript](#javascript)
-  - [HTML](#html)
-  - [CSS](#css)
-  - [Cloudinary](#cloudinary)
+  - [Front-end Technologies](#front-end-technologies)
+  - [Back-end Technologies](#back-end-technologies)
+  - [Other technologies](#other-technologies)
+  - [About Cloudinary](#about-cloudinary)
 - [Testing](#testing)
+  - [Validators](#validators)
 - [Issues found and status](#issues-found-and-status)
   - [Custom Validator for types](#custom-validator-for-types)
-  - [Aggregation](#aggregation)
   - [Onerror default to picture](#onerror-default-to-picture)
   - [Images](#images)
   - [filters](#filters)
     - [Search](#search)
-    - [CKEdit](#ckedit)
+    - [CKEditor](#ckeditor)
     - [Quote all testing as noted in external doc](#quote-all-testing-as-noted-in-external-doc)
 - [Deployment](#deployment)
   - [Local Development](#local-development)
@@ -74,7 +72,12 @@ This website is intended for all pefume lovers, people curious about perfumes, o
 
 ### Who are the primary target groups
 
+People from all ages and origins, people wishing to discover new fragrances, to make a purchase and be informed before that.
+
 ### What is it that they (the users) want to achieve
+
+Users want to learn about perfumes, get informed and read opinions from other users.
+Users want also to be able to leave a review to collaborate with the database.
 
 ### How is my project the best way to help them achieve those things
 
@@ -116,7 +119,8 @@ This website is intended for all pefume lovers, people curious about perfumes, o
 
 ### Buttons
 
-I chose to have well rounded buttons.
+I chose to have well rounded buttons for a soft, visually pleasing impact.
+All buttons use custom colours from the palette to avoid having them popping over the clean and airy general design.
 
 ### Colors
 
@@ -213,7 +217,7 @@ This gives registered users the possibility to add reviews to perfumes, edit the
 
 For this project we were instructed to use MongoDB as our database.
 
-MongoDB is a non-relational database but I still decided to have three different collections and find ways to combine data from them by using aggregation, such as in the colde below:
+MongoDB is a non-relational database but I still decided to have three different collections and find ways to combine data in the same cursor from them by using aggregation, such as in the colde below:
 
 ``` python
 cur = mongo.db.perfumes.aggregate(
@@ -252,17 +256,29 @@ cur = mongo.db.perfumes.aggregate(
 
 ## Technologies Used
 
-### MongoDB
+### Front-end Technologies
 
-### Python
+- ![html](https://img.shields.io/static/v1?label=HTML&message=5&color=red&logo=html5)  HTML: Used for markup.
+- ![css](https://img.shields.io/static/v1?label=CSS&message=3&color=blue&logo=css3) CSS: Used to style the elements of the app.
+- ![bootstrap](https://img.shields.io/static/v1?label=Bootstrap&message=4.5&color=blueviolet&logo=bootstrap) Bootstrap: to make use of its grid system and responsiveness.
+- ![javascript](https://img.shields.io/static/v1?label=JavaScript&message=ES6&color=yellow&logo=javascript) JavaScript: Used for the functionality of the app.
+- ![jquery](https://img.shields.io/static/v1?label=jQuery&message=3.5.1&color=0769ad&logo=jquery) jQuery, to access and manipulate the DOM.
+- ![fontawesome](https://img.shields.io/static/v1?label=Fontawesome&message=2.3.2&color=339af0&logo=font-awesome) Font Awesome, for all icons.
 
-### JavaScript
+### Back-end Technologies
 
-### HTML
+- ![python](https://img.shields.io/static/v1?label=PYTHON&message=3.7&color=339af0&logo=PYTHON) Python, for all backend logic.
+- ![mongodb](https://img.shields.io/static/v1?label=MongoDB&message=3.7&color=success&logo=mongodb) MongoDB, my database for the app.
 
-### CSS
+### Other technologies
 
-### Cloudinary
+- ![vscode](https://img.shields.io/static/v1?label=VSCode&message=1.45.1&color=informational&logo=visual-studio) Visual Studio Code: my IDE of choice for all my projects.
+- ![github](https://img.shields.io/static/v1?label=GitHub&message=GBrachetta&color=black&logo=github)  GitHub: My remote storage for this project.
+- ![heroku](https://img.shields.io/static/v1?label=Heroku&message=brachetta@me.com&color=blueviolet&logo=heroku) Heroku, the patform to deploy the app.
+- ![balsamiq](https://img.shields.io/static/v1?label=Balsamiq&message=3.5.17&color=ff2800&logo=balsamiq) Balsamiq: to create the wireframes of this project.
+- ![cloudinary](https://img.shields.io/static/v1?label=Cloudinary&message=1.21&color=red&logo=cloudinary) Cloudinary: to upload and host images.
+
+### About Cloudinary
 
 The app originally saved media files to the file system, but that caused some issues:
 
@@ -274,6 +290,23 @@ The options I considered were Imgur and Cloudinary, and chose the latter due to 
 
 ## Testing
 
+### Validators
+
+- [W3C HTML Validator](https://validator.w3.org/)
+  - No warnings or errors reported.
+
+- [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)
+  - No warnings or errors reported.
+
+- [CSS Lint](http://csslint.net/)
+  - No errors found.
+
+- [JSHint](https://jshint.com/)
+  - No errors found.
+
+- [PEP8](http://pep8online.com/)
+  - No errors or warnings besides the false warning about the Cloudinary options variable.
+
 ## Issues found and status
 
 During the project I met several challenges, as this was my first experience with both Python and MongoDB (or any database for that matter).
@@ -281,9 +314,9 @@ Some of them are summarised below.
 
 ### Custom Validator for types
 
-While
-
-### Aggregation
+While it was an easy task to put a validator in place for the user (since it uses flask_login to identify it) it was a bit more complicated to check for existing perfume types when the admin wants to edit it.
+For that purpose a hidden field was included in the editReview form and in the route it is assigned the current type in the database.
+Thanks to this method, seamless to the user, the custom validator can check the data from the form against it and act the same way put in place in the custom validator for the username and email.
 
 ### Onerror default to picture
 
@@ -332,7 +365,7 @@ def search():
     )
 ```
 
-#### CKEdit
+#### CKEditor
 
 This was my choice in order to give admins and users the possibility to enter text in Rich Text Format.
 
