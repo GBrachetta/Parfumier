@@ -1,4 +1,4 @@
-"""sumary_line"""
+"""Imports with fields and validators required for the forms"""
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, HiddenField
 from wtforms.validators import DataRequired, ValidationError
@@ -6,11 +6,9 @@ from parfumier import mongo
 
 
 class CreateTypeForm(FlaskForm):
-    """sumary_line
+    """Form to create a perfume type
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Includes the three needed fields and validator
     """
 
     type_name = StringField("Type Name", validators=[DataRequired()])
@@ -19,7 +17,8 @@ class CreateTypeForm(FlaskForm):
 
     def validate_type_name(self, type_name):
         """
-        DESCRIPTION
+        This custom validator queries the database to check if the
+        perfume type already exists in the database.
         """
         existing_type = mongo.db.types.find_one({"type_name": type_name.data})
         if existing_type:
@@ -27,11 +26,10 @@ class CreateTypeForm(FlaskForm):
 
 
 class EditTypeForm(FlaskForm):
-    """sumary_line
+    """Form to edit an existing perfume type
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Similar to the one above, with the adition of an extra
+    hidden field explaned below.
     """
 
     origin_type_name = HiddenField()
@@ -41,11 +39,14 @@ class EditTypeForm(FlaskForm):
     # https://stackoverflow.com/questions/61896450/check-duplication-when-edit-an-exist-database-field-with-wtforms-custom-validato
 
     def validate_type_name(self, type_name):
-        """sumary_line
+        """Custom validator
 
-        Keyword arguments:
-        argument -- description
-        Return: return_description
+        Thanks to the hidden field acquiring the current value of the
+        type_name field, this validator can check for repeated perfume types
+        while not throwing a validation error in case the type is the type
+        being edited. (i.e. in case the user wants to edit the description
+        of the perfume while mantaining the current name, in which case
+        the validator allows that particular 'duplication').
         """
 
         existing_type = mongo.db.types.find_one({"type_name": type_name.data})

@@ -1,4 +1,4 @@
-"""sumary_line"""
+"""Imports all Flask components, database object and forms"""
 from flask import Blueprint, redirect, url_for, render_template, flash
 from flask_login import current_user, login_required
 from bson.objectid import ObjectId
@@ -12,11 +12,11 @@ types = Blueprint("types", __name__)
 @types.route("/type/new", methods=["POST", "GET"])
 @login_required
 def new_type():
-    """sumary_line
+    """Creates a new Perfume Type
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    User has to be an admin in order to create a perfume type.
+    The route simply creates a new document with the information
+    passed in the form in case the form validates.
     """
 
     if current_user.is_admin:
@@ -39,11 +39,9 @@ def new_type():
 
 @types.route("/types")
 def all_types():
-    """sumary_line
+    """Displays all types
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    This route simply displays all existing types.
     """
 
     the_types = mongo.db.types.find().sort("type_name")
@@ -52,11 +50,9 @@ def all_types():
 
 @types.route("/type/<type_id>")
 def show_type(type_id):
-    """sumary_line
+    """Displays one type only
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    This route displays the type selected using the unique ObjectId.
     """
 
     one_type = mongo.db.types.find_one({"_id": ObjectId(type_id)})
@@ -68,11 +64,10 @@ def show_type(type_id):
 @types.route("/type/<type_id>", methods=["POST"])
 @login_required
 def delete_type(type_id):
-    """sumary_line
+    """Deletes a perfume type
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    This route simply deletes a perfume type matched by its id.
+    It's only available to admins.
     """
 
     if current_user.is_admin:
@@ -86,11 +81,11 @@ def delete_type(type_id):
 @types.route("/type/edit/<type_id>", methods=["POST", "GET"])
 @login_required
 def edit_type(type_id):
-    """sumary_line
+    """Allows editing a Perfume Type
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    This route finds a type by its id, assigns the current name to the hidden
+    field (used to check against to avoid a false validation error) and updates
+    the current data from its corresponding document in the database.
     """
 
     form = EditTypeForm()
