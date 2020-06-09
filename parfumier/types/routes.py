@@ -34,7 +34,7 @@ def new_type():
     else:
         flash("You need to be an administrator.", "danger")
         return redirect(url_for("main.index"))
-    return render_template("pages/new_type.html", title="New Type", form=form)
+    return render_template("pages/new-type.html", title="New Type", form=form)
 
 
 @types.route("/types")
@@ -111,7 +111,7 @@ def edit_type(type_id):
         form.type_name.data = current_type_value["type_name"]
         form.description.data = current_type_value["description"]
     return render_template(
-        "pages/edit_type.html",
+        "pages/edit-type.html",
         title="Edit Type",
         form=form,
         current_type=current_type,

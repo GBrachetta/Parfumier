@@ -223,7 +223,7 @@ def reset_request():
         flash("An email has been sent to reset your password", "success")
         return redirect(url_for("users.login"))
     return render_template(
-        "pages/reset_request.html", title="Reset Password", form=form
+        "pages/reset-request.html", title="Reset Password", form=form
     )
 
 
@@ -264,7 +264,7 @@ def reset_token(token):
         flash("Your password has been updated. You are now logged in.", "info")
         return redirect(url_for("users.login"))
     return render_template(
-        "pages/reset_token.html", title="Reset Password", form=form
+        "pages/reset-token.html", title="Reset Password", form=form
     )
 
 
