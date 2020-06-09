@@ -1,4 +1,8 @@
-"""sumary_line"""
+"""
+Imports necessary to check the hashed password,
+the serializer to allow to create a reset password token, mongodb,
+current_app for the above and login_manager to deal with user session
+"""
 from werkzeug.security import check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
@@ -7,7 +11,8 @@ from parfumier import login_manager, mongo
 
 class User:
     """
-    DESCRIPTION
+    Initialises the User class and its methods that deal with
+    session, password check and reset email.
     """
 
     def __init__(
@@ -29,38 +34,47 @@ class User:
 
     def is_authenticated(self):
         """
-        DESCRIPTION
+        One of the required parameters needed by flask_login
+        to deal with user session
         """
         return True
 
     def is_active(self):
         """
-        DESCRIPTION
+        One of the required parameters needed by flask_login
+        to deal with user session
         """
         return True
 
     def is_anonymous(self):
         """
-        DESCRIPTION
+        One of the required parameters needed by flask_login
+        to deal with user session
         """
         return False
 
     def get_id(self):
         """
-        DESCRIPTION
+        One of the required parameters needed by flask_login
+        to deal with user session
         """
         return self.email
 
     @staticmethod
     def check_password(password_hash, password):
         """
-        DESCRIPTION
+        Uses check_password_hash to check the hashed password against
+        the entered password to find or not a match.
         """
         return check_password_hash(password_hash, password)
 
     def get_reset_token(self, expires_sec=1800):
         """
-        DESCRIPTION
+        Deals with the token to reset the password.
+        This token has a life of 1800ms, after which it becomes invalid.
+        It serialises it (SECRET_KEY is required too) and passes the
+        life length.
+        Returns a serialised token, decoded.
         """
         ser = Serializer(current_app.config["SECRET_KEY"], expires_sec)
         return ser.dumps({"email": self.email}).decode("utf-8")
@@ -68,7 +82,7 @@ class User:
     @staticmethod
     def verify_reset_token(token):
         """
-        DESCRIPTION
+        Veryfies the validity of the token generated above.
         """
         ser = Serializer(current_app.config["SECRET_KEY"])
         try:
@@ -79,11 +93,8 @@ class User:
 
 
 class Perfume:
-    """sumary_line
-
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    """
+    Initialises the Perfume class
     """
 
     def __init__(
@@ -108,11 +119,8 @@ class Perfume:
 
 
 class Types:
-    """sumary_line
-
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    """
+    Initialises the Types class
     """
 
     def __init__(self, type_name, description, author):
@@ -124,7 +132,8 @@ class Types:
 @login_manager.user_loader
 def load_user(email):
     """
-    DESCRIPTION
+    Queries the user by their email address, if it exists, returns a User
+    object to keep logged in the session.
     """
     user = mongo.db.users.find_one({"email": email})
     if not user:
