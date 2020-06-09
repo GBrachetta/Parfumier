@@ -22,7 +22,6 @@
                 </div>
 
                 <div class="form-group">
-                    {{ form.csrf_token }}
                     {{ form.brand.label(class="form-control-label") }}
                     {% if form.brand.errors %}
                     {{ form.brand(class="form-control form-control-md is-invalid border-white shadow-sm item") }}
