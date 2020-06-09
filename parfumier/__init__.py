@@ -1,10 +1,22 @@
-"""sumary_line"""
+"""
+Imports the primordial elements to be initialised:
+LoginManager deals with the user in session
+PyMongo is the connection to the database
+Config is the class reading the enviroment variables
+Compress permits to use gzip to allow text compression
+and accelerate the loading times.
+"""
 from flask import Flask
 from flask_login import LoginManager
 from flask_pymongo import PyMongo
 from parfumier.config import Config
 from flask_compress import Compress
 
+"""Instantiates and configures app
+
+Defines login_manager, the mongodb connector
+and the Compress class allowing faster delivery of text gzipped.
+"""
 
 login_manager = LoginManager()
 login_manager.login_view = "users.login"
@@ -15,11 +27,13 @@ compress = Compress()
 
 
 def create_app(config_class=Config):
-    """sumary_line
+    """Creates the app
 
-    Keyword arguments:
-    argument -- description
-    Return: return_description
+    Initialises the app and all the required components.
+    Compresses the text delivery.
+    Imports and registers all blueprints.
+    Reads configuration from file with variables.
+    Returns the initialised app.
     """
     app = Flask(__name__)
     app.config.from_object(Config)
