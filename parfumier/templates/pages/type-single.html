@@ -1,0 +1,36 @@
+{% extends "layout/base.html" %}
+{% block content %}
+
+<main class="page project-page">
+    <section class="portfolio-block">
+        <div class="container">
+            <div class="heading">
+                <h2 class="text-capitalize">{{ type.type_name }}</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6 info">
+                    <h3>{{ type.type_name }}</h3>
+                    <p class="card-text">{{ type.description | safe}}</p>
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            {% if current_user.is_authenticated and current_user.is_admin == True and current_user.username == type.author %}
+                                <a href="{{ url_for("types.edit_type", type_id=type._id) }}" class="btn button-blue-small btn-sm shadow-sm" disabled>Edit</a>
+                                <button type="button" class="btn button-red btn-sm shadow-sm" data-toggle="modal" data-target="#deleteTypeModal">Delete</button>
+                            {% elif current_user.is_authenticated and current_user.is_admin == True %}
+                                <a href="{{ url_for("types.edit_type", type_id=type._id) }}" class="btn button-blue-small btn-sm shadow-sm" disabled>Edit</a>
+                                <button  disabled type="button" class="btn button-red btn-sm shadow-sm" data-toggle="modal" data-target="#deleteTypeModal">Delete</button>
+                                <span class="ml-0 mt-5 float-left small ml-2">You can't delete.</span>
+                            {% endif %}
+                            <a class="shadow-sm btn btn-sm button-green" href="{{ url_for("types.all_types") }}">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- MODAL -->
+{% include "modals/delete-type-modal.html" %}
+
+{% endblock content %}

@@ -34,7 +34,13 @@ def new_type():
     else:
         flash("You need to be an administrator.", "danger")
         return redirect(url_for("main.index"))
-    return render_template("pages/new-type.html", title="New Type", form=form)
+    return render_template(
+        "pages/type.html",
+        title="New Type",
+        form=form,
+        new_type=True,
+        heading="New Type",
+    )
 
 
 @types.route("/types")
@@ -57,7 +63,7 @@ def show_type(type_id):
 
     one_type = mongo.db.types.find_one({"_id": ObjectId(type_id)})
     return render_template(
-        "pages/type.html", type=one_type, title=one_type["type_name"]
+        "pages/type-single.html", type=one_type, title=one_type["type_name"]
     )
 
 
@@ -111,8 +117,9 @@ def edit_type(type_id):
         form.type_name.data = current_type_value["type_name"]
         form.description.data = current_type_value["description"]
     return render_template(
-        "pages/edit-type.html",
+        "pages/type.html",
         title="Edit Type",
         form=form,
         current_type=current_type,
+        heading="Edit Type",
     )
