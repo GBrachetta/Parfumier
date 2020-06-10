@@ -1,0 +1,27 @@
+{% extends "layout/base.html" %}
+{% block content %}
+
+<main class="page contact-page">
+    <section class="portfolio-block contact">
+        <div class="container">
+            <div class="heading">
+                <h2 class="text-capitalize titles">{{ heading }}</h2>
+            </div>
+            {% if account %}
+                {% include "forms/account-form.html" %}
+            {% elif login %}
+                {% include "forms/login-form.html" %}
+            {% elif register %}
+                {% include "forms/register-form.html" %}
+            {% elif reset_request %}
+                {% include "forms/reset-request-form.html" %}
+            {% else %}
+                {% include "forms/reset-token-form.html" %}
+            {% endif %}
+        </div>
+    </section>
+</main>
+{% if account == True %}
+    {% include "modals/delete-user-modal.html" %}
+{% endif %}
+{% endblock content %}
