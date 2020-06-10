@@ -52,6 +52,7 @@ If you are a visitor, please log in and share your comments on the perfumes in o
     - [Search](#search)
     - [CKEditor](#ckeditor)
 - [Deployment](#deployment)
+  - [Version Control](#version-control)
   - [Local Development](#local-development)
   - [Heroku](#heroku)
 - [Credits](#credits)
@@ -428,6 +429,12 @@ JQuery was used to retrieve the html elements in order to pre-populate the conte
 CKEditor's scripts only load on the pages where they are required, avoiding unnecessary loading time on other pages.
 
 ## Deployment
+
+### Version Control
+
+Through the whole development I've used GitFlow, and by doing so I was able to isolate feature in different branches and integrated them as soon as they were finished and tested.
+Stale branches were subsequently deleted as their features proved solid after passing all testing stages.
+Over 40 branches were using during the development of this app, to ensure isolated enviroments for each of them without interfering with already functioning features.
 
 ### Local Development
 
