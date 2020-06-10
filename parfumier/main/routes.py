@@ -18,4 +18,4 @@ def index():
 def about():
     """Renders the about page with general information"""
 
-    return render_template("pages/index.html", title="About")
+    return render_template("pages/about.html", title="About")
