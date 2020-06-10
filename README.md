@@ -1,6 +1,10 @@
 # Parfumier <!-- omit in toc -->
 
-> An app that allows users to create a profile, edit it, add their profile image and interact with a database with perfumes.
+Welcome to Parfumier.
+I love fragrances and always wished to have an app allowing me to save my perfumes, share reviews and be able to connect with other perfume lovers.
+This is the result of this passion.
+Please send me a message if you would like to be an administrator and so be able to enter, edit and deal with perfumes.
+If you are a visitor, please log in and share your comments on the perfumes in our databse.
 
 ![Mockup](wireframes/images/mockup.png)
 
@@ -18,6 +22,7 @@
   - [Visitor Goals](#visitor-goals)
 - [User Stories](#user-stories)
 - [Design Choices](#design-choices)
+  - [General](#general)
   - [Buttons](#buttons)
   - [Colors](#colors)
 - [Wireframes](#wireframes)
@@ -38,6 +43,7 @@
   - [Other technologies](#other-technologies)
   - [About Cloudinary](#about-cloudinary)
 - [Testing](#testing)
+  - [Tests performed](#tests-performed)
   - [Validators](#validators)
 - [Issues found and status](#issues-found-and-status)
   - [Custom Validator for types](#custom-validator-for-types)
@@ -80,9 +86,34 @@ Users want also to be able to leave a review to collaborate with the database.
 
 ### How is my project the best way to help them achieve those things
 
+The app is flexible and intuitive.
+To the administrators it gives all the possibilities to interact with the database and so admins can edit all documents.
+It is worth mentioning that the only limitation admins have is to delete documents not created by themselves, i.e. admins can edit types or perfumes, but won't be able to delete a record created by another admin.
+A non-admin user will be able to browse and interact with all information in the database and add reviews or comments on the documents, plus be able to edit those interactions.
+Users can edit all information related to their account, including their profile picture, and request a password reset.
+To make all interaction as clear as possible, buttons are available only when they are available to the permissions of the user or admin.
+Basic buttons are still visible in all instances, but attemptin to interact with some of the functions will redirect users to the route requiring them either to log in or register.
+No anonymous writting to the database is permitter by the app.
+
 ### How do users achieve each of the following goals
 
+After users log in, they can edit their account, add reviews, edit them, delete them and even delete their account.
+Admins can add perfumes, types, and edit them.
+Admins can also add or change perfume pictures.
+Not logged visitors can see all information in the database.
+Admins can delete perfumes except if they are not the creators of the record. They can still edit their content.
+Users and admins can request a password reset link to be sent to their email account.
+Users and admins can upload an avatar or picture, and change it at any time.
+
 ## Project Goals
+
+The main goals of the project are
+
+- Keep users informed about perfumes.
+- Give a platform in which to share comments and reviews.
+- Connect to other perfume lovers.
+- Offer information before choosing a perfume.
+- Share the enthusiasm about the fascinating world of fragrances.
 
 ### User Goals
 
@@ -90,24 +121,22 @@ Users want also to be able to leave a review to collaborate with the database.
 
 ## User Stories
 
-> As a user, I would like to ______________"
+- As a user, I would like to find information about perfumes.
+- As a user, I would like to be able to see what the bottle looks like.
+- As a user, I would like to be able to search for a particular perfume.
+- As a user, I would like to be able to filter perfumes by type.
+- As a user, I would like to learn more about types of perfumes.
+- As a user, I would like to be able to read reviews on a perfume.
+- As a user, I would like to be able to write my own review on a perfume.
+- As a user, I would like to be able to create an account and modify it.
+- As a user, I would like to upload an avatar or photo of my choice, and preview it before I do so.
+- As a user, I would like to be able to change that photo at any point.
+- As a user, I would like to see my photo next to my reviews on perfumes.
+- As a user, I would like to have the possibility to create a new password in case I forgot my current one.
+- As a user, I would like to have the possibility to edit or delete my reviews on a perfume.
+- As a user, I would like to have the possibility to delete my account.
 
-- Find information about perfumes.
-- Be able to see what the bottle looks like.
-- Be able to search for a particular perfume.
-- Be able to filter perfumes by type.
-- Learn more about types of perfumes.
-- Be able to read reviews on a perfume.
-- Be able to write my own review on a perfume.
-- Be able to create an account and modify it.
-- Be able to upload an avatar or photo of my choice, and preview it before I do so.
-- Be able to change that photo at any point.
-- See my photo next to my reviews on perfumes.
-- Be able to create a new password in case I forgot my current one.
-- Be able to edit or delete my reviews on a perfume.
-- Be able to delete my account.
-
-> As an administrator, I would like to do all of the above, plus ______________"
+As an administrator, I would like to do all of the above, plus ______________"
 
 - Be able to create, modify and delete perfumes.
 - Be able to upload a photo of the perfume, and to change it.
@@ -115,6 +144,12 @@ Users want also to be able to leave a review to collaborate with the database.
 - Be able to create, modify and delete types of perfumes.
 
 ## Design Choices
+
+### General
+
+Like good perfumes, I decided to leave a lot to the suggestion of imagination.
+That's why I chose for an airy design, with predominance of white and empty space, pastel colours and soft curves.
+All what's in between is to be filled in by memories and evocations produced by the senses.
 
 ### Buttons
 
@@ -224,7 +259,7 @@ Types collection
 
 ### Database Choice
 
-For this project we were instructed to use MongoDB as our database.
+For this project I decided to use MongoDB as my database.
 
 MongoDB is a non-relational database but I still decided to have three different collections and find ways to combine data in the same cursor from them by using aggregation, such as in the colde below:
 
@@ -295,32 +330,43 @@ The app originally saved media files to the file system, but that caused some is
 - The local and remote file systems are different spaces, so pictures uploaded while on development didn't exist remotely (and vice-versa).
 - Heroku's file system is ephemeral, meaning that it is rebuilt on each deployment. That causes that all pictures uploaded at a certain point get destroyed on subsequent deploys, making the media file practically unmanageable.
 
-With this in mind I decided considered saving photos to a cloud-based solution reachable both locally and remotely.
+With this in mind I decided saving photos in a cloud-based solution reachable both locally and remotely.
 The options I considered were Imgur and Cloudinary, and chose the latter due to its set of features and ease of use and setup.
 
 ## Testing
 
+### Tests performed
+
+- Navigation never breaks:
+  - Regardless of what the user attempts to do, there's never the need to click the 'back' button to return to a page. Either clicking a button, or a menu item would bring the user to their required spot in the app.
+- Forms don't break:
+  - Validators in the forms are clear and explain what to do or not to do with them.
+- Custom validators work:
+  - Usernames cannot contain spaces or characters other than letters, numbers and underscores, even when updating the account.
+  - Reviews cannot be empty.
+  - Passwords must contain at least a letter, a number and a special character.
+- Not uploading a picture for an user or for a perfume defaults to a standar picture.
+- Non-admin users don't have access to functionalities reserved to admins, such as the creation or deletion of a perfume or a type of perfume.
+- Request to reset the password has been tested in all possible scenarios and the tests passed all of them.
+- Deleting a document, or an object in an array of object, always deletes the proper one indentified by its ObjectId.
+- Users cannot delete or edit documents others than the ones created by them.
+- Error pages respond correctly to all possible errors. To test this, errors have been purposedly provoqued in order to invoque the above pages.
+
 ### Validators
 
 - [W3C HTML Validator](https://validator.w3.org/)
-  - No warnings or errors reported.
 
 - [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)
-  - No warnings or errors reported.
 
 - [CSS Lint](http://csslint.net/)
-  - No errors found.
 
 - [JSHint](https://jshint.com/)
-  - No errors found.
 
 - [PEP8](http://pep8online.com/)
-  - No errors or warnings besides the false warning about the Cloudinary options variable.
 
 ## Issues found and status
 
-During the project I met several challenges, as this was my first experience with both Python and MongoDB (or any database for that matter).
-Some of them are summarised below.
+Some of the issues and challenges found during development are summarised below.
 
 ### Custom Validator for types
 
