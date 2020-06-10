@@ -1,0 +1,20 @@
+<div class="card border-white mb-4">
+    <div class="row justify-content-center mb-2">
+        <div class="col-12 col-md-2 text-lg-center text-xl-right mb-3">
+            <img class=" review-avatar rounded-circle img-fluid mr-3" src="{{ review["reviewer_picture"] }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width=100 height=100 alt="avatar">
+        </div>
+        <div class="review-content col-12 col-md-8 col-lg-6 mb-2">
+            <div class="review-in-prefume">
+                <p class="mb-2"><span class="name-reviewer">{{review["reviewer"].title() }}</span> said:&nbsp;</p>
+                <div class="content-review">{{ review["review_content"] | safe }}
+                </div>
+                <small class="text-muted">{{ review.date_reviewed.strftime("%d %B, %Y @%-H:%Mh") }}</small></div>
+        </div>
+        <div class="col-12 col-lg-3 text-center pr-0 mb-2">
+            {% if current_user.username == review["reviewer"] %}
+            <button type="button" class="btn btn-sm shadow-sm edit-review button-blue-small mt-2" data-perfume_id="{{perfume["_id"]}}" data-review_id="{{review["_id"]}}" data-toggle="modal" data-target="#editReviewPerfumeModal" id="editFormButton">Edit</button>
+            <button class="btn btn-sm shadow-sm delete-review button-red mt-2" data-perfume_id="{{perfume["_id"]}}" data-review_id="{{review["_id"]}}" type="button" data-toggle="modal" data-target="#deleteReviewModal">Delete</button>
+            {% endif %}
+        </div>
+    </div>
+</div>
