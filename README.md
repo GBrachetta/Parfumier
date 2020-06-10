@@ -47,7 +47,6 @@ If you are a visitor, please log in and share your comments on the perfumes in o
   - [Validators](#validators)
 - [Issues found and status](#issues-found-and-status)
   - [Custom Validator for types](#custom-validator-for-types)
-  - [Onerror default to picture](#onerror-default-to-picture)
   - [Images](#images)
   - [filters & Search](#filters--search)
     - [Search](#search)
@@ -198,7 +197,7 @@ This gives registered users the possibility to add reviews to perfumes, edit the
 
 - Admins have access to functionalities reserved only to them, such as
   - Creating a perfume.
-  - Deleting a perfume.
+  - Deleting a perfume (except if they are not the creators)
 
 #### Perfume Photos
 
@@ -310,8 +309,8 @@ cur = mongo.db.perfumes.aggregate(
 
 ### Back-end Technologies
 
-- ![python](https://img.shields.io/static/v1?label=PYTHON&message=3.7&color=339af0&logo=PYTHON) Python, for all backend logic.
-- ![mongodb](https://img.shields.io/static/v1?label=MongoDB&message=3.7&color=success&logo=mongodb) MongoDB, my database for the app.
+- ![python](https://img.shields.io/static/v1?label=Python&message=3.7&color=339af0&logo=PYTHON) Python, for all backend logic.
+- ![mongodb](https://img.shields.io/static/v1?label=MongoDB&message=1.21.2&color=success&logo=mongodb) MongoDB, my database for the app.
 
 ### Other technologies
 
@@ -374,10 +373,6 @@ Some of the issues and challenges found during development are summarised below.
 While it was an easy task to put a validator in place for the user (since it uses flask_login to identify it) it was a bit more complicated to check for existing perfume types when the admin wants to edit it.
 For that purpose a hidden field was included in the editReview form and in the route it is assigned the current type in the database.
 Thanks to this method, seamless to the user, the custom validator can check the data from the form against it and act the same way put in place in the custom validator for the username and email.
-
-### Onerror default to picture
-
-If for some reason outside my control a remote image weren't found for a user or a perfume, I decided to put in place the following method in the templates to ensure at least that the visitor wouldn't see a broken image icon.
 
 ### Images
 
