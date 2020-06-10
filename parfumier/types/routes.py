@@ -35,7 +35,7 @@ def new_type():
         flash("You need to be an administrator.", "danger")
         return redirect(url_for("main.index"))
     return render_template(
-        "pages/type.html",
+        "pages/perfume-and-type.html",
         title="New Type",
         form=form,
         new_type=True,
@@ -63,7 +63,7 @@ def show_type(type_id):
 
     one_type = mongo.db.types.find_one({"_id": ObjectId(type_id)})
     return render_template(
-        "pages/type-single.html", type=one_type, title=one_type["type_name"]
+        "pages/type.html", type=one_type, title=one_type["type_name"]
     )
 
 
@@ -117,9 +117,10 @@ def edit_type(type_id):
         form.type_name.data = current_type_value["type_name"]
         form.description.data = current_type_value["description"]
     return render_template(
-        "pages/type.html",
+        "pages/perfume-and-type.html",
         title="Edit Type",
         form=form,
         current_type=current_type,
+        edit_type=True,
         heading="Edit Type",
     )

@@ -1,0 +1,27 @@
+{% extends "layout/base.html" %}
+{% block content %}
+
+<main class="page contact-page">
+    <section class="portfolio-block contact">
+        <div class="container">
+            <div class="heading">
+                <h2 class="text-capitalize">{{ heading }}</h2>
+            </div>
+            {% if new_perfume %}
+                {% include "forms/new-perfume-form.html" %}
+            {% elif edit_perfume %}
+                {% include "forms/edit-perfume-form.html" %}
+            {% elif new_type%}
+                {% include "forms/new-type-form.html" %}
+            {% else %}
+                {% include "forms/edit-type-form.html" %}
+            {% endif %}
+        </div>
+    </section>
+</main>
+
+{% block CKEditor %}
+<script src="https://cdn.ckeditor.com/4.14.0/basic/ckeditor.js"></script>
+{% endblock CKEditor %}
+
+{% endblock content%}
