@@ -190,7 +190,7 @@ def account():
         )
         login_user(user_obj)
         flash("You have updated your information", "info")
-        return redirect(url_for("main.index"))
+        return redirect(url_for("users.account"))
     # the if form.validate_on_submit() checks for method POST, so no
     # elif is needed to check for method GET after the return.
     form.username.data = current_user.username

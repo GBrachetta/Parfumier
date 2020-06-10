@@ -64,7 +64,8 @@ $(document).on("click", "#editFormButton", function () {
     const reviewText = $(this)
         .parents("div")
         .siblings("div.review-content")
-        .children(".content-review")
+        .children("div")
+        .children("div.content-review")
         .html();
     CKEDITOR.instances.edit_review.setData(reviewText);
 });

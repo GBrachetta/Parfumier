@@ -5,26 +5,40 @@
     <section class="portfolio-block contact">
         <div class="container">
             <div class="heading">
-                <h2 class=" titles">Welcome to Parfumier</h2>
-                {% if current_user.is_authenticated %}
-                    <h3>Welcome, {{ current_user.username.title() }}!</h3>
-                {% else %}
-                    <h3>Welcome!</h3>
-                {% endif %}
-                <p class="my-5 lead">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla distinctio nihil
-                    deleniti laboriosam tempora reprehenderit autem enim et nisi iure, dignissimos
-                    illum, quia maiores dolorum quae officia! Nam aperiam adipisci, doloremque quod quas
-                    dolores hic voluptatibus laudantium minima architecto quo quae harum tempora, saepe,
-                    veritatis veniam vero dolor earum deleniti assumenda possimus nobis. Laudantium
-                    commodi reprehenderit et corporis velit cum dolores quae animi architecto ex
-                    repellendus possimus voluptates dolorum nulla ad eius, dolorem maiores natus unde
-                    molestiae quibusdam! Doloribus, hic voluptas. Ad doloribus sequi beatae earum
-                    laborum eligendi unde. Autem laborum nemo voluptatibus minima labore ut fugiat rerum
-                    maiores accusamus.
-                </p>
-                <img class="img-fluid mb-5" src="{{ url_for("static", filename="images/flower-field.png") }}"
-                loading="lazy" width=600 height=300 alt="Flower Field" />
+                <h2 class="titles">Welcome to Parfumier{% if current_user.is_authenticated %},
+                    {{ current_user.username.title() }}{% endif %}!
+                </h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <p class="my-5 text-left">
+                        Perfume is thousands of years old, with evidence of the first perfumes dating back to Ancient Egypt,
+                        Mesopotamia and Cyprus. The English word "perfume" comes from the Latin per fume, meaning "through smoke."
+                    </p>
+                    <img class="img-fluid mb-5" src="{{ url_for("static", filename="images/egyptian-bottle.png") }}" loading="lazy" width=600 height=300 alt="Flower Field" />
+                    <p class="my-5 text-left">
+                        The Ancient Egyptians were the first to incorporate perfume into their culture, followed by the ancient Chinese, Hindus, Israelites, Carthaginians, Arabs, Greeks, and Romans.
+                        <br>
+                        The oldest perfumes ever found were discovered by archeologists in Cyprus. They were more than four thousand years old. A cuneiform tablet from Mesopotamia, dating back more than three thousand years, identifies a woman named Tapputi as the first recorded perfume maker. But perfumes could also be found in India at the time.
+                        <br>
+                        The earliest use of perfume bottles is Egyptian and dates to around 1000 BCE. The Egyptians invented glass and perfume bottles were one of the first common uses for glass.
+                        <br>
+                        Persian and Arab chemists helped codify the production of perfume and its use spread throughout the world of classical antiquity. The rise of Christianity, however, saw a decline in the use of perfume for much of the Dark Ages. It was the Muslim world that kept the traditions of perfume alive during this time—and helped trigger its revival with the onset of international trade.
+                        <br>
+                        The 16th century saw the popularity of perfume explode in France, especially among the upper classes and nobles. With help from “the perfume court,” the court of Louis XV, everything got perfumed: Furniture, gloves, and other clothing.
+                        <br>
+                        The 18th-century invention of eau de cologne helped the perfume industry continue to grow.
+                    </p>
+                    <img class="img-fluid mb-5" src="{{ url_for("static", filename="images/louis15.png") }}" loading="lazy" width=400 height=300 alt="Flower Field" />
+                    <p class="my-5 text-left">
+                        One of the oldest uses of perfume comes from the burning of incense and aromatic herbs for religious services, often the aromatic gums, frankincense and myrrh gathered from trees. It did not take long, though, for people to discover perfume’s romantic potential and it was used both for seduction and as preparation for love-making.
+                        <br>
+                        With the arrival of eau de cologne, 18th-century France began using perfume for a broad range of purposes. They used it in their bath water, in poultices and enemas, and consumed it in wine or drizzled on a sugar lump.
+                        <br>
+                        Although niche perfume makers remain to cater to the very rich, perfumes today enjoy widespread use—and not just among women. The selling of perfume, however, is no longer just the purview of perfume makers. In the 20th century, clothing designers began marketing their own lines of scents, and almost any celebrity with a lifestyle brand can be found hawking a perfume with their name (if not smell) on it.
+                    </p>
+                    <img class="img-fluid mb-5" src="{{ url_for("static", filename="images/flower-field.png") }}" loading="lazy" width=600 height=300 alt="Flower Field" />
+                </div>
             </div>
         </div>
     </section>
