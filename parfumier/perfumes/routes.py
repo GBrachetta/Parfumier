@@ -139,7 +139,7 @@ def new_perfume():
         form=form,
         types=mongo.db.types.find().sort("type_name"),
         new_perfume=True,
-        heading="New Perfume"
+        heading="New Perfume",
     )
 
 
@@ -287,7 +287,7 @@ def edit_perfume(perfume_id):
         current_perfume=current_perfume,
         types=mongo.db.types.find().sort("type_name"),
         edit_perfume=True,
-        heading="Edit Perfume"
+        heading="Edit Perfume",
     )
 
 
@@ -342,7 +342,11 @@ def search():
         ]
     )
     return render_template(
-        "pages/perfumes.html", perfumes=results, types=types, title="Perfumes",
+        "pages/perfumes.html",
+        perfumes=results,
+        types=types,
+        title="Perfumes",
+        query=db_query,
     )
 
 
@@ -396,5 +400,9 @@ def filters():
         ]
     )
     return render_template(
-        "pages/perfumes.html", perfumes=results, types=types, title="Perfumes",
+        "pages/perfumes.html",
+        perfumes=results,
+        types=types,
+        title="Perfumes",
+        query=filter_query,
     )

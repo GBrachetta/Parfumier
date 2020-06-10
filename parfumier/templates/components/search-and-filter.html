@@ -1,5 +1,5 @@
 <div class="heading mb-0">
-    <h2 class="text-capitalize">Perfumes</h2>
+    <h2>Perfumes{% if query %}: {{ query.lower() }}{% endif %}</h2>
     <div class="row">
         <div class="col-md-6">
             <form id="form" action="{{ url_for("perfumes.filters") }}" class="shadow-none pb-0 px-0">
