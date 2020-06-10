@@ -49,10 +49,9 @@ If you are a visitor, please log in and share your comments on the perfumes in o
   - [Custom Validator for types](#custom-validator-for-types)
   - [Onerror default to picture](#onerror-default-to-picture)
   - [Images](#images)
-  - [filters](#filters)
+  - [filters & Search](#filters--search)
     - [Search](#search)
     - [CKEditor](#ckeditor)
-    - [Quote all testing as noted in external doc](#quote-all-testing-as-noted-in-external-doc)
 - [Deployment](#deployment)
   - [Local Development](#local-development)
   - [Heroku](#heroku)
@@ -345,12 +344,14 @@ The options I considered were Imgur and Cloudinary, and chose the latter due to 
   - Usernames cannot contain spaces or characters other than letters, numbers and underscores, even when updating the account.
   - Reviews cannot be empty.
   - Passwords must contain at least a letter, a number and a special character.
-- Not uploading a picture for an user or for a perfume defaults to a standar picture.
+- Not uploading a picture for an user or for a perfume defaults to a standard predetermined picture.
 - Non-admin users don't have access to functionalities reserved to admins, such as the creation or deletion of a perfume or a type of perfume.
 - Request to reset the password has been tested in all possible scenarios and the tests passed all of them.
-- Deleting a document, or an object in an array of object, always deletes the proper one indentified by its ObjectId.
+- Deleting a document, or an object in an array of objects, always deletes the proper one indentified by its ObjectId.
 - Users cannot delete or edit documents others than the ones created by them.
+- Admins cannot access the delete button for perfumes not created by them.
 - Error pages respond correctly to all possible errors. To test this, errors have been purposedly provoqued in order to invoque the above pages.
+- Visiting non-existing endpoints correctly returns the 404.html template, with access to all navigation.
 
 ### Validators
 
@@ -380,7 +381,10 @@ If for some reason outside my control a remote image weren't found for a user or
 
 ### Images
 
-### filters
+All images interacting with the database are dinamically stored in Cloudinary.com. They are given a reduced size to minimise loading times and the app only needs to render a 'thumbnain' of the full size image stored remotely.
+Additionally, in the routes the default 'http' protocol gets replaced by 'https' so images get served securely.
+
+### filters & Search
 
 #### Search
 
@@ -424,8 +428,9 @@ def search():
 #### CKEditor
 
 CKEDitor version 4 was my choice in order to give admins and users the possibility to enter text in Rich Text Format.
-
-#### Quote all testing as noted in external doc
+The required script renders all text area fields as WYSIWYG editors, giving users and admins the possibility to use rich text features when adding text, such as back, italics, lists and numbered lists.
+JQuery was used to retrieve the html elements in order to pre-populate the contents of the forms in the edit reviews form, since those elements live in a modal.
+CKEditor's scripts only load on the pages where they are required, avoiding unnecessary loading time on other pages.
 
 ## Deployment
 
