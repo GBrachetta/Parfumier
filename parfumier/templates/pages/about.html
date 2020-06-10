@@ -7,7 +7,9 @@
             <div class="heading">
                 <h2 class=" titles">Welcome to Parfumier</h2>
                 {% if current_user.is_authenticated %}
-                <h3>Welcome, {{ current_user.username.title() }}!</h3>
+                    <h3>Welcome, {{ current_user.username.title() }}!</h3>
+                {% else %}
+                    <h3>Welcome!</h3>
                 {% endif %}
                 <p class="my-5 lead">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla distinctio nihil
@@ -21,7 +23,8 @@
                     laborum eligendi unde. Autem laborum nemo voluptatibus minima labore ut fugiat rerum
                     maiores accusamus.
                 </p>
-                <img class="img-fluid mb-5" src="https://cdn.myonlinestore.eu/943d3925-6be1-11e9-a722-44a8421b9960/images/VitexNaturaWholesale%20Grasse%20Perfume%20flowers.jpg" loading="lazy" width=500 height=300 alt="Flower Field" />
+                <img class="img-fluid mb-5" src="{{ url_for("static", filename="images/flower-field.png") }}"
+                loading="lazy" width=600 height=300 alt="Flower Field" />
             </div>
         </div>
     </section>

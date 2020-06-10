@@ -7,24 +7,23 @@
             <div class="heading">
                 <h2>{{ perfume.name.title() }}</h2>
             </div>
-            <!-- START "CURSOR" -->
+            <!-- Start Perfume Cursor -->
             {% include "components/perfume-cursor.html" %}
-            <!-- END "CURSOR" -->
         </div>
     </section>
 </main>
 
-<!-- REVIEWS -->
+<!-- Reviews -->
 {% include "components/perfume-reviews.html" %}
 
-<!-- MODALS -->
+<!-- Modals -->
 {% include "modals/delete-perfume-modal.html" %}
 {% include "modals/create-review-modal.html" %}
 {% include "modals/delete-review-modal.html" %}
 {% include "modals/edit-review-modal.html" %}
 
 {% block CKEditor %}
-<script src="https://cdn.ckeditor.com/4.14.0/basic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.14.0/basic/ckeditor.js"></script>
 {% endblock CKEditor %}
 
 {% endblock content %}
