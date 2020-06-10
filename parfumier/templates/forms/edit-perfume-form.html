@@ -1,8 +1,8 @@
-<form method=POST action="" enctype="multipart/form-data" id="form-perfume" novalidate>
+<form method=POST enctype="multipart/form-data" id="form-perfume" novalidate>
     {{ form.hidden_tag() }}
     <div class="form-row mb-4">
         <div class="col-6 col-md-3 text-center">
-            <img src="{{ current_perfume.picture }}" alt="picture" width="140" height="164">
+            <img src="{{ current_perfume.picture }}" alt="picture" width="140" height="164" loading="lazy">
         </div>
         <div class="col-6 col-md-3">
             <p class="form-control-thumbnail border-white">

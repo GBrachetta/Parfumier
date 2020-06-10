@@ -1,0 +1,22 @@
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="modal-about-label" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-about-label">About me</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <h3 class="heading-modal">Guillermo Brachetta</h3>
+                <img src="{{ url_for("static", filename="images/avatar.png") }}" loading="lazy" width="500" height="500" alt="avatar" class="img-fluid my-3" />
+                <p class="text-left">I'm driven by the senses.<br />All that touches me, moves me.<br />A Haydn string quartet,
+                 the taste and texture of oysters, the view of a 15th century cathedral or the fragrance of a sophisticated perfume
+                 they all elevate me in a similar way.<br /><br />This is my contribution to the world of scents.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn button-purple" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

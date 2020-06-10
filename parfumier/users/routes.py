@@ -64,7 +64,13 @@ def login():
                 else redirect(url_for("perfumes.all_perfumes"))
             )
         flash("Please check your credentials", "warning")
-    return render_template("pages/login.html", title="Login", form=form)
+    return render_template(
+        "pages/users.html",
+        title="Login",
+        form=form,
+        login=True,
+        heading="Log in",
+    )
 
 
 @users.route("/register", methods=["POST", "GET"])
@@ -116,7 +122,13 @@ def register():
             "info",
         )
         return redirect(url_for("users.login"))
-    return render_template("pages/register.html", title="Register", form=form)
+    return render_template(
+        "pages/users.html",
+        title="Register",
+        form=form,
+        register=True,
+        heading="Register",
+    )
 
 
 @users.route("/account", methods=["POST", "GET"])
@@ -188,7 +200,12 @@ def account():
     form.avatar.data = current_user.avatar
     avatar = current_user.avatar
     return render_template(
-        "pages/account.html", title="Account", form=form, avatar=avatar
+        "pages/users.html",
+        title="Account",
+        form=form,
+        avatar=avatar,
+        account=True,
+        heading="Edit Account",
     )
 
 
@@ -223,7 +240,11 @@ def reset_request():
         flash("An email has been sent to reset your password", "success")
         return redirect(url_for("users.login"))
     return render_template(
-        "pages/reset-request.html", title="Reset Password", form=form
+        "pages/users.html",
+        title="Reset Password",
+        form=form,
+        reset_request=True,
+        heading="Reset Password",
     )
 
 
@@ -264,7 +285,11 @@ def reset_token(token):
         flash("Your password has been updated. You are now logged in.", "info")
         return redirect(url_for("users.login"))
     return render_template(
-        "pages/reset-token.html", title="Reset Password", form=form
+        "pages/users.html",
+        title="Reset Password",
+        form=form,
+        reset_token=True,
+        heading="Reset Password",
     )
 
 
