@@ -43,6 +43,7 @@ If you are a visitor, please log in and share your comments on the perfumes in o
   - [Other technologies](#other-technologies)
   - [About Cloudinary](#about-cloudinary)
 - [Testing](#testing)
+  - [Tests performed](#tests-performed)
   - [Validators](#validators)
 - [Issues found and status](#issues-found-and-status)
   - [Custom Validator for types](#custom-validator-for-types)
@@ -333,6 +334,23 @@ With this in mind I decided saving photos in a cloud-based solution reachable bo
 The options I considered were Imgur and Cloudinary, and chose the latter due to its set of features and ease of use and setup.
 
 ## Testing
+
+### Tests performed
+
+- Navigation never breaks:
+  - Regardless of what the user attempts to do, there's never the need to click the 'back' button to return to a page. Either clicking a button, or a menu item would bring the user to their required spot in the app.
+- Forms don't break:
+  - Validators in the forms are clear and explain what to do or not to do with them.
+- Custom validators work:
+  - Usernames cannot contain spaces or characters other than letters, numbers and underscores, even when updating the account.
+  - Reviews cannot be empty.
+  - Passwords must contain at least a letter, a number and a special character.
+- Not uploading a picture for an user or for a perfume defaults to a standar picture.
+- Non-admin users don't have access to functionalities reserved to admins, such as the creation or deletion of a perfume or a type of perfume.
+- Request to reset the password has been tested in all possible scenarios and the tests passed all of them.
+- Deleting a document, or an object in an array of object, always deletes the proper one indentified by its ObjectId.
+- Users cannot delete or edit documents others than the ones created by them.
+- Error pages respond correctly to all possible errors. To test this, errors have been purposedly provoqued in order to invoque the above pages.
 
 ### Validators
 
