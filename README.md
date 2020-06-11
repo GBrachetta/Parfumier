@@ -440,41 +440,72 @@ CKEditor's scripts only load on the pages where they are required, avoiding unne
 
 ### Local Development
 
-This project can be ran locally by going to this [Repository link](https://github.com/GBrachetta/Parfumier) and clicking on the Clone or Download button and copying the link provided.
+This project can be ran locally by followinf the following steps:
 
-![clone](wireframes/images/clone.png)
+1. Visit this [Repository link](https://github.com/GBrachetta/Parfumier) and click on the Clone or Download button to copy the link provided.
 
-In your IDE, open a Terminal window and change to the directory where you want to clone this project and type `Git clone "your copied link"`.
+    ![clone](wireframes/images/clone.png)
 
-After pressing Enter the project will be created and cloned locally.
+2. In your IDE, open a Terminal window and change to the directory where you want to clone this project and type:
 
-Alternatively you can download the zipped file, decompress it and use your IDE of choice to access it.
+    `Git clone "your copied link"`
 
-To run it locally, though, and to achieve full functionality, a series of settings must be performed by the user which won't be discussed here, such as creating an account with Cloudinary for the images to upload to their servers, having the right credentials for the email server for the reset password functionality and installing all necessary dependencies.
-Additionally, the user should create a database (local or remote) using MongoDB and call the collections as described in the [Information Architecture](#information-architecture) section and create 2 enviroment variables: "MONGO_URI" and "SECRET_KEY". "MONGO_URI" should be the connection string for the database, while "SECRET_KEY" should be a more or less random sequence of characters.
+    After pressing Enter the project will be created and cloned locally.
 
-During development I had all these variables in place, working directly from my machine with the remote servers.
+    (Alternatively you can download the zipped file, decompress it and use your IDE of choice to access it.)
+
+3. Create a free account on [MongoDb](https://www.mongodb.com/) and reproduce the 3 collections as described [here](#information-architecture).
+4. Create a free account on [Cloudinary](https://cloudinary.com/).
+5. Make sure you either have access to your email server settings and credentials or to your cloud based email, such as [Gmail](https://accounts.google.com/b/0/AddMailService).
+6. Install [Pipenv](https://pipenv.pypa.io/en/latest/).
+7. Create a virtual enviroment by typing
+
+   `pipenv shell`
+
+8. Install all dependenciel present in pipfile by executing
+
+   `pipenv install`
+
+9. Create a series of enviroment variables following the below criteria
+
+   ```json
+      {
+      "MONGO_URI": "Your mongodb connection string",
+      "SECRET_KEY": "Your secret key",
+      "MAIL_USERNAME": "Your email username",
+      "MAIL_PASSWORD": "Your email password",
+      "CLOUDINARY_URL": "Your Cloudinary account url"
+      }
+   ```
+
+   `Be aware that you will need to adapt line 85 of utils.py to match your own email server!`
+
+10. You will then be able to run the app locally by typing either `python app.py` or `flask run`.
 
 ### Heroku
 
 [Heroku](https://www.heroku.com/) was chosen as the deployment platform for this project.
 The steps to deploy the local app to Heroku were as follow:
 
-- In Heroku, created an app. The app must have an unique name.
-- Linked that app to the GitHub repository by going to the "Deploy" tab in the main app menu.
-- Selected a branch to deploy automatically (alternatively one could opt to deploy manually instead).
-- In the Settings tab, added the corresponding Config Variables as present in my local development:
-  - CLOUDINARY_URL (Allowing to upload pictures to my Cloudinary account)
-  - MAIL_PASSWORD (Used by python mail to connect to my smtp server to deal with sending emails)
-  - MAIL_USERNAME (Same as above)
-  - MONGO_URI (Connecting string to my MongoDB)
-  - SECRET_KEY
-- I used [Pipenv](https://pipenv.pypa.io/en/latest/) to deal with my virtual enviroment, which creates a pipfile for the dependencies needed for the app and a pipfile.lock to deal with versioning of these dependencies.
-- This pipfile renders the file 'requirements.txt' unnecessary, so it was not included in the project.
-- I installed the dependency [Gunicorn](https://gunicorn.org/) which is a Python WSGI HTTP Server.
-- I also created a "Procfile", needed by Heroku in order to know how to run the app and instructed it to run my app using the Gunicorn server in it.
-- When deploying, Heroku reads the pipfiles to install the dependencies, reads the Procfile and the Config Variables inserted above.
-- After that process, the app was live and running remotely in Heroku's servers.
+1. In Heroku, created an app. The app must have an unique name.
+2. Linked that app to the GitHub repository by going to the "Deploy" tab in the main app menu.
+3. Selected a branch to deploy automatically (alternatively one could opt to deploy manually instead).
+4. In the Settings tab, added the corresponding Config Variables as present in my local development:
+
+   ```none
+      CLOUDINARY_URL (Allowing to upload pictures to my Cloudinary account)
+      MAIL_PASSWORD (Used by python mail to connect to my smtp server to deal with sending emails)
+      MAIL_USERNAME (Same as above)
+      MONGO_URI (Connecting string to my MongoDB)
+      SECRET_KEY
+   ```
+
+5. I used [Pipenv](https://pipenv.pypa.io/en/latest/) to deal with my virtual enviroment, which creates a pipfile for the dependencies needed for the app and a pipfile.lock to deal with versioning of these dependencies.
+6. This pipfile renders the file 'requirements.txt' unnecessary, so it was not included in the project.
+7. I installed the dependency [Gunicorn](https://gunicorn.org/) which is a Python WSGI HTTP Server.
+8. I also created a "Procfile", needed by Heroku in order to know how to run the app and instructed it to run my app using the Gunicorn server in it.
+9. When deploying, Heroku reads the pipfiles to install the dependencies, reads the Procfile and the Config Variables inserted above.
+10 After that process, the app was live and running remotely in Heroku's servers.
 
 ## Credits
 
