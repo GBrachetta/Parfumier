@@ -3,10 +3,12 @@
     {% if perfume %}
     <div class="col-4 col-lg-3 item zoom-on-hover">
         <a href="{{ url_for("perfumes.perfume", perfume_id=perfume._id) }}">
-            <img class="img-fluid image" src="{{ perfume["perfumePicture"] }}" height="300" width="300" loading="lazy" alt="perfume img">
+            <img class="img-fluid image perfume-picture" src="{{ perfume["perfumePicture"] }}"
+             height="300" width="300" loading="lazy" alt="perfume img">
             <div class="description">
                 <span class="description-heading">{{ perfume["perfumeName"] }}</span>
-                <p class="d-none d-sm-block description-body d-xs-none">Click on the card to find out more</p>
+                <p class="d-none d-sm-block description-body d-xs-none">
+                Click on the card to find out more</p>
             </div>
         </a>
     </div>
