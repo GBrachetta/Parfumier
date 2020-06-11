@@ -3,7 +3,9 @@
 
     <div class="form-row edit-user-header mb-4">
         <div class="col-12 col-md-3 text-right text-md-left">
-            <img class="rounded-circle img-fluid edit-user-avatar" src="{{ avatar }}" onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';" loading="lazy" width="125" height="125" alt="avatar">
+            <img class="rounded-circle img-fluid edit-user-avatar user-picture" src="{{ avatar }}"
+             onerror="if (this.src != '../static/images/default.png') this.src = '../static/images/default.png';"
+             loading="lazy" width="125" height="125" alt="avatar">
         </div>
         <div class="pl-4 col-12 col-md-6 text-right text-md-left edit-user-data">
             <p class="edit-user-username">{{ current_user.username }}</p>
@@ -89,6 +91,7 @@
         </div>
 
         <div class="col-12 col-sm-4 text-center text-md-right">
-            <button type="button" class="btn shadow-sm button-red ml-3" data-toggle="modal" data-target="#deleteUserModal">Delete Account</button>
+            <button type="button" class="btn shadow-sm button-red ml-3" data-toggle="modal"
+             data-target="#deleteUserModal">Delete Account</button>
         </div>
 </form>

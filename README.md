@@ -35,7 +35,7 @@ If you are a visitor, please log in and share your comments on the perfumes in o
     - [Perfume Photos](#perfume-photos)
   - [Future Goals](#future-goals)
 - [Information Architecture](#information-architecture)
-  - [Database Choice](#database-choice)
+  - [Database Aggregation](#database-aggregation)
   - [Data Storage](#data-storage)
 - [Technologies Used](#technologies-used)
   - [Front-end Technologies](#front-end-technologies)
@@ -55,6 +55,7 @@ If you are a visitor, please log in and share your comments on the perfumes in o
   - [Version Control](#version-control)
   - [Local Development](#local-development)
   - [Heroku](#heroku)
+  - [Version Control](#version-control)
 - [Credits](#credits)
   - [Content](#content)
   - [Media](#media)
@@ -66,7 +67,10 @@ If you are a visitor, please log in and share your comments on the perfumes in o
 
 ## Introduction
 
-The current app is my third submission for my studies at Code Institue and it was inspired by my love for fragrances.
+I love fragrances and always wished to have an app allowing me to save my perfumes, share reviews and be able to connect with other perfume lovers.
+This is the result of this passion.
+Please send me a message if you would like to be an administrator and so be able to enter, edit and deal with perfumes.
+If you are a visitor, please log in and share your comments on the perfumes in our databse.
 
 ## UX
 
@@ -163,14 +167,22 @@ The colors chosen for the app are all soft shades of pastel colors allowing user
 
 ## Wireframes
 
-- ![Login Page](wireframes/login.png)
-- ![Account Page](wireframes/account.png)
-- ![Register Page](wireframes/register.png)
-- ![All Perfumes](wireframes/perfumes.png)
-- ![Individual Perfume](wireframes/perfume.png)
-- ![All Types](wireframes/types.png)
-- ![Individual Type](wireframes/type.png)
-- ![About](wireframes/about.png)
+Login Page
+![Login Page](wireframes/login.png)
+Edit Account Page
+![Account Page](wireframes/account.png)
+Register Page
+![Register Page](wireframes/register.png)
+All Perfumes (main) Page
+![All Perfumes](wireframes/perfumes.png)
+Individual Perfume Page
+![Individual Perfume](wireframes/perfume.png)
+All Types Page
+![All Types](wireframes/types.png)
+Individual Type Page
+![Individual Type](wireframes/type.png)
+About Page
+![About](wireframes/about.png)
 
 ## Features
 
@@ -256,9 +268,7 @@ Types collection
 }
 ```
 
-### Database Choice
-
-For this project I decided to use MongoDB as my database.
+### Database Aggregation
 
 MongoDB is a non-relational database but I still decided to have three different collections and find ways to combine data in the same cursor from them by using aggregation, such as in the colde below:
 
@@ -301,26 +311,26 @@ cur = mongo.db.perfumes.aggregate(
 
 ### Front-end Technologies
 
-- ![html](https://img.shields.io/static/v1?label=HTML&message=5&color=red&logo=html5)  HTML: Used for markup.
-- ![css](https://img.shields.io/static/v1?label=CSS&message=3&color=blue&logo=css3) CSS: Used to style the elements of the app.
-- ![bootstrap](https://img.shields.io/static/v1?label=Bootstrap&message=4.5&color=blueviolet&logo=bootstrap) Bootstrap: to make use of its grid system and responsiveness.
-- ![javascript](https://img.shields.io/static/v1?label=JavaScript&message=ES6&color=yellow&logo=javascript) JavaScript: Used for the functionality of the app.
-- ![jquery](https://img.shields.io/static/v1?label=jQuery&message=3.5.1&color=0769ad&logo=jquery) jQuery, to access and manipulate the DOM.
-- ![fontawesome](https://img.shields.io/static/v1?label=Fontawesome&message=2.3.2&color=339af0&logo=font-awesome) Font Awesome, for all icons.
+- ![html](https://img.shields.io/static/v1?label=HTML&message=5&color=E34F26&style=for-the-badge&logo=html5)  HTML: Used for markup.
+- ![css](https://img.shields.io/static/v1?label=CSS&message=3&color=1572B6&style=for-the-badge&logo=css3) CSS: Used to style the elements of the app.
+- ![bootstrap](https://img.shields.io/static/v1?label=Bootstrap&message=4.5&style=for-the-badge&color=563D7C&logo=bootstrap) Bootstrap: to make use of its grid system and responsiveness.
+- ![javascript](https://img.shields.io/static/v1?label=JavaScript&message=ES6&style=for-the-badge&color=F7DF1E&logo=JavaScript) JavaScript: Used for the functionality of the app.
+- ![jquery](https://img.shields.io/static/v1?label=jQuery&message=3.5.1&style=for-the-badge&color=0769AD&logo=jquery) jQuery, to access and manipulate the DOM.
+- ![fontawesome](https://img.shields.io/static/v1?label=Fontawesome&message=5&style=for-the-badge&color=339AF0&logo=font-awesome) Font Awesome, for all icons.
 
 ### Back-end Technologies
 
-- ![python](https://img.shields.io/static/v1?label=Python&message=3.7&color=339af0&logo=PYTHON) Python, for all backend logic.
-- ![mongodb](https://img.shields.io/static/v1?label=MongoDB&message=1.21.2&color=success&logo=mongodb) MongoDB, my database for the app.
+- ![python](https://img.shields.io/static/v1?label=Python&style=for-the-badge&message=3.7&color=3776AB&logo=PYTHON) Python, for all backend logic.
+- ![mongodb](https://img.shields.io/static/v1?label=MongoDB&style=for-the-badge&message=1.21.2&color=47A248&logo=mongodb) MongoDB, my database for the app.
 
 ### Other technologies
 
-- ![vscode](https://img.shields.io/static/v1?label=VSCode&message=1.45.1&color=informational&logo=visual-studio) Visual Studio Code: my IDE of choice for all my projects.
-- ![github](https://img.shields.io/static/v1?label=GitHub&message=GBrachetta&color=black&logo=github)  GitHub: My remote storage for this project.
-- ![heroku](https://img.shields.io/static/v1?label=Heroku&message=brachetta@me.com&color=blueviolet&logo=heroku) Heroku, the patform to deploy the app.
-- ![balsamiq](https://img.shields.io/static/v1?label=Balsamiq&message=3.5.17&color=ff2800&logo=balsamiq) Balsamiq: to create the wireframes of this project.
-- ![cloudinary](https://img.shields.io/static/v1?label=Cloudinary&message=1.21&color=red&logo=cloudinary) Cloudinary: to upload and host images.
-- ![ckeditor](https://img.shields.io/static/v1?label=CKEditor&message=4&color=yellowgreen&logo=ckeditor) CKEditor: to display a WYSIWYG editor in the text area fields.
+- ![vscode](https://img.shields.io/static/v1?label=VSCode&message=1.45.1&style=for-the-badge&color=007ACC&logo=visual-studio) Visual Studio Code: my IDE of choice for all my projects.
+- ![github](https://img.shields.io/static/v1?label=GitHub&message=GBrachetta&color=181717&style=for-the-badge&logo=github)  GitHub: My remote storage for this project.
+- ![heroku](https://img.shields.io/static/v1?label=Heroku&message=brachetta@me.com&color=430098&style=for-the-badge&logo=heroku) Heroku, the patform to deploy the app.
+- ![balsamiq](https://img.shields.io/static/v1?label=Balsamiq&message=3.5.17&style=for-the-badge&color=7c0000&logo=balsamiq&?link=http://left&link=http://right) Balsamiq: to create the wireframes of this project.
+- ![cloudinary](https://img.shields.io/static/v1?label=Cloudinary&message=1.21&style=for-the-badge&color=f96726&logo=icloud) Cloudinary: to upload and host images.
+- ![ckeditor](https://img.shields.io/static/v1?label=CKEditor&message=4&color=30a3f1&style=for-the-badge&logo=ckeditor) CKEditor: to display a WYSIWYG editor in the text area fields.
 
 ### About Cloudinary
 
@@ -438,41 +448,86 @@ Over 40 branches were using during the development of this app, to ensure isolat
 
 ### Local Development
 
-This project can be ran locally by going to this [Repository link](https://github.com/GBrachetta/Parfumier) and clicking on the Clone or Download button and copying the link provided.
+This project can be ran locally by followinf the following steps:
 
-![clone](wireframes/images/clone.png)
+1. Visit this [Repository link](https://github.com/GBrachetta/Parfumier) and click on the Clone or Download button to copy the link provided.
 
-In your IDE, open a Terminal window and change to the directory where you want to clone this project and type `Git clone "your copied link"`.
+    ![clone](wireframes/images/clone.png)
 
-After pressing Enter the project will be created and cloned locally.
+2. In your IDE, open a Terminal window and change to the directory where you want to clone this project and type:
 
-Alternatively you can download the zipped file, decompress it and use your IDE of choice to access it.
+    `Git clone "your copied link"`
 
-To run it locally, though, and to achieve full functionality, a series of settings must be performed by the user which won't be discussed here, such as creating an account with Cloudinary for the images to upload to their servers, having the right credentials for the email server for the reset password functionality and installing all necessary dependencies.
-Additionally, the user should create a database (local or remote) using MongoDB and call the collections as described in the [Information Architecture](#information-architecture) section and create 2 enviroment variables: "MONGO_URI" and "SECRET_KEY". "MONGO_URI" should be the connection string for the database, while "SECRET_KEY" should be a more or less random sequence of characters.
+    After pressing Enter the project will be created and cloned locally.
 
-During development I had all these variables in place, working directly from my machine with the remote servers.
+    (Alternatively you can download the zipped file, decompress it and use your IDE of choice to access it.)
+
+3. Create a free account on [MongoDb](https://www.mongodb.com/) and reproduce the 3 collections as described [here](#information-architecture).
+4. Create a free account on [Cloudinary](https://cloudinary.com/).
+5. Make sure you either have access to your email server settings and credentials or to your cloud based email, such as [Gmail](https://accounts.google.com/b/0/AddMailService).
+6. Install [Pipenv](https://pipenv.pypa.io/en/latest/).
+7. Create a virtual enviroment by typing
+
+   `pipenv shell`
+
+8. Install all dependenciel present in pipfile by executing
+
+   `pipenv install`
+
+9. Create a series of enviroment variables following the below criteria
+
+   ```json
+      {
+      "MONGO_URI": "Your mongodb connection string",
+      "SECRET_KEY": "Your secret key",
+      "MAIL_USERNAME": "Your email username",
+      "MAIL_PASSWORD": "Your email password",
+      "CLOUDINARY_URL": "Your Cloudinary account url"
+      }
+   ```
+
+   `Be aware that you will need to adapt line 85 of utils.py to match your own email server!`
+
+10. You will then be able to run the app locally by typing either `python app.py` or `flask run`.
 
 ### Heroku
 
 [Heroku](https://www.heroku.com/) was chosen as the deployment platform for this project.
 The steps to deploy the local app to Heroku were as follow:
 
-- In Heroku, created an app. The app must have an unique name.
-- Linked that app to the GitHub repository by going to the "Deploy" tab in the main app menu.
-- Selected a branch to deploy automatically (alternatively one could opt to deploy manually instead).
-- In the Settings tab, added the corresponding Config Variables as present in my local development:
-  - CLOUDINARY_URL (Allowing to upload pictures to my Cloudinary account)
-  - MAIL_PASSWORD (Used by python mail to connect to my smtp server to deal with sending emails)
-  - MAIL_USERNAME (Same as above)
-  - MONGO_URI (Connecting string to my MongoDB)
-  - SECRET_KEY
-- I used [Pipenv](https://pipenv.pypa.io/en/latest/) to deal with my virtual enviroment, which creates a pipfile for the dependencies needed for the app and a pipfile.lock to deal with versioning of these dependencies.
-- This pipfile renders the file 'requirements.txt' unnecessary, so it was not included in the project.
-- I installed the dependency [Gunicorn](https://gunicorn.org/) which is a Python WSGI HTTP Server.
-- I also created a "Procfile", needed by Heroku in order to know how to run the app and instructed it to run my app using the Gunicorn server in it.
-- When deploying, Heroku reads the pipfiles to install the dependencies, reads the Procfile and the Config Variables inserted above.
-- After that process, the app was live and running remotely in Heroku's servers.
+1. In Heroku, created an app. The app must have an unique name.
+2. Linked that app to the GitHub repository by going to the "Deploy" tab in the main app menu.
+3. Selected a branch to deploy automatically (alternatively one could opt to deploy manually instead).
+4. In the Settings tab, added the corresponding Config Variables as present in my local development:
+
+   ```none
+      CLOUDINARY_URL (Allowing to upload pictures to my Cloudinary account)
+      MAIL_PASSWORD (Used by python mail to connect to my smtp server to deal with sending emails)
+      MAIL_USERNAME (Same as above)
+      MONGO_URI (Connecting string to my MongoDB)
+      SECRET_KEY
+   ```
+
+5. I used [Pipenv](https://pipenv.pypa.io/en/latest/) to deal with my virtual enviroment, which creates a pipfile for the dependencies needed for the app and a pipfile.lock to deal with versioning of these dependencies.
+6. This pipfile renders the file 'requirements.txt' unnecessary, so it was not included in the project.
+7. I installed the dependency [Gunicorn](https://gunicorn.org/) which is a Python WSGI HTTP Server.
+8. I also created a "Procfile", needed by Heroku in order to know how to run the app and instructed it to run my app using the Gunicorn server in it.
+9. When deploying, Heroku reads the pipfiles to install the dependencies, reads the Procfile and the Config Variables inserted above.
+10. After that process, the app was live and running remotely in Heroku's servers.
+
+### Version Control
+
+During the development I used [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) for version control.
+
+By this I was able to create branches to deal with all the features as they were added to the app without having half finished code deployed.
+
+As soon as I considered that a feature was finished I then merged its branch to the develop branch. I then deleted stale branches once they were sufficiently tested and approved for release.
+
+When a group of features made a release worthwhile I then merged the develop branch to the master branch.
+
+Additionaly, and for testing purposes, I often also deployed feature branches in order to double-check that the app was responsive remotely.
+
+To deal with these features i used [GitHub Issues](https://guides.github.com/features/issues/) and put in place a [project board](https://help.github.com/en/github/managing-your-work-on-github/about-project-boards), which helped me organise my workflow and have a clear overview of where in the process of my development I was.
 
 ## Credits
 
@@ -482,7 +537,7 @@ The description of the perfumes has been freely adapted from [Fragrantica](www.f
 
 ### Media
 
-The media (pictures) contained in this app has been borrowed from [Fragrantica](https://www.fragrantica.com/) without any comercial intention.
+The perfume pictures contained in this app have been borrowed from [Fragrantica](https://www.fragrantica.com/) without any comercial intention.
 
 ### Code
 

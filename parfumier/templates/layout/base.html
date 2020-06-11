@@ -11,9 +11,9 @@
 </head>
 
 <body>
-
+    <!-- Navbar -->
     {% include "layout/navbar.html" %}
-
+    <!-- Flash messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -23,14 +23,14 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
+    <!-- Content -->
     <div class="container main-contents">
         {% block content %}
         {% endblock content %}
     </div>
-
+    <!-- Footer & scripts -->
     {% include "layout/footer.html" %}
     {% include "layout/scripts.html" %}
-
 </body>
 
 </html>
