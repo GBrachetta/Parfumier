@@ -1,11 +1,5 @@
 # Parfumier <!-- omit in toc -->
 
-Welcome to Parfumier.
-I love fragrances and always wished to have an app allowing me to save my perfumes, share reviews and be able to connect with other perfume lovers.
-This is the result of this passion.
-Please send me a message if you would like to be an administrator and so be able to enter, edit and deal with perfumes.
-If you are a visitor, please log in and share your comments on the perfumes in our databse.
-
 ![Mockup](wireframes/images/mockup.png)
 
 ## Table of Contents <!-- omit in toc -->
@@ -44,7 +38,7 @@ If you are a visitor, please log in and share your comments on the perfumes in o
   - [About Cloudinary](#about-cloudinary)
 - [Testing](#testing)
   - [Tests performed](#tests-performed)
-  - [Validators](#validators)
+  - [Validators and linters](#validators-and-linters)
 - [Issues found and status](#issues-found-and-status)
   - [Custom Validator for types](#custom-validator-for-types)
   - [Images](#images)
@@ -52,7 +46,6 @@ If you are a visitor, please log in and share your comments on the perfumes in o
     - [Search](#search)
     - [CKEditor](#ckeditor)
 - [Deployment](#deployment)
-  - [Version Control](#version-control)
   - [Local Development](#local-development)
   - [Heroku](#heroku)
   - [Version Control](#version-control)
@@ -216,7 +209,39 @@ This gives registered users the possibility to add reviews to perfumes, edit the
 
 Admins can upload photos using Cloudinary. In case a photo is not provided during the creation of the perfume, a default generic picture is saved to the database.
 
+The method used is described below:
+
+```python
+if form.validate_on_submit():
+    if form.picture.data:
+        picture_uploaded = upload(form.picture.data)
+        # <cloudinary here>
+        picture_link = picture.replace("http", "https")
+        mongo.db.perfumes.insert(
+            {
+                # <other fields>
+                "picture": picture_link,
+            }
+        )
+    else:
+        mongo.db.perfumes.insert(
+            {
+                # <other fields>
+                "picture": (
+                    "https://res.cloudinary.com/gbrachetta/"
+                    "image/upload/v1590013198/generic.jpg"
+                ),
+            }
+        )
+```
+
 ### Future Goals
+
+Some of the features I would like to implement in the future are:
+
+- Request administrator status during the registration.
+- Put in place personal collections of perfumes. The perfumes collection includes a currently unused boolean field to allow for this in a feature release.
+- Use JavaScript to deal with all the forms.
 
 ## Information Architecture
 
@@ -307,6 +332,10 @@ cur = mongo.db.perfumes.aggregate(
 
 ### Data Storage
 
+No data is stored in the file system.
+
+Since Heroku has an ephemeral file system I decided to incorporate Cloudinary for the images, which was at the beginning of the development the only process still writing to it.
+
 ## Technologies Used
 
 ### Front-end Technologies
@@ -363,17 +392,16 @@ The options I considered were Imgur and Cloudinary, and chose the latter due to 
 - Error pages respond correctly to all possible errors. To test this, errors have been purposedly provoqued in order to invoque the above pages.
 - Visiting non-existing endpoints correctly returns the 404.html template, with access to all navigation.
 
-### Validators
+### Validators and linters
+
+The following validators and linters were used either remotely or with their plugins for Visual Studio Code:
 
 - [W3C HTML Validator](https://validator.w3.org/)
-
 - [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)
-
 - [CSS Lint](http://csslint.net/)
-
 - [JSHint](https://jshint.com/)
-
 - [PEP8](http://pep8online.com/)
+- [BLACK](https://pypi.org/project/black/)
 
 ## Issues found and status
 
@@ -439,12 +467,6 @@ JQuery was used to retrieve the html elements in order to pre-populate the conte
 CKEditor's scripts only load on the pages where they are required, avoiding unnecessary loading time on other pages.
 
 ## Deployment
-
-### Version Control
-
-Through the whole development I've used GitFlow, and by doing so I was able to isolate feature in different branches and integrated them as soon as they were finished and tested.
-Stale branches were subsequently deleted as their features proved solid after passing all testing stages.
-Over 40 branches were using during the development of this app, to ensure isolated enviroments for each of them without interfering with already functioning features.
 
 ### Local Development
 
@@ -519,13 +541,15 @@ The steps to deploy the local app to Heroku were as follow:
 
 During the development I used [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) for version control.
 
-By this I was able to create branches to deal with all the features as they were added to the app without having half finished code deployed.
+By this I was able to isolate feature in different branches and integrated them as soon as they were finished and fully tested.
 
 As soon as I considered that a feature was finished I then merged its branch to the develop branch. I then deleted stale branches once they were sufficiently tested and approved for release.
 
 When a group of features made a release worthwhile I then merged the develop branch to the master branch.
 
 Additionaly, and for testing purposes, I often also deployed feature branches in order to double-check that the app was responsive remotely.
+
+Over 40 branches were using during the development of this app, to ensure isolated enviroments for each of them without interfering with already functioning features.
 
 To deal with these features i used [GitHub Issues](https://guides.github.com/features/issues/) and put in place a [project board](https://help.github.com/en/github/managing-your-work-on-github/about-project-boards), which helped me organise my workflow and have a clear overview of where in the process of my development I was.
 
