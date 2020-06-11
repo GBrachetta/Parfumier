@@ -54,6 +54,7 @@ If you are a visitor, please log in and share your comments on the perfumes in o
 - [Deployment](#deployment)
   - [Local Development](#local-development)
   - [Heroku](#heroku)
+  - [Version Control](#version-control)
 - [Credits](#credits)
   - [Content](#content)
   - [Media](#media)
@@ -505,7 +506,21 @@ The steps to deploy the local app to Heroku were as follow:
 7. I installed the dependency [Gunicorn](https://gunicorn.org/) which is a Python WSGI HTTP Server.
 8. I also created a "Procfile", needed by Heroku in order to know how to run the app and instructed it to run my app using the Gunicorn server in it.
 9. When deploying, Heroku reads the pipfiles to install the dependencies, reads the Procfile and the Config Variables inserted above.
-10 After that process, the app was live and running remotely in Heroku's servers.
+10. After that process, the app was live and running remotely in Heroku's servers.
+
+### Version Control
+
+During the development I used [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) for version control.
+
+By this I was able to create branches to deal with all the features as they were added to the app without having half finished code deployed.
+
+As soon as I considered that a feature was finished I then merged its branch to the develop branch. I then deleted stale branches once they were sufficiently tested and approved for release.
+
+When a group of features made a release worthwhile I then merged the develop branch to the master branch.
+
+Additionaly, and for testing purposes, I often also deployed feature branches in order to double-check that the app was responsive remotely.
+
+To deal with these features i used [GitHub Issues](https://guides.github.com/features/issues/) and put in place a [project board](https://help.github.com/en/github/managing-your-work-on-github/about-project-boards), which helped me organise my workflow and have a clear overview of where in the process of my development I was.
 
 ## Credits
 
@@ -515,7 +530,7 @@ The description of the perfumes has been freely adapted from [Fragrantica](www.f
 
 ### Media
 
-The media (pictures) contained in this app has been borrowed from [Fragrantica](https://www.fragrantica.com/) without any comercial intention.
+The perfume pictures contained in this app have been borrowed from [Fragrantica](https://www.fragrantica.com/) without any comercial intention.
 
 ### Code
 
