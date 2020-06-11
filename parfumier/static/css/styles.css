@@ -361,6 +361,9 @@ div.social-icons .background-twitter {
     line-height: 2.5rem;
 }
 
+a:hover{
+    text-decoration: overline;
+}
 
 @media only screen and (min-width: 768px) {
     .project-card-no-image h3 {
