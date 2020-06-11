@@ -1,10 +1,8 @@
-"""Besides the flask imports, math was imported to deal with
-pagination, datetime to stamp current creation date, cloudinary_url
-and upload to deal with uploading images and ObjectId to find and deal
-with objects by their id.
+"""Besides the flask imports, datetime to stamp current creation date,
+cloudinary_url and upload to deal with uploading images and ObjectId to
+find and deal with objects by their id.
 """
 from datetime import datetime
-import math
 from flask import render_template, redirect, flash, url_for, request, Blueprint
 from flask_login import login_required, current_user
 from cloudinary.uploader import upload
@@ -13,6 +11,7 @@ from bson.objectid import ObjectId
 from parfumier.perfumes.forms import CreatePerfumeForm, EditPerfumeForm
 from parfumier.reviews.forms import AddReviewForm, EditReviewForm
 from parfumier import mongo
+from flask_paginate import Pagination, get_page_parameter
 
 perfumes = Blueprint("perfumes", __name__)
 
@@ -28,11 +27,21 @@ def all_perfumes():
     Returns a cursor with the said aggregation amongst pagination objects
     and the types collection ordered by name.
     """
+    page = request.args.get(get_page_parameter(), type=int, default=1)
     types = mongo.db.types.find().sort("type_name")
     page_count = 8
-    page = int(request.args.get("page", 1))
     total_perfumes = mongo.db.perfumes.count()
-    total_pages = range(1, int(math.ceil(total_perfumes / page_count)) + 1)
+    pagination = Pagination(
+        per_page=8,
+        page=page,
+        total=total_perfumes,
+        record_name="perfumes",
+        bs_version=4,
+        outer_window=2,
+        alignment="center",
+        display_msg="Displaying <b>{start} - {end}</b>\
+             {record_name} of <b>{total}</b>",
+    )
     cur = mongo.db.perfumes.aggregate(
         [
             {
@@ -70,8 +79,7 @@ def all_perfumes():
         title="Perfumes",
         perfumes=cur,
         types=types,
-        page=page,
-        total_pages=total_pages,
+        pagination=pagination,
     )
 
 
@@ -302,7 +310,8 @@ def search():
     in the search form.
     It returns the 'results' cursor, sorted alphabetically.
     """
-
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    page_count = 8
     types = mongo.db.types.find().sort("type_name")
     mongo.db.perfumes.create_index(
         [("name", "text"), ("brand", "text"), ("perfume_type", "text")]
@@ -339,7 +348,34 @@ def search():
                 }
             },
             {"$sort": {"perfumeName": 1}},
+            {"$skip": (page - 1) * page_count},
+            {"$limit": page_count},
         ]
+    )
+    count = mongo.db.perfumes.aggregate(
+        [
+            {"$match": {"$text": {"$search": db_query}}},
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "author",
+                    "foreignField": "username",
+                    "as": "creator",
+                }
+            },
+        ]
+    )
+    total_perfumes = len(list(count))
+    pagination = Pagination(
+        per_page=8,
+        page=page,
+        total=total_perfumes,
+        record_name="perfumes",
+        bs_version=4,
+        outer_window=2,
+        alignment="center",
+        display_msg="Displaying <b>{start} - {end}</b>\
+             {record_name} of <b>{total}</b>",
     )
     return render_template(
         "pages/perfumes.html",
@@ -347,6 +383,7 @@ def search():
         types=types,
         title="Perfumes",
         query=db_query,
+        pagination=pagination,
     )
 
 
@@ -362,7 +399,8 @@ def filters():
     option is selected.
     As in most perfumes and types routes, this one uses aggregation.
     """
-
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    page_count = 8
     types = mongo.db.types.find().sort("type_name")
     mongo.db.types.create_index([("type_name", "text")])
     filter_query = request.args["filter_query"]
@@ -397,7 +435,34 @@ def filters():
                 }
             },
             {"$sort": {"perfumeName": 1}},
+            {"$skip": (page - 1) * page_count},
+            {"$limit": page_count},
         ]
+    )
+    count = mongo.db.perfumes.aggregate(
+        [
+            {"$match": {"$text": {"$search": filter_query}}},
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "author",
+                    "foreignField": "username",
+                    "as": "creator",
+                }
+            },
+        ]
+    )
+    total_perfumes = len(list(count))
+    pagination = Pagination(
+        per_page=8,
+        page=page,
+        total=total_perfumes,
+        record_name="perfumes",
+        bs_version=4,
+        outer_window=2,
+        alignment="center",
+        display_msg="Displaying <b>{start} - {end}</b>\
+             {record_name} of <b>{total}</b>",
     )
     return render_template(
         "pages/perfumes.html",
@@ -405,4 +470,5 @@ def filters():
         types=types,
         title="Perfumes",
         query=filter_query,
+        pagination=pagination,
     )

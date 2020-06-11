@@ -14,7 +14,10 @@
             <!-- Perfume card -->
             {% include "components/perfume-card.html" %}
             <!-- Pagination -->
-            {% include "components/pagination.html" %}
+            <div class="col-12 text-center px-0 mt-5">
+                {{ pagination.info }}
+                {{ pagination.links }}
+            </div>
             {% if current_user.is_authenticated and current_user.is_admin == True %}
             <div class="col-12 text-center mt-4">
                 <a class="btn button-purple" href="{{ url_for("perfumes.new_perfume") }}" role="button">Create New Perfume</a>
