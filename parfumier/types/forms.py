@@ -2,6 +2,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, HiddenField
 from wtforms.validators import DataRequired, ValidationError
+from flask_wtf.file import FileField, FileAllowed
 from parfumier import mongo
 
 
@@ -13,6 +14,9 @@ class CreateTypeForm(FlaskForm):
 
     type_name = StringField("Type Name", validators=[DataRequired()])
     description = TextAreaField("Description")
+    type_picture = FileField(
+        "Picture", validators=[FileAllowed(["jpg", "png", "jpeg"])]
+    )
     submit = SubmitField("Create")
 
     def validate_type_name(self, type_name):
@@ -35,6 +39,9 @@ class EditTypeForm(FlaskForm):
     origin_type_name = HiddenField()
     type_name = StringField("Type", validators=[DataRequired()])
     description = TextAreaField("Description")
+    type_picture = FileField(
+        "Picture", validators=[FileAllowed(["jpg", "jpeg", "png"])]
+    )
     submit = SubmitField("Update")
     # https://stackoverflow.com/questions/61896450/check-duplication-when-edit-an-exist-database-field-with-wtforms-custom-validato
 
