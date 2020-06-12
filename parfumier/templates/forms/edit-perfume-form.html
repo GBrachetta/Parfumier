@@ -90,7 +90,7 @@
 
     <div class="form-row">
         <div class="col-12 col-sm-4 text-center text-sm-left">
-            {{ form.picture.label(class="btn shadow-sm button-green form-control-label") }}
+            {{ form.picture.label(class="btn shadow-sm btn-sm button-green form-control-label") }}
             {{ form.picture(class="form-control-file") }}
             {% if form.picture.errors %}
             {% for error in form.picture.errors %}
@@ -100,11 +100,11 @@
         </div>
 
         <div class="col-12 col-sm-4 text-center">
-            <a class="btn button-yellow" href="{{ url_for("perfumes.perfume", perfume_id=current_perfume._id) }}">Cancel</a>
+            <a class="btn btn-sm button-yellow" href="{{ url_for("perfumes.perfume", perfume_id=current_perfume._id) }}">Cancel</a>
         </div>
 
         <div class="col-12 col-sm-4 text-center text-sm-right">
-            {{ form.submit(class="btn button-blue-small shadow-sm text-center") }}
+            {{ form.submit(class="btn btn-sm button-blue shadow-sm text-center") }}
         </div>
     </div>
 </form>
