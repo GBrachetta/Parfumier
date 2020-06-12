@@ -65,8 +65,8 @@ const checkSelected = function () {
     if (this.value === "/type/new") return (window.location = this.value);
     if (this.value) this.closest("form").submit();
 };
-const EL_select = document.querySelector("#filter_query");
-if (EL_select) EL_select.addEventListener("change", checkSelected);
+const selectElement = document.querySelector("#filter_query");
+if (selectElement) selectElement.addEventListener("change", checkSelected);
 
 /**
  * Pre-populates the content of the review to edit it, in the modal.
