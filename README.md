@@ -24,9 +24,11 @@
   - [Existing Features](#existing-features)
     - [Login](#login)
     - [Account managment](#account-managment)
-    - [Perfumes](#perfumes)
+    - [Perfumes & Types](#perfumes--types)
     - [Admins](#admins)
-    - [Perfume Photos](#perfume-photos)
+    - [Images](#images)
+    - [Custom Validator for types](#custom-validator-for-types)
+    - [filters & Search](#filters--search)
   - [Future Goals](#future-goals)
 - [Information Architecture](#information-architecture)
   - [Database Aggregation](#database-aggregation)
@@ -36,15 +38,12 @@
   - [Back-end Technologies](#back-end-technologies)
   - [Other technologies](#other-technologies)
   - [About Cloudinary](#about-cloudinary)
+  - [About CKEditor](#about-ckeditor)
+  - [About Flask-paginate](#about-flask-paginate)
 - [Testing](#testing)
   - [Tests performed](#tests-performed)
   - [Validators and linters](#validators-and-linters)
 - [Issues found and status](#issues-found-and-status)
-  - [Custom Validator for types](#custom-validator-for-types)
-  - [Images](#images)
-  - [filters & Search](#filters--search)
-    - [Search](#search)
-    - [CKEditor](#ckeditor)
 - [Deployment](#deployment)
   - [Local Development](#local-development)
   - [Heroku](#heroku)
@@ -106,7 +105,7 @@ Users and admins can upload an avatar or picture, and change it at any time.
 The main goals of the project are
 
 - Keep users informed about perfumes.
-- Give a platform in which to share comments and reviews.
+- Offer users a platform in which to share comments and reviews.
 - Connect to other perfume lovers.
 - Offer information before choosing a perfume.
 - Share the enthusiasm about the fascinating world of fragrances.
@@ -131,6 +130,7 @@ The main goals of the project are
 - As a user, I would like to have the possibility to create a new password in case I forgot my current one.
 - As a user, I would like to have the possibility to edit or delete my reviews on a perfume.
 - As a user, I would like to have the possibility to delete my account.
+- As a user, I
 
 As an administrator, I would like to do all of the above, plus ______________"
 
@@ -193,21 +193,24 @@ This gives registered users the possibility to add reviews to perfumes, edit the
 - Users have the possibility to delete their account.
 - Users can request a password reset in case they forget their password.
 
-#### Perfumes
+#### Perfumes & Types
 
-- Admins are able to create, edit and delete perfumes.
+- Admins are able to create, edit and delete perfumes and types of perfumes.
 - Admins can upload and change a picture for the above perfumes.
 - All users and not registered visitors can browse and search the full database and access all perfumes and reviews.
 
 #### Admins
 
 - Admins have access to functionalities reserved only to them, such as
-  - Creating a perfume.
-  - Deleting a perfume (except if they are not the creators)
+  - Creating and editing a perfume or type.
+  - Deleting a perfume or type (except if they are not their creators)
 
-#### Perfume Photos
+#### Images
 
-Admins can upload photos using Cloudinary. In case a photo is not provided during the creation of the perfume, a default generic picture is saved to the database.
+All images interacting with the database are dinamically stored in Cloudinary.com. They are given a reduced size to minimise loading times and the app only needs to render a 'thumbnain' of the full size image stored remotely.
+Additionally, in the routes the default 'http' protocol gets replaced by 'https' so images get served securely.
+
+Admins can upload perfume photos using Cloudinary. In case a photo is not provided during the creation of the perfume, a default generic picture is saved to the database.
 
 The method used is described below:
 
@@ -233,6 +236,53 @@ if form.validate_on_submit():
                 ),
             }
         )
+```
+
+The same method applies to user pictures.
+
+#### Custom Validator for types
+
+While it was an easy task to put a validator in place for the user (since it uses flask_login to identify it) it was a bit more complicated to check for existing perfume types when the admin wants to edit it.
+For that purpose a hidden field was included in the editReview form and in the route it is assigned the current type in the database.
+Thanks to this method, seamless to the user, the custom validator can check the data from the form against it and act the same way put in place in the custom validator for the username and email.
+
+#### filters & Search
+
+I userd the following method to index my collections and allow users to perform searches on the indexed fields:
+
+```python
+@perfumes.route("/search")
+def search():
+    types = mongo.db.types.find().sort("type_name")
+    mongo.db.perfumes.create_index(
+        [("name", "text"), ("brand", "text"), ("perfume_type", "text")]
+    ) # This creates the indexes for the three mentioned fields, allowing users to search the collection
+    db_query = request.args["db_query"]
+    # If no text is entered, returns all the perfumes.
+    if db_query == "":
+        return redirect(url_for("perfumes.all_perfumes"))
+    # I then use the aggregate method to render the search results including
+    # the necessary fields from other collections, such as the avatar,
+    # and sort that aggregate by name.
+    results = mongo.db.perfumes.aggregate(
+        [
+            {"$match": {"$text": {"$search": db_query}}},
+            {
+                "$lookup": {...}
+            },
+            {"$unwind": "$creator"},
+            {
+                "$project": {...}
+            },
+            {"$sort": {"perfumeName": 1}},
+        ]
+    )
+    return render_template(
+        "pages/perfumes.html",
+        perfumes=results,
+        types=types,
+        title="Perfumes",
+    )
 ```
 
 ### Future Goals
@@ -371,6 +421,33 @@ The app originally saved media files to the file system, but that caused some is
 With this in mind I decided saving photos in a cloud-based solution reachable both locally and remotely.
 The options I considered were Imgur and Cloudinary, and chose the latter due to its set of features and ease of use and setup.
 
+### About CKEditor
+
+CKEDitor version 4 was my choice in order to give admins and users the possibility to enter text in Rich Text Format.
+The required script renders all text area fields as WYSIWYG editors, giving users and admins the possibility to use rich text features when adding text, such as back, italics, lists and numbered lists.
+JQuery was used to retrieve the html elements in order to pre-populate the contents of the forms in the edit reviews form, since those elements live in a modal.
+CKEditor's scripts only load on the pages where they are required, avoiding unnecessary loading time on other pages.
+
+### About Flask-paginate
+
+After having in place a standard pagination system, I decided to migrate it to [flask-paginate](https://github.com/lixxu/flask-paginate) which gave me a lot more options for the purposes of my app.
+
+Flask-paginate takes in several paramaters in order to display as required. The documentation is quite limited but after digging into the code of the dependency I found what I needed to and managed to dysplay it and style it as I wanted it to.
+
+```python
+pagination = Pagination(
+    per_page=8, # Indicates how many records per page for the 'info' to display the proper count
+    page=page, # Indicates  how to displate the page number and which one is the default
+    total=total_perfumes, # Passes the total amount of perfumes
+    record_name="perfumes", # the item to be displayed in the info label of the pagination
+    bs_version=4, # Specifies which CSS framework, in this case Bootstrap 4
+    alignment="center", # Alignment of the navigation
+    display_msg="Displaying <b>{start} - {end}</b>{record_name} of <b>{total}</b>", # My custom message to display in the info
+)
+```
+
+Pagination now correctly displays both on perfumes and types pages, also when a search is performed.
+
 ## Testing
 
 ### Tests performed
@@ -388,9 +465,10 @@ The options I considered were Imgur and Cloudinary, and chose the latter due to 
 - Request to reset the password has been tested in all possible scenarios and the tests passed all of them.
 - Deleting a document, or an object in an array of objects, always deletes the proper one indentified by its ObjectId.
 - Users cannot delete or edit documents others than the ones created by them.
-- Admins cannot access the delete button for perfumes not created by them.
+- Admins cannot click the delete button for perfumes not created by them.
 - Error pages respond correctly to all possible errors. To test this, errors have been purposedly provoqued in order to invoque the above pages.
 - Visiting non-existing endpoints correctly returns the 404.html template, with access to all navigation.
+- Regardless of the size of the image uploaded, cloudinary deals with it and resizes it to the predetermined dimensions.
 
 ### Validators and linters
 
@@ -406,65 +484,6 @@ The following validators and linters were used either remotely or with their plu
 ## Issues found and status
 
 Some of the issues and challenges found during development are summarised below.
-
-### Custom Validator for types
-
-While it was an easy task to put a validator in place for the user (since it uses flask_login to identify it) it was a bit more complicated to check for existing perfume types when the admin wants to edit it.
-For that purpose a hidden field was included in the editReview form and in the route it is assigned the current type in the database.
-Thanks to this method, seamless to the user, the custom validator can check the data from the form against it and act the same way put in place in the custom validator for the username and email.
-
-### Images
-
-All images interacting with the database are dinamically stored in Cloudinary.com. They are given a reduced size to minimise loading times and the app only needs to render a 'thumbnain' of the full size image stored remotely.
-Additionally, in the routes the default 'http' protocol gets replaced by 'https' so images get served securely.
-
-### filters & Search
-
-#### Search
-
-I userd the following method to index my collections and allow users to perform searches on the indexed fields:
-
-```python
-@perfumes.route("/search")
-def search():
-    types = mongo.db.types.find().sort("type_name")
-    mongo.db.perfumes.create_index(
-        [("name", "text"), ("brand", "text"), ("perfume_type", "text")]
-    ) # This creates the indexes for the three mentioned fields, allowing users to search the collection
-    db_query = request.args["db_query"]
-    # If no text is entered, returns all the perfumes.
-    if db_query == "":
-        return redirect(url_for("perfumes.all_perfumes"))
-    # I then use the aggregate method to render the search results including
-    # the necessary fields from other collections, such as the avatar,
-    # and sort that aggregate by name.
-    results = mongo.db.perfumes.aggregate(
-        [
-            {"$match": {"$text": {"$search": db_query}}},
-            {
-                "$lookup": {...}
-            },
-            {"$unwind": "$creator"},
-            {
-                "$project": {...}
-            },
-            {"$sort": {"perfumeName": 1}},
-        ]
-    )
-    return render_template(
-        "pages/perfumes.html",
-        perfumes=results,
-        types=types,
-        title="Perfumes",
-    )
-```
-
-#### CKEditor
-
-CKEDitor version 4 was my choice in order to give admins and users the possibility to enter text in Rich Text Format.
-The required script renders all text area fields as WYSIWYG editors, giving users and admins the possibility to use rich text features when adding text, such as back, italics, lists and numbered lists.
-JQuery was used to retrieve the html elements in order to pre-populate the contents of the forms in the edit reviews form, since those elements live in a modal.
-CKEditor's scripts only load on the pages where they are required, avoiding unnecessary loading time on other pages.
 
 ## Deployment
 
