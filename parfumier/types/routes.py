@@ -81,7 +81,6 @@ def all_types():
         total=total_types,
         record_name="types",
         bs_version=4,
-        outer_window=2,
         alignment="center",
         display_msg="Displaying <b>{start} - {end}</b>\
         {record_name} of <b>{total}</b>",
