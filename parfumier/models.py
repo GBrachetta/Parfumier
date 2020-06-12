@@ -123,9 +123,10 @@ class Types:
     Initialises the Types class
     """
 
-    def __init__(self, type_name, description, author):
+    def __init__(self, type_name, description, type_picture, author):
         self.type_name = type_name
         self.description = description
+        self.type_picture = type_picture
         self.author = author
 
 

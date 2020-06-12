@@ -154,6 +154,23 @@ div.social-icons .background-twitter {
     border-radius: 5px;
 }
 
+#form-type .form-control-thumbnail {
+    display: inline;
+    /* width: 50px;
+    height: 50px; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    border-radius: 5px;
+}
+
+#form-type .form-control-file {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
 #form-profile .form-control-thumbnail {
     border-radius: 50%;
     display: inline-block;
@@ -350,6 +367,12 @@ div.social-icons .background-twitter {
     background-color: rgba(143, 82, 13, 0.1);
 }
 
+.type-background {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .navbar-brand {
     font-family: "Alex Brush", cursive;
     text-transform: capitalize;
@@ -382,7 +405,7 @@ a:hover {
     background-color: #c7e2f5;
     border: 0;
     color: black;
-    transition: all 0.4s;
+    transition: all .4s;
 }
 
 .pagination .page-item.active .page-link {
@@ -397,6 +420,11 @@ a:hover {
 
 .pagination .page-item.active .page-link:hover {
     background-color: #957ae3;
+}
+
+.picture-type {
+    height: 50px;
+    width: 50px;
 }
 
 @media only screen and (min-width: 768px) {
