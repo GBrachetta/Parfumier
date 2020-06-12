@@ -37,7 +37,6 @@ def all_perfumes():
         total=total_perfumes,
         record_name="perfumes",
         bs_version=4,
-        outer_window=2,
         alignment="center",
         display_msg="Displaying <b>{start} - {end}</b>\
              {record_name} of <b>{total}</b>",
@@ -372,7 +371,6 @@ def search():
         total=total_perfumes,
         record_name="perfumes",
         bs_version=4,
-        outer_window=2,
         alignment="center",
         display_msg="Displaying <b>{start} - {end}</b>\
              {record_name} of <b>{total}</b>",
@@ -459,7 +457,6 @@ def filters():
         total=total_perfumes,
         record_name="perfumes",
         bs_version=4,
-        outer_window=2,
         alignment="center",
         display_msg="Displaying <b>{start} - {end}</b>\
              {record_name} of <b>{total}</b>",
