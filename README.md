@@ -1,6 +1,6 @@
 # Parfumier <!-- omit in toc -->
 
-![Mockup](wireframes/images/mockup.png)
+![Mockup](wireframes/mockup.png)
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -28,7 +28,7 @@
     - [Admins](#admins)
     - [Images](#images)
     - [Custom Validator for types](#custom-validator-for-types)
-    - [filters & Search](#filters--search)
+    - [Filters & Search](#filters--search)
   - [Future Goals](#future-goals)
 - [Information Architecture](#information-architecture)
   - [Database Aggregation](#database-aggregation)
@@ -43,7 +43,6 @@
 - [Testing](#testing)
   - [Tests performed](#tests-performed)
   - [Validators and linters](#validators-and-linters)
-- [Issues found and status](#issues-found-and-status)
 - [Deployment](#deployment)
   - [Local Development](#local-development)
   - [Heroku](#heroku)
@@ -130,7 +129,7 @@ The main goals of the project are
 - As a user, I would like to have the possibility to create a new password in case I forgot my current one.
 - As a user, I would like to have the possibility to edit or delete my reviews on a perfume.
 - As a user, I would like to have the possibility to delete my account.
-- As a user, I
+- As a user, I would like to have a visual idea about what a perfume type represents.
 
 As an administrator, I would like to do all of the above, plus ______________"
 
@@ -156,7 +155,7 @@ All buttons use custom colours from the palette to avoid having them popping ove
 
 The colors chosen for the app are all soft shades of pastel colors allowing users to make a visual connection with the world of perfumes: flowers, herbs, spices and woods.
 
-![Color Palette](wireframes/images/palette.png)
+![Color Palette](wireframes/palette.png)
 
 ## Wireframes
 
@@ -246,7 +245,7 @@ While it was an easy task to put a validator in place for the user (since it use
 For that purpose a hidden field was included in the editReview form and in the route it is assigned the current type in the database.
 Thanks to this method, seamless to the user, the custom validator can check the data from the form against it and act the same way put in place in the custom validator for the username and email.
 
-#### filters & Search
+#### Filters & Search
 
 I userd the following method to index my collections and allow users to perform searches on the indexed fields:
 
@@ -314,6 +313,7 @@ Perfumes Collection
         "reviewer": "<string>",
         "date_reviewed": "<date>",
         "reviewer_picture": "<string>"
+    }
 }
 ```
 
@@ -339,6 +339,7 @@ Types collection
     "_id": "<ObjectId>",
     "type_name": "<string>",
     "description": "<text field>",
+    "type_picture": "<string>",
     "author": "<string>"
 }
 ```
@@ -481,19 +482,15 @@ The following validators and linters were used either remotely or with their plu
 - [PEP8](http://pep8online.com/)
 - [BLACK](https://pypi.org/project/black/)
 
-## Issues found and status
-
-Some of the issues and challenges found during development are summarised below.
-
 ## Deployment
 
 ### Local Development
 
-This project can be ran locally by followinf the following steps:
+This project can be ran locally by following the following steps:
 
 1. Visit this [Repository link](https://github.com/GBrachetta/Parfumier) and click on the Clone or Download button to copy the link provided.
 
-    ![clone](wireframes/images/clone.png)
+    ![clone](wireframes/clone.png)
 
 2. In your IDE, open a Terminal window and change to the directory where you want to clone this project and type:
 
@@ -506,12 +503,12 @@ This project can be ran locally by followinf the following steps:
 3. Create a free account on [MongoDb](https://www.mongodb.com/) and reproduce the 3 collections as described [here](#information-architecture).
 4. Create a free account on [Cloudinary](https://cloudinary.com/).
 5. Make sure you either have access to your email server settings and credentials or to your cloud based email, such as [Gmail](https://accounts.google.com/b/0/AddMailService).
-6. Install [Pipenv](https://pipenv.pypa.io/en/latest/).
+6. Install [Pipenv](https://pipenv.pypa.io/en/latest/). This app was developed on a Mac, and on MacOS you can install pipenv by typing `brew pipenv` (provided you have [Homebrew](https://brew.sh/) installed).
 7. Create a virtual enviroment by typing
 
    `pipenv shell`
 
-8. Install all dependenciel present in pipfile by executing
+8. Install all dependencies present in pipfile by executing
 
    `pipenv install`
 
