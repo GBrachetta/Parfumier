@@ -29,6 +29,7 @@
     - [Images](#images)
     - [Custom Validator for types](#custom-validator-for-types)
     - [Filters & Search](#filters--search)
+    - [Types Cards](#types-cards)
   - [Future Goals](#future-goals)
 - [Information Architecture](#information-architecture)
   - [Database Aggregation](#database-aggregation)
@@ -283,6 +284,12 @@ def search():
         title="Perfumes",
     )
 ```
+
+#### Types Cards
+
+Admins are prompted to upload an image when they create a type. When they do so, that image bacomes the background of the type card.
+
+If no image is selected, a default image is assigned to the databse so there won't be a card without a background.
 
 ### Future Goals
 
@@ -594,6 +601,7 @@ I would like to specially thank the help of:
 
 - [Roko Buljan](https://github.com/rokobuljan), for his help and input.
 - [Simen Daehlin](https://github.com/Eventyret), my mentor for this project.
+- [Fran DeBoo](https://github.com/fdeboo) for her great tip about type card background.
 
 ## Disclaimer
 
