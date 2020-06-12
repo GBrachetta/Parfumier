@@ -1,4 +1,4 @@
-<form class="shadow-sm" method=POST id="form-perfume" novalidate>
+<form class="shadow-sm" enctype="multipart/form-data" method=POST id="form-type" novalidate>
     {{ form.hidden_tag() }}
 
     <div class="form-group">
@@ -29,11 +29,23 @@
         {% endif %}
     </div>
 
-    <div class="form-row">
-        <div class="col-12 text-left">
-            {{ form.submit(class="btn button-blue-small text-center shadow-sm mt-0") }}
-            <a class="btn button-yellow-nom" href="{{ url_for("types.show_type", type_id=current_type._id) }}">Cancel</a>
-
+    <div class="form-row justify-content-center">
+        <div class="col-4 mt-0">
+            {{ form.type_picture.label(class="btn btn-sm shadow-sm button-green form-control-label mt-2") }}
+            {{ form.type_picture(class="form-control-file") }}
+            {% if form.type_picture.errors %}
+            {% for error in form.type_picture.errors %}
+            <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-8 text-right">
+            {{ form.submit(class="btn btn-sm button-blue-small text-center shadow-sm mt-2") }}
+            <a class="btn btn-sm button-yellow-nom mt-2" href="{{ url_for("types.show_type", type_id=current_type._id) }}">Cancel</a>
+        </div>
+        <div class="col-2 text-center mt-3">
+            <span class="form-control-thumbnail picture-type d-none"></span>
+            <span class="form-control-filename small ml-0 mb-0 mt-3" data-text="Picture" id="pictureFileName"></span>
         </div>
     </div>
 </form>
