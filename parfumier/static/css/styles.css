@@ -30,6 +30,7 @@ div.social-icons .background-twitter {
     background-color: #4c99e0;
 }
 
+/* buttons */
 .button-blue:hover {
     background-color: #a0caf5;
 }
@@ -89,38 +90,9 @@ div.social-icons .background-twitter {
     background-color: #f7d274;
 }
 
-.button-yellow-nom {
-    background-color: #f5db98;
-    color: #454e56;
-}
-
 .border-purple {
     border-color: #eadff7;
     color: #585e65;
-}
-
-/* Text */
-.portfolio-block .heading h2 {
-    color: #957ae3;
-    font-size: 3rem;
-    font-family: "Alex Brush", cursive;
-    text-transform: unset;
-}
-
-.portfolio-block .heading h4 {
-    color: #957ae3;
-    font-size: 40px;
-    font-family: "Alex Brush", cursive;
-}
-
-.small-links {
-    font-size: 12px;
-    color: #56aee7;
-}
-
-.muted-texts {
-    font-size: 12px;
-    color: #959595;
 }
 
 .account-img {
@@ -170,6 +142,78 @@ div.social-icons .background-twitter {
     background-repeat: no-repeat;
 }
 
+.button-go {
+    background-color: #c7e2f5;
+    color: #746d6d;
+}
+
+.button-go:hover {
+    background-color: #d4b3fa;
+}
+
+/* Images users - perfumes & yypes */
+.perfume-avatar {
+    width: 75px;
+    height: 75px;
+    margin-top: 20px;
+}
+
+.review-avatar {
+    width: 60px;
+    height: 60px;
+}
+
+#form-perfume .form-control-thumbnail {
+    width: 140px;
+    height: 164px;
+    margin-bottom: 0;
+    border: none;
+}
+
+.new-pic-select {
+    position: absolute;
+    color: #fff;
+    background-color: rgba(227, 122, 195, 0.6);
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+    margin-top: 65px;
+    margin-left: 2.5rem;
+}
+
+/* Text */
+.portfolio-block .heading h2 {
+    color: #957ae3;
+    font-size: 3rem;
+    font-family: "Alex Brush", cursive;
+    text-transform: unset;
+}
+
+.portfolio-block .heading h4 {
+    color: #957ae3;
+    font-size: 40px;
+    font-family: "Alex Brush", cursive;
+}
+
+.small-links {
+    font-size: 12px;
+    color: #56aee7;
+}
+
+.muted-texts {
+    font-size: 12px;
+    color: #959595;
+}
+
+#filter_query,
+#db_query {
+    color: #8399b0;
+}
+
+#db_query::placeholder {
+    color: #8399b0;
+}
+
 .edit-user-username {
     font-size: 30px;
     color: #6488ab;
@@ -192,27 +236,9 @@ div.social-icons .background-twitter {
     font-size: 1rem;
 }
 
-#filter_query,
-#db_query {
-    color: #8399b0;
-}
-
-#db_query::placeholder {
-    color: #8399b0;
-}
-
 .input-group-text {
     background-color: #c7e2f5;
     color: #989da2;
-}
-
-.button-go {
-    background-color: #c7e2f5;
-    color: #746d6d;
-}
-
-.button-go:hover {
-    background-color: #d4b3fa;
 }
 
 .content-review {
@@ -229,130 +255,104 @@ div.social-icons .background-twitter {
     font-size: 14px;
 }
 
-.links-footer a {
-    font-size: 14px;
-}
-
 .meta-heading {
     font-size: 10px;
     margin-top: 5px;
     margin-bottom: 0;
 }
 
-.perfume-avatar {
-    width: 75px;
-    height: 75px;
-    margin-top: 20px;
-}
-
-.review-avatar {
-    width: 60px;
-    height: 60px;
-}
-
 .text-muted {
     font-size: 12px;
 }
 
-#form-perfume .form-control-thumbnail {
-    width: 140px;
-    height: 164px;
-    margin-bottom: 0;
-    border: none;
-}
+/* Card types */
 
-.new-pic-select {
-    position: absolute;
-    color: #fff;
-    background-color: rgba(227, 122, 195, 0.6);
-    padding-left: 4px;
-    padding-right: 4px;
-    border-radius: 4px;
-    margin-top: 65px;
-    margin-left: 2.5rem;
-}
-
-.type-Aromatic {
+.type-aromatic {
     border-color: #971f9b;
     background-color: rgba(151, 31, 155, 0.1);
 }
 
-.type-Amber {
-    border-color: #7a4818;
+.type-amber {
+    border-color: #a75202;
     background-color: rgba(122, 72, 24, 0.1);
 }
 
-.type-Balsamic {
+.type-balsamic {
     border-color: #89a076;
     background-color: rgba(137, 160, 118, 0.1);
 }
 
-.type-Bright-Floral {
+.type-bright-floral {
     border-color: #d69fd8;
     background-color: rgba(214, 159, 216, 0.1);
 }
 
-.type-Chypre {
+.type-chypre {
     border-color: #3c9b1f;
     background-color: rgba(60, 155, 31, 0.1);
 }
 
-.type-Citrus {
+.type-citrus {
     border-color: #e5ff00;
     background-color: rgba(229, 255, 0, 0.1);
 }
 
-.type-Floral-Bouquet {
+.type-floral-bouquet {
     border-color: #612cc5;
     background-color: rgba(98, 44, 197, 0.1);
 }
 
-.type-Fougère {
-    border-color: #73ff00;
+.type-floral-oriental {
+    border-color: #c52c2c;
+    background-color: rgba(255, 151, 151, 0.1);
+}
+
+.type-fougère {
+    border-color: #3d8601;
     background-color: rgb(115, 255, 0, 0.1);
 }
 
-.type-Fruity {
-    border-color: #d83131;
-    background-color: rgba(216, 49, 49, 0.1);
+.type-fruity {
+    border-color: #ac0303;
+    background-color: rgba(121, 0, 0, 0.1);
 }
 
-.type-Gourmand {
+.type-gourmand {
     border-color: #ff8800;
     background-color: rgba(255, 136, 0, 0.1);
 }
 
-.type-Green {
+.type-green {
     border-color: #a4f017;
     background-color: rgba(164, 240, 23, 0.1);
 }
 
-.type-Leather {
+.type-leather {
     border-color: #472c08;
     background-color: rgba(71, 44, 8, 0.1);
 }
 
-.type-Oceanic {
+.type-oceanic {
     border-color: #196ebe;
     background-color: rgba(25, 110, 190, 0.1);
 }
 
-.type-Oriental {
+.type-oriental {
     border-color: #e6c96a;
     background-color: rgba(230, 201, 106, 0.1);
 }
 
-.type-Single-Flower {
+.type-single-flower {
     border-color: #a159ca;
     background-color: rgba(161, 89, 202, 0.1);
 }
 
-.type-Spicy {
+.type-spicy {
     border-color: #8e9102;
     background-color: rgba(142, 145, 2, 0.1);
 }
 
-.type-Woody {
+.type-woody {
     border-color: #8f520d;
     background-color: rgba(143, 82, 13, 0.1);
 }
@@ -373,9 +373,16 @@ div.social-icons .background-twitter {
     line-height: 2.5rem;
 }
 
+/* Links footer */
 a:hover {
     text-decoration: overline;
 }
+
+.links-footer a {
+    font-size: 14px;
+}
+
+/* Pagination */
 
 .pagination-page-info {
     margin-bottom: 1rem;
@@ -417,6 +424,7 @@ a:hover {
     width: 50px;
 }
 
+/* Media queries */
 @media only screen and (min-width: 768px) {
     .project-card-no-image h3 {
         font-size: 1.3rem;
