@@ -1,6 +1,8 @@
 """Imports all Flask components, database object and forms"""
 from flask import Blueprint, redirect, url_for, render_template, flash, request
 from flask_login import current_user, login_required
+from cloudinary.uploader import upload
+from cloudinary.utils import cloudinary_url
 from bson.objectid import ObjectId
 from parfumier import mongo
 from parfumier.types.forms import CreateTypeForm, EditTypeForm
@@ -23,13 +25,38 @@ def new_type():
     if current_user.is_admin:
         form = CreateTypeForm()
         if form.validate_on_submit():
-            mongo.db.types.insert(
-                {
-                    "type_name": form.type_name.data,
-                    "description": form.description.data,
-                    "author": current_user.username,
-                }
-            )
+            if form.type_picture.data:
+                picture_uploaded = upload(form.type_picture.data)
+                type_picture, options = cloudinary_url(
+                    picture_uploaded["public_id"],
+                    format="jpg",
+                    crop="fill",
+                    width=250,
+                    height=250,
+                    opacity=20,
+                )
+                picture_link = type_picture.replace("http", "https")
+                mongo.db.types.insert(
+                    {
+                        "type_name": form.type_name.data,
+                        "description": form.description.data,
+                        "type_picture": picture_link,
+                        "author": current_user.username,
+                    }
+                )
+            else:
+                mongo.db.types.insert(
+                    {
+                        "type_name": form.type_name.data,
+                        "description": form.description.data,
+                        "type_picture": (
+                            "https://res.cloudinary.com/gbrachetta/"
+                            "image/upload/c_scale,o_20,w_293/"
+                            "v1578262574/sample.jpg"
+                        ),
+                        "author": current_user.username,
+                    }
+                )
             flash("You added a new type!", "info")
             return redirect(url_for("types.all_types"))
     else:
@@ -67,9 +94,11 @@ def all_types():
             {"$unwind": "$type_name"},
             {
                 "$project": {
-                    "_id": "$_id", "typeName": "$type_name",
+                    "_id": "$_id",
+                    "typeName": "$type_name",
+                    "picture": "$type_picture",
                 }
-             },
+            },
             {"$sort": {"typeName": 1}},
             {"$skip": (page - 1) * page_count},
             {"$limit": page_count},
@@ -143,12 +172,38 @@ def edit_type(type_id):
     current_type_value = mongo.db.types.find_one({"_id": ObjectId(type_id)})
     if current_user.is_admin:
         if form.validate_on_submit():
-            new_value = {
-                "$set": {
-                    "type_name": form.type_name.data,
-                    "description": form.description.data,
+            if form.type_picture.data:
+                picture_uploaded = upload(form.type_picture.data)
+                type_picture, options = cloudinary_url(
+                    picture_uploaded["public_id"],
+                    format="jpg",
+                    crop="fill",
+                    width=250,
+                    height=250,
+                    opacity=20,
+                )
+                picture_link = type_picture.replace("http", "https")
+                new_value = {
+                    "$set": {
+                        "type_name": form.type_name.data,
+                        "description": form.description.data,
+                        "type_picture": picture_link,
+                    }
                 }
-            }
+                mongo.db.types.update_one(current_type_value, new_value)
+                flash("Type has been updated", "info")
+                return redirect(
+                    url_for(
+                        "types.show_type", type_id=current_type_value["_id"]
+                    )
+                )
+            else:
+                new_value = {
+                    "$set": {
+                        "type_name": form.type_name.data,
+                        "description": form.description.data,
+                    }
+                }
             mongo.db.types.update_one(current_type_value, new_value)
             flash("Type has been updated", "info")
             return redirect(
