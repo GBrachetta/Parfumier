@@ -43,9 +43,9 @@
             {{ form.submit(class="btn btn-sm button-blue-small text-center shadow-sm mt-2") }}
             <a class="btn btn-sm button-yellow-nom mt-2" href="{{ url_for("types.show_type", type_id=current_type._id) }}">Cancel</a>
         </div>
-        <div class="col-2 text-center mt-3">
+        <div class="col text-center mt-3">
             <span class="form-control-thumbnail picture-type d-none"></span>
-            <span class="form-control-filename small ml-0 mb-0 mt-3" data-text="Picture" id="pictureFileName"></span>
+            <span class="form-control-filename small ml-0 mb-0 mt-3" data-text="Picture chosen, please update." id="pictureFileName"></span>
         </div>
     </div>
 </form>
