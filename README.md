@@ -390,26 +390,26 @@ Since Heroku has an ephemeral file system I decided to incorporate Cloudinary fo
 
 ### Front-end Technologies
 
-- [![html](https://img.shields.io/static/v1?label=HTML&message=5&color=E34F26&style=for-the-badge&logo=html5)](https://www.w3schools.com/html/)  HTML: Used for markup.
-- [![css](https://img.shields.io/static/v1?label=CSS&message=3&color=1572B6&style=for-the-badge&logo=css3)](https://developer.mozilla.org/en-US/docs/Web/CSS) CSS: Used to style the elements of the app.
-- [![bootstrap](https://img.shields.io/static/v1?label=Bootstrap&message=4.5&style=for-the-badge&color=563D7C&logo=bootstrap)](https://getbootstrap.com/) Bootstrap: to make use of its grid system and responsiveness.
-- [![javascript](https://img.shields.io/static/v1?label=JavaScript&message=ES6&style=for-the-badge&color=F7DF1E&logo=JavaScript)](https://www.w3schools.com/Js/) JavaScript: Used for the functionality of the app.
-- [![jquery](https://img.shields.io/static/v1?label=jQuery&message=3.5.1&style=for-the-badge&color=0769AD&logo=jquery)](https://jquery.com/) jQuery, to access and manipulate the DOM.
-- [![fontawesome](https://img.shields.io/static/v1?label=Fontawesome&message=5&style=for-the-badge&color=339AF0&logo=font-awesome)](https://fontawesome.com/) Font Awesome, for all icons.
+- ![html](https://img.shields.io/static/v1?label=HTML&message=5&color=E34F26&style=for-the-badge&logo=html5)  HTML: Used for markup.
+- ![css](https://img.shields.io/static/v1?label=CSS&message=3&color=1572B6&style=for-the-badge&logo=css3) CSS: Used to style the elements of the app.
+- ![bootstrap](https://img.shields.io/static/v1?label=Bootstrap&message=4.5&style=for-the-badge&color=563D7C&logo=bootstrap) Bootstrap: to make use of its grid system and responsiveness.
+- ![javascript](https://img.shields.io/static/v1?label=JavaScript&message=ES6&style=for-the-badge&color=F7DF1E&logo=JavaScript) JavaScript: Used for the functionality of the app.
+- ![jquery](https://img.shields.io/static/v1?label=jQuery&message=3.5.1&style=for-the-badge&color=0769AD&logo=jquery) jQuery, to access and manipulate the DOM.
+- ![fontawesome](https://img.shields.io/static/v1?label=Fontawesome&message=5&style=for-the-badge&color=339AF0&logo=font-awesome) Font Awesome, for all icons.
 
 ### Back-end Technologies
 
-- [![python](https://img.shields.io/static/v1?label=Python&style=for-the-badge&message=3.7&color=3776AB&logo=PYTHON)](https://www.python.org/) Python, for all backend logic.
-- [![mongodb](https://img.shields.io/static/v1?label=MongoDB&style=for-the-badge&message=1.21.2&color=47A248&logo=mongodb)](https://www.mongodb.com/) MongoDB, my database for the app.
+- ![python](https://img.shields.io/static/v1?label=Python&style=for-the-badge&message=3.7&color=3776AB&logo=PYTHON) Python, for all backend logic.
+- ![mongodb](https://img.shields.io/static/v1?label=MongoDB&style=for-the-badge&message=1.21.2&color=47A248&logo=mongodb) MongoDB, my database for the app.
 
 ### Other technologies
 
-- [![vscode](https://img.shields.io/static/v1?label=VSCode&message=1.45.1&style=for-the-badge&color=007ACC&logo=visual-studio)](https://code.visualstudio.com/) Visual Studio Code: my IDE of choice for all my projects.
-- [![github](https://img.shields.io/static/v1?label=GitHub&message=GBrachetta&color=181717&style=for-the-badge&logo=github)](https://github.com/GBrachetta)  GitHub: My remote storage for this project.
-- [![heroku](https://img.shields.io/static/v1?label=Heroku&message=brachetta@me.com&color=430098&style=for-the-badge&logo=heroku)](https://www.heroku.com/) Heroku, the patform to deploy the app.
-- [![balsamiq](https://img.shields.io/static/v1?label=Balsamiq&message=3.5.17&style=for-the-badge&color=7c0000&logo=balsamiq&?link=http://left&link=http://right)](https://balsamiq.com/) Balsamiq: to create the wireframes of this project.
-- [![cloudinary](https://img.shields.io/static/v1?label=Cloudinary&message=1.21&style=for-the-badge&color=f96726&logo=icloud)](https://cloudinary.com/) Cloudinary: to upload and host images.
-- [![ckeditor](https://img.shields.io/static/v1?label=CKEditor&message=4&color=30a3f1&style=for-the-badge&logo=ckeditor)](https://ckeditor.com/ckeditor-4/) CKEditor: to display a WYSIWYG editor in the text area fields.
+- ![vscode](https://img.shields.io/static/v1?label=VSCode&message=1.45.1&style=for-the-badge&color=007ACC&logo=visual-studio) Visual Studio Code: my IDE of choice for all my projects.
+- ![github](https://img.shields.io/static/v1?label=GitHub&message=GBrachetta&color=181717&style=for-the-badge&logo=github)  GitHub: My remote storage for this project.
+- ![heroku](https://img.shields.io/static/v1?label=Heroku&message=brachetta@me.com&color=430098&style=for-the-badge&logo=heroku) Heroku, the patform to deploy the app.
+- ![balsamiq](https://img.shields.io/static/v1?label=Balsamiq&message=3.5.17&style=for-the-badge&color=7c0000&logo=balsamiq&?link=http://left&link=http://right) Balsamiq: to create the wireframes of this project.
+- ![cloudinary](https://img.shields.io/static/v1?label=Cloudinary&message=1.21&style=for-the-badge&color=f96726&logo=icloud) Cloudinary: to upload and host images.
+- ![ckeditor](https://img.shields.io/static/v1?label=CKEditor&message=4&color=30a3f1&style=for-the-badge&logo=ckeditor) CKEditor: to display a WYSIWYG editor in the text area fields.
 
 ### About Cloudinary
 
