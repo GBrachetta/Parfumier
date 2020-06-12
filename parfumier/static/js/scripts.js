@@ -1,36 +1,43 @@
-// Prieviews avatar and perfume image before upload
-// With invaluable input from Roko Buljan
-function imagePreviewer(ev) {
-    const EL_input = this;
-    const EL_form = EL_input.closest("form");
-    const EL_filename = EL_form.querySelector(".form-control-filename");
-    const EL_thumbnail = EL_form.querySelector(".form-control-thumbnail");
+/**
+ * Prieviews avatar and perfume image before upload
+ * With invaluable input from Roko Buljan
+ * @param {HTMLElement} ev
+ */
+const imagePreviewer = function (ev) {
+    const inputElement = this;
+    const formElement = inputElement.closest("form");
+    const filenameElement = formElement.querySelector(".form-control-filename");
+    const thumbnailElement = formElement.querySelector(".form-control-thumbnail");
     const files = ev.target.files;
 
     if (files && files[0]) {
         const file = files[0];
-        EL_filename.textContent = EL_filename.dataset.text;
+        filenameElement.textContent = filenameElement.dataset.text;
         const FR = new FileReader();
         FR.addEventListener("load", function (ev) {
-            EL_thumbnail.style.backgroundImage = `url("${ev.target.result}")`;
+            thumbnailElement.style.backgroundImage = `url("${ev.target.result}")`;
         });
         FR.readAsDataURL(file);
     }
-}
+};
 
-const ELS_file = document.querySelectorAll(".form-control-file");
-ELS_file.forEach((el) => {
+const formControlFileRef = document.querySelectorAll(".form-control-file");
+formControlFileRef.forEach((el) => {
     el.addEventListener("change", imagePreviewer);
 });
 
-// Fades flash messages after a timeout
+/**
+ * Fades flash messages after a set timeout
+ */
 $(document).ready(() => {
     setTimeout(function () {
         $("#flash").fadeOut("slow");
     }, 3000);
 });
 
-// Opens the delete review modal passing data to delete review
+/**
+ * Opens the delete review modal passing data to delete review
+ */
 $(".delete-review").on("click", (evt) => {
     evt.preventDefault();
     const btnData = $(evt.currentTarget).data();
@@ -39,7 +46,9 @@ $(".delete-review").on("click", (evt) => {
     formDeleteReview.find('[name="perfume_id"]').val(btnData.perfume_id);
 });
 
-// Opens the edit review modal passing data to edit review
+/**
+ * Opens the edit review modal passing data to edit review
+ */
 $(".edit-review").on("click", (evt) => {
     evt.preventDefault();
     const btnData = $(evt.currentTarget).data();
@@ -48,18 +57,22 @@ $(".edit-review").on("click", (evt) => {
     formEditReview.find('[name="perfume_id"]').val(btnData.perfume_id);
 });
 
-// Triggers the filter query - Deals with a different route
-// for the option outside the loop (create new type)
-function checkSelected() {
+/**
+ * Triggers the filter query - Deals with a different route
+ * for the option outside the loop (create new type)
+ */
+const checkSelected = function () {
     if (this.value === "/type/new") return (window.location = this.value);
     if (this.value) this.closest("form").submit();
-}
+};
 const EL_select = document.querySelector("#filter_query");
 if (EL_select) EL_select.addEventListener("change", checkSelected);
 
-// Pre-populates the content of the review to edit it, in the modal.
-// Worked out together with the help from a gentleman on this question on SO:
-//https://stackoverflow.com/questions/61989485/pre-populate-current-value-of-wtforms-field-in-order-to-edit-it/62013979?noredirect=1#comment109698792_62013979
+/**
+ * Pre-populates the content of the review to edit it, in the modal.
+ * Worked out together with the help from a gentleman on this question on SO:
+ * https://www.shorturl.at/ahRX3
+ */
 $(document).on("click", "#editFormButton", function () {
     const reviewText = $(this)
         .parents("div")
@@ -70,8 +83,10 @@ $(document).on("click", "#editFormButton", function () {
     CKEDITOR.instances.edit_review.setData(reviewText);
 });
 
-// Shows modal with validation error in the event of submitting form in the modal
-// with no data on a DataRequired field.
-// This hack is a temporary workaround. Future version should have
-// JS dealing with forms on the frontend.
+/**
+ * Shows modal with validation error in the event of submitting form in the modal
+ * with no data on a DataRequired field.
+ * This hack is a temporary workaround. Future version should have
+ * JS dealing with forms on the frontend.
+ */
 $(".is-invalid").closest(".modal").modal("show");
