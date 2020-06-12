@@ -375,13 +375,14 @@ a:hover {
 
 .pagination .page-item {
     font-size: 0.8rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 .pagination .page-item .page-link {
     background-color: #c7e2f5;
     border: 0;
     color: black;
-    transition: all .4s;
+    transition: all 0.4s;
 }
 
 .pagination .page-item.active .page-link {
