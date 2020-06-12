@@ -24,6 +24,7 @@ python-dotenv = "*"
 pillow = "*"
 cloudinary = "*"
 flask-compress = "*"
+flask-paginate = "*"
 
 [requires]
 python_version = "3.7"

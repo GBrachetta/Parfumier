@@ -13,7 +13,7 @@ body {
     font-weight: 500;
 }
 
-.navbar-brand{
+.navbar-brand {
     margin-right: 3rem;
 }
 
@@ -121,7 +121,6 @@ div.social-icons .background-twitter {
     font-family: "Alex Brush", cursive;
 }
 
-
 .small-links {
     font-size: 12px;
     color: #56aee7;
@@ -205,7 +204,7 @@ div.social-icons .background-twitter {
     color: #746d6d;
 }
 
-.button-go:hover{
+.button-go:hover {
     background-color: #d4b3fa;
 }
 
@@ -281,7 +280,7 @@ div.social-icons .background-twitter {
     background-color: rgba(137, 160, 118, 0.1);
 }
 
-.type-Bright {
+.type-Bright-Floral {
     border-color: #d69fd8;
     background-color: rgba(214, 159, 216, 0.1);
 }
@@ -296,7 +295,7 @@ div.social-icons .background-twitter {
     background-color: rgba(229, 255, 0, 0.1);
 }
 
-.type-Floral {
+.type-Floral-Bouquet {
     border-color: #612cc5;
     background-color: rgba(98, 44, 197, 0.1);
 }
@@ -336,7 +335,7 @@ div.social-icons .background-twitter {
     background-color: rgba(230, 201, 106, 0.1);
 }
 
-.type-Single {
+.type-Single-Flower {
     border-color: #a159ca;
     background-color: rgba(161, 89, 202, 0.1);
 }
@@ -361,8 +360,42 @@ div.social-icons .background-twitter {
     line-height: 2.5rem;
 }
 
-a:hover{
+a:hover {
     text-decoration: overline;
+}
+
+.pagination-page-info {
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+}
+.pagination-page-info b {
+    color: black;
+    font-size: 110%;
+}
+
+.pagination .page-item {
+    font-size: 0.8rem;
+}
+
+.pagination .page-item .page-link {
+    background-color: #c7e2f5;
+    border: 0;
+    color: black;
+    transition: all .4s;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #957ae3;
+    border: 0;
+    color: white;
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: #6aa6ed;
+}
+
+.pagination .page-item.active .page-link:hover {
+    background-color: #957ae3;
 }
 
 @media only screen and (min-width: 768px) {

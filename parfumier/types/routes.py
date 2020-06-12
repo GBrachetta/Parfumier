@@ -1,9 +1,10 @@
 """Imports all Flask components, database object and forms"""
-from flask import Blueprint, redirect, url_for, render_template, flash
+from flask import Blueprint, redirect, url_for, render_template, flash, request
 from flask_login import current_user, login_required
 from bson.objectid import ObjectId
 from parfumier import mongo
 from parfumier.types.forms import CreateTypeForm, EditTypeForm
+from flask_paginate import Pagination, get_page_parameter
 
 
 types = Blueprint("types", __name__)
@@ -48,10 +49,49 @@ def all_types():
     """Displays all types
 
     This route simply displays all existing types.
+    It uses aggregation in order to allow for pagination.
     """
-
-    the_types = mongo.db.types.find().sort("type_name")
-    return render_template("pages/types.html", types=the_types, title="Types")
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    total_types = mongo.db.types.find().count()
+    page_count = 8
+    the_types = mongo.db.types.aggregate(
+        [
+            {
+                "$lookup": {
+                    "from": "types",
+                    "localField": "type_name",
+                    "foreignField": "perfume_type",
+                    "as": "type",
+                }
+            },
+            {"$unwind": "$type_name"},
+            {
+                "$project": {
+                    "_id": "$_id", "typeName": "$type_name",
+                }
+             },
+            {"$sort": {"typeName": 1}},
+            {"$skip": (page - 1) * page_count},
+            {"$limit": page_count},
+        ]
+    )
+    pagination = Pagination(
+        per_page=8,
+        page=page,
+        total=total_types,
+        record_name="types",
+        bs_version=4,
+        outer_window=2,
+        alignment="center",
+        display_msg="Displaying <b>{start} - {end}</b>\
+        {record_name} of <b>{total}</b>",
+    )
+    return render_template(
+        "pages/types.html",
+        types=the_types,
+        title="Types",
+        pagination=pagination,
+    )
 
 
 @types.route("/type/<type_id>")
