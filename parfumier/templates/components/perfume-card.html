@@ -1,7 +1,7 @@
 <div class="row no-gutters justify-content-center">
     {% for perfume in perfumes %}
     {% if perfume %}
-    <div class="col-4 col-lg-3 item zoom-on-hover">
+    <div class="col-6 col-md-3 item zoom-on-hover">
         <a href="{{ url_for("perfumes.perfume", perfume_id=perfume._id) }}">
             <img class="img-fluid image perfume-picture" src="{{ perfume["perfumePicture"] }}"
              height="300" width="300" loading="lazy" alt="perfume img">

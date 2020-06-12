@@ -9,6 +9,11 @@
             </div>
             <div class="row">
                 {% include "components/type-cursor.html" %}
+                <!-- Pagination -->
+                <div class="col-12 text-center px-0 mt-5">
+                    {{ pagination.info }}
+                    {{ pagination.links }}
+                </div>
                 {% if current_user.is_authenticated and current_user.is_admin == True %}
                     <div class="col-12 text-center mt-4">
                         <a href="{{ url_for("types.new_type") }}" class="btn button-purple shadow-sm" type="button">Create new type</a>
