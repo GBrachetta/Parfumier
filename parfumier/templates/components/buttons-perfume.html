@@ -1,4 +1,4 @@
-{% if current_user.is_authenticated and current_user.is_admin == True %}
+{% if current_user.is_admin %}
     <div class="col-2 text-center text-sm-left my-3">
         <a class="shadow-sm btn btn-sm my-buttons green" href="{{ url_for("perfumes.all_perfumes") }}">Back</a>
     </div>
