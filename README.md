@@ -624,6 +624,7 @@ I would like to specially thank the help of:
 - [Roko Buljan](https://github.com/rokobuljan), for his help and input.
 - [Simen Daehlin](https://github.com/Eventyret), my mentor for this project.
 - [Fran DeBoo](https://github.com/fdeboo) for her great tip about type card background.
+- [Johan de Leeuw](https://github.com/jdl208) for his tips which saved my day more than once.
 
 ## Disclaimer
 

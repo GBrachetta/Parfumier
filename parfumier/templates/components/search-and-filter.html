@@ -9,7 +9,9 @@
                         {% for type in types %}
                         <option value="{{ type["type_name"] }}">{{ type["type_name"] }}</option>
                         {% endfor %}
+                        {% if current_user.is_admin %}
                         <option value="{{ url_for("types.new_type") }}">Create new type...</option>
+                        {% endif %}
                     </select>
 
                 </div>
