@@ -1,6 +1,6 @@
 {% if current_user.is_authenticated and current_user.is_admin == True %}
     <div class="col-2 text-center text-sm-left mb-2">
-        <a class="shadow-sm btn btn-sm button-green" href="{{ url_for("perfumes.all_perfumes") }}">Back</a>
+        <a class="shadow-sm btn btn-sm my-buttons green" href="{{ url_for("perfumes.all_perfumes") }}">Back</a>
     </div>
     <div class="col-10 text-center text-sm-right mb-2">
         <button class="btn btn-sm shadow-sm button-purple" type="button"
@@ -14,7 +14,7 @@
     </div>
 {% else %}
     <div class="col text-left mb-2">
-        <a class="shadow-sm btn btn-sm button-green" href="{{ url_for("perfumes.all_perfumes") }}">Back</a>
+        <a class="shadow-sm btn btn-sm my-buttons green" href="{{ url_for("perfumes.all_perfumes") }}">Back</a>
     </div>
     <div class="col text-right mb-2">
         <button class="btn btn-sm shadow-sm button-purple" type="button"

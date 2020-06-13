@@ -45,24 +45,11 @@ div.social-icons .background-twitter {
     background-color: #a0caf5;
 }
 
-
-
-.button-blue {
-    margin-left: 0;
-    margin-top: 40px;
-    background-color: #d2e3f4;
-    color: #585e65;
-}
-
-.button-green {
-    margin-left: 0;
-    margin-top: 40px;
-    margin-bottom: 0;
-    color: #585e65;
+.green {
     background-color: #cdf1c4;
 }
 
-.button-green:hover {
+.green:hover {
     background-color: #aef19d;
 }
 

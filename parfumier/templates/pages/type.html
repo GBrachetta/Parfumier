@@ -13,7 +13,7 @@
                     <p class="card-text">{{ type.description | safe}}</p>
                     <div class="row">
                         <div class="col-4 text-left">
-                            <a class="shadow-sm btn btn-sm button-green" href="{{ url_for("types.all_types") }}">Back</a>
+                            <a class="shadow-sm btn btn-sm my-buttons green" href="{{ url_for("types.all_types") }}">Back</a>
                         </div>
                         <div class="col-8 text-right">
                             {% if current_user.is_authenticated and current_user.is_admin == True and current_user.username == type.author %}
