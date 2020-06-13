@@ -33,8 +33,9 @@ div.social-icons .background-twitter {
 /* buttons */
 .my-buttons {
     margin-left: 0;
-    margin-top: 40px;
+    /* margin-top: 40px; */
     color: #585e65;
+    font-weight: 400;
 }
 
 .blue {

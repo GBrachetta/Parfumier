@@ -88,8 +88,8 @@
         {% endif %}
     </div>
 
-    <div class="form-row">
-        <div class="col-12 col-sm-4 text-center text-sm-left">
+    <div class="form-row mt-4">
+        <div class="col-4 text-center text-sm-left">
             {{ form.picture.label(class="btn shadow-sm btn-sm my-buttons green form-control-label") }}
             {{ form.picture(class="form-control-file") }}
             {% if form.picture.errors %}
@@ -99,11 +99,11 @@
             {% endif %}
         </div>
 
-        <div class="col-12 col-sm-4 text-center">
+        <div class="col-4 text-center">
             <a class="btn btn-sm my-buttons yellow" href="{{ url_for("perfumes.perfume", perfume_id=current_perfume._id) }}">Cancel</a>
         </div>
 
-        <div class="col-12 col-sm-4 text-center text-sm-right">
+        <div class="col-4 text-center text-sm-right">
             {{ form.submit(class="btn btn-sm my-buttons blue shadow-sm text-center") }}
         </div>
     </div>
