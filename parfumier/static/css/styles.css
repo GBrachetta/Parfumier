@@ -31,19 +31,27 @@ div.social-icons .background-twitter {
 }
 
 /* buttons */
-.button-blue:hover {
+.my-buttons {
+    margin-left: 0;
+    margin-top: 40px;
+    color: #585e65;
+}
+
+.blue {
+    background-color: #d2e3f4;
+}
+
+.blue:hover {
     background-color: #a0caf5;
 }
+
+
 
 .button-blue {
     margin-left: 0;
     margin-top: 40px;
     background-color: #d2e3f4;
     color: #585e65;
-}
-
-.button-blue:hover {
-    background-color: #a0caf5;
 }
 
 .button-green {
@@ -402,7 +410,7 @@ a:hover {
     background-color: #c7e2f5;
     border: 0;
     color: black;
-    transition: all .4s;
+    transition: all 0.4s;
 }
 
 .pagination .page-item.active .page-link {

@@ -5,7 +5,7 @@
     <div class="col-10 text-center text-sm-right mb-2">
         <button class="btn btn-sm shadow-sm button-purple" type="button"
         data-toggle="modal" data-target="#reviewPerfumeModal">Review</button>
-        <a class="shadow-sm btn btn-sm button-blue"
+        <a class="shadow-sm btn btn-sm my-buttons blue"
         href="{{ url_for("perfumes.edit_perfume", perfume_id=perfume._id) }}"
         role="button">Edit</a>
         <button {% if current_user.username != perfume.author %}disabled{% endif %}
