@@ -63,7 +63,11 @@ def login():
                 if next_page
                 else redirect(url_for("perfumes.all_perfumes"))
             )
-        flash("Please check your credentials", "warning")
+        flash(
+            "Please check your credentials. Either your password is incorrect\
+                 or your email is not registered.",
+            "danger",
+        )
     return render_template(
         "pages/users.html",
         title="Login",
