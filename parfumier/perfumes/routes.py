@@ -379,7 +379,7 @@ def search():
         "pages/perfumes.html",
         perfumes=results,
         types=types,
-        title="Perfumes",
+        title=f"Search: {db_query}",
         query=db_query,
         pagination=pagination,
     )
@@ -465,7 +465,91 @@ def filters():
         "pages/perfumes.html",
         perfumes=results,
         types=types,
-        title="Perfumes",
+        title=f"Type {filter_query}",
         query=filter_query,
+        pagination=pagination,
+    )
+
+
+@perfumes.route("/perfumes/<perfume_type>")
+def perfumes_types(perfume_type):
+    """Displays perfumes by type
+
+    The method takes the parameter passed from the type.html template
+    and performs a search over the aggregation similar to the ones
+    dealing with search and filter, but instead of using request it
+    just uses the variable. The rest of the route is otherwise very similar
+    to search or filter and renders perfumes.html with a cursor for the
+    perfumes matching the query and the count of found records for the
+    pagination configuration.
+
+    """
+
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    page_count = 8
+    types = mongo.db.types.find().sort("type_name")
+    results = mongo.db.perfumes.aggregate(
+        [
+            {"$match": {"$text": {"$search": perfume_type}}},
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "author",
+                    "foreignField": "username",
+                    "as": "creator",
+                }
+            },
+            {"$unwind": "$creator"},
+            {
+                "$project": {
+                    "_id": "$_id",
+                    "perfumeName": "$name",
+                    "perfumeBrand": "$brand",
+                    "perfumeDescription": "$description",
+                    "date_updated": "$date_updated",
+                    "perfumePicture": "$picture",
+                    "isPublic": "$public",
+                    "perfumeType": "$perfume_type",
+                    "username": "$creator.username",
+                    "firstName": "$creator.first_name",
+                    "lastName": "$creator.last_name",
+                    "profilePicture": "$creator.avatar",
+                }
+            },
+            {"$sort": {"perfumeName": 1}},
+            {"$skip": (page - 1) * page_count},
+            {"$limit": page_count},
+        ]
+    )
+    count = mongo.db.perfumes.aggregate(
+        [
+            {"$match": {"$text": {"$search": perfume_type}}},
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "author",
+                    "foreignField": "username",
+                    "as": "creator",
+                }
+            },
+        ]
+    )
+    total_perfumes = len(list(count))
+    pagination = Pagination(
+        per_page=8,
+        page=page,
+        total=total_perfumes,
+        record_name="perfumes",
+        bs_version=4,
+        alignment="center",
+        display_msg="Displaying <b>{start} - {end}</b>\
+             {record_name} of <b>{total}</b>",
+    )
+    return render_template(
+        "pages/perfumes.html",
+        perfumes=results,
+        types=types,
+        title=f"Type {perfume_type}",
+        query=perfume_type,
         pagination=pagination,
     )
