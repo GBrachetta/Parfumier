@@ -3,7 +3,7 @@
         <a class="shadow-sm btn btn-sm my-buttons green" href="{{ url_for("perfumes.all_perfumes") }}">Back</a>
     </div>
     <div class="col-10 text-center text-sm-right mb-2">
-        <button class="btn btn-sm shadow-sm button-purple" type="button"
+        <button class="btn btn-sm shadow-sm my-buttons purple" type="button"
         data-toggle="modal" data-target="#reviewPerfumeModal">Review</button>
         <a class="shadow-sm btn btn-sm my-buttons blue"
         href="{{ url_for("perfumes.edit_perfume", perfume_id=perfume._id) }}"
@@ -17,7 +17,7 @@
         <a class="shadow-sm btn btn-sm my-buttons green" href="{{ url_for("perfumes.all_perfumes") }}">Back</a>
     </div>
     <div class="col text-right mb-2">
-        <button class="btn btn-sm shadow-sm button-purple" type="button"
+        <button class="btn btn-sm shadow-sm my-buttons purple" type="button"
          data-toggle="modal" data-target="#reviewPerfumeModal">Review</button>
     </div>
 {% endif %}

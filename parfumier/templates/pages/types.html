@@ -16,7 +16,7 @@
                 </div>
                 {% if current_user.is_authenticated and current_user.is_admin == True %}
                     <div class="col-12 text-center mt-4">
-                        <a href="{{ url_for("types.new_type") }}" class="btn button-purple shadow-sm" type="button">Create new type</a>
+                        <a href="{{ url_for("types.new_type") }}" class="btn my-buttons purple shadow-sm" type="button">Create new type</a>
                     </div>
                 {% endif %}
             </div>

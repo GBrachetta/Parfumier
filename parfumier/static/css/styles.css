@@ -61,24 +61,19 @@ div.social-icons .background-twitter {
     background-color: #fabf9d;
 }
 
-
-.button-purple {
+.purple {
     background-color: #eadff7;
-    margin-top: 40px;
-    color: #454e56;
 }
 
-.button-purple:hover {
+.purple:hover {
     background-color: #d4b3fa;
 }
 
-.button-yellow {
+.yellow {
     background-color: #f5db98;
-    color: #454e56;
-    margin-top: 40px;
 }
 
-.button-yellow:hover {
+.yellow:hover {
     background-color: #f7d274;
 }
 
