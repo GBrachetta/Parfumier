@@ -29,9 +29,9 @@
         {% endif %}
     </div>
 
-    <div class="form-row">
+    <div class="form-row mt-4">
         <div class="col-4 mt-0">
-            {{ form.type_picture.label(class="btn btn-sm shadow-sm button-green form-control-label mt-2") }}
+            {{ form.type_picture.label(class="btn btn-sm shadow-sm my-buttons green form-control-label mt-2") }}
             {{ form.type_picture(class="form-control-file") }}
             {% if form.type_picture.errors %}
             {% for error in form.type_picture.errors %}
@@ -44,7 +44,7 @@
             <span class="form-control-filename small ml-0 shadow-sm mt-3" data-text="Picture" id="pictureFileName"></span>
         </div>
         <div class="col-4 text-right">
-            {{ form.submit(class="btn btn-sm button-blue text-center shadow-sm mt-2") }}
+            {{ form.submit(class="btn btn-sm my-buttons blue text-center shadow-sm mt-2") }}
         </div>
     </div>
 </form>

@@ -74,10 +74,10 @@
         {% endif %}
     </div>
 
-    <div class="form-row buttons-edit-account">
+    <div class="form-row buttons-edit-account mt-4">
 
-        <div class="col-12 col-sm-4 text-center text-md-left">
-            {{ form.avatar.label(class="btn button-green btn-sm form-control-label shadow-sm") }}
+        <div class="col-4 text-center text-md-left">
+            {{ form.avatar.label(class="btn my-buttons green btn-sm form-control-label shadow-sm") }}
             {{ form.avatar(class="form-control-file") }}
 
             {% if form.avatar.errors %}
@@ -86,12 +86,12 @@
             {% endfor %}
             {% endif %}
         </div>
-        <div class="col-12 col-sm-4 text-center">
-            {{ form.submit(class="btn btn-sm button-blue text-center shadow-sm") }}
+        <div class="col-4 text-center">
+            {{ form.submit(class="btn btn-sm my-buttons blue text-center shadow-sm") }}
         </div>
 
-        <div class="col-12 col-sm-4 text-center text-md-right">
-            <button type="button" class="btn shadow-sm btn-sm button-red ml-3" data-toggle="modal"
-             data-target="#deleteUserModal">Delete Account</button>
+        <div class="col-4 text-center text-md-right">
+            <button type="button" class="btn shadow-sm btn-sm my-buttons red ml-3" data-toggle="modal"
+             data-target="#deleteUserModal">Delete</button>
         </div>
 </form>

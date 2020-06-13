@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:ital,wght@0,400;0,600;0,700;1,300&display=swap");
 
+html {
+    font-size: 100%;
+}
+
 body {
+    color: #585e65;
     font-family: "Montserrat", sans-serif;
 }
 
@@ -10,7 +15,8 @@ body {
 }
 
 .portfolio-navbar .navbar-nav .nav-link {
-    font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 400;
 }
 
 .navbar-brand {
@@ -31,62 +37,48 @@ div.social-icons .background-twitter {
 }
 
 /* buttons */
-.button-blue:hover {
-    background-color: #a0caf5;
+.my-buttons {
+    margin-left: 0;
+    color: #585e65;
 }
 
-.button-blue {
-    margin-left: 0;
-    margin-top: 40px;
+.blue {
     background-color: #d2e3f4;
-    color: #585e65;
 }
 
-.button-blue:hover {
+.blue:hover {
     background-color: #a0caf5;
 }
 
-.button-green {
-    margin-left: 0;
-    margin-top: 40px;
-    margin-bottom: 0;
-    color: #585e65;
+.green {
     background-color: #cdf1c4;
 }
 
-.button-green:hover {
+.green:hover {
     background-color: #aef19d;
 }
 
-.button-red {
-    margin-left: 0;
-    margin-top: 40px;
-    color: #585e65;
-    margin-right: 0;
+.red {
     background-color: #ffe0ce;
 }
 
-.button-red:hover {
+.red:hover {
     background-color: #fabf9d;
 }
 
-.button-purple {
+.purple {
     background-color: #eadff7;
-    margin-top: 40px;
-    color: #454e56;
 }
 
-.button-purple:hover {
+.purple:hover {
     background-color: #d4b3fa;
 }
 
-.button-yellow {
+.yellow {
     background-color: #f5db98;
-    color: #454e56;
-    margin-top: 40px;
 }
 
-.button-yellow:hover {
+.yellow:hover {
     background-color: #f7d274;
 }
 
@@ -100,7 +92,7 @@ div.social-icons .background-twitter {
     height: 125px;
 }
 
-/* Styling Preview Avatar */
+/* Styling Preview Thumbnails */
 .form-control-file {
     position: absolute;
     width: 1px;
@@ -142,20 +134,11 @@ div.social-icons .background-twitter {
     background-repeat: no-repeat;
 }
 
-.button-go {
-    background-color: #c7e2f5;
-    color: #746d6d;
-}
-
-.button-go:hover {
-    background-color: #d4b3fa;
-}
-
-/* Images users - perfumes & yypes */
+/* Images users - perfumes & types */
 .perfume-avatar {
     width: 75px;
     height: 75px;
-    margin-top: 20px;
+    margin-top: 1.25rem;
 }
 
 .review-avatar {
@@ -177,8 +160,13 @@ div.social-icons .background-twitter {
     padding-left: 4px;
     padding-right: 4px;
     border-radius: 4px;
-    margin-top: 65px;
+    margin-top: 4rem;
     margin-left: 2.5rem;
+}
+
+.picture-type {
+    height: 50px;
+    width: 50px;
 }
 
 /* Text */
@@ -189,20 +177,18 @@ div.social-icons .background-twitter {
     text-transform: unset;
 }
 
-.portfolio-block .heading h4 {
-    color: #957ae3;
-    font-size: 40px;
-    font-family: "Alex Brush", cursive;
-}
-
 .small-links {
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #56aee7;
 }
 
 .muted-texts {
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #959595;
+}
+
+.mild {
+    color: #585e65;
 }
 
 #filter_query,
@@ -215,7 +201,7 @@ div.social-icons .background-twitter {
 }
 
 .edit-user-username {
-    font-size: 30px;
+    font-size: 2rem;
     color: #6488ab;
 }
 
@@ -242,7 +228,7 @@ div.social-icons .background-twitter {
 }
 
 .content-review {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #454e56;
 }
 
@@ -252,21 +238,20 @@ div.social-icons .background-twitter {
 }
 
 .review-in-prefume {
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .meta-heading {
-    font-size: 10px;
+    font-size: 0.625rem;
     margin-top: 5px;
     margin-bottom: 0;
 }
 
 .text-muted {
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 
 /* Card types */
-
 .type-aromatic {
     border-color: #971f9b;
     background-color: rgba(151, 31, 155, 0.1);
@@ -369,8 +354,8 @@ div.social-icons .background-twitter {
 }
 
 .portfolio-navbar .logo {
-    font-size: 2.5rem;
-    line-height: 2.5rem;
+    font-size: 2rem;
+    line-height: 2rem;
 }
 
 /* Links footer */
@@ -379,11 +364,10 @@ a:hover {
 }
 
 .links-footer a {
-    font-size: 14px;
+    font-size: 0.9rem;
 }
 
 /* Pagination */
-
 .pagination-page-info {
     margin-bottom: 1rem;
     font-size: 0.8rem;
@@ -402,7 +386,7 @@ a:hover {
     background-color: #c7e2f5;
     border: 0;
     color: black;
-    transition: all .4s;
+    transition: all 0.4s;
 }
 
 .pagination .page-item.active .page-link {
@@ -419,11 +403,6 @@ a:hover {
     background-color: #957ae3;
 }
 
-.picture-type {
-    height: 50px;
-    width: 50px;
-}
-
 /* Media queries */
 @media only screen and (min-width: 768px) {
     .project-card-no-image h3 {
@@ -431,6 +410,15 @@ a:hover {
     }
 
     .portfolio-block .heading h2 {
-        font-size: 4.5rem;
+        font-size: 4rem;
+    }
+
+    .portfolio-navbar .navbar-nav .nav-link {
+        font-size: 1.1rem;
+    }
+
+    .portfolio-navbar .logo {
+        font-size: 2.5rem;
+        line-height: 2.5rem;
     }
 }

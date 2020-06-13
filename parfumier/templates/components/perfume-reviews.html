@@ -3,16 +3,16 @@
         <div class=" border-white">
             <h3 class="text-center">Reviews</h3>
         </div>
-        <div class="container mt-5">
+        <div class="container mt-0">
             <div class="row justify-content-center">
                 <div class="col-12">
                     {% for review in perfume.reviews|sort(attribute="date_reviewed", reverse = True) %}
                         {% include "components/review-card.html" %}
                     {% endfor %}
                     {% if not perfume.reviews %}
-                    <div class="row portfolio-block">
+                    <div class="row portfolio-block py-0">
                         <div class="col-12 my-5 heading">
-                            <h4 class="text-center">There are no reviews for this perfume.</h4>
+                            <p class="text-center small">There are no reviews for this perfume.</p>
                         </div>
                     </div>
                     {% endif %}
