@@ -1,8 +1,8 @@
 {% if current_user.is_authenticated and current_user.is_admin == True %}
-    <div class="col-2 text-center text-sm-left my-2">
+    <div class="col-2 text-center text-sm-left my-3">
         <a class="shadow-sm btn btn-sm my-buttons green" href="{{ url_for("perfumes.all_perfumes") }}">Back</a>
     </div>
-    <div class="col-10 text-center text-sm-right my-2">
+    <div class="col-10 text-center text-sm-right my-3">
         <button class="btn btn-sm shadow-sm my-buttons purple" type="button"
         data-toggle="modal" data-target="#reviewPerfumeModal">Review</button>
         <a class="shadow-sm btn btn-sm my-buttons blue"
@@ -13,10 +13,10 @@
         data-target="#deletePerfumeModal">Delete</button>
     </div>
 {% else %}
-    <div class="col text-left mb-2">
+    <div class="col text-left my-3">
         <a class="shadow-sm btn btn-sm my-buttons green" href="{{ url_for("perfumes.all_perfumes") }}">Back</a>
     </div>
-    <div class="col text-right mb-2">
+    <div class="col text-right my-3">
         <button class="btn btn-sm shadow-sm my-buttons purple" type="button"
          data-toggle="modal" data-target="#reviewPerfumeModal">Review</button>
     </div>
