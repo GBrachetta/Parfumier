@@ -18,6 +18,7 @@
   - [General](#general)
   - [Buttons](#buttons)
   - [Colors](#colors)
+  - [Fonts](#fonts)
 - [Wireframes](#wireframes)
 - [Features](#features)
   - [Existing Features](#existing-features)
@@ -178,7 +179,17 @@ All buttons use custom colours from the palette to avoid having them popping ove
 
 The colors chosen for the app are all soft shades of pastel colors allowing users to make a visual connection with the world of perfumes: flowers, herbs, spices and woods.
 
+For the main headings I chose a hue of purple which connects to lavender.
+
 ![Color Palette](wireframes/palette.png)
+
+### Fonts
+
+Only two font families have been used in this app:
+
+- Alex Brush: for the titles and the navbar brand.
+  I chose this cursive font to transmit a feeling of craftmanship which is related to the world of perfume making.
+- Montserrat: for all the remaining texts, for its excellent legibility specially on small screens, and for it's timeless elegance.
 
 ## Wireframes
 
@@ -275,6 +286,8 @@ I userd the following method to index my collections and allow users to perform 
 ```python
 @perfumes.route("/search")
 def search():
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    page_count = 8
     types = mongo.db.types.find().sort("type_name")
     mongo.db.perfumes.create_index(
         [("name", "text"), ("brand", "text"), ("perfume_type", "text")]
@@ -288,22 +301,45 @@ def search():
     # and sort that aggregate by name.
     results = mongo.db.perfumes.aggregate(
         [
-            {"$match": {"$text": {"$search": db_query}}},
+            {"$match": {"$text": {"$search": db_query}}}, # search based on the request
             {
-                "$lookup": {...}
+                "$lookup": {...} # etc
             },
             {"$unwind": "$creator"},
             {
-                "$project": {...}
+                "$project": {...} # etc
             },
             {"$sort": {"perfumeName": 1}},
+            {"$skip": (page - 1) * page_count}, # pagination
+            {"$limit": page_count},
         ]
+    )
+    count = mongo.db.perfumes.aggregate(
+        [
+            {"$match": {"$text": {"$search": db_query}}}, # same query as above
+            {
+                "$lookup": {...) # etc
+            },
+        ] # uses the variable from the request to count the total records returned
+    )
+    total_perfumes = len(list(count)) # cursor gets extinguished after use, so this method in place for the count of records returned
+    pagination = Pagination(
+        per_page=8, # items to be counter per page
+        page=page, # passes current page
+        total=total_perfumes, # total amount of perfumes
+        record_name="perfumes", # variable to display on the info
+        bs_version=4, # the CSS framework, in this case Bootstrap 4
+        alignment="center", # alignment of the pagination buttons
+        display_msg="Displaying <b>{start} - {end}</b>\
+             {record_name} of <b>{total}</b>", # The message displayed on the info
     )
     return render_template(
         "pages/perfumes.html",
-        perfumes=results,
-        types=types,
-        title="Perfumes",
+        perfumes=results, # passes the perfumes returned by the query
+        types=types, # passes the types in order to populate the select options on the main page
+        title=f"Search: {db_query}", # passes the title as an f string
+        query=db_query, # passes the query in order to display it in the title
+        pagination=pagination, # passes the pagination configuration
     )
 ```
 
