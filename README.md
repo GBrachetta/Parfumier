@@ -6,6 +6,7 @@
 
 - [Introduction](#introduction)
 - [UX](#ux)
+  - [What is the purpose of the app](#what-is-the-purpose-of-the-app)
   - [Who is this website for](#who-is-this-website-for)
   - [Who are the primary target groups](#who-are-the-primary-target-groups)
   - [What is it that they want to achieve](#what-is-it-that-they-want-to-achieve)
@@ -63,9 +64,9 @@ It also allows them to register, log in, leave reviews on them and read reviews 
 
 The app also gives administrators to possibility to add new perfumes, types of perfumes, edit their contents, images and delete them.
 
-I love fragrances and always wished to have an app allowing me to save my perfumes, share reviews and be able to connect with other perfume lovers.
+I love fragrances and wanted a platform to be able document my perfume collection and offer my reviews on different fragrances.
 
-Parfumier is the result of that passion.
+I developed Parfumier not just to facilitate this, but also to share my passion with others, connect with like-minded individuals and encourage people to explore the world of perfumes.
 
 Please send me a message if you would like to be an administrator and so be able to enter, edit and deal with perfumes.
 
@@ -73,30 +74,35 @@ If you are a visitor, please log in and share your comments on the perfumes in t
 
 ## UX
 
+### What is the purpose of the app
+
+The ultimate goal of Parfumier is to encourage people to discover new perfumes beyond their 'go to' bottles. The app informs them about different fragrances and guides them via descriptions, preview images and reviews written by other users.
+
 ### Who is this website for
 
 This website is intended for all fragrance lovers, people curious about perfumes, or people wishing to exchange comments, reviews and experiences around perfumes.
 
 ### Who are the primary target groups
 
-People from all backgrounds and origins, people wishing to discover new fragrances, to make a purchase and be informed before that.
+The website is aimed at anyone, from teenagers to adults, with an interest in perfumes. It is of particular value to those looking to try a new perfume and be informed before making a purchase.
 
 ### What is it that they want to achieve
 
-Users want to learn about perfumes, be informed and read opinions from other users.
-
-Users want also to be able to leave a review to collaborate with the database.
+Users will either want to share their experiences of the perfumes they've tried, or discover a new perfume they have not tried before, guided by accessible information and reviews.
 
 ### How is my project the best way to help them achieve those things
 
-The app is flexible and intuitive.
+The app provides a library of different perfumes and perfume types and includes images that provide a preview of what the perfume bottles look like.
 
-To the administrators it gives all the possibilities to interact with the database and so they can edit all documents.
+The app features information on the different types of fragrances and any new perfume added is categorised by its type.
 
-It is worth mentioning that the only limitation admins have is deleting documents not created by themselves, i.e. admins can edit types or perfumes, but won't be able to delete a record created by another admin.
+Any visitor to the site is able to freely view all information related to the perfumes including reviews left by other users.
 
-A non-admin, registered user will be able to browse and interact with all information in the database, add reviews or comments on the documents and edit their posts.
-Users can edit all information related to their account, including their profile picture, and request a password reset.
+Registered users will be authorised to add reviews or comments on the documents and edit their posts.
+
+Registered users can also edit all information related to their account, including their profile picture, and request a password reset.
+
+Administrators are able to update the database by adding perfumes or fragrance types, editing information, or deleting entries. It is worth mentioning that the only limitation admins have is deleting documents not created by themselves, i.e. admins can edit types or perfumes, but won't be able to delete a record created by another admin.
 
 To make all interaction as clear as possible, buttons are available only when they are permitted to the privileges of a registered user or admin.
 
@@ -110,7 +116,7 @@ After users log in, they can edit their account, add reviews, edit them, delete 
 
 Admins can add perfumes, types, and edit them.
 
-Admins can also add or change perfume pictures.
+Admins can also add or change perfume or type pictures.
 
 Unregistered visitors can see all information in the database.
 
@@ -124,9 +130,9 @@ Users and admins can upload an avatar or picture, and change it at any time.
 
 The main goals of the project are
 
-- Keep users informed about perfumes.
-- Offer users a platform in which to share comments and reviews.
-- Connect to other perfume lovers.
+- Inform users about perfumes and perfume types.
+- Provide a platform for users to share comments and reviews.
+- Connect with other perfume lovers.
 - Offer information before choosing a perfume.
 - Share the enthusiasm about the fascinating world of fragrances.
 
