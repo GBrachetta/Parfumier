@@ -8,12 +8,10 @@
 - [UX](#ux)
   - [Who is this website for](#who-is-this-website-for)
   - [Who are the primary target groups](#who-are-the-primary-target-groups)
-  - [What is it that they (the users) want to achieve](#what-is-it-that-they-the-users-want-to-achieve)
+  - [What is it that they want to achieve](#what-is-it-that-they-want-to-achieve)
   - [How is my project the best way to help them achieve those things](#how-is-my-project-the-best-way-to-help-them-achieve-those-things)
   - [How do users achieve each of the following goals](#how-do-users-achieve-each-of-the-following-goals)
 - [Project Goals](#project-goals)
-  - [User Goals](#user-goals)
-  - [Visitor Goals](#visitor-goals)
 - [User Stories](#user-stories)
 - [Design Choices](#design-choices)
   - [General](#general)
@@ -59,45 +57,67 @@
 
 ## Introduction
 
+This app lets users discover perfumes and types of perfumes, learn about them and see what they look like.
+
+It also allows them to register, log in, leave reviews on them and read reviews written by other users.
+
+The app also gives administrators to possibility to add new perfumes, types of perfumes, edit their contents, images and delete them.
+
 I love fragrances and always wished to have an app allowing me to save my perfumes, share reviews and be able to connect with other perfume lovers.
-This is the result of this passion.
+
+Parfumier is the result of that passion.
+
 Please send me a message if you would like to be an administrator and so be able to enter, edit and deal with perfumes.
-If you are a visitor, please log in and share your comments on the perfumes in our databse.
+
+If you are a visitor, please log in and share your comments on the perfumes in the databse.
 
 ## UX
 
 ### Who is this website for
 
-This website is intended for all pefume lovers, people curious about perfumes, or people wishing to exchange comments, reviews and experiences around perfumes.
+This website is intended for all fragrance lovers, people curious about perfumes, or people wishing to exchange comments, reviews and experiences around perfumes.
 
 ### Who are the primary target groups
 
-People from all ages and origins, people wishing to discover new fragrances, to make a purchase and be informed before that.
+People from all backgrounds and origins, people wishing to discover new fragrances, to make a purchase and be informed before that.
 
-### What is it that they (the users) want to achieve
+### What is it that they want to achieve
 
-Users want to learn about perfumes, get informed and read opinions from other users.
+Users want to learn about perfumes, be informed and read opinions from other users.
+
 Users want also to be able to leave a review to collaborate with the database.
 
 ### How is my project the best way to help them achieve those things
 
 The app is flexible and intuitive.
-To the administrators it gives all the possibilities to interact with the database and so admins can edit all documents.
-It is worth mentioning that the only limitation admins have is to delete documents not created by themselves, i.e. admins can edit types or perfumes, but won't be able to delete a record created by another admin.
-A non-admin user will be able to browse and interact with all information in the database and add reviews or comments on the documents, plus be able to edit those interactions.
+
+To the administrators it gives all the possibilities to interact with the database and so they can edit all documents.
+
+It is worth mentioning that the only limitation admins have is deleting documents not created by themselves, i.e. admins can edit types or perfumes, but won't be able to delete a record created by another admin.
+
+A non-admin, registered user will be able to browse and interact with all information in the database, add reviews or comments on the documents and edit their posts.
 Users can edit all information related to their account, including their profile picture, and request a password reset.
-To make all interaction as clear as possible, buttons are available only when they are available to the permissions of the user or admin.
-Basic buttons are still visible in all instances, but attemptin to interact with some of the functions will redirect users to the route requiring them either to log in or register.
-No anonymous writting to the database is permitter by the app.
+
+To make all interaction as clear as possible, buttons are available only when they are permitted to the privileges of a registered user or admin.
+
+Basic buttons are still visible in all instances, but attempting to interact with some of the functions will redirect users to the route requiring them either to log in or register.
+
+No anonymous writing to the database is permitted by the app.
 
 ### How do users achieve each of the following goals
 
 After users log in, they can edit their account, add reviews, edit them, delete them and even delete their account.
+
 Admins can add perfumes, types, and edit them.
+
 Admins can also add or change perfume pictures.
-Not logged visitors can see all information in the database.
-Admins can delete perfumes except if they are not the creators of the record. They can still edit their content.
+
+Unregistered visitors can see all information in the database.
+
+Admins can delete perfumes only if they are the creators of the record. They can still edit their content.
+
 Users and admins can request a password reset link to be sent to their email account.
+
 Users and admins can upload an avatar or picture, and change it at any time.
 
 ## Project Goals
@@ -110,10 +130,6 @@ The main goals of the project are
 - Offer information before choosing a perfume.
 - Share the enthusiasm about the fascinating world of fragrances.
 
-### User Goals
-
-### Visitor Goals
-
 ## User Stories
 
 - As a user, I would like to find information about perfumes.
@@ -124,12 +140,12 @@ The main goals of the project are
 - As a user, I would like to be able to read reviews on a perfume.
 - As a user, I would like to be able to write my own review on a perfume.
 - As a user, I would like to be able to create an account and modify it.
-- As a user, I would like to upload an avatar or photo of my choice, and preview it before I do so.
+- As a user, I would like to upload an avatar or photo of my choice, and preview it before I submit it.
 - As a user, I would like to be able to change that photo at any point.
 - As a user, I would like to see my photo next to my reviews on perfumes.
-- As a user, I would like to have the possibility to create a new password in case I forgot my current one.
-- As a user, I would like to have the possibility to edit or delete my reviews on a perfume.
-- As a user, I would like to have the possibility to delete my account.
+- As a user, I would like to be able to create a new password in case I forget my current one.
+- As a user, I would like to be able to edit or delete my reviews on a perfume.
+- As a user, I would like to to be able to delete my account.
 - As a user, I would like to have a visual idea about what a perfume type represents.
 
 As an administrator, I would like to do all of the above, plus ______________"
@@ -195,19 +211,19 @@ This gives registered users the possibility to add reviews to perfumes, edit the
 
 #### Perfumes & Types
 
-- Admins are able to create, edit and delete perfumes and types of perfumes.
+- Admins are able to create, edit and delete both perfumes and perfume types.
 - Admins can upload and change a picture for the above perfumes.
-- All users and not registered visitors can browse and search the full database and access all perfumes and reviews.
+- All users and unregistered visitors can browse and search the full database and access all perfumes and reviews.
 
 #### Admins
 
 - Admins have access to functionalities reserved only to them, such as
   - Creating and editing a perfume or type.
-  - Deleting a perfume or type (except if they are not their creators)
+  - Deleting a perfume or type that they themselves have posted.
 
 #### Images
 
-All images interacting with the database are dinamically stored in Cloudinary.com. They are given a reduced size to minimise loading times and the app only needs to render a 'thumbnain' of the full size image stored remotely.
+All images interacting with the database are dynamically stored in Cloudinary.com. They are given a reduced size to minimise loading times and the app only needs to render a 'thumbnail' of the full size image stored remotely.
 Additionally, in the routes the default 'http' protocol gets replaced by 'https' so images get served securely.
 
 Admins can upload perfume photos using Cloudinary. In case a photo is not provided during the creation of the perfume, a default generic picture is saved to the database.
@@ -288,6 +304,8 @@ def search():
 #### Types Cards
 
 Admins are prompted to upload an image when they create a type. When they do so, that image bacomes the background of the type card.
+
+The image is reduced automatically in size on cloudinary and given an opacity of 20% by the method in the route, so regardless of the size of the image uploaded it doesn't have much impact on the performance of the app.
 
 If no image is selected, a default image is assigned to the databse so there won't be a card without a background.
 
@@ -428,6 +446,10 @@ The app originally saved media files to the file system, but that caused some is
 
 With this in mind I decided saving photos in a cloud-based solution reachable both locally and remotely.
 The options I considered were Imgur and Cloudinary, and chose the latter due to its set of features and ease of use and setup.
+
+All images have a `loading="lazy"` attribute with specified dimensions so they are only loaded when required, regardless of how small they are after being converted on Cloudinary.
+
+The images on the about page were minified on [tinypng](https://tinypng.com/).
 
 ### About CKEditor
 
