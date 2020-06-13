@@ -190,6 +190,7 @@ Only two font families have been used in this app:
 - Alex Brush: for the titles and the navbar brand.
   I chose this cursive font to transmit a feeling of craftmanship which is related to the world of perfume making.
 - Montserrat: for all the remaining texts, for its excellent legibility specially on small screens, and for it's timeless elegance.
+  Additionally these two fonts complement each other, contrast well and they both transmit the balance between elegance and modernity I want to transmit in the app.
 
 ## Wireframes
 
@@ -271,7 +272,7 @@ if form.validate_on_submit():
         )
 ```
 
-The same method applies to user pictures.
+The same method applies to user and type pictures.
 
 #### Custom Validator for types
 
@@ -281,7 +282,7 @@ Thanks to this method, seamless to the user, the custom validator can check the 
 
 #### Filters & Search
 
-I userd the following method to index my collections and allow users to perform searches on the indexed fields:
+I used the following method to index my collections and allow users to perform searches on the indexed fields:
 
 ```python
 @perfumes.route("/search")
@@ -318,13 +319,13 @@ def search():
         [
             {"$match": {"$text": {"$search": db_query}}}, # same query as above
             {
-                "$lookup": {...) # etc
+                "$lookup": {...} # etc
             },
         ] # uses the variable from the request to count the total records returned
     )
     total_perfumes = len(list(count)) # cursor gets extinguished after use, so this method in place for the count of records returned
     pagination = Pagination(
-        per_page=8, # items to be counter per page
+        per_page=8, # items to be accounted for per page
         page=page, # passes current page
         total=total_perfumes, # total amount of perfumes
         record_name="perfumes", # variable to display on the info
@@ -541,6 +542,7 @@ Pagination now correctly displays both on perfumes and types pages, also when a 
 - Error pages respond correctly to all possible errors. To test this, errors have been purposedly provoqued in order to invoque the above pages.
 - Visiting non-existing endpoints correctly returns the 404.html template, with access to all navigation.
 - Regardless of the size of the image uploaded, cloudinary deals with it and resizes it to the predetermined dimensions.
+- Attempting to write a review without being logged in makes a modal open letting the user know that such operation isn't permitted.
 
 ### Validators and linters
 
@@ -598,13 +600,18 @@ This project can be ran locally by following the following steps:
    `Be aware that you will need to adapt line 85 of utils.py to match your own email server!`
 
 10. You will then be able to run the app locally by typing either `python app.py` or `flask run`.
+    Alternatively you can force debbug mode by typing this set of commands (they can be all in the same line)
+
+    `FLASK_APP=app.py FLASK_ENV=development flask run`
+
+    This will force debbug mode on and will let you see all error messages thanks to [Wekzeug](https://pypi.org/project/Werkzeug/), a WSGI web application library that makes tracking errors much easier and more comprehensively.
 
 ### Heroku
 
 [Heroku](https://www.heroku.com/) was chosen as the deployment platform for this project.
 The steps to deploy the local app to Heroku were as follow:
 
-1. In Heroku, created an app. The app must have an unique name.
+1. In Heroku, created an app. The app must have a unique name.
 2. Linked that app to the GitHub repository by going to the "Deploy" tab in the main app menu.
 3. Selected a branch to deploy automatically (alternatively one could opt to deploy manually instead).
 4. In the Settings tab, added the corresponding Config Variables as present in my local development:
@@ -638,13 +645,13 @@ Additionaly, and for testing purposes, I often also deployed feature branches in
 
 Over 40 branches were using during the development of this app, to ensure isolated enviroments for each of them without interfering with already functioning features.
 
-To deal with these features i used [GitHub Issues](https://guides.github.com/features/issues/) and put in place a [project board](https://help.github.com/en/github/managing-your-work-on-github/about-project-boards), which helped me organise my workflow and have a clear overview of where in the process of my development I was.
+To deal with these features i used [GitHub issues](https://guides.github.com/features/issues/) and put in place a [project board](https://help.github.com/en/github/managing-your-work-on-github/about-project-boards), which helped me organise my workflow and have a clear overview of where in the process of my development I was.
 
 ## Credits
 
 ### Content
 
-The description of the perfumes has been freely adapted from [Fragrantica](www.fragrantica.com).
+The descriptions of the perfumes have been freely adapted from [Fragrantica](www.fragrantica.com).
 
 ### Media
 
