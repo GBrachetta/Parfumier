@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:ital,wght@0,400;0,600;0,700;1,300&display=swap");
 
+html {
+    font-size: 100%;
+}
+
 body {
+    color: #585e65;
     font-family: "Montserrat", sans-serif;
 }
 
@@ -10,7 +15,7 @@ body {
 }
 
 .portfolio-navbar .navbar-nav .nav-link {
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .navbar-brand {
@@ -33,9 +38,7 @@ div.social-icons .background-twitter {
 /* buttons */
 .my-buttons {
     margin-left: 0;
-    /* margin-top: 40px; */
     color: #585e65;
-    font-weight: 400;
 }
 
 .blue {
@@ -88,7 +91,7 @@ div.social-icons .background-twitter {
     height: 125px;
 }
 
-/* Styling Preview Avatar */
+/* Styling Preview Thumbnails */
 .form-control-file {
     position: absolute;
     width: 1px;
@@ -130,20 +133,11 @@ div.social-icons .background-twitter {
     background-repeat: no-repeat;
 }
 
-.button-go {
-    background-color: #c7e2f5;
-    color: #746d6d;
-}
-
-.button-go:hover {
-    background-color: #d4b3fa;
-}
-
-/* Images users - perfumes & yypes */
+/* Images users - perfumes & types */
 .perfume-avatar {
     width: 75px;
     height: 75px;
-    margin-top: 20px;
+    margin-top: 1.25rem;
 }
 
 .review-avatar {
@@ -165,8 +159,13 @@ div.social-icons .background-twitter {
     padding-left: 4px;
     padding-right: 4px;
     border-radius: 4px;
-    margin-top: 65px;
+    margin-top: 4rem;
     margin-left: 2.5rem;
+}
+
+.picture-type {
+    height: 50px;
+    width: 50px;
 }
 
 /* Text */
@@ -179,18 +178,22 @@ div.social-icons .background-twitter {
 
 .portfolio-block .heading h4 {
     color: #957ae3;
-    font-size: 40px;
+    font-size: 2.5rem;
     font-family: "Alex Brush", cursive;
 }
 
 .small-links {
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #56aee7;
 }
 
 .muted-texts {
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #959595;
+}
+
+.mild {
+    color: #585e65;
 }
 
 #filter_query,
@@ -203,7 +206,7 @@ div.social-icons .background-twitter {
 }
 
 .edit-user-username {
-    font-size: 30px;
+    font-size: 2rem;
     color: #6488ab;
 }
 
@@ -230,7 +233,7 @@ div.social-icons .background-twitter {
 }
 
 .content-review {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #454e56;
 }
 
@@ -240,21 +243,20 @@ div.social-icons .background-twitter {
 }
 
 .review-in-prefume {
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .meta-heading {
-    font-size: 10px;
+    font-size: 0.625rem;
     margin-top: 5px;
     margin-bottom: 0;
 }
 
 .text-muted {
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 
 /* Card types */
-
 .type-aromatic {
     border-color: #971f9b;
     background-color: rgba(151, 31, 155, 0.1);
@@ -367,11 +369,10 @@ a:hover {
 }
 
 .links-footer a {
-    font-size: 14px;
+    font-size: 0.9rem;
 }
 
 /* Pagination */
-
 .pagination-page-info {
     margin-bottom: 1rem;
     font-size: 0.8rem;
@@ -405,11 +406,6 @@ a:hover {
 
 .pagination .page-item.active .page-link:hover {
     background-color: #957ae3;
-}
-
-.picture-type {
-    height: 50px;
-    width: 50px;
 }
 
 /* Media queries */
