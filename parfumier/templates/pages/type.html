@@ -18,10 +18,10 @@
                         <div class="col-8 text-right">
                             {% if current_user.is_authenticated and current_user.is_admin == True and current_user.username == type.author %}
                                 <a href="{{ url_for("types.edit_type", type_id=type._id) }}" class="btn my-buttons blue btn-sm shadow-sm" disabled>Edit</a>
-                                <button type="button" class="btn button-red btn-sm shadow-sm" data-toggle="modal" data-target="#deleteTypeModal">Delete</button>
+                                <button type="button" class="btn my-buttons red btn-sm shadow-sm" data-toggle="modal" data-target="#deleteTypeModal">Delete</button>
                             {% elif current_user.is_authenticated and current_user.is_admin == True %}
                                 <a href="{{ url_for("types.edit_type", type_id=type._id) }}" class="btn my-buttons blue btn-sm shadow-sm" disabled>Edit</a>
-                                <button  disabled type="button" class="btn button-red btn-sm shadow-sm" data-toggle="modal" data-target="#deleteTypeModal">Delete</button>
+                                <button  disabled type="button" class="btn my-buttons red btn-sm shadow-sm" data-toggle="modal" data-target="#deleteTypeModal">Delete</button>
                             {% endif %}
                         </div>
                     </div>

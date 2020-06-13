@@ -53,17 +53,14 @@ div.social-icons .background-twitter {
     background-color: #aef19d;
 }
 
-.button-red {
-    margin-left: 0;
-    margin-top: 40px;
-    color: #585e65;
-    margin-right: 0;
+.red {
     background-color: #ffe0ce;
 }
 
-.button-red:hover {
+.red:hover {
     background-color: #fabf9d;
 }
+
 
 .button-purple {
     background-color: #eadff7;

@@ -9,7 +9,7 @@
         href="{{ url_for("perfumes.edit_perfume", perfume_id=perfume._id) }}"
         role="button">Edit</a>
         <button {% if current_user.username != perfume.author %}disabled{% endif %}
-        type="button" class="btn btn-sm shadow-sm button-red" data-toggle="modal"
+        type="button" class="btn btn-sm shadow-sm my-buttons red" data-toggle="modal"
         data-target="#deletePerfumeModal">Delete</button>
     </div>
 {% else %}
