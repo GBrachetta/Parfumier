@@ -1,4 +1,4 @@
-# Parfumier <!-- omit in toc -->
+# [Parfumier](https://parfumier.herokuapp.com/) <!-- omit in toc -->
 
 ![Mockup](wireframes/mockup.png)
 
@@ -19,6 +19,7 @@
   - [Buttons](#buttons)
   - [Colors](#colors)
   - [Fonts](#fonts)
+  - [Bootstrap](#bootstrap)
 - [Wireframes](#wireframes)
 - [Features](#features)
   - [Existing Features](#existing-features)
@@ -211,6 +212,10 @@ Only two font families have been used in this app:
   I chose this cursive font to transmit a feeling of craftmanship which is related to the world of perfume making.
 - Montserrat: for all the remaining texts, for its excellent legibility specially on small screens, and for it's timeless elegance.
   Additionally these two fonts complement each other, contrast well and they both transmit the balance between elegance and modernity I want to transmit in the app.
+
+### Bootstrap
+
+I chose to use a custom version of Bootstrap's CSS framework, and as such it is minified and loaded from my static folder rather than from a CDN.
 
 <div align="right">
     <b><a href="#table-of-contents">↥ Back To Top</a></b>
