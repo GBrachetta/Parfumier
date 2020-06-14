@@ -195,6 +195,12 @@ Only two font families have been used in this app:
 
 ## Wireframes
 
+```text
+Note:The app evolved and several improvements were put in place through development.
+
+The wireframes served as guidelines but some details such as positioning, pagination for types, placement of avatars, images and buttons and other refinements diverge from the original wireframes on the current state of the application.
+```
+
 Login Page
 ![Login Page](wireframes/login.png)
 Edit Account Page
