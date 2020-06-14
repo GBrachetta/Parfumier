@@ -77,7 +77,7 @@ def review_perfume(perfume_id):
         flash("Your review has been received", "success")
         return redirect(url_for("perfumes.perfume", perfume_id=perfume["_id"]))
     return render_template(
-        "pages/perfume-single.html",
+        "pages/perfume.html",
         perfume=perfume,
         add_review_form=form,
         edit_review_form=form_edit,
