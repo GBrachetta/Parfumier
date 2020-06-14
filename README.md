@@ -2,7 +2,7 @@
 
 ![Mockup](wireframes/mockup.png)
 
-## Table of Contents <!-- omit in toc -->
+## Table of Contents
 
 - [Introduction](#introduction)
 - [UX](#ux)
