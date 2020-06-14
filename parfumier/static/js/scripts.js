@@ -90,3 +90,24 @@ $(document).on("click", "#editFormButton", function () {
  * JS dealing with forms on the frontend.
  */
 $(".is-invalid").closest(".modal").modal("show");
+
+/**
+ * This loops through my img elements and on error replaces the
+ * eventually missing or broken src attribute, making sure an image
+ * is displayed in case the one on cloudinary is not found for some reason.
+ * It will still throw a console error if that happens, but the user
+ * will at least see a fallback image instead of a broken image icon.
+ * This made possible to get rid of my inline 'onerror' JS in the templates
+ * My question on SO: shorturl.at/bmJS4
+ */
+$(document).ready(() => {
+    $("img").each(function () {
+        this.onerror = () => {
+            if ($(this).hasClass("user-picture")) {
+                $(this).attr("src", "../static/images/default.png");
+            } else if ($(this).hasClass("perfume-picture")) {
+                $(this).attr("src", "../static/images/generic.jpg");
+            }
+        };
+    });
+});
