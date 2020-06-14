@@ -30,6 +30,7 @@
     - [Custom Validator for types](#custom-validator-for-types)
     - [Filters & Search](#filters--search)
     - [Types Cards](#types-cards)
+    - [Onerror for images](#onerror-for-images)
   - [Future Goals](#future-goals)
 - [Information Architecture](#information-architecture)
   - [Database Aggregation](#database-aggregation)
@@ -351,6 +352,12 @@ Admins are prompted to upload an image when they create a type. When they do so,
 The image is reduced automatically in size on cloudinary and given an opacity of 20% by the method in the route, so regardless of the size of the image uploaded it doesn't have much impact on the performance of the app.
 
 If no image is selected, a default image is assigned to the databse so there won't be a card without a background.
+
+#### Onerror for images
+
+In the event an image couldn't be found on Cloudinary (albeit a very unlikely possibility) I put in place a defensive JavaScript onerror function which returns a fallback image.
+
+This would still throw a console error, but it will avoid displaying a broken image icon and the user would still be able to have visual feedback seeing a generic avatar or a generic perfume bottle.
 
 ### Future Goals
 
