@@ -33,6 +33,7 @@
     - [Onerror for images](#onerror-for-images)
   - [Future Goals](#future-goals)
 - [Information Architecture](#information-architecture)
+  - [Models](#models)
   - [Database Aggregation](#database-aggregation)
   - [Data Storage](#data-storage)
 - [Technologies Used](#technologies-used)
@@ -73,6 +74,10 @@ I developed Parfumier not just to facilitate this, but also to share my passion 
 Please send me a message if you would like to be an administrator and so be able to enter, edit and deal with perfumes.
 
 If you are a visitor, please log in and share your comments on the perfumes in the databse.
+
+<div align="right">
+    <b><a href="#table-of-contents">↥ Back To Top</a></b>
+</div>
 
 ## UX
 
@@ -128,6 +133,10 @@ Users and admins can request a password reset link to be sent to their email acc
 
 Users and admins can upload an avatar or picture, and change it at any time.
 
+<div align="right">
+    <b><a href="#table-of-contents">↥ Back To Top</a></b>
+</div>
+
 ## Project Goals
 
 The main goals of the project are
@@ -137,6 +146,10 @@ The main goals of the project are
 - Connect with other perfume lovers.
 - Offer information before choosing a perfume.
 - Share the enthusiasm about the fascinating world of fragrances.
+
+<div align="right">
+    <b><a href="#table-of-contents">↥ Back To Top</a></b>
+</div>
 
 ## User Stories
 
@@ -162,6 +175,10 @@ As an administrator, I would like to do all of the above, plus ______________"
 - Be able to upload a photo of the perfume, and to change it.
 - Be able to preview the photo I'm about to upload.
 - Be able to create, modify and delete types of perfumes.
+
+<div align="right">
+    <b><a href="#table-of-contents">↥ Back To Top</a></b>
+</div>
 
 ## Design Choices
 
@@ -193,13 +210,17 @@ Only two font families have been used in this app:
 - Montserrat: for all the remaining texts, for its excellent legibility specially on small screens, and for it's timeless elegance.
   Additionally these two fonts complement each other, contrast well and they both transmit the balance between elegance and modernity I want to transmit in the app.
 
+<div align="right">
+    <b><a href="#table-of-contents">↥ Back To Top</a></b>
+</div>
+
 ## Wireframes
 
-```text
-Note:The app evolved and several improvements were put in place through development.
-
-The wireframes served as guidelines but some details such as positioning, pagination for types, placement of avatars, images and buttons and other refinements diverge from the original wireframes on the current state of the application.
-```
+> **Note**:The app evolved and several improvements were put in place through development.
+>
+> The wireframes served as guidelines but some details such as positioning, pagination for types, placement of avatars, images and buttons and other refinements diverge from the original wireframes on the current state of the application.
+>
+> Since there's virtually little to no difference between tablet view and desktop view besides the navbar collapsing on smaller tablets, wireframes for them have been omitted
 
 Login Page
 ![Login Page](wireframes/login.png)
@@ -217,6 +238,10 @@ Individual Type Page
 ![Individual Type](wireframes/type.png)
 About Page
 ![About](wireframes/about.png)
+
+<div align="right">
+    <b><a href="#table-of-contents">↥ Back To Top</a></b>
+</div>
 
 ## Features
 
@@ -373,7 +398,13 @@ Some of the features I would like to implement in the future are:
 - Put in place personal collections of perfumes. The perfumes collection includes a currently unused boolean field to allow for this in a feature release.
 - Use JavaScript to deal with all the forms.
 
+<div align="right">
+    <b><a href="#table-of-contents">↥ Back To Top</a></b>
+</div>
+
 ## Information Architecture
+
+### Models
 
 Perfumes Collection
 
@@ -468,6 +499,10 @@ No data is stored in the file system.
 
 Since Heroku has an ephemeral file system I decided to incorporate Cloudinary for the images, which was at the beginning of the development the only process still writing to it.
 
+<div align="right">
+    <b><a href="#table-of-contents">↥ Back To Top</a></b>
+</div>
+
 ## Technologies Used
 
 ### Front-end Technologies
@@ -534,6 +569,10 @@ pagination = Pagination(
 
 Pagination now correctly displays both on perfumes and types pages, also when a search is performed.
 
+<div align="right">
+    <b><a href="#table-of-contents">↥ Back To Top</a></b>
+</div>
+
 ## Testing
 
 ### Tests performed
@@ -567,6 +606,10 @@ The following validators and linters were used either remotely or with their plu
 - [JSHint](https://jshint.com/)
 - [PEP8](http://pep8online.com/)
 - [BLACK](https://pypi.org/project/black/)
+
+<div align="right">
+    <b><a href="#table-of-contents">↥ Back To Top</a></b>
+</div>
 
 ## Deployment
 
@@ -660,6 +703,10 @@ Over 40 branches were using during the development of this app, to ensure isolat
 
 To deal with these features i used [GitHub issues](https://guides.github.com/features/issues/) and put in place a [project board](https://help.github.com/en/github/managing-your-work-on-github/about-project-boards), which helped me organise my workflow and have a clear overview of where in the process of my development I was.
 
+<div align="right">
+    <b><a href="#table-of-contents">↥ Back To Top</a></b>
+</div>
+
 ## Credits
 
 ### Content
@@ -691,3 +738,7 @@ I would like to specially thank the help of:
 ## Disclaimer
 
 This app and its deployment are for instructional purposes only, not intended comercially in any way and its eventual copyright infringments involuntary.
+
+<div align="right">
+    <b><a href="#table-of-contents">↥ Back To Top</a></b>
+</div>
