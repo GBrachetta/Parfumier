@@ -1,9 +1,11 @@
 {% for type in types %}
 <div class="col-6 col-md-4 col-lg-3">
     <div class="type-background" style="background-image:url('{{ type.picture }}');">
+        <!-- Replaces spaces with hyphens and forces lowercase to correctly name class  -->
         <div class="project-card-no-image px-0 text-center type-{{ type.typeName.replace(" ", "-").lower() }}">
             <h3 class="types-names">{{ type.typeName }}</h3>
-            <a class="btn btn-sm shadow-sm my-buttons yellow mt-4" role="button" href="{{ url_for("types.show_type", type_id=type._id) }}">Read more</a>
+            <a class="btn btn-sm shadow-sm my-buttons yellow mt-4" role="button"
+                href="{{ url_for("types.show_type", type_id=type._id) }}">Read more</a>
             <div class="tags"></div>
         </div>
     </div>

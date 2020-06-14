@@ -1,3 +1,4 @@
+<!-- Edit Account form -->
 <form class="shadow-sm" method=POST enctype="multipart/form-data" id="form-profile" novalidate>
     {{ form.hidden_tag() }}
 
@@ -12,8 +13,8 @@
         </div>
         <div class="col-12 col-md-6 text-md-right edit-user-data">
             <p class="edit-user-username">{{ current_user.username }}</p>
-            <p class="edit-user-names">{{ current_user.first_name}} {{ current_user.last_name}}</p>
-            <p class="edit-user-email">{{ current_user.email}}</p>
+            <p class="edit-user-names">{{ current_user.first_name }} {{ current_user.last_name }}</p>
+            <p class="edit-user-email">{{ current_user.email }}</p>
         </div>
     </div>
 

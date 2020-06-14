@@ -14,10 +14,12 @@
                     {{ pagination.info }}
                     {{ pagination.links }}
                 </div>
+                <!-- Displays create button only to admins -->
                 {% if current_user.is_admin %}
-                    <div class="col-12 text-center mt-4">
-                        <a href="{{ url_for("types.new_type") }}" class="btn my-buttons purple shadow-sm" type="button">Create new type</a>
-                    </div>
+                <div class="col-12 text-center mt-4">
+                    <a href="{{ url_for("types.new_type") }}" class="btn my-buttons purple shadow-sm"
+                        type="button">Create new type</a>
+                </div>
                 {% endif %}
             </div>
         </div>

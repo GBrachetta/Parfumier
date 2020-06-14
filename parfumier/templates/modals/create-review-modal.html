@@ -1,5 +1,6 @@
-<!-- CREATE REVIEW MODAL -->
-<div class="modal fade" role="dialog" tabindex="-1" id="reviewPerfumeModal" aria-labelledby="reviewPerfumeModalLabel" aria-hidden="true">
+<!-- Create review MODAL -->
+<div class="modal fade" role="dialog" tabindex="-1" id="reviewPerfumeModal" aria-labelledby="reviewPerfumeModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,7 +9,8 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form method=POST action="{{ url_for("reviews.review_perfume", perfume_id=perfume._id) }}" id="form-review" class="shadow-none" novalidate>
+            <form method=POST action="{{ url_for("reviews.review_perfume", perfume_id=perfume._id) }}" id="form-review"
+                class="shadow-none" novalidate>
                 <div class="modal-body">
                     {{ add_review_form.hidden_tag() }}
                     <div class="form-group">

@@ -7,9 +7,10 @@
         {% include "components/search-and-filter.html" %}
         <div class="container mb-4 pt-4">
             <div class="col-12 text-center mb-4">
-            {% if query %}
-                <a class="btn shadow-sm my-buttons purple mb-5" href="{{ url_for("perfumes.all_perfumes") }}" role="button">Back to All Perfumes</a>
-            {% endif %}
+                {% if query %}
+                <a class="btn shadow-sm my-buttons purple mb-5" href="{{ url_for("perfumes.all_perfumes") }}"
+                    role="button">Back to All Perfumes</a>
+                {% endif %}
             </div>
             <!-- Perfume card -->
             {% include "components/perfume-card.html" %}
@@ -20,7 +21,8 @@
             </div>
             {% if current_user.is_admin %}
             <div class="col-12 text-center mt-4">
-                <a class="btn shadow-sm my-buttons purple" href="{{ url_for("perfumes.new_perfume") }}" role="button">Create New Perfume</a>
+                <a class="btn shadow-sm my-buttons purple" href="{{ url_for("perfumes.new_perfume") }}"
+                    role="button">Create New Perfume</a>
             </div>
             {% endif %}
     </section>

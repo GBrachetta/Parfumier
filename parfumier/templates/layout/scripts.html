@@ -3,12 +3,14 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
- </script>
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"
  integrity="sha256-Xt8pc4G0CdcRvI0nZ2lRpZ4VHng0EoUDMlGcBSQ9HiQ=" crossorigin="anonymous">
- </script>
+</script>
+<!-- Loads my kit, a heavily reduced and lighter version of the complete library -->
 <script src="https://kit.fontawesome.com/9464f43776.js" crossorigin="anonymous"></script>
 <!-- Only loads CKEditor where necessary -->
 {% block CKEditor %}
 {% endblock CKEditor %}
+<!-- Minified js to speed up loading time -->
 <script src="{{ url_for("static", filename="js/scripts.min.js" ) }}"></script>

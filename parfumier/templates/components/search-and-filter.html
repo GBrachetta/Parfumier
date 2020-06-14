@@ -1,14 +1,17 @@
 <div class="heading mb-0">
+    <!-- Displays query next to heading if query passed -->
     <h2>Perfumes{% if query %}: {{ query.lower() }}{% endif %}</h2>
     <div class="row">
         <div class="col-md-6">
             <form id="form" action="{{ url_for("perfumes.filters") }}" class="shadow-none pb-0 px-0">
                 <div class="form-group shadow-sm">
-                    <select class="custom-select border-white shadow-sm" id="filter_query" name="filter_query" aria-label="Filter by Type">
+                    <select class="custom-select border-white shadow-sm" id="filter_query" name="filter_query"
+                        aria-label="Filter by Type">
                         <option selected="true" id="option-selected">Filter by type</option>
                         {% for type in types %}
                         <option value="{{ type["type_name"] }}">{{ type["type_name"] }}</option>
                         {% endfor %}
+                        <!-- Only admins have access to this option -->
                         {% if current_user.is_admin %}
                         <option value="{{ url_for("types.new_type") }}">Create new type...</option>
                         {% endif %}
@@ -21,7 +24,8 @@
             <form class="shadow-none pb-0 px-0 search-form" action="{{ url_for("perfumes.search") }}">
                 <div class="form-group shadow-sm">
                     <div class="input-group">
-                        <input class="border rounded-0 form-control" type="text" id="db_query" name="db_query" aria-label="Search">
+                        <input class="border rounded-0 form-control" type="text" id="db_query" name="db_query"
+                            aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn rounded purple mild" type="submit">Search</button>
                         </div>

@@ -1,11 +1,15 @@
-<div class="modal fade" role="dialog" tabindex="-1" id="editReviewPerfumeModal" aria-labelledby="editReviewPerfumeModalLabel" aria-hidden="true">
+<!-- Edit Review modal -->
+<div class="modal fade" role="dialog" tabindex="-1" id="editReviewPerfumeModal"
+    aria-labelledby="editReviewPerfumeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit your review</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Edit your review</h4><button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
-                <form class="shadow-none" method=POST action="{{ url_for("reviews.edit_review") }}" id="form-edit-review">
+                <form class="shadow-none" method=POST action="{{ url_for("reviews.edit_review") }}"
+                    id="form-edit-review">
                     {{ edit_review_form.hidden_tag() }}
                     <fieldset class="form-group">
                         <div class="form-group">

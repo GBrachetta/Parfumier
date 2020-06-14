@@ -1,6 +1,6 @@
 {% for author in cursor %}
 <div class="row">
-    <!-- Left Column Perfume -->
+    <!-- Left Column Perfume - Formatted information -->
     <div class="col-12 col-lg-2 text-center meta left-perfume-container pl-3">
         <div class="text-left tags"><span class="meta-heading">Brand</span>
             <span class="text-info">{{ perfume.brand.title() }}</span>
@@ -15,19 +15,18 @@
         <div class="row">
             <div class="col-12 text-left perfume-avatar-container mb-2">
                 <img class="rounded-circle img-fluid perfume-avatar user-picture" src="{{ author["profilePicture"] }}"
-                 loading="lazy" width=100 height=100 alt="Avatar">
+                    loading="lazy" width=100 height=100 alt="Avatar">
             </div>
         </div>
     </div>
     <!-- Main Content Perfume Column -->
     <div class="col-12 col-md-8 col-lg-7 info">
         <h3>{{ perfume.name.title() }}, by {{ perfume.brand.title() }}</h3>
-        <p>{{ perfume.description | safe}}</p>
+        <p>{{ perfume.description | safe }}</p>
     </div>
     <!-- Perfume Picture Column -->
     <div class="col-12 col-md-4 col-lg-3 text-center text-md-right align-self-center">
-        <img class="perfume-picture" src="{{ perfume.picture }}"
-         loading="lazy" width=225 height=300 alt="Perfume">
+        <img class="perfume-picture" src="{{ perfume.picture }}" loading="lazy" width=225 height=300 alt="Perfume">
     </div>
     <!-- Buttons -->
     {% include "components/buttons-perfume.html" %}

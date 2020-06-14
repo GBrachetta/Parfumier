@@ -1,40 +1,66 @@
-{% extends "layout/base.html" %}
-{% block content %}
+{% extends "layout/base.html" %} {% block content %}
 
 <main class="page contact-page">
     <section class="portfolio-block contact">
         <div class="container">
             <div class="heading">
-                <h2 class="titles">Welcome to Parfumier{% if current_user.is_authenticated %},
-                    {{ current_user.username.title() }}{% endif %}!
+                <h2 class="titles">
+                    Welcome to Parfumier{% if current_user.is_authenticated %}, {{
+                    current_user.username.title() }}{% endif %}!
                 </h2>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
                     <p class="mb-5 text-left">
-                        Perfume is thousands of years old, with evidence of the first perfumes dating back to Ancient Egypt,
-                        Mesopotamia and Cyprus. The English word "perfume" comes from the Latin per fume, meaning "through smoke."
+                        Perfume is thousands of years old, with evidence of the first perfumes
+                        dating back to Ancient Egypt, Mesopotamia and Cyprus. The English word
+                        "perfume" comes from the Latin per fume, meaning "through smoke."
                     </p>
-                    <img class="img-fluid mb-0" src="{{ url_for("static", filename="images/roman-bottle.jpg") }}" loading="lazy" width=400 height=300 alt="Flower Field" /><br>
+                    <img class="img-fluid mb-0" src="{{ url_for("static",
+                    filename="images/roman-bottle.jpg") }}" loading="lazy" width=400 height=300
+                        alt="Flower Field" /><br />
                     <small>Roman cameo glass perfume-bottle, ca. 25 BCE</small>
                     <p class="my-5 text-left">
-                        The Ancient Egyptians were the first to incorporate perfume into their culture, followed by the ancient Chinese, Hindus, Israelites, Carthaginians, Arabs, Greeks, and Romans.
-                        <br>
-                        The oldest perfumes ever found were discovered by archeologists in Cyprus. They were more than four thousand years old. A cuneiform tablet from Mesopotamia, dating back more than three thousand years, identifies a woman named Tapputi as the first recorded perfume maker. But perfumes could also be found in India at the time.
-                        <br>
-                        The 16th century saw the popularity of perfume explode in France, especially among the upper classes and nobles. With help from “the perfume court,” the court of Louis XV, everything got perfumed: furniture, gloves and clothing.
-                        <br>
+                        The Ancient Egyptians were the first to incorporate perfume into their
+                        culture, followed by the ancient Chinese, Hindus, Israelites, Carthaginians,
+                        Arabs, Greeks, and Romans.
+                        <br />
+                        The oldest perfumes ever found were discovered by archeologists in Cyprus.
+                        They were more than four thousand years old. A cuneiform tablet from
+                        Mesopotamia, dating back more than three thousand years, identifies a woman
+                        named Tapputi as the first recorded perfume maker. But perfumes could also
+                        be found in India at the time.
+                        <br />
+                        The 16th century saw the popularity of perfume explode in France, especially
+                        among the upper classes and nobles. With help from “the perfume court,” the
+                        court of Louis XV, everything got perfumed: furniture, gloves and clothing.
+                        <br />
                     </p>
-                    <img class="img-fluid mb-0" src="{{ url_for("static", filename="images/louisXV.jpg") }}" loading="lazy" width=400 height=300 alt="Flower Field" /><br>
+                    <img class="img-fluid mb-0" src="{{ url_for("static",
+                    filename="images/louisXV.jpg") }}" loading="lazy" width=400 height=300 alt="Flower Field" /><br />
                     <small>Perfumed water fountain, France, 18th c.</small>
                     <p class="my-5 text-left">
-                        One of the oldest uses of perfume comes from the burning of incense and aromatic herbs for religious services, often the aromatic gums, frankincense and myrrh gathered from trees. It did not take long, though, for people to discover perfume’s romantic potential and it was used both for seduction and as preparation for love-making.
-                        <br>
-                        Although niche perfume makers remain to cater to the very rich, perfumes today enjoy widespread use. The selling of perfume, however, is no longer just the purview of perfume makers. In the 20th century, clothing designers began marketing their own lines of scents, and almost any celebrity with a lifestyle brand can be found hawking a perfume with their name (if not smell) on it.
+                        One of the oldest uses of perfume comes from the burning of incense and
+                        aromatic herbs for religious services, often the aromatic gums, frankincense
+                        and myrrh gathered from trees. It did not take long, though, for people to
+                        discover perfume’s romantic potential and it was used both for seduction and
+                        as preparation for love-making.
+                        <br />
+                        Although niche perfume makers remain to cater to the very rich, perfumes
+                        today enjoy widespread use. The selling of perfume, however, is no longer
+                        just the purview of perfume makers. In the 20th century, clothing designers
+                        began marketing their own lines of scents, and almost any celebrity with a
+                        lifestyle brand can be found hawking a perfume with their name (if not
+                        smell) on it.
                     </p>
-                    <img class="img-fluid mb-0" src="{{ url_for("static", filename="images/flower-field.jpg") }}" loading="lazy" width=600 height=300 alt="Flower Field" /><br>
+                    <img class="img-fluid mb-0" src="{{ url_for("static",
+                    filename="images/flower-field.jpg") }}" loading="lazy" width=600 height=300
+                        alt="Flower Field" /><br />
                     <small>Lavender fields in Grasse, France</small>
-                    <p class="my-5 text-left">Please enjoy this website, discover perfumes, learn about what their types are, leave a review and read what others have to say about them!</p>
+                    <p class="my-5 text-left">
+                        Please enjoy this website, discover perfumes, learn about what their types
+                        are, leave a review and read what others have to say about them!
+                    </p>
                 </div>
             </div>
         </div>

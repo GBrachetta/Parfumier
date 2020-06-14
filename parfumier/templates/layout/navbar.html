@@ -1,4 +1,6 @@
-<nav class="navbar navbar-dark navbar-expand-lg sticky-top bg-white portfolio-navbar gradient navbar-gradient" id="navbar">
+<!-- Navbar -->
+<nav class="navbar navbar-dark navbar-expand-lg sticky-top bg-white portfolio-navbar gradient navbar-gradient"
+    id="navbar">
     <div class="container-fluid">
         <a class="navbar-brand logo" href="{{ url_for("perfumes.all_perfumes") }}">Parfumier</a>
         <button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav">
@@ -18,6 +20,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto">
+                <!-- Logic to display menu items depending on session status -->
                 {% if current_user.is_authenticated %}
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" href="{{ url_for("users.account") }}">Account</a>

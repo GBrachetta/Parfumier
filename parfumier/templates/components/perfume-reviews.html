@@ -1,3 +1,4 @@
+<!-- Perfume reviews -->
 <div class="row">
     <div class="col perfume-reviews-container mt-4 pt-4">
         <div class=" border-white">
@@ -7,7 +8,7 @@
             <div class="row justify-content-center">
                 <div class="col-12">
                     {% for review in perfume.reviews|sort(attribute="date_reviewed", reverse = True) %}
-                        {% include "components/review-card.html" %}
+                    {% include "components/review-card.html" %}
                     {% endfor %}
                     {% if not perfume.reviews %}
                     <div class="row portfolio-block py-0">
