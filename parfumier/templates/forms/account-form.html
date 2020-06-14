@@ -2,18 +2,18 @@
     {{ form.hidden_tag() }}
 
     <div class="form-row edit-user-header mb-4">
-        <div class="col-12 col-md-3 text-right text-md-left">
-            <img class="rounded-circle img-fluid edit-user-avatar user-picture" src="{{ avatar }}"
+        <div class="col-6 col-md-3 text-left mb-2">
+            <img class="rounded-circle img-fluid user-picture" src="{{ avatar }}"
              loading="lazy" width="125" height="125" alt="avatar">
         </div>
-        <div class="pl-4 col-12 col-md-6 text-right text-md-left edit-user-data">
+        <div class="col-6 col-md-3 avatar-preview text-center">
+            <span class="form-control-thumbnail"></span><br>
+            <p class="form-control-filename text-danger small mb-0" data-text="New avatar" id="fileName"></p>
+        </div>
+        <div class="col-12 col-md-6 text-md-right edit-user-data">
             <p class="edit-user-username">{{ current_user.username }}</p>
             <p class="edit-user-names">{{ current_user.first_name}} {{ current_user.last_name}}</p>
             <p class="edit-user-email">{{ current_user.email}}</p>
-        </div>
-        <div class="col-12 col-md-3 avatar-preview text-center">
-            <span class="form-control-thumbnail"></span><br>
-            <p class="form-control-filename text-danger small" data-text="New avatar" id="fileName"></p>
         </div>
     </div>
 
