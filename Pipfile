@@ -27,7 +27,7 @@ flask-compress = "*"
 flask-paginate = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.9.16"
 
 [pipenv]
 allow_prereleases = true
