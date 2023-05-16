@@ -749,3 +749,5 @@ This app and its deployment are for instructional purposes only, not intended co
 <div align="right">
     <b><a href="#table-of-contents">↥ Back To Top</a></b>
 </div>
+
+## Redeployed to Heroku
