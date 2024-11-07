@@ -1,0 +1,4 @@
+requests
+numpy
+pandas
+# Add any other packages you use in your application
