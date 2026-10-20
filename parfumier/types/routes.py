@@ -36,7 +36,7 @@ def new_type():
                     opacity=20,
                 )
                 picture_link = type_picture.replace("http", "https")
-                mongo.db.types.insert(
+                mongo.db.types.insert_one(
                     {
                         "type_name": form.type_name.data,
                         "description": form.description.data,
@@ -45,7 +45,7 @@ def new_type():
                     }
                 )
             else:
-                mongo.db.types.insert(
+                mongo.db.types.insert_one(
                     {
                         "type_name": form.type_name.data,
                         "description": form.description.data,
@@ -79,7 +79,7 @@ def all_types():
     It uses aggregation in order to allow for pagination.
     """
     page = request.args.get(get_page_parameter(), type=int, default=1)
-    total_types = mongo.db.types.find().count()
+    total_types = mongo.db.types.count_documents({})
     page_count = 8
     the_types = mongo.db.types.aggregate(
         [
