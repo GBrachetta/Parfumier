@@ -60,7 +60,7 @@ def review_perfume(perfume_id):
     )
     if form.validate_on_submit():
         review_id = ObjectId.from_datetime(datetime.utcnow())
-        mongo.db.perfumes.update(
+        mongo.db.perfumes.update_one(
             {"_id": perfume["_id"]},
             {
                 "$push": {
@@ -125,7 +125,7 @@ def edit_review():
     review_id = request.form.get("review_id")
     perfume_id = request.form.get("perfume_id")
     if form.validate_on_submit():
-        mongo.db.perfumes.update(
+        mongo.db.perfumes.update_one(
             {"_id": ObjectId(perfume_id), "reviews._id": ObjectId(review_id)},
             {"$set": {"reviews.$.review_content": form.edit_review.data, }},
         )

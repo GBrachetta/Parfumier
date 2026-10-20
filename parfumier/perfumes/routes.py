@@ -30,7 +30,7 @@ def all_perfumes():
     page = request.args.get(get_page_parameter(), type=int, default=1)
     types = mongo.db.types.find().sort("type_name")
     page_count = 8
-    total_perfumes = mongo.db.perfumes.count()
+    total_perfumes = mongo.db.perfumes.count_documents({})
     pagination = Pagination(
         per_page=8,
         page=page,
@@ -106,7 +106,7 @@ def new_perfume():
                     height=300,
                 )
                 picture_link = picture.replace("http", "https")
-                mongo.db.perfumes.insert(
+                mongo.db.perfumes.insert_one(
                     {
                         "author": current_user.username,
                         "brand": form.brand.data,
@@ -119,7 +119,7 @@ def new_perfume():
                     }
                 )
             else:
-                mongo.db.perfumes.insert(
+                mongo.db.perfumes.insert_one(
                     {
                         "author": current_user.username,
                         "brand": form.brand.data,

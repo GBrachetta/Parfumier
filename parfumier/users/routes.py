@@ -96,7 +96,7 @@ def register():
     all_users = mongo.db.users
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data)
-        all_users.insert(
+        all_users.insert_one(
             {
                 "username": form.username.data.lower(),
                 "first_name": form.first_name.data,
@@ -306,7 +306,7 @@ def delete_user():
     logs it out.
     """
 
-    mongo.db.users.remove({"username": current_user.username})
+    mongo.db.users.delete_many({"username": current_user.username})
     logout_user()
     flash("You have deleted your account", "success")
     return redirect(url_for("main.index"))
