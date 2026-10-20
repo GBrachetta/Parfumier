@@ -4,7 +4,7 @@ the serializer to allow to create a reset password token, mongodb,
 current_app for the above and login_manager to deal with user session
 """
 from werkzeug.security import check_password_hash
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from itsdangerous import URLSafeTimedSerializer as Serializer
 from flask import current_app
 from parfumier import login_manager, mongo
 
@@ -68,25 +68,19 @@ class User:
         """
         return check_password_hash(password_hash, password)
 
-    def get_reset_token(self, expires_sec=1800):
-        """
-        Deals with the token to reset the password.
-        This token has a life of 1800ms, after which it becomes invalid.
-        It serialises it (SECRET_KEY is required too) and passes the
-        life length.
-        Returns a serialised token, decoded.
-        """
-        ser = Serializer(current_app.config["SECRET_KEY"], expires_sec)
-        return ser.dumps({"email": self.email}).decode("utf-8")
+    def get_reset_token(self):
+        """Create a signed password-reset token, valid for 30 minutes."""
+        ser = Serializer(current_app.config["SECRET_KEY"], salt="password-reset")
+        return ser.dumps({"email": self.email})
 
     @staticmethod
     def verify_reset_token(token):
         """
         Veryfies the validity of the token generated above.
         """
-        ser = Serializer(current_app.config["SECRET_KEY"])
+        ser = Serializer(current_app.config["SECRET_KEY"], salt="password-reset")
         try:
-            email = ser.loads(token)["email"]
+            email = ser.loads(token, max_age=1800)["email"]
         except Exception:
             return None
         return mongo.db.users.find_one({"email": email})
